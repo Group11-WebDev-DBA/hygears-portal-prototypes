@@ -282,12 +282,10 @@ if (trackForm) {
   function showRequest(ref) {
     var data = sampleRequests[ref];
     var result = document.getElementById("track-result");
-    var empty = document.getElementById("track-empty");
 
     if (!data) {
       setError(refInput, "We couldn't find " + ref + ". Check the number, or try a sample below.");
       result.hidden = true;
-      empty.hidden = false;
       return;
     }
     setError(refInput, "");
@@ -296,7 +294,7 @@ if (trackForm) {
     var labels = {
       pending: { chip: "○ Pending", msg: "An officer hasn't reviewed this yet. Check back later." },
       approved: { chip: "✓ Approved", msg: "Approved. Pick it up at the workshop on your pickup date and bring your PUP ID." },
-      declined: { chip: "✕ Declined", msg: "Declined. The item may be booked for those dates. Try other dates or email the officers." }
+      declined: { chip: "✕ Declined", msg: "Declined. Email the officers to ask why, or reserve again for other dates." }
     };
 
     var chip = document.getElementById("r-status");
@@ -310,15 +308,26 @@ if (trackForm) {
     document.getElementById("r-pickup").textContent = data.pickup;
     document.getElementById("r-return").textContent = data.ret;
 
-    // Fill the progress cells: Sent, Reviewed, Ready for pickup
+    // Fill the progress steps: Sent, Reviewed, Ready for pickup.
+    // Done steps get a check mark and darker bar, so it's not colour alone.
+    var names = ["Sent", "Reviewed", data.status === "declined" ? "Not approved" : "Ready for pickup"];
     var steps = { pending: 1, approved: 3, declined: 2 };
     for (var i = 1; i <= 3; i++) {
-      document.getElementById("p" + i).classList.toggle("done", i <= steps[data.status]);
+      var step = document.getElementById("p" + i);
+      var done = i <= steps[data.status];
+      step.classList.toggle("done", done);
+      step.textContent = (done ? "✓ " : "") + names[i - 1];
     }
-    document.getElementById("p3").textContent = data.status === "declined" ? "Not approved" : "Ready for pickup";
 
     result.hidden = false;
-    empty.hidden = true;
+  }
+
+  // Move focus to the result card (this also scrolls it into view)
+  function showResultOnScreen() {
+    var result = document.getElementById("track-result");
+    if (!result.hidden) {
+      result.focus();
+    }
   }
 
   trackForm.addEventListener("submit", function (event) {
@@ -336,6 +345,7 @@ if (trackForm) {
       return;
     }
     showRequest(ref);
+    showResultOnScreen();
   });
 
   // Sample buttons fill the box and look it up
@@ -344,6 +354,7 @@ if (trackForm) {
     sampleButtons[s].addEventListener("click", function () {
       refInput.value = this.dataset.ref;
       showRequest(this.dataset.ref);
+      showResultOnScreen();
     });
   }
 

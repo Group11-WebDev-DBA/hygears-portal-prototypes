@@ -4,9 +4,14 @@
 (function () {
   'use strict';
 
-  const $ = (s, r = document) => r.querySelector(s);
-  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  /* ---------- Small helpers ---------- */
+  // $ finds the first element that matches a CSS selector, $$ finds all of them as an array
+  function $(selector, root) { return (root || document).querySelector(selector); }
+  function $$(selector, root) { return Array.from((root || document).querySelectorAll(selector)); }
+  // esc makes typed text safe to put inside HTML (so "<b>" shows as text, not as a tag)
+  function esc(text) {
+    return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
   const YEAR = new Date().getFullYear();
 
   const ICON = {
@@ -52,9 +57,6 @@
       return `HYG-${YEAR}-${String(n).padStart(4, '0')}`;
     }
   };
-
-  /* ---------- Hero entrance ---------- */
-  requestAnimationFrame(() => requestAnimationFrame(() => document.documentElement.classList.add('m-enter-done')));
 
   /* ---------- Menu (under 1024px) ---------- */
   const nav = $('.nav'), toggle = $('.nav__toggle');
@@ -239,7 +241,13 @@
       { name: 'E. Aquino', course: 'BSIE 3-1', com: 'Finance and Operations', reason: 'Wants to manage the build budget.' }
     ];
     const LOW = 1;   // at or below this many available, stock reads Low
-    const stockLevel = i => (i.avail === 0 ? `<span class="badge badge--declined">${ICON.x}Out</span>` : i.avail <= LOW ? `<span class="badge badge--low">${ICON.alert}Low</span>` : `<span class="badge">${ICON.check}OK</span>`);
+    // stock level badge: Out, Low or OK, each with its own icon
+    function stockLevel(item) {
+      if (item.avail === 0) return `<span class="badge badge--declined">${ICON.x}Out</span>`;
+      if (item.avail <= LOW) return `<span class="badge badge--low">${ICON.alert}Low</span>`;
+      return `<span class="badge">${ICON.check}OK</span>`;
+    }
+    // Approve + Decline buttons for one row; data-id tells the click handler which cell to replace
     const decide = (label, id) => `<div class="btn-row"><button class="btn btn--primary btn--sm" type="button" data-act="Approved" data-id="${id}" aria-label="Approve ${label}">Approve</button><button class="btn btn--secondary btn--sm" type="button" data-act="Declined" data-id="${id}" aria-label="Decline ${label}">Decline</button></div>`;
     const stats = () => {
       const open = $$('#t-pending [data-act="Approved"]').length, apps = $$('#t-apps [data-act="Approved"]').length;

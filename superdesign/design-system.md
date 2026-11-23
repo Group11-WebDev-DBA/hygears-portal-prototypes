@@ -17,7 +17,7 @@ Written first, per the superdesign skill's Brand New Project SOP. Every page fol
 | `--gray` | #F4F5F7 | alternate sections, photo slots, empty cells |
 | `--line` | #D5D8DE | borders and dividers |
 | `--ink` | #14161A | text, filled cells, battery outline |
-| `--muted` | #5B6270 | hints and meta text (6.3:1 on white, 5.8:1 on gray) |
+| `--muted` | #5B6270 | hints and meta text (6.1:1 on white, 5.6:1 on gray) |
 | `--red` | #D7261E | buttons, current-page bar, key actions only (white text 5.0:1) |
 | `--red-dark` | #B51E17 | button hover, error text |
 | `--charcoal` | #1B1D22 | hero and footer bands |

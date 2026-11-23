@@ -47,7 +47,7 @@
   <section class="section">
     <div class="container split">
 
-      <!-- Lookup form (app.js checks it against sample requests) -->
+      <!-- Lookup form and result (app.js checks it against sample requests) -->
       <div>
         <form class="form" id="track-form" novalidate>
           <div class="field">
@@ -59,7 +59,33 @@
           <button class="btn btn-full" type="submit">Track request</button>
         </form>
 
-        <div class="card card-gray try-card">
+        <!-- Result card, right under the form so phones see it without scrolling -->
+        <div class="track-out" aria-live="polite">
+          <div class="card" id="track-result" tabindex="-1" hidden>
+            <p class="kicker">Request <span id="r-ref">HYG-2026-0142</span></p>
+            <h2 id="r-title">Soldering station</h2>
+            <p><span class="status" id="r-status">&#9675; Pending</span></p>
+
+            <ol class="progress" aria-label="Request progress">
+              <li id="p1">Sent</li>
+              <li id="p2">Reviewed</li>
+              <li id="p3">Ready for pickup</li>
+            </ol>
+
+            <p id="r-message">An officer hasn't reviewed this yet.</p>
+
+            <dl class="details">
+              <div><dt>Quantity</dt><dd id="r-qty">1</dd></div>
+              <div><dt>Pickup date</dt><dd id="r-pickup">-</dd></div>
+              <div><dt>Return date</dt><dd id="r-return">-</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <!-- Samples and help -->
+      <div>
+        <div class="card card-gray">
           <h2 class="h3-size">Try a sample</h2>
           <p class="hint">These three show each possible status.</p>
           <div class="sample-btns">
@@ -68,34 +94,7 @@
             <button class="btn-ghost btn-sm" type="button" data-ref="HYG-2026-0129">0129 &middot; Declined</button>
           </div>
         </div>
-      </div>
-
-      <!-- Result card, filled in by app.js -->
-      <div aria-live="polite">
-        <div class="card" id="track-result" hidden>
-          <p class="kicker">Request <span id="r-ref">HYG-2026-0142</span></p>
-          <h2 id="r-title">Soldering station</h2>
-          <p><span class="status" id="r-status">&#9675; Pending</span></p>
-
-          <ol class="progress" aria-label="Request progress">
-            <li id="p1">Sent</li>
-            <li id="p2">Reviewed</li>
-            <li id="p3">Ready for pickup</li>
-          </ol>
-
-          <p id="r-message">An officer hasn't reviewed this yet.</p>
-
-          <dl class="details">
-            <div><dt>Quantity</dt><dd id="r-qty">1</dd></div>
-            <div><dt>Pickup date</dt><dd id="r-pickup">-</dd></div>
-            <div><dt>Return date</dt><dd id="r-return">-</dd></div>
-          </dl>
-        </div>
-
-        <div class="card card-gray" id="track-empty">
-          <h2 class="h3-size">Your result shows here</h2>
-          <p class="muted">Lost your number? Email <a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a> with your name and the item.</p>
-        </div>
+        <p class="muted track-help">Lost your number? Email <a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a> with your name and the item.</p>
       </div>
     </div>
   </section>

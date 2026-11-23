@@ -77,6 +77,7 @@ button, input, select, textarea { font: inherit; }
 @media (min-width: 768px) { .container { padding: 0 32px; } }
 
 .lead { font-size: var(--lead); line-height: 1.45; }
+.eyebrow { margin-bottom: 16px; font-size: var(--small); font-weight: 600; color: var(--muted); }
 .note { font-size: var(--small); color: var(--muted); }
 .mono { font-family: var(--font-mono); }
 
@@ -110,7 +111,7 @@ button, input, select, textarea { font: inherit; }
 
 @media (min-width: 960px) {
   .pill { flex-wrap: nowrap; border-radius: 999px; }
-  .menu-toggle { display: none; }
+  .pill .menu-toggle { display: none; }
   .nav-links, .js .nav-links { display: flex; flex-direction: row; align-items: center; gap: 4px; width: auto; margin-left: auto; padding: 0; }
   .nav-links .nav-officer { margin-left: 8px; border: 1px solid var(--rule); }
 }
@@ -152,7 +153,7 @@ button, input, select, textarea { font: inherit; }
 }
 
 /* Segmented radio buttons (Tools page "Type" filter) */
-.seg { display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 0; border: 0; }
+.seg { display: flex; flex-direction: row; flex-wrap: wrap; gap: 4px; margin: 0; padding: 0; border: 0; }
 .seg legend { width: 100%; margin-bottom: 4px; }
 .seg input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .seg label { display: inline-flex; align-items: center; min-height: 48px; padding: 0 16px; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--gray-bg); font-weight: 600; cursor: pointer; }
@@ -201,7 +202,7 @@ button, input, select, textarea { font: inherit; }
 .hero .lead { margin-top: 20px; }
 .hero .actions { margin-top: 28px; }
 @media (min-width: 960px) {
-  .hero { padding: 64px 0 96px; }
+  .hero { padding: 64px 0 40px; }
   .hero__grid { grid-template-columns: 5fr 6fr; gap: 64px; align-items: center; }
 }
 
@@ -235,7 +236,7 @@ blockquote { margin: 0; }
 
 /* ---------- 9. Tools catalogue ---------- */
 .toolbar { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 24px; }
-@media (min-width: 960px) { .toolbar { grid-template-columns: 5fr 3fr auto; gap: 32px; align-items: end; } }
+@media (min-width: 960px) { .toolbar { grid-template-columns: 5fr 3fr auto; gap: 32px; align-items: start; } }
 
 .table { width: 100%; border-collapse: collapse; border-top: 1px solid var(--text); }
 .table th { padding: 12px 16px 12px 0; font-size: var(--small); font-weight: 400; color: var(--muted); text-align: left; border-bottom: 1px solid var(--rule); }
@@ -245,6 +246,7 @@ blockquote { margin: 0; }
 .table-empty { padding: 32px 0; border-bottom: 1px solid var(--rule); }
 .table-empty p + p { margin-top: 12px; }
 .table .row-done td { color: var(--muted); }
+.table .mono, .table td[data-label="Student"] { white-space: nowrap; }
 
 /* Phone and tablet: every table row becomes a stacked card.
    Each cell shows its column name from data-label. */
@@ -253,7 +255,7 @@ blockquote { margin: 0; }
   .table, .table tbody, .table tr, .table td { display: block; width: 100%; }
   .table tr { padding: 16px 0; border-bottom: 1px solid var(--rule); }
   .table td { padding: 2px 0; border: 0; }
-  .table td[data-label]::before { content: attr(data-label) ": "; color: var(--muted); font-size: var(--small); }
+  .table td[data-label]::before { content: attr(data-label) ": "; color: var(--muted); font-family: var(--font); font-size: var(--small); }
   .table .act { margin-top: 12px; }
   /* Tools table only: photo on the left, details on the right */
   .table--thumbs tr { display: grid; grid-template-columns: 72px 1fr; column-gap: 16px; }
@@ -263,6 +265,7 @@ blockquote { margin: 0; }
 @media (min-width: 1024px) {
   .table .num { text-align: right; }
   .table .act { text-align: right; white-space: nowrap; }
+  .table .act .actions { flex-wrap: nowrap; justify-content: flex-end; }
 }
 
 .reserve { scroll-margin-top: 90px; }
@@ -288,6 +291,8 @@ blockquote { margin: 0; }
 .stats { display: grid; grid-template-columns: 1fr 1fr; margin: 0 0 40px; border-top: 1px solid var(--text); border-bottom: 1px solid var(--text); }
 .stats div { padding: 16px 0; }
 .stats dt { font-size: var(--small); color: var(--muted); }
+/* Each count links down to its table, so officers on a phone skip the long scroll */
+.stats dt a { display: inline-block; padding: 10px 0; color: var(--muted); font-weight: 400; }
 .stats dd { margin: 4px 0 0; font-size: 2.25rem; font-weight: 700; line-height: 1; }
 @media (min-width: 768px) {
   .stats { grid-template-columns: repeat(4, 1fr); }
