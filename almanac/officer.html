@@ -8,8 +8,9 @@
 <link rel="icon" href="../assets/hygears-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<!-- Adds a "js" class so the CSS knows JavaScript is on (used to hide the officer dashboard until sign-in) -->
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -73,14 +74,14 @@
       <p class="muted small">Everything below is sample data for the prototype.</p>
       <p class="visually-hidden" id="dash-live" role="status"></p>
       <ul class="figures">
-        <li><b id="fig-pending">3</b><span>Pending reservations</span></li>
-        <li><b>1</b><span>Overdue items</span></li>
-        <li><b>2</b><span>New applications</span></li>
-        <li><b>4</b><span>Items out or low</span></li>
+        <li><a href="#pending-table"><b id="fig-pending">3</b><span>Pending reservations</span></a></li>
+        <li><a href="#overdue-table"><b>1</b><span>Overdue items</span></a></li>
+        <li><a href="#apps-table"><b>2</b><span>New applications</span></a></li>
+        <li><a href="#stock-table"><b>4</b><span>Items out or low</span></a></li>
       </ul>
       <div class="dash">
         <div class="sheet dash__wide">
-          <table class="table table--stack" id="pending-table">
+          <table class="table table--stack table--actions-below" id="pending-table">
             <caption><span class="sheet__title">Pending reservations</span></caption>
             <thead><tr><th scope="col">Reference</th><th scope="col">Student</th><th scope="col">Item</th><th scope="col" class="num">Qty</th><th scope="col" class="num">Pickup</th><th scope="col" class="num">Return</th><th scope="col">Status</th><th scope="col"><span class="visually-hidden">Decision</span></th></tr></thead>
             <tbody>
@@ -93,7 +94,7 @@
         </div>
 
         <div class="sheet">
-          <table class="table table--stack">
+          <table class="table table--stack" id="overdue-table">
             <caption><span class="sheet__title">Overdue items</span></caption>
             <thead><tr><th scope="col">Reference</th><th scope="col">Item</th><th scope="col" class="num">Due</th><th scope="col">Status</th></tr></thead>
             <tbody><tr><td class="num">HYG-2026-0118</td><td data-label="Item">Heat gun, Sample student 4</td><td class="num" data-label="Due">2026-11-15</td><td data-label="Status"><span class="status status--late"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>Overdue</span></td></tr></tbody>
@@ -101,7 +102,7 @@
         </div>
 
         <div class="sheet">
-          <table class="table table--stack">
+          <table class="table table--stack" id="apps-table">
             <caption><span class="sheet__title">New applications</span></caption>
             <thead><tr><th scope="col">Applicant</th><th scope="col">Course</th><th scope="col">Committee</th></tr></thead>
             <tbody>
@@ -112,7 +113,7 @@
         </div>
 
         <div class="sheet dash__wide">
-          <table class="table table--stack">
+          <table class="table table--stack" id="stock-table">
             <caption><span class="sheet__title">Item stock, out or low</span></caption>
             <thead><tr><th scope="col">Item</th><th scope="col">Category</th><th scope="col">Type</th><th scope="col" class="num">Available now</th><th scope="col">Status</th></tr></thead>
             <tbody>
@@ -127,13 +128,11 @@
     </div>
   </section>
 </main>
-<template id="icon-pending"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></template>
-<template id="icon-approved"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></template>
-<template id="icon-declined"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></template>
 <footer class="site-foot">
   <div class="container">
     <p class="site-foot__mark"><img src="../assets/hygears-logo.png" width="222" height="224" alt="">PUP Hygears</p>
     <p class="site-foot__line">“We don’t just build vehicles, we build people to help us build the future!” #GEARINGUpTowardExcellence</p>
+    <p class="site-foot__line">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
     <div class="site-foot__cols">
       <div><h2>Pages</h2><ul><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li></ul></div>
       <div><h2>Contact</h2><ul>

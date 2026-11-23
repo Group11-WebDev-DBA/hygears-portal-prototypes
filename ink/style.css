@@ -72,6 +72,8 @@ button, input, select, textarea { font: inherit; }
 
 /* Keyboard focus: a red ring on everything you can tab to */
 :focus-visible { outline: 3px solid var(--red); outline-offset: 2px; }
+/* Headings and slips that JavaScript moves focus to don't need a ring */
+[tabindex="-1"]:focus { outline: none; }
 
 .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
 @media (min-width: 768px) { .container { padding: 0 32px; } }
@@ -300,7 +302,7 @@ blockquote { margin: 0; }
   .stats div:first-child { padding-left: 0; border-left: 0; }
 }
 .panel { padding: 24px 0 40px; }
-.panel h2 { margin-bottom: 12px; }
+.panel h2 { margin-bottom: 12px; scroll-margin-top: 100px; }
 .panel .note { margin-bottom: 16px; }
 
 /* ---------- 12. About and Join ---------- */

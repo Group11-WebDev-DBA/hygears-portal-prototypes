@@ -1,18 +1,18 @@
 # Direction: Taste ("the ticket")
 
-Built with the taste-skill (design-taste-frontend 2.5.1), kind **service** (site-kind other): real photographs, flat cream grounds, heavy type, no effects or 3D. Our professor's rules win wherever the skill disagrees.
+Built with the taste-skill (design-taste-frontend 2.5.1), kind **service** (site-kind other): real photographs, flat white and gray grounds, heavy type, no effects or 3D. Our professor's rules win wherever the skill disagrees.
 
 ## Pages
-`index.html`, `tools.html`, `reserve.html`, `track.html`, `join.html`, `about.html`, `officer.html`. They share one `style.css`, one `app.js`, and the same header and footer. The nav marks the current page with an amber bar, and `reserve.html` lights up Tools. Every page opens by double-click.
+`index.html`, `tools.html`, `reserve.html`, `track.html`, `join.html`, `about.html`, `officer.html`. They share one `style.css`, one `app.js`, and the same header and footer. The nav marks the current page with a red bar, and `reserve.html` lights up Tools. Every page opens by double-click.
 
-## Palette (the org's 2026 brand, orange to red on cream)
+## Palette (updated 2026-11-23: classic Hygears red and white, no cream or orange)
 | Role | Colour | Use |
 |---|---|---|
-| Primary / action | red `#D7261E` | Buttons and key actions only. White label 5.0:1. Hover `#B81E17` |
-| Highlight | amber `#F5A623` | Current-page bar and the 3px flame stripe only, never behind text |
-| Flame | orange `#F26A1B` | Only in the flame stripe at the top of the header |
-| Ground | cream `#FFF4E2`, surface `#F7E6CC`, card `#FFFAF1` | Page, panels, cards |
-| Text | brown-black `#2A140C` (16:1), muted `#6E5348` (6.4:1) | All text. Muted is for labels and meta only |
+| Action | red `#D7261E`, hover `#B51E17` | Buttons, the current-page bar, Sent/Publish pills. White label 5.0:1 |
+| Ground | white `#FFFFFF`, gray `#F4F5F7` | Page and cards white; panels, photo slots, table heads and the ticket stub gray |
+| Text | near-black `#14161A` (18:1), secondary `#5B6270` (6.3:1) | All text. Secondary for labels, hints and meta |
+| Lines | `#DFE2E7` hairlines, `#858C98` input/card borders | |
+| Footer band | charcoal `#1B1D22`, white text, gray `#B4BAC4` | Closing photo, HG mark, sign-off, directory |
 
 Status never relies on colour alone. Every status badge is an icon plus a word: clock Pending, check Approved, cross Declined, triangle Low or Due.
 
@@ -22,7 +22,7 @@ Status never relies on colour alone. Every status badge is an icon plus a word: 
 - If the page is opened offline, Host Grotesk falls back to the system sans.
 
 ## The one idea
-**Every request becomes a ticket.** The reference number (`HYG-2026-0142`) is set large in mono on a card with a dashed tear line. The same ticket appears in the reserve success state, on the Track page and in the officer queue, so a student always knows which object they are holding. The flame stripe on the header and the heavy headings carry the brand's energy, while the rest of the page stays quiet cream.
+**Every request becomes a ticket.** The reference number (`HYG-2026-0142`) is set large in mono on a card with a dashed tear line. The same ticket appears in the reserve success state, on the Track page and in the officer queue, so a student always knows which object they are holding. The ticket stub is gray, cut off from the body by a dashed tear line. Heavy headings and the red actions carry the energy; the rest stays white, with a charcoal footer band that holds the HG mark and the org's sign-off.
 
 ## States (app.js, vanilla, no modules)
 - **Tools:** search, category filter and a Tools/Consumables switch, with a live count. Out-of-stock items show "None available now" and a disabled button.
@@ -36,11 +36,15 @@ Status never relies on colour alone. Every status badge is an icon plus a word: 
 - **Nav, close and footer:** nav-centre, close-photo, footer-visit. Footer-visit shows the district only, "Sta. Mesa, Manila", with a "See the area" map search.
 - **Rhythm and buttons:** rhythm "space", arrow buttons.
 - **Colour and type:** the palette comes from `start.mjs brand` with the client's own colours, and the pairing is Host Grotesk.
-- **Moment:** word-highlight, on the org's own tagline in the Join section of the home page.
-- **Moment runtime:** the moment loads as an ES module from `assets/moments/` (unchanged kit files). Browsers block modules on `file://`, so when the page is opened by double-click the tagline simply shows in full ink. Over http (or the later PHP site) it lights up word by word.
-- **Hero entrance:** done in `style.css`/`app.js`, not with the kit's `system.js`/`motion.js`. Those are ES modules too and would not run on double-click.
+- **Moment and hero entrance (changed 2026-11-23):** the word-highlight moment and its ES-module kit were dropped so every page is plain CSS + one plain script. The hero words fade up once with a single CSS `@keyframes` (off under reduced motion).
 
-## Checker
+## Code standard (2026-11-23)
+- One `style.css`, mobile first, 19 numbered sections with short comments: variables, base, grid, header, buttons, hero, photos, cards, badges, ticket, rows, forms, catalog, dashboard, home sections, footer, then the 640px and 1024px media queries and reduced motion.
+- Only hex variables, Flexbox, a 12-column Grid with `span-N` / `start-N` classes, media queries. No clamp(), min(), svh, :has(), oklch/color-mix, container queries or modules. `[hidden]{display:none !important}` is in the base.
+- `app.js` is one plain script (no modules) with a commented section per page.
+- `assets/moments/` is no longer used by any page; delete it.
+
+## Checker (from the first build, before the 2026-11-23 update)
 The finish gate ran 2 rounds on `index.html`, capped at two browser renders for this laptop.
 - **Round 1:** 17 FAIL, all fixed. They covered a grid start/span bug, the hero visual, split lines, footer height, phone section heights, cut text, the 320px overflow, a repeated action and the first-screen fact.
 - **Round 2:** `GATE: OPEN 2`. The two findings were a footer 37px over its bottom padding and two headings the checker said name no thing. Both were fixed after the gate (footer bottom padding set to the rhythm token; headings renamed "Hygears announcements" and "Posted from the officer dashboard"), but **not re-rendered**.

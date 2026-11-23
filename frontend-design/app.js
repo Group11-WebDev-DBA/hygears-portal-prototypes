@@ -78,7 +78,7 @@
     var count = '<p class="slot__count">' + (out ? ICON.cross : ICON.check) + countText(it, mini) + "</p>";
     var typeText = it.type === "tool" ? "Tool, return after use" : "Consumable, used up";
     if (mini) {
-      return '<li class="slot' + (out ? " is-out" : "") + '" style="--i:' + i + '">' +
+      return '<li class="slot' + (out ? " is-out" : "") + '">' +
         '<a class="slot__link" href="' + (out ? "tools.html" : "reserve.html?item=" + it.id) + '">' +
         '<div class="slot__wall">' + toolSvg(it) + "</div>" +
         '<div class="slot__plate"><h3 class="slot__name">' + it.name + "</h3>" + count + "</div></a></li>";
@@ -86,7 +86,7 @@
     var action = out
       ? '<span class="btn btn--off btn--block" aria-disabled="true">None left</span>'
       : '<a class="btn btn--primary btn--block" href="reserve.html?item=' + it.id + '" aria-label="Reserve ' + it.name + '">Reserve</a>';
-    return '<li class="slot' + (out ? " is-out" : "") + '" style="--i:' + i + '">' +
+    return '<li class="slot' + (out ? " is-out" : "") + '">' +
       '<div class="slot__wall">' + toolSvg(it) + "</div>" +
       '<div class="slot__plate"><h3 class="slot__name">' + it.name + "</h3>" +
       '<p class="slot__use">' + it.use + "</p>" +

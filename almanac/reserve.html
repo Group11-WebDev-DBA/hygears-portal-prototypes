@@ -8,8 +8,9 @@
 <link rel="icon" href="../assets/hygears-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<!-- Adds a "js" class so the CSS knows JavaScript is on (used to hide the officer dashboard until sign-in) -->
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -55,8 +56,8 @@
         </div>
             <div class="field">
           <label for="r-sn">Student number</label>
-          <input class="input" id="r-sn" name="student_number" required data-error="Enter your student number as printed on your ID." aria-describedby="r-sn-hint r-sn-error">
-          <p class="hint" id="r-sn-hint">As printed on your PUP ID.</p>
+          <input class="input" id="r-sn" name="student_number" required pattern="[0-9]{4}-[0-9]{5}-[A-Za-z]{2}-[0-9]" data-error="Enter your student number like 2023-00123-MN-0." aria-describedby="r-sn-hint r-sn-error">
+          <p class="hint" id="r-sn-hint">As printed on your PUP ID, like 2023-00123-MN-0.</p>
           <p class="error" id="r-sn-error" aria-live="polite"></p>
         </div>
           </div>
@@ -83,9 +84,9 @@
         </div>
             <div class="field">
           <label for="r-qty">Quantity</label>
-          <input class="input" id="r-qty" name="quantity" type="number" inputmode="numeric" min="1" value="1" required data-error="Enter a quantity of at least 1, up to what is available." aria-describedby="r-qty-error">
-          
-          <p class="error" id="r-qty-error" aria-live="polite"></p>
+          <input class="input" id="r-qty" name="quantity" type="number" inputmode="numeric" min="1" value="1" required data-error="Enter a quantity of at least 1, up to what is available." aria-describedby="r-qty-hint r-qty-error">
+<p class="hint" id="r-qty-hint">Choose an item to see how many are available.</p>
+<p class="error" id="r-qty-error" aria-live="polite"></p>
         </div>
           </div>
           <div class="field">
@@ -138,6 +139,7 @@
   <div class="container">
     <p class="site-foot__mark"><img src="../assets/hygears-logo.png" width="222" height="224" alt="">PUP Hygears</p>
     <p class="site-foot__line">“We don’t just build vehicles, we build people to help us build the future!” #GEARINGUpTowardExcellence</p>
+    <p class="site-foot__line">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
     <div class="site-foot__cols">
       <div><h2>Pages</h2><ul><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li></ul></div>
       <div><h2>Contact</h2><ul>
