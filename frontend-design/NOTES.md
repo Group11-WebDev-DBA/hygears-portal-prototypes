@@ -4,37 +4,42 @@ Built with Anthropic's frontend-design skill. The professor's rules win wherever
 
 ## The one idea
 
-**The shadow board.** In a real workshop, every tool hangs on a pegboard over its own painted outline, so you can see at a glance what's missing. This portal is that wall. Each item hangs from a hook on a cream pegboard. When stock is available, the tool is a solid dark silhouette with a small drop shadow. When every unit is out, only the pale painted outline is left, marked "None left" with a cross icon. Stock reads at a glance, with no legend needed. On Home the tools swing onto their hooks once on load (turned off for reduced motion). After you reserve, your reference number comes back as a hang tag with an eyelet (`HYG-2026-0142`). The Track page and its three example statuses use the same tag.
+**The shadow board.** In a real workshop, every tool hangs on a pegboard over its own painted outline, so you can see at a glance what's missing. This portal is that wall. Each item hangs from a hook on a gray pegboard. When stock is available, the tool is a solid dark silhouette with a small drop shadow. When every unit is out, only the pale painted outline is left, marked "None left" with a cross icon. Stock reads at a glance, with no legend needed. On Home the tools swing onto their hooks once on load (turned off for reduced motion). After you reserve, your reference number comes back as a hang tag with an eyelet (`HYG-2026-0142`). The Track page and its three example statuses use the same tag.
 
-Everything else stays quiet: white pages, brown-black text, heavy condensed headings, and red only on buttons.
+Everything else stays quiet: white pages, near-black text, heavy condensed headings, a charcoal tab bar and footer, and red only on buttons and the current-page bar.
 
 ## Pages
-`index.html`, `tools.html`, `reserve.html`, `track.html`, `join.html`, `about.html`, `officer.html`. One `style.css`, one `app.js`, the same header and footer everywhere. The current page gets an amber bar and `aria-current`, and Reserve lights up Tools. Double-click any file to open it. To review the officer desk without signing in, open `officer.html#signed-in`.
+`index.html`, `tools.html`, `reserve.html`, `track.html`, `join.html`, `about.html`, `officer.html`. One `style.css`, one `app.js`, the same header and footer everywhere. The current page gets a red bar and `aria-current`, and Reserve lights up Tools. Double-click any file to open it. To review the officer desk without signing in, open `officer.html#signed-in`.
 
 On phones the main nav is a thumb bar fixed to the bottom of the screen (Home, Tools, Track, Join, About), with "Officer sign in" at the top right. From 896px up, the same markup sits in the header.
 
-## Palette
+## Palette (updated 2026-11-23: classic red and white, no cream, amber or orange)
 | Role | Value | Use |
 |---|---|---|
-| Action (accent) | red `#D7261E`, pressed `#AE1D16` | Buttons only. White text on it is 5.0:1 |
-| Text / structure | brown-black `#2A140C` | Text, board frame, hooks, tool silhouettes, tab bar, footer. 16:1 on cream |
-| Muted text | `#5A3F33` | Hints and meta. 8.9:1 on cream |
-| Field edge | `#8A6F60` | Input borders, dashed "out" outlines. 4.6:1 on white |
-| Board | cream `#FFF4E2` with peg holes `#E8D3AE` | The pegboard, plus bands on Track, About and Join |
-| Paint | `#EED8B3` | The painted outline of a tool that's out |
-| Highlight | amber `#F5A623` | Current-page bar and the tag eyelet only, never behind text |
-| Page | white `#FFFFFF` | Page background, label plates, forms |
-
-Orange `#F26A1B` isn't used outside the logo. Orange text on cream is about 2.8:1, so red took the action role.
+| Action | red `#D7261E`, hover `#B51E17` | Buttons and the current-page bar only. White text on it is 5.0:1 |
+| Text / structure | near-black `#14161A` | Text, board frame, hooks, tool silhouettes. 18:1 on white |
+| Secondary text | `#5B6270` | Hints and meta. 6.3:1 on white, 5.8:1 on gray |
+| Field edge | `#858C98` | Input borders, dashed "out" outlines. 3.4:1 on white |
+| Board | gray `#F4F5F7`, peg holes `#D3D7DD` | The pegboard, plus gray bands on Tools, Track, About and Join |
+| Paint | `#E2E5EA` | The painted outline of a tool that's out |
+| Page | white `#FFFFFF` | Page background, label plates, forms, tags |
+| Dark band | charcoal `#1B1D22`, text `#C9CED6` | Phone tab bar, quote band, footer |
 
 ## Fonts
 One family: **Archivo** (Google Fonts, variable width and weight).
-- Headings: weight 800 at 68% width, a condensed workshop-label look. h1 is 40 to 72px, h2 28 to 40px, h3 20px. The same tokens are used on every page.
+- Headings: weight 800 at 68% width, a condensed workshop-label look. h1 is 40, 56 or 72px and h2 28, 34 or 40px (phone, tablet, laptop, set in media queries), h3 20px. The same tokens are used on every page.
 - Body: weight 400 at normal width, 16px, line-height 1.55, about 38rem line length.
 
 ## Why it differs from the other three
 - Ink: pill nav and a reservation slip on cream. Almanac: serif record with ruled tables. Taste: photo-led, ticket cards.
-- Shadow Board leads with the tool wall itself as the visual. It uses a single condensed sans, white pages with the cream reserved for the pegboard, a bottom tab bar on phones, and hang tags for reference numbers.
+- Shadow Board leads with the tool wall itself as the visual. It uses a single condensed sans, white pages with the gray reserved for the pegboard, a bottom tab bar on phones, and hang tags for reference numbers.
+
+## Code standard (2026-11-23)
+- One `style.css`, mobile first, sections with short comments; plain hex variables, Flexbox, simple Grid, media queries at 40rem and 56rem.
+- Removed: clamp() sizes, min(), :has(), inset, env(), calc() animation delays, rgba, padding-block/inline, scrollbar-width. `[hidden]{display:none !important}` is in the base.
+- Kept with a one-line comment: `font-stretch` (Archivo's width axis), `clip-path` for the tag's cut corners, the radial-gradient peg holes, the repeating-linear-gradient stripes on declined tags.
+- `app.js` is one plain ES5 script (var, functions, string concatenation), commented per page. No modules.
+- The pages were first generated by a script; they are now edited by hand. Don't re-run the generator, it would undo these changes.
 
 ## Needs real material
 - The real item list, categories and counts (all marked "Sample"). Real item photos can replace the silhouettes in each slot, keeping the painted outline for the "out" state.
