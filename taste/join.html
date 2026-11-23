@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en" data-type="service" data-radius="soft" data-buttons="arrow">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Join PUP Hygears: membership application</title>
+<meta name="description" content="Apply to PUP Hygears, the PUP student research organization that builds the Luna electric vehicles.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Join PUP Hygears: membership application">
+<meta property="og:description" content="Apply to PUP Hygears, the PUP student research organization that builds the Luna electric vehicles.">
+<meta property="og:image" content="img/team-luna.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/hygears-logo.png" type="image/png">
+<meta name="theme-color" content="#fff4e2">
+<!-- <link rel="canonical" href="https://[the org's domain]/join.html"> once the domain is known -->
+<meta name="site-kind" content="other">
+<meta name="page-type" content="service">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400..800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+</head>
+<body data-page="join">
+<header class="nav">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Skip to content</a>
+    <a class="nav__logo" href="index.html"><img src="img/hygears-logo.png" alt="" width="32" height="32">PUP Hygears</a>
+    <nav class="nav__links" id="site-menu" aria-label="Main">
+      <a class="nav__link" href="tools.html">Tools</a>
+      <a class="nav__link" href="track.html">Track</a>
+      <a class="nav__link" href="join.html" aria-current="page">Join</a>
+      <a class="nav__link" href="about.html">About</a>
+      <a class="nav__link nav__sheet-only" href="officer.html">Officers</a>
+    </nav>
+    <div class="nav__actions">
+      <a class="nav__link" href="officer.html">Officers</a>
+      <a class="btn btn--primary" href="tools.html">Reserve a tool</a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<main id="top">
+  <section class="page-head" aria-labelledby="page-h">
+    <div class="wrap">
+      <p class="t-label">Membership</p>
+      <h1 id="page-h">Apply to join PUP Hygears</h1>
+      <p class="t-lead">Members train on a real vehicle build, the Luna series, and help the team compete in the Shell Eco-marathon.</p>
+    </div>
+  </section>
+  <section class="block" aria-label="Application">
+    <div class="wrap grid">
+      <div class="span-7">
+        <form class="form form-card" id="join-form" novalidate>
+          <div class="form-grid">
+            <div class="field full"><label for="j-name">Full name</label>
+              <input id="j-name" name="name" autocomplete="name" required aria-describedby="j-name-err">
+              <p class="field__error" id="j-name-err" hidden>Write your full name.</p></div>
+            <div class="field"><label for="j-sn">Student number</label>
+              <span class="hint" id="j-sn-hint">Like 2023-00123-MN-0</span>
+              <input id="j-sn" name="student_number" required data-rule="sn" aria-describedby="j-sn-hint j-sn-err">
+              <p class="field__error" id="j-sn-err" hidden>Write your student number in the format 2023-00123-MN-0.</p></div>
+            <div class="field"><label for="j-email">Email</label>
+              <span class="hint" id="j-email-hint">Officers reply here</span>
+              <input id="j-email" name="email" type="email" autocomplete="email" required data-rule="email" aria-describedby="j-email-hint j-email-err">
+              <p class="field__error" id="j-email-err" hidden>Write an email address with an @, like juan@gmail.com.</p></div>
+            <div class="field"><label for="j-course">Course</label>
+              <input id="j-course" name="course" placeholder="e.g. BS Mechanical Engineering" required aria-describedby="j-course-err">
+              <p class="field__error" id="j-course-err" hidden>Write your course.</p></div>
+            <div class="field"><label for="j-year">Year and section</label>
+              <input id="j-year" name="year_section" placeholder="e.g. 2-1" required aria-describedby="j-year-err">
+              <p class="field__error" id="j-year-err" hidden>Write your year and section, like 2-1.</p></div>
+            <div class="field full"><label for="j-committee">Preferred committee</label>
+              <select id="j-committee" name="committee" required aria-describedby="j-committee-err">
+                <option value="">Choose a committee</option>
+                <option>Finance and Operations</option><option>Internal Affairs</option><option>Innovation and Research</option><option>External Affairs</option><option>Creative Media and Design</option>
+              </select>
+              <p class="field__error" id="j-committee-err" hidden>Choose the committee you want to join first.</p></div>
+            <div class="field full"><label for="j-reason">Reason for joining</label>
+              <span class="hint" id="j-reason-hint">At least 30 characters: what you want to learn or bring</span>
+              <textarea id="j-reason" name="reason" required data-rule="long" aria-describedby="j-reason-hint j-reason-err"></textarea>
+              <p class="field__error" id="j-reason-err" hidden>Write at least 30 characters about why you want to join.</p></div>
+          </div>
+          <div class="btn-row"><button class="btn btn--primary" type="submit">Send application<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h8"/><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button></div>
+          <p class="form__status" role="status" data-form-status></p>
+        </form>
+        <div id="join-done" hidden tabindex="-1" class="ticket">
+          <div class="ticket__head"><div><p class="t-label">Application sent</p><p class="ticket__ref" id="join-ref"></p></div><span class="badge"><svg class="ic" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.5 1.5"/></svg>Under review</span></div>
+          <div class="ticket__body"><p id="join-msg"></p><p class="t-small muted">Prototype: nothing leaves your browser yet.</p></div>
+        </div>
+      </div>
+      <aside class="span-4 start-9 stack-5">
+        <div class="frame" style="aspect-ratio:4/3"><img class="frame__img" src="img/team-2.jpg" alt="Hygears members lined up in team shirts at the PUP campus" width="1440" height="650" loading="lazy"></div>
+        <h2 style="font-size:var(--t-h3)">Programs members come from</h2>
+        <ul class="rows">
+          <li>Mechanical Engineering</li><li>Electronics and Communications Engineering</li><li>Industrial Engineering</li><li>Electrical Engineering</li><li>Computer Engineering</li><li>Marketing</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+</main>
+<footer class="footer closing" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="close--photo">
+      <div class="section-head--split">
+        <div><h2 id="close-h">Reserve a tool for your project</h2><p class="t-lead">Send the form, get a reference number, and follow the request until pickup.</p></div>
+        <a class="btn btn--primary" href="tools.html">Reserve a tool<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h8"/><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+      </div>
+      <div class="close__media"><img src="img/team-luna.jpg" alt="Hygears members gathered around the Luna car on a tree-lined road at PUP" loading="lazy" width="1435" height="645" data-source="client" data-subject="the team with the Luna car"></div>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-5 stack-4">
+          <address class="footer__address">Sta. Mesa, Manila</address>
+          <p>Polytechnic University of the Philippines</p>
+          <p><a class="link" href="https://www.openstreetmap.org/search?query=Sta.%20Mesa%20Manila">See the area</a></p>
+        </div>
+        <div class="span-3"><h3>Contact</h3><ul>
+          <li><a href="https://www.instagram.com/puphygears">Instagram: puphygears</a></li>
+          <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+          <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+          <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+        </ul></div>
+        <div class="span-2"><h3>Borrow</h3><ul>
+          <li><a href="tools.html">Tools</a></li><li><a href="reserve.html">Reservation form</a></li><li><a href="track.html">Track a request</a></li>
+        </ul></div>
+        <div class="span-2"><h3>Hygears</h3><ul>
+          <li><a href="join.html">Membership</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li>
+        </ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 PUP Hygears, a student research organization of PUP</span>
+        <span class="hashtag">#GEARINGUpTowardExcellence</span>
+        <span>Photographs by PUP Hygears</span>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="app.js" defer></script>
+</body>
+</html>

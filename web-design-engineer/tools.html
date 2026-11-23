@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tools and consumables | PUP Hygears</title>
+  <meta name="description" content="Search the Hygears tools and consumables, see what is available now, and reserve.">
+  <link rel="icon" href="../assets/hygears-logo.png">
+  <!-- Fonts: Instrument Sans (all text) and JetBrains Mono (reference numbers). Falls back to Arial offline. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ===== Header (same on every page; becomes header.php later) ===== -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <!-- decorative: the name is written right next to the logo -->
+        <img src="../assets/hygears-logo.png" alt="" width="40" height="40">
+        <span>PUP Hygears</span>
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tools.html" aria-current="page">Tools</a></li>
+        <li><a href="track.html">Track Request</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="officer.html" class="nav-officer">Officers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="page-head">
+      <div class="wrap">
+        <h1>Tools and consumables</h1>
+        <p class="lead">Tools are borrowed and returned. Consumables are used up. <span class="sample-tag">Sample list</span></p>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <form class="filters" id="filters" role="search" onsubmit="return false;">
+        <div class="field">
+          <label for="search">Search items</label>
+          <input type="search" id="search" placeholder="e.g. soldering" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="category">Category</label>
+          <select id="category">
+            <option value="all">All categories</option>
+            <option>Electrical</option>
+            <option>Hand and power tools</option>
+            <option>Safety</option>
+            <option>Materials</option>
+          </select>
+        </div>
+        <div>
+          <p class="visually-hidden" id="type-label">Type</p>
+          <div class="chips" role="group" aria-labelledby="type-label">
+            <button type="button" class="chip" data-type="all" aria-pressed="true">All</button>
+            <button type="button" class="chip" data-type="tool" aria-pressed="false">Tools</button>
+            <button type="button" class="chip" data-type="consumable" aria-pressed="false">Consumables</button>
+          </div>
+        </div>
+        <label class="check-inline"><input type="checkbox" id="available-only"> Available now only</label>
+      </form>
+
+      <p class="result-count" id="result-count" aria-live="polite">Showing all 12 items</p>
+      <div class="board-head" aria-hidden="true">
+        <span></span><span>Item</span><span>Category</span><span>Type</span><span>Available now</span><span></span>
+      </div>
+      <ul class="board" id="board">
+          <li class="item" data-name="digital multimeter" data-category="Electrical" data-type="tool" data-available="3">
+            <div class="item-photo" aria-hidden="true">Photo</div>
+            <div>
+              <h3 class="item-name">Digital multimeter</h3>
+              <p class="item-desc">Measure voltage, current and resistance.</p>
+              <p class="item-meta item-meta-mobile">Electrical &middot; Tool</p>
+            </div>
+            <span class="item-cat item-meta">Electrical</span>
+            <span class="item-type item-meta">Tool</span>
+            <p class="item-stock"><span class="dot" aria-hidden="true"></span>3 of 4 available</p>
+            <div class="item-action"><a class="btn btn-primary btn-small" href="reserve.html?item=multimeter">Reserve<span class="visually-hidden"> Digital multimeter</span></a></div>
+          </li>
+          <li class="item" data-name="soldering station" data-category="Electrical" data-type="tool" data-available="2">
+            <div class="item-photo" aria-hidden="true">Photo</div>
+            <div>
+              <h3 class="item-name">Soldering station</h3>
+              <p class="item-desc">Solder wires and boards. Temperature-controlled.</p>
+              <p class="item-meta item-meta-mobile">Electrical &middot; Tool</p>
+            </div>
+            <span class="item-cat item-meta">Electrical</span>
+            <span class="item-type item-meta">Tool</span>
+            <p class="item-stock"><span class="dot" aria-hidden="true"></span>2 of 3 available</p>
+            <div class="item-action"><a class="btn btn-primary btn-small" href="reserve.html?item=soldering-station">Reserve<span class="visually-hidden"> Soldering station</span></a></div>
+          </li>
+          <li class="item" data-name="cordless drill" data-category="Hand and power tools" data-type="tool" data-available="1">
+            <div class="item-photo" aria-hidden="true">Photo</div>
+            <div>
+              <h3 class="item-name">Cordless drill</h3>
+              <p class="item-desc">Drill and drive screws. Battery included.</p>
+              <p class="item-meta item-meta-mobile">Hand and power tools &middot; Tool</p>
+            </div>
+            <span class="item-cat item-meta">Hand and power tools</span>
+            <span class="item-type item-meta">Tool</span>
+            <p class="item-stock"><span class="dot" aria-hidden="true"></span>1 of 2 available</p>
+            <div class="item-action"><a class="btn btn-primary btn-small" href="reserve.html?item=cordless-drill">Reserve<span class="visually-hidden"> Cordless drill</span></a></div>
+          </li>
+          <li class="item" data-name="torque wrench" data-category="Hand and power tools" data-type="tool" data-available="0">
+            <div class="item-photo" aria-hidden="true">Photo</div>
+            <div>
+              <h3 class="item-name">Torque wrench</h3>
+              <p class="item-desc">Tighten bolts to a set torque.</p>
+              <p class="item-meta item-meta-mobile">Hand and power tools &middot; Tool</p>
+            </div>
+            <span class="item-cat item-meta">Hand and power tools</span>
+            <span class="item-type item-meta">Tool</span>
+            <p class="item-stock"><span class="dot is-empty" aria-hidden="true"></span>None left</p>
+            <div class="item-action"><span class="none-left">Back soon</span></div>
+          </li>
+          <li class="item" data-name="wire crimper" data-category="Electrical" data-type="tool" data-available="2">
+            <div class="item-photo" aria-hidden="true">Photo</div>
+            <div>
+              <h3 class="item-name">Wire crimper</h3>
+              <p class="item-desc">Attach terminals to wire ends.</p>
+              <p class="item-meta item-meta-mobile">Electrical &middot; Tool</p>
+            </div>
+            <span class="item-cat item-meta">Electrical</span>
+            <span class="item-type item-meta">Tool</span>
+            <p class="item-stock"><span class="dot" aria-hidden="true"></span>2 of 2 available</p>
+            <div class="item-action"><a class="btn btn-primary btn-small" href="reserve.html?item=wire-crimper">Reserve<span class="visually-hidden"> Wire crimper</span></a></div>
+          </li>
+          <li class="item" data-name="heat gun" data-category="Hand and power tools" data-type="tool" data-available="1">
+            <div class="item-photo" aria-hidden="true">Photo</div>
+            <div>
+              <h3 class="item-name">Heat gun</h3>
+              <p class="item-desc">Shrink tubing and soften plastics.</p>
+              <p class="item-meta item-meta-mobile">Hand and power tools &middot; Tool</p>
+            </div>
+            <span class="item-cat item-meta">Hand and power tools</span>
+            <span class="item-type item-meta">Tool</span>
+            <p class="item-stock"><span class="dot" aria-hidden="true"></span>1 of 1 available</p>
+            <div class="item-action"><a class="btn btn-primary btn-small" href="reserve.html?item=heat-gun">Reserve<span class="visually-hidden"> Heat gun</span></a></div>
+          </li>
+          <li class="item" data-name="safety goggles" data-category="Safety" data-type="tool" data-available="8">
+            <div class="item-photo" aria-hidden="true">Photo</div>
+            <div>
+              <h3 class="item-name">Safety goggles</h3>
+              <p class="item-desc">Eye protection for the workshop.</p>
+              <p class="item-meta item-meta-mobile">Safety &middot; Tool</p>
+            </div>
+            <span class="item-cat item-meta">Safety</span>
+            <span class="item-type item-meta">Tool</span>
+            <p class="item-stock"><span class="dot" aria-hidden="true"></span>8 of 10 available</p>
+            <div class="item-action"><a class="btn btn-primary btn-small" href="reserve.html?item=safety-goggles">Reserve<span class="visually-hidden"> Safety goggles</span></a></div>
+          </li>
+          <li class="item" data-name="pla filament 1kg" data-category="Materials" data-type="consumable" data-available="4">
+            <div class="item-photo" aria-hidden="true">Photo</div>
+            <div>
+              <h3 class="item-name">PLA filament 1kg</h3>
+              <p class="item-desc">3D printer filament, one roll.</p>
+              <p class="item-meta item-meta-mobile">Materials &middot; Consumable</p>
+            </div>
+            <span class="item-cat item-meta">Materials</span>
+            <span class="item-type item-meta">Consumable</span>
+            <p class="item-stock"><span class="dot" aria-hidden="true"></span>4 in stock</p>
+            <div class="item-action"><a class="btn btn-primary btn-small" href="reserve.html?item=pla-filament">Reserve<span class="visually-hidden"> PLA filament 1kg</span></a></div>
+          </li>
+          <li class="item" data-name="heat-shrink tubing pack" data-category="Electrical" data-type="consumable" data-available="6">
+            <div class="item-photo" aria-hidden="true">Photo</div>
+            <div>
+              <h3 class="item-name">Heat-shrink tubing pack</h3>
+              <p class="item-desc">Insulate soldered joints.</p>
+              <p class="item-meta item-meta-mobile">Electrical &middot; Consumable</p>
+            </div>
+            <span class="item-cat item-meta">Electrical</span>
+            <span class="item-type item-meta">Consumable</span>
+            <p class="item-stock"><span class="dot" aria-hidden="true"></span>6 in stock</p>
+            <div class="item-action"><a class="btn btn-primary btn-small" href="reserve.html?item=heat-shrink">Reserve<span class="visually-hidden"> Heat-shrink tubing pack</span></a></div>
+          </li>
+          <li class="item" data-name="zip ties pack" data-category="Materials" data-type="consumable" data-available="10">
+            <div class="item-photo" aria-hidden="true">Photo</div>
+            <div>
+              <h3 class="item-name">Zip ties pack</h3>
+              <p class="item-desc">Bundle and secure cables.</p>
+              <p class="item-meta item-meta-mobile">Materials &middot; Consumable</p>
+            </div>
+            <span class="item-cat item-meta">Materials</span>
+            <span class="item-type item-meta">Consumable</span>
+            <p class="item-stock"><span class="dot" aria-hidden="true"></span>10 in stock</p>
+            <div class="item-action"><a class="btn btn-primary btn-small" href="reserve.html?item=zip-ties">Reserve<span class="visually-hidden"> Zip ties pack</span></a></div>
+          </li>
+          <li class="item" data-name="electrical tape" data-category="Electrical" data-type="consumable" data-available="0">
+            <div class="item-photo" aria-hidden="true">Photo</div>
+            <div>
+              <h3 class="item-name">Electrical tape</h3>
+              <p class="item-desc">Insulate and wrap wires, one roll.</p>
+              <p class="item-meta item-meta-mobile">Electrical &middot; Consumable</p>
+            </div>
+            <span class="item-cat item-meta">Electrical</span>
+            <span class="item-type item-meta">Consumable</span>
+            <p class="item-stock"><span class="dot is-empty" aria-hidden="true"></span>None left</p>
+            <div class="item-action"><span class="none-left">Restocking</span></div>
+          </li>
+          <li class="item" data-name="epoxy resin kit" data-category="Materials" data-type="consumable" data-available="2">
+            <div class="item-photo" aria-hidden="true">Photo</div>
+            <div>
+              <h3 class="item-name">Epoxy resin kit</h3>
+              <p class="item-desc">Two-part adhesive for bonding parts.</p>
+              <p class="item-meta item-meta-mobile">Materials &middot; Consumable</p>
+            </div>
+            <span class="item-cat item-meta">Materials</span>
+            <span class="item-type item-meta">Consumable</span>
+            <p class="item-stock"><span class="dot" aria-hidden="true"></span>2 in stock</p>
+            <div class="item-action"><a class="btn btn-primary btn-small" href="reserve.html?item=epoxy-kit">Reserve<span class="visually-hidden"> Epoxy resin kit</span></a></div>
+          </li>
+      </ul>
+      <div class="empty-state" id="empty-state">
+        <h2>No items match</h2>
+        <p class="muted">Try a shorter word or another category.</p>
+        <button type="button" class="btn btn-secondary" id="clear-filters">Clear filters</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===== Footer (same on every page; becomes footer.php later) ===== -->
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <img class="footer-logo" src="../assets/hygears-logo.png" alt="" width="48" height="48">
+        <p class="footer-name">PUP Hygears</p>
+        <p class="footer-line">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+        <p class="footer-line">#GEARINGUpTowardExcellence</p>
+      </div>
+      <div>
+        <h2 class="footer-h">Find us</h2>
+        <address>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</address>
+      </div>
+      <div>
+        <h2 class="footer-h">Contact</h2>
+        <ul class="footer-links">
+          <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+          <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap">
+      <p class="footer-base">Hygears Web Portal prototype. Items, requests and dates marked "Sample" are placeholders until the officers supply the real list.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

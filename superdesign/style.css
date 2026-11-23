@@ -1,0 +1,696 @@
+/* =========================================================
+   PUP Hygears Web Portal - "Charge" prototype (superdesign)
+   One shared stylesheet for all 7 pages.
+   Mobile first: base rules are for phones. The media queries
+   at the bottom add columns for tablets (48rem) and laptops (64rem).
+   ========================================================= */
+
+/* ---------- 1. Variables ---------- */
+:root {
+  /* Colours (hex only) */
+  --white: #FFFFFF;
+  --gray: #F4F5F7;       /* alternate sections, photo slots, empty cells */
+  --line: #D5D8DE;       /* borders and dividers */
+  --ink: #14161A;        /* text and filled battery cells */
+  --muted: #5B6270;      /* hints and meta text */
+  --red: #D7261E;        /* actions only: buttons and the current-page bar */
+  --red-dark: #B51E17;   /* button hover and error text */
+  --charcoal: #1B1D22;   /* hero and footer bands */
+  --on-dark: #C3C8D1;    /* secondary text on charcoal */
+
+  /* Fonts: one for headings, one for body */
+  --font-head: "Barlow Semi Condensed", Arial, sans-serif;
+  --font-body: "Barlow", Arial, sans-serif;
+
+  /* Type sizes (phone); laptop sizes are in the media query */
+  --h1: 2.25rem;
+  --h2: 1.625rem;
+  --h3: 1.25rem;
+  --small: 0.9375rem;
+
+  /* Space and shape */
+  --space: 1rem;
+  --radius: 4px;
+  --max: 72rem;
+}
+
+/* ---------- 2. Reset and base ---------- */
+* { box-sizing: border-box; }
+
+/* The hidden attribute must win over any display rule below */
+[hidden] { display: none !important; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--white);
+}
+
+img { max-width: 100%; display: block; }
+
+h1, h2, h3 {
+  font-family: var(--font-head);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 0.75rem;
+}
+h1 { font-size: var(--h1); }
+h2 { font-size: var(--h2); }
+h3 { font-size: var(--h3); }
+
+p { margin: 0 0 1rem; max-width: 65ch; }
+
+a { color: var(--ink); text-underline-offset: 3px; }
+a:hover { color: var(--red-dark); }
+
+/* Visible keyboard focus everywhere */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+}
+.band-dark a:focus-visible,
+.band-dark button:focus-visible,
+.site-footer a:focus-visible {
+  outline-color: var(--white);
+}
+
+/* Hidden from the eye, still read by screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Skip link appears when tabbed to */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  background: var(--ink);
+  color: var(--white);
+  padding: 0.75rem 1rem;
+  z-index: 10;
+}
+.skip-link:focus { top: 0.5rem; color: var(--white); }
+
+/* ---------- 3. Layout helpers ---------- */
+.container {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.section { padding: 3rem 0; }
+.section-gray { background: var(--gray); }
+
+.page-head { padding: 2.5rem 0 1.5rem; border-bottom: 1px solid var(--line); }
+.page-head p { color: var(--muted); }
+.page-head + .section { padding-top: 2rem; }
+
+.kicker {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.5rem;
+}
+
+.lead { font-size: 1.125rem; }
+.muted { color: var(--muted); }
+
+/* Row with a heading on the left and a link on the right */
+.section-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1.25rem;
+}
+.section-top h2 { margin: 0; }
+
+/* Two-column split that stacks on phones */
+.split { display: grid; gap: 2rem; }
+
+/* ---------- 4. Header and navigation ---------- */
+.site-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 4rem;
+  gap: 1rem;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  text-decoration: none;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+.brand img { width: 40px; height: 40px; }
+
+.menu-btn {
+  min-height: 44px;
+  padding: 0 1rem;
+  font: inherit;
+  font-weight: 600;
+  background: var(--white);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+/* Phone: the nav is a list under the header, opened by the Menu button.
+   Without JavaScript it simply stays open (see the .js-nav rule). */
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0.75rem;
+}
+.site-nav a {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 1rem;
+  text-decoration: none;
+  font-weight: 600;
+  border-left: 4px solid transparent;
+}
+.site-nav a[aria-current="page"] {
+  border-left-color: var(--red);
+  background: var(--gray);
+}
+.js-nav .site-nav { display: none; }
+.js-nav .site-nav.open { display: block; }
+
+/* ---------- 5. Buttons ---------- */
+.btn,
+.btn-ghost,
+.btn-on-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0 1.25rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+.btn { background: var(--red); color: var(--white); border: 1px solid var(--red); }
+.btn:hover { background: var(--red-dark); border-color: var(--red-dark); color: var(--white); }
+
+.btn-ghost { background: var(--white); color: var(--ink); border: 1px solid var(--ink); }
+.btn-ghost:hover { background: var(--ink); color: var(--white); }
+
+.btn-on-dark { background: transparent; color: var(--white); border: 1px solid var(--white); }
+.btn-on-dark:hover { background: var(--white); color: var(--ink); }
+
+/* Out-of-stock "button": looks off and is not a link */
+.btn-off {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 1.25rem;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--gray);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+}
+
+.btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.btn-full { width: 100%; }
+
+/* Small buttons inside tables still keep a 44px tap height */
+.btn-sm { min-height: 44px; padding: 0 0.875rem; font-size: var(--small); }
+
+/* ---------- 6. Battery cells (the one idea) ----------
+   One cell per unit. Filled = on the shelf, empty = out.
+   Always shown next to the count in words. */
+.stock {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  font-weight: 600;
+}
+.cells {
+  display: inline-flex;
+  gap: 3px;
+  padding: 3px;
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  position: relative;
+  margin-right: 6px;            /* room for the battery tip */
+}
+.cells::after {                 /* the battery tip */
+  content: "";
+  position: absolute;
+  right: -7px;
+  top: 50%;
+  width: 4px;
+  height: 8px;
+  margin-top: -4px;
+  background: var(--ink);
+  border-radius: 0 2px 2px 0;
+}
+.cells i {
+  display: block;
+  width: 10px;
+  height: 16px;
+  background: var(--gray);
+  border: 1px solid var(--line);
+}
+.cells i.on { background: var(--ink); border-color: var(--ink); }
+.stock-none { color: var(--muted); }
+
+/* Big version used in the steps row and Track progress */
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+.step {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.25rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.step-cell {
+  flex: 0 0 auto;
+  width: 2.5rem;
+  height: 3.25rem;
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.25rem;
+  background: var(--white);
+}
+.step-cell.on { background: var(--ink); color: var(--white); }
+.step h3 { margin-bottom: 0.25rem; }
+.step p { margin: 0; color: var(--muted); }
+
+/* ---------- 7. Hero (Home) ---------- */
+.band-dark { background: var(--charcoal); color: var(--white); }
+.band-dark .kicker { color: var(--on-dark); }
+.band-dark p { color: var(--on-dark); }
+
+.hero-photo img {
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+  object-position: 75% 60%;
+}
+.hero-text { padding: 2rem 1.25rem 2.5rem; }
+.hero-text h1 { color: var(--white); }
+.hero-tag { font-style: italic; }
+
+/* ---------- 8. Cards and item list ---------- */
+.card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+.card-gray { background: var(--gray); border-color: var(--gray); }
+
+.notice {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background: var(--gray);
+  border-left: 4px solid var(--ink);
+  border-radius: var(--radius);
+  margin: 0 0 1.5rem;
+}
+.notice p { margin: 0; }
+
+.item-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.item h3 { margin: 0; }
+.item-meta { margin: 0; color: var(--muted); font-size: var(--small); }
+.item .btn, .item .btn-off { margin-top: auto; }
+
+/* Photo slot: the org adds real item photos later */
+.photo-slot {
+  aspect-ratio: 2 / 1;
+  background: var(--gray);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: var(--small);
+}
+
+/* Compact rows used on Home ("Available now") */
+.quick-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.quick-list li {
+  display: grid;
+  grid-template-columns: 1fr auto;   /* phone: name on top, then stock + button */
+  align-items: center;
+  gap: 0.75rem 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.quick-name { font-weight: 600; min-width: 10rem; }
+.quick-name span { display: block; font-weight: 400; color: var(--muted); font-size: var(--small); }
+
+/* Announcements */
+.news { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+.news li { border-top: 2px solid var(--ink); padding-top: 1rem; }
+.news h3 { margin-bottom: 0.25rem; }
+.slot {
+  display: inline-block;
+  font-size: var(--small);
+  color: var(--muted);
+  border: 1px dashed var(--muted);
+  border-radius: var(--radius);
+  padding: 0.125rem 0.5rem;
+}
+
+/* ---------- 9. Filters (Tools) ---------- */
+.filters {
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--gray);
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+}
+.type-switch {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.type-switch legend { font-weight: 600; margin-bottom: 0.375rem; padding: 0; }
+.type-switch label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: 44px;
+  padding: 0 0.875rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  font-weight: 600;
+}
+.check input, .type-switch input { width: 1.25rem; height: 1.25rem; accent-color: var(--ink); }
+.result-count { font-weight: 600; margin: 0 0 1rem; }
+
+/* ---------- 10. Forms ---------- */
+.form { display: grid; gap: 1.25rem; }
+.field { display: grid; gap: 0.375rem; }
+.field label { font-weight: 600; }
+.hint { font-size: var(--small); color: var(--muted); margin: 0; }
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+input[type="search"],
+input[type="password"],
+select,
+textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.625rem 0.75rem;
+  font-family: var(--font-body);
+  font-size: 1rem;              /* 16px stops phones from zooming in */
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--muted);
+  border-radius: var(--radius);
+}
+textarea { min-height: 7rem; resize: vertical; }
+
+/* Error state: red-dark text with a "!" mark, never colour alone */
+.error {
+  margin: 0;
+  color: var(--red-dark);
+  font-weight: 600;
+  font-size: var(--small);
+}
+.error:not(:empty)::before { content: "! "; }
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"] { border: 2px solid var(--red-dark); }
+
+.form-row { display: grid; gap: 1.25rem; }
+
+/* Success panel shown after a form is sent */
+.success {
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  background: var(--white);
+}
+.ref {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 2.25rem;
+  letter-spacing: 0.02em;
+  margin: 0.25rem 0 1rem;
+  word-break: break-all;
+}
+
+/* ---------- 11. Status chips (Track, Officer) ---------- */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  font-weight: 700;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  white-space: nowrap;
+}
+.status-approved { background: var(--ink); color: var(--white); }
+.status-declined { border-style: dashed; }
+
+/* Progress row on Track: three cells that fill as the request moves */
+.progress { list-style: none; margin: 1.25rem 0; padding: 0; display: flex; gap: 0.5rem; }
+.progress li {
+  flex: 1;
+  border-top: 8px solid var(--line);
+  padding-top: 0.5rem;
+  font-size: var(--small);
+  font-weight: 600;
+  color: var(--muted);
+}
+.progress li.done { border-top-color: var(--ink); color: var(--ink); }
+
+.details { display: grid; gap: 0.5rem; margin: 0; }
+.details div { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--line); padding: 0.5rem 0; }
+.details dt { color: var(--muted); }
+.details dd { margin: 0; font-weight: 600; text-align: right; }
+
+.sample-btns { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+/* ---------- 12. Tables (Officer) ----------
+   Phones: each row becomes a labelled block using data-label. */
+.table { width: 100%; border-collapse: collapse; }
+.table caption { text-align: left; font-weight: 600; padding-bottom: 0.5rem; }
+.table thead { display: none; }
+.table tr {
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+  background: var(--white);
+}
+.table td {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.375rem 0;
+  text-align: right;
+}
+.table td::before {
+  content: attr(data-label);
+  font-weight: 600;
+  color: var(--muted);
+  text-align: left;
+}
+.table td.actions { justify-content: flex-end; gap: 0.5rem; padding-top: 0.75rem; }
+.table td.actions::before { content: none; }
+
+/* Officer summary counters */
+.counters { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 2rem; }
+.counter {
+  display: block;
+  padding: 1rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-decoration: none;
+}
+.counter strong { display: block; font-family: var(--font-head); font-size: 2rem; line-height: 1; }
+.counter span { color: var(--muted); font-weight: 600; }
+
+.dash-section { margin-bottom: 2.5rem; }
+.login-card { max-width: 26rem; margin: 0 auto; }
+
+/* ---------- 13. About ---------- */
+.photo-wide img { width: 100%; height: 13rem; object-fit: cover; border-radius: var(--radius); }
+.plain-list { margin: 0 0 1rem; padding-left: 1.25rem; }
+.plain-list li { margin-bottom: 0.375rem; }
+.quote { border-left: 4px solid var(--ink); padding-left: 1rem; margin: 0 0 1rem; font-size: 1.125rem; }
+.contact-list { list-style: none; margin: 0; padding: 0; }
+.contact-list li { display: flex; flex-wrap: wrap; gap: 0 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid var(--line); }
+.contact-list span { color: var(--muted); min-width: 6rem; }
+
+/* ---------- 14. Footer ---------- */
+.site-footer { background: var(--charcoal); color: var(--white); padding: 2.5rem 0 1.5rem; margin-top: 3rem; }
+.site-footer a { color: var(--white); }
+.site-footer p { color: var(--on-dark); }
+.footer-grid { display: grid; gap: 2rem; }
+.footer-brand { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+.footer-brand img { width: 48px; height: 48px; }
+.footer-brand strong { font-family: var(--font-head); font-size: 1.25rem; }
+.descriptor { color: var(--white); font-weight: 600; }
+.site-footer h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--on-dark); }
+.footer-links { list-style: none; margin: 0; padding: 0; }
+.footer-links a { display: inline-flex; align-items: center; min-height: 44px; }
+.footer-bottom { border-top: 1px solid #3A3D45; margin-top: 2rem; padding-top: 1rem; font-size: var(--small); }
+
+/* ---------- 15. Tablet (48rem = 768px and up) ---------- */
+@media (min-width: 48rem) {
+  .item-grid { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr 1fr; }
+  .filters { grid-template-columns: 2fr 1fr; align-items: end; }
+  .steps { grid-template-columns: repeat(3, 1fr); }
+  .counters { grid-template-columns: repeat(4, 1fr); }
+  .footer-grid { grid-template-columns: 2fr 1fr 1fr; }
+  .news { grid-template-columns: repeat(3, 1fr); }
+  .photo-wide img { height: 20rem; }
+
+  /* Tables go back to normal rows */
+  .table thead { display: table-header-group; }
+  .table tr { display: table-row; border: 0; padding: 0; margin: 0; }
+  .table th, .table td {
+    display: table-cell;
+    text-align: left;
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: middle;
+  }
+  .table th { font-size: var(--small); color: var(--muted); background: var(--gray); }
+  .table td::before { content: none; }
+  .table td.actions { white-space: nowrap; }
+}
+
+/* ---------- 16. Laptop (64rem = 1024px and up) ---------- */
+@media (min-width: 64rem) {
+  :root { --h1: 3rem; --h2: 2rem; }
+
+  /* Nav sits in the header row; the Menu button is hidden */
+  .menu-btn { display: none; }
+  .js-nav .site-nav, .site-nav { display: block; }
+  .site-nav ul { display: flex; gap: 0.25rem; padding: 0; }
+  .site-nav a {
+    min-height: 4rem;
+    padding: 0 0.875rem;
+    border-left: 0;
+    border-bottom: 4px solid transparent;
+  }
+  .site-nav a[aria-current="page"] { border-bottom-color: var(--red); background: none; }
+
+  .hero { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; }
+  .hero-text { padding: 4rem 3rem 4rem 5.25rem; align-self: center; }
+  .hero-photo { order: 2; }
+  .hero-photo img { height: 100%; min-height: 26rem; }
+
+  .split { grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .split-wide { grid-template-columns: 2fr 1fr; }
+  .split-form { grid-template-columns: 1fr 1.6fr; }
+  .item-grid { grid-template-columns: repeat(3, 1fr); }
+  .section { padding: 4rem 0; }
+}
+
+/* Phone header: logo, then Menu button; nav list drops below */
+@media (max-width: 63.99rem) {
+  .header-inner { flex-wrap: wrap; }
+  .site-nav { width: 100%; }
+}
+
+/* ---------- 17. Small helpers used by a few pages ---------- */
+.search-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.search-row input { flex: 1 1 14rem; width: auto; }
+.quick-name { margin: 0; grid-column: 1 / -1; }
+@media (min-width: 48rem) {
+  .quick-list li { grid-template-columns: 2fr 1.5fr auto; }
+  .quick-name { grid-column: auto; }
+}
+.legend-hint { margin: 1.25rem 0 0.5rem; }
+.h3-size { font-size: var(--h3); }
+.after-list { margin-top: 1.25rem; }
+.side-photo { width: 100%; height: 11rem; object-fit: cover; border-radius: var(--radius); margin-bottom: 1.25rem; }
+.notice-white { background: var(--white); }
+.about-split { margin-top: 2rem; }
+.try-card { margin-top: 1.5rem; }
+.login-hint { margin-top: 1rem; }
+.descriptor-dark { font-weight: 600; }
+@media (min-width: 48rem) {
+  .steps-rules { grid-template-columns: 1fr 1fr; }
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Track request | PUP Hygears</title>
+<meta name="description" content="Check whether your Hygears reservation is pending, approved or declined.">
+<link rel="icon" href="img/hg-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');</script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap head-row">
+    <a class="brand" href="index.html">
+      <img src="img/hg-mark.png" alt="" width="40" height="40">
+      <span>PUP Hygears</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i data-icon="menu"></i>Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        <li><a href="track.html" aria-current="page">Track request</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="officer.html">Officer</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <div class="page-head">
+    <h1>Track a request</h1>
+    <p class="lede">Enter the reference number you got after reserving.</p>
+  </div>
+  <div class="layout-split">
+    <div>
+      <form class="form form-panel" id="track-form" novalidate>
+        <div class="field">
+          <label for="t-ref">Reference number</label>
+          <input id="t-ref" type="text" autocapitalize="characters" autocomplete="off" placeholder="e.g. HYG-2026-0142" aria-describedby="t-ref-hint t-ref-error">
+          <p class="hint" id="t-ref-hint">It starts with HYG and is on your confirmation screen.</p>
+          <p class="error" id="t-ref-error" role="alert"></p>
+        </div>
+        <div class="btn-row"><button class="btn btn--primary" type="submit">Track request</button></div>
+      </form>
+      <section class="form-panel stack-top" id="track-result" hidden tabindex="-1" aria-live="polite"></section>
+    </div>
+    <aside aria-labelledby="samples-title">
+      <h2 id="samples-title">Sample requests</h2>
+      <p class="small muted">One of each status, to show how results look. Tap one to open it.</p>
+      <ul class="ref-list">
+        <li><button type="button" data-ref="HYG-2026-0137"><strong>HYG-2026-0137</strong><span class="chip chip--pending"><i data-icon="clock"></i>Pending</span><span class="muted">Soldering station</span></button></li>
+        <li><button type="button" data-ref="HYG-2026-0142"><strong>HYG-2026-0142</strong><span class="chip chip--approved"><i data-icon="check"></i>Approved</span><span class="muted">Digital multimeter × 2</span></button></li>
+        <li><button type="button" data-ref="HYG-2026-0129"><strong>HYG-2026-0129</strong><span class="chip chip--declined"><i data-icon="x"></i>Declined</span><span class="muted">Heat gun</span></button></li>
+      </ul>
+    </aside>
+  </div>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <img src="img/hg-mark.png" alt="PUP Hygears logo" width="48" height="48">
+          <strong>PUP Hygears</strong>
+        </div>
+        <p class="signoff">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership
+          <span class="tag">#GEARINGUpTowardExcellence</span></p>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul class="foot-list">
+          <li><i data-icon="mail"></i><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><i data-icon="link"></i><a href="https://www.facebook.com/PUPHygears">Facebook: PUP Hygears</a></li>
+          <li><i data-icon="link"></i><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><i data-icon="link"></i><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Find us</h2>
+        <ul class="foot-list">
+          <li><i data-icon="pin"></i><span>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-note">A student research organization of the Polytechnic University of the Philippines. Prototype: items, requests and officer data shown are samples.</p>
+  </div>
+</footer>
+</body>
+</html>

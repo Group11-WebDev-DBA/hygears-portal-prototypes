@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Track a request: PUP Hygears</title>
+<meta name="description" content="Enter your Hygears reference number to see if your reservation is pending, approved or declined.">
+<link rel="icon" href="../assets/hygears-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="container site-head__bar">
+    <a class="brand" href="index.html" aria-label="PUP Hygears home"><img src="../assets/hygears-logo.png" width="222" height="224" alt="">PUP Hygears</a>
+    <nav class="nav" aria-label="Main">
+      <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="tools.html">Tools</a></li>
+          <li><a href="track.html" aria-current="page">Track request</a></li>
+          <li><a href="join.html">Join</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="officer.html">Officers</a></li>
+      </ul>
+    </nav>
+    <form class="search" action="tools.html" method="get" role="search">
+      <label class="visually-hidden" for="nav-q">Search tools and consumables</label>
+      <input class="input input--sm" id="nav-q" name="q" type="search" placeholder="Search tools" autocomplete="off">
+      <button class="btn btn--sm" type="submit">Search</button>
+    </form>
+  </div>
+</header>
+<main id="main">
+  <section class="page-head">
+    <div class="container">
+      <h1>Track a request</h1>
+      <p class="lead">Enter the reference number from your reservation to see where it stands.</p>
+    </div>
+  </section>
+
+  <section class="section--s">
+    <div class="container split split--top">
+      <div class="panel">
+        <form class="form" id="track-form" novalidate>
+          <div class="field">
+          <label for="t-ref">Reference number</label>
+          <input class="input num" id="t-ref" name="ref" required pattern="HYG-[0-9]{4}-[0-9]{4}" autocomplete="off" spellcheck="false" data-error="Write it as HYG-2026-0142." aria-describedby="t-ref-hint t-ref-error">
+          <p class="hint" id="t-ref-hint">It starts with HYG, like HYG-2026-0142.</p>
+          <p class="error" id="t-ref-error" aria-live="polite"></p>
+        </div>
+          <div class="actions"><button class="btn btn--primary" type="submit">Track request</button></div>
+        </form>
+        <div class="result stack--tight" id="track-result" role="status" hidden>
+          <p class="result__ref" id="tr-ref"></p>
+          <p id="tr-status"></p>
+          <p class="item" id="tr-item"></p>
+          <p id="tr-next"></p>
+        </div>
+      </div>
+
+      <div class="sheet">
+        <table class="table table--stack table--hover">
+          <caption><span class="sheet__title">Example requests</span> <span class="muted small">Sample numbers showing each state</span></caption>
+          <thead><tr><th scope="col">Reference</th><th scope="col">Item</th><th scope="col">Status</th></tr></thead>
+          <tbody>
+            <tr><td class="num"><a href="track.html?ref=HYG-2026-0142">HYG-2026-0142</a></td><td data-label="Item">Digital multimeter</td><td data-label="Status"><span class="status status--pending"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Pending</span></td></tr>
+            <tr><td class="num"><a href="track.html?ref=HYG-2026-0139">HYG-2026-0139</a></td><td data-label="Item">Soldering station</td><td data-label="Status"><span class="status status--approved"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Approved</span></td></tr>
+            <tr><td class="num"><a href="track.html?ref=HYG-2026-0131">HYG-2026-0131</a></td><td data-label="Item">Cordless drill</td><td data-label="Status"><span class="status status--declined"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>Declined</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+<template id="icon-pending"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></template>
+<template id="icon-approved"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></template>
+<template id="icon-declined"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></template>
+<footer class="site-foot">
+  <div class="container">
+    <p class="site-foot__mark"><img src="../assets/hygears-logo.png" width="222" height="224" alt="">PUP Hygears</p>
+    <p class="site-foot__line">“We don’t just build vehicles, we build people to help us build the future!” #GEARINGUpTowardExcellence</p>
+    <div class="site-foot__cols">
+      <div><h2>Pages</h2><ul><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li></ul></div>
+      <div><h2>Contact</h2><ul>
+        <li><a href="https://www.instagram.com/puphygears">Instagram: puphygears</a></li>
+        <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+        <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+      </ul></div>
+      <div><h2>Where</h2><p>Polytechnic University of the Philippines, Sta. Mesa, Manila</p></div>
+    </div>
+    <p class="site-foot__legal">A student research organization of PUP. Prototype for review: sample data is marked as sample.</p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

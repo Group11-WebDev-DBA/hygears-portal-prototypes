@@ -1,0 +1,1633 @@
+/* =========================================================
+   PUP Hygears Web Portal: "Spec" direction
+   One shared stylesheet for every page. Mobile first:
+   base styles are for phones, media queries add the
+   tablet (48rem = 768px) and laptop (64rem = 1024px) layouts.
+   ========================================================= */
+
+/* ---------- 1. Design tokens (change colours and sizes here) ---------- */
+:root {
+  /* Colours: white and cool gray grounds, near-black text, red for actions only */
+  --color-bg: #FFFFFF;
+  --color-surface: #F4F5F7;     /* sections, panels */
+  --color-text: #14161A;        /* 16:1 on white */
+  --color-muted: #5B6270;       /* 6.1:1 on white, 5.6:1 on surface */
+  --color-line: #DDE0E5;        /* hairlines between things (decorative) */
+  --color-field: #7D8490;       /* input borders, 3.8:1 so fields are visible */
+  --color-action: #D7261E;      /* Hygears red: buttons, current page, key actions */
+  --color-action-hover: #B51E17;
+  --color-dark: #1B1D22;        /* charcoal footer band */
+  --color-dark-muted: #C9CDD3;  /* text on the charcoal band, 10:1 */
+
+  /* Status colours: always shown with an icon and a word, never alone */
+  --color-ok: #1E7B3C;          /* approved, in stock */
+  --color-bad: #B51E17;         /* declined, overdue, form errors */
+
+  /* Fonts: two families only */
+  --font-sans: "Geist", system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, Consolas, "Courier New", monospace;
+
+  /* Type scale (same on every page) */
+  --size-h1: 2rem;
+  --size-h2: 1.5rem;
+  --size-h3: 1.125rem;
+  --size-body: 1rem;
+  --size-small: 0.875rem;
+
+  /* Spacing and shape */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --radius: 6px;
+  --tap: 44px;                  /* smallest tap target */
+  --header-height: 4rem;
+}
+
+/* ---------- 2. Base ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+  /* keeps headings and focused fields clear of the sticky header */
+  scroll-padding-top: calc(var(--header-height) + 1rem);
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Laptop/mouse users: stop the page "bouncing" past its ends */
+@media (pointer: fine) {
+  html {
+    overscroll-behavior: none;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--size-body);
+  line-height: 1.5;
+  -webkit-tap-highlight-color: transparent; /* we draw our own :active states */
+}
+
+/* The hidden attribute always wins, even over display: grid/flex below */
+[hidden] {
+  display: none !important;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h1, h2, h3 {
+  margin: 0 0 var(--space-3);
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-wrap: balance; /* avoids one-word last lines; older browsers ignore it */
+}
+
+h1 { font-size: var(--size-h1); }
+h2 { font-size: var(--size-h2); }
+h3 { font-size: var(--size-h3); }
+
+p {
+  margin: 0 0 var(--space-4);
+  max-width: 65ch; /* about 60 to 80 characters per line */
+}
+
+a {
+  color: var(--color-text);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--color-action-hover);
+}
+
+/* Faster taps on phones (no double-tap zoom delay) */
+a, button, input, select, textarea, label, summary {
+  touch-action: manipulation;
+}
+
+/* Visible keyboard focus everywhere (mouse clicks don't show it) */
+:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/* Numbers that get compared line up in columns */
+.num, .ref, td.num {
+  font-variant-numeric: tabular-nums;
+}
+
+.ref {
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+/* Text only screen readers hear */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- 3. Layout helpers ---------- */
+.container {
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.section {
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-12);
+}
+
+.section-gray {
+  background: var(--color-surface);
+}
+
+.section-head {
+  margin-bottom: var(--space-6);
+}
+
+.section-head p {
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.page-head {
+  padding: var(--space-8) 0 var(--space-6);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.page-head p {
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.eyebrow {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: var(--size-small);
+}
+
+.muted {
+  color: var(--color-muted);
+}
+
+.small {
+  font-size: var(--size-small);
+}
+
+/* Shows that a fact still has to come from the officers */
+.slot {
+  display: inline-block;
+  padding: 0 var(--space-2);
+  border: 1px dashed var(--color-field);
+  border-radius: 4px;
+  color: var(--color-muted);
+  font-size: var(--size-small);
+}
+
+/* ---------- 4. Skip link ---------- */
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: -4rem;
+  z-index: 100;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-text);
+  color: #FFFFFF;
+  border-radius: var(--radius);
+}
+
+.skip-link:focus {
+  top: var(--space-2);
+  color: #FFFFFF;
+}
+
+/* ---------- 5. Header and navigation ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--header-height);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--tap);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.brand img {
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+}
+
+.menu-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-field);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.menu-button:hover {
+  background: var(--color-surface);
+}
+
+/* Phone menu: closed by default when JavaScript is on, opened by the Menu button */
+.site-nav {
+  width: 100%;
+}
+
+.js .site-nav {
+  display: none;
+}
+
+.js .site-nav.is-open {
+  display: block;
+}
+
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 var(--space-3);
+}
+
+.site-nav a {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 var(--space-3);
+  border-left: 3px solid transparent;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.site-nav a:hover {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+/* Current page: red bar plus bold text (not colour alone) */
+.site-nav a[aria-current="page"] {
+  border-left-color: var(--color-action);
+  font-weight: 600;
+}
+
+.site-nav .nav-officer a {
+  color: var(--color-muted);
+}
+
+/* ---------- 6. Buttons (same everywhere) ---------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--tap);
+  padding: 0 var(--space-6);
+  border: 1px solid var(--color-action);
+  border-radius: var(--radius);
+  background: var(--color-action);
+  color: #FFFFFF;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.button:hover {
+  background: var(--color-action-hover);
+  border-color: var(--color-action-hover);
+  color: #FFFFFF;
+}
+
+.button:active {
+  background: #8F1712;
+}
+
+/* Secondary: outlined, for the second choice on a screen */
+.button-secondary {
+  background: var(--color-bg);
+  border-color: var(--color-field);
+  color: var(--color-text);
+}
+
+.button-secondary:hover {
+  background: var(--color-surface);
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+.button-secondary:active {
+  background: var(--color-line);
+}
+
+.button-small {
+  padding: 0 var(--space-4);
+}
+
+.button-block {
+  width: 100%;
+}
+
+.button[disabled] {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+/* Spinner shown inside a button while a request is sending */
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #FFFFFF;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+/* Plain text button (e.g. "Clear Filters", "Undo") */
+.link-button {
+  min-height: var(--tap);
+  padding: 0 var(--space-2);
+  border: 0;
+  background: none;
+  color: var(--color-text);
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.link-button:hover {
+  color: var(--color-action-hover);
+}
+
+/* ---------- 7. Icons (one style: 20px outline) ---------- */
+.icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- 8. Status labels (icon + word) ---------- */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 2px var(--space-2);
+  border: 1px solid var(--color-line);
+  border-radius: 4px;
+  background: var(--color-bg);
+  font-size: var(--size-small);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.status-ok { color: var(--color-ok); }
+.status-bad { color: var(--color-bad); }
+.status-wait { color: var(--color-text); }
+
+/* ---------- 9. Home hero ---------- */
+.hero {
+  padding: var(--space-8) 0 var(--space-12);
+}
+
+.hero-grid {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.hero h1 {
+  margin-bottom: var(--space-4);
+}
+
+.hero-lead {
+  font-size: 1.125rem;
+  color: var(--color-muted);
+}
+
+.hero-photo {
+  margin: 0;
+}
+
+.hero-photo img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.hero-photo figcaption {
+  margin-top: var(--space-2);
+  color: var(--color-muted);
+  font-size: var(--size-small);
+}
+
+/* Quick search box on Home */
+.quick-search {
+  margin-top: var(--space-8);
+  padding: var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+.quick-search .search-row {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.quick-search input {
+  flex: 1;
+  min-width: 0; /* lets the input shrink on narrow phones */
+}
+
+/* Numbered "how borrowing works" steps */
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-4);
+}
+
+.steps li {
+  padding: var(--space-4);
+  border-top: 2px solid var(--color-text);
+}
+
+.step-num {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-family: var(--font-mono);
+  color: var(--color-muted);
+}
+
+.steps h3 {
+  margin-bottom: var(--space-1);
+}
+
+.steps p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+/* ---------- 10. Cards and lists ---------- */
+.card {
+  padding: var(--space-6);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+}
+
+.card-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.news-card h3 {
+  margin-bottom: var(--space-2);
+}
+
+.news-card p {
+  margin-bottom: var(--space-3);
+  color: var(--color-muted);
+}
+
+/* Empty frame where the officers drop the campaign graphic */
+.pubmat-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 9;
+  margin-bottom: var(--space-4);
+  border: 1px dashed var(--color-field);
+  border-radius: 4px;
+  background: var(--color-surface);
+  color: var(--color-muted);
+  font-size: var(--size-small);
+  text-align: center;
+  padding: var(--space-4);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  color: var(--color-muted);
+  font-size: var(--size-small);
+}
+
+/* Photo band with the standing descriptor */
+.band {
+  display: grid;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.band img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.descriptor {
+  font-family: var(--font-mono);
+  font-size: var(--size-small);
+  color: var(--color-muted);
+}
+
+/* ---------- 11. Tools catalog ---------- */
+.notice {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-line);
+  border-left: 3px solid var(--color-text);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  font-size: var(--size-small);
+}
+
+.notice p {
+  margin: 0;
+}
+
+.filters {
+  display: grid;
+  gap: var(--space-3);
+  margin: var(--space-4) 0 var(--space-3);
+}
+
+.sample-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 0;
+}
+
+.sample-note .icon {
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+}
+
+/* Tools / Consumables choice drawn as one segmented control */
+.segmented {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.segmented legend {
+  padding: 0;
+  margin-bottom: var(--space-1);
+  font-weight: 600;
+}
+
+.segmented-options {
+  display: flex;
+  width: 100%;
+}
+
+.segmented label {
+  flex: 1;
+  position: relative;
+}
+
+/* The real radio is hidden; the whole label is the tap target */
+.segmented input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.segmented span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-field);
+  margin-left: -1px;
+  background: var(--color-bg);
+  cursor: pointer;
+}
+
+.segmented label:first-child span {
+  margin-left: 0;
+  border-radius: var(--radius) 0 0 var(--radius);
+}
+
+.segmented label:last-child span {
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.segmented span:hover {
+  background: var(--color-surface);
+}
+
+.segmented input:checked + span {
+  background: var(--color-text);
+  border-color: var(--color-text);
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.segmented input:focus-visible + span {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+.results-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-line);
+  color: var(--color-muted);
+  font-size: var(--size-small);
+}
+
+.item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+/* Phone: one compact row per item */
+.item {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: var(--space-3) var(--space-4);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.item-photo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 4px;
+  background: var(--color-surface);
+  color: var(--color-muted);
+}
+
+.item-body {
+  min-width: 0;
+}
+
+.item h3 {
+  margin-bottom: var(--space-1);
+  overflow-wrap: break-word;
+}
+
+.item .meta {
+  margin-bottom: var(--space-2);
+}
+
+.stock {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--size-small);
+  font-weight: 600;
+}
+
+.stock .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.stock-ok { color: var(--color-ok); }
+.stock-out { color: var(--color-bad); }
+
+.item-action {
+  grid-column: 1 / -1;
+}
+
+.item-action .button,
+.item-action .unavailable {
+  width: 100%;
+}
+
+.unavailable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap);
+  border: 1px dashed var(--color-field);
+  border-radius: var(--radius);
+  color: var(--color-muted);
+  font-size: var(--size-small);
+}
+
+.empty-state {
+  padding: var(--space-12) var(--space-4);
+  text-align: center;
+}
+
+.empty-state p {
+  margin: 0 auto var(--space-4);
+}
+
+/* ---------- 12. Forms (same look on every form) ---------- */
+.form {
+  max-width: 40rem;
+}
+
+.form fieldset {
+  margin: 0 0 var(--space-8);
+  padding: 0;
+  border: 0;
+}
+
+.form legend {
+  padding: 0;
+  margin-bottom: var(--space-4);
+  font-size: var(--size-h3);
+  font-weight: 600;
+}
+
+.field {
+  margin-bottom: var(--space-6);
+}
+
+.field-row {
+  display: grid;
+  gap: 0 var(--space-4);
+}
+
+label,
+.label {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-weight: 600;
+}
+
+.optional {
+  font-weight: 400;
+  color: var(--color-muted);
+}
+
+.hint {
+  margin: 0 0 var(--space-2);
+  color: var(--color-muted);
+  font-size: var(--size-small);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="number"],
+input[type="date"],
+input[type="password"],
+select,
+textarea {
+  width: 100%;
+  min-height: var(--tap);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-field);
+  border-radius: var(--radius);
+  background-color: var(--color-bg); /* explicit so Windows dark mode can't flip it */
+  color: var(--color-text);
+  font: inherit; /* 16px stops iPhones from zooming in on focus */
+  transition: border-color 0.15s ease;
+}
+
+textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: var(--color-text);
+}
+
+/* Fields keep a ring on focus (also when clicked, so you know where you're typing) */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--color-text);
+  outline-offset: 1px;
+  border-color: var(--color-text);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-muted);
+}
+
+/* Error state: red border, icon and message below the field */
+.field.has-error input,
+.field.has-error select,
+.field.has-error textarea {
+  border-color: var(--color-bad);
+  border-width: 2px;
+}
+
+.field-error {
+  display: none;
+  align-items: flex-start;
+  gap: var(--space-1);
+  margin: var(--space-2) 0 0;
+  color: var(--color-bad);
+  font-size: var(--size-small);
+  font-weight: 600;
+}
+
+.field.has-error .field-error {
+  display: flex;
+}
+
+.field-error .icon {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+}
+
+.counter {
+  margin-top: var(--space-1);
+  color: var(--color-muted);
+  font-size: var(--size-small);
+  text-align: right;
+}
+
+/* Radio choices: the whole row is one tap target */
+.choice-list {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.choice {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--tap);
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-field);
+  border-radius: var(--radius);
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.choice:hover {
+  background: var(--color-surface);
+}
+
+.choice input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--color-text);
+}
+
+.choice:focus-within {
+  outline: 2px solid var(--color-text);
+  outline-offset: 1px;
+}
+
+.form-footer {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-line);
+}
+
+.form-footer p {
+  color: var(--color-muted);
+  font-size: var(--size-small);
+}
+
+/* Read-only summary of the chosen item on the Reserve form */
+.picked {
+  margin-bottom: var(--space-6);
+  padding: var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+/* ---------- 13. Result panels (success, track result) ---------- */
+.result {
+  max-width: 40rem;
+  padding: var(--space-6);
+  border: 1px solid var(--color-line);
+  border-top: 3px solid var(--color-text);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+}
+
+.result-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.ref-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-4) 0;
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+.ref-box .ref {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Key/value list (item, quantity, dates) */
+.summary {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-2) var(--space-4);
+  margin: 0 0 var(--space-6);
+}
+
+.summary dt {
+  color: var(--color-muted);
+}
+
+.summary dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+/* ---------- 14. The request timeline (the signature piece) ---------- */
+.timeline {
+  list-style: none;
+  margin: 0 0 var(--space-6);
+  padding: 0;
+}
+
+.timeline li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: var(--space-3);
+  padding-bottom: var(--space-4);
+}
+
+/* The vertical line joining the steps */
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: 13px;
+  top: 28px;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-line);
+}
+
+.timeline li:last-child::before {
+  display: none;
+}
+
+.timeline .dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--color-line);
+  border-radius: 50%;
+  background: var(--color-bg);
+  color: var(--color-muted);
+}
+
+.timeline .dot .icon {
+  width: 14px;
+  height: 14px;
+  stroke-width: 3;
+}
+
+.timeline strong {
+  display: block;
+}
+
+.timeline span.step-note {
+  color: var(--color-muted);
+  font-size: var(--size-small);
+}
+
+.timeline .is-done .dot {
+  border-color: var(--color-text);
+  background: var(--color-text);
+  color: #FFFFFF;
+}
+
+.timeline .is-done::before {
+  background: var(--color-text);
+}
+
+.timeline .is-current .dot {
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+.timeline .is-declined .dot {
+  border-color: var(--color-bad);
+  background: var(--color-bad);
+  color: #FFFFFF;
+}
+
+/* ---------- 15. Track page ---------- */
+.track-form .search-row {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.track-form input {
+  flex: 1;
+  min-width: 0;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+}
+
+.track-form input::placeholder {
+  text-transform: none;
+  font-family: var(--font-sans);
+}
+
+.samples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.samples a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  font-size: var(--size-small);
+  text-decoration: none;
+}
+
+.samples a:hover {
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+/* ---------- 16. About page ---------- */
+.two-col {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.plain-list {
+  margin: 0 0 var(--space-4);
+  padding-left: 1.25rem;
+}
+
+.plain-list li {
+  margin-bottom: var(--space-2);
+}
+
+.rules {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.rules li {
+  margin-bottom: var(--space-3);
+  padding-left: var(--space-1);
+}
+
+.contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.contact-list li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-4);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.contact-list a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  overflow-wrap: anywhere;
+}
+
+/* ---------- 17. Officer dashboard ---------- */
+.login-card {
+  max-width: 26rem;
+  margin: var(--space-8) auto;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+  margin-bottom: var(--space-8);
+}
+
+.stat {
+  display: block;
+  padding: var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  text-decoration: none;
+}
+
+.stat:hover {
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+.stat-number {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.stat-label {
+  color: var(--color-muted);
+  font-size: var(--size-small);
+}
+
+.dash-section {
+  margin-bottom: var(--space-12);
+}
+
+.dash-section h2 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Tables: rows become stacked cards on phones (labels come from data-label) */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table caption {
+  text-align: left;
+  color: var(--color-muted);
+  font-size: var(--size-small);
+  padding-bottom: var(--space-2);
+}
+
+.table thead {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.table tr {
+  display: block;
+  margin-bottom: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+}
+
+.table td {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: var(--space-3);
+  padding: var(--space-1) 0;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.table td::before {
+  content: attr(data-label);
+  color: var(--color-muted);
+  font-size: var(--size-small);
+}
+
+.table td.actions {
+  display: block;
+  padding-top: var(--space-3);
+}
+
+.table td.actions::before {
+  display: none;
+}
+
+.row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.row-actions .button {
+  flex: 1;
+}
+
+.row-done {
+  background: var(--color-surface);
+}
+
+.row-result {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+/* ---------- 18. Footer (charcoal band) ---------- */
+.site-footer {
+  margin-top: var(--space-16);
+  padding: var(--space-12) 0 var(--space-8);
+  background: var(--color-dark);
+  color: var(--color-dark-muted);
+  font-size: var(--size-small);
+}
+
+.site-footer a {
+  color: #FFFFFF;
+}
+
+.site-footer a:hover {
+  color: #FFFFFF;
+  text-decoration-thickness: 2px;
+}
+
+.site-footer :focus-visible {
+  outline-color: #FFFFFF;
+}
+
+.footer-grid {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+  color: #FFFFFF;
+  font-size: var(--size-body);
+  font-weight: 600;
+}
+
+.footer-brand img {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+}
+
+.site-footer h2 {
+  margin-bottom: var(--space-2);
+  color: #FFFFFF;
+  font-size: var(--size-small);
+  font-family: var(--font-mono);
+  font-weight: 400;
+}
+
+.site-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-footer li a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+}
+
+.footer-note {
+  margin-top: var(--space-8);
+  padding-top: var(--space-4);
+  border-top: 1px solid #3A3D45;
+}
+
+/* ---------- 19. Reduced motion: no spinning or smooth effects ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+    border-top-color: rgba(255, 255, 255, 0.4);
+  }
+
+  * {
+    transition: none !important;
+  }
+}
+
+/* ---------- 20. Tablet (768px and up) ---------- */
+@media (min-width: 48rem) {
+  :root {
+    --size-h1: 2.75rem;
+    --size-h2: 1.875rem;
+    --size-h3: 1.25rem;
+  }
+
+  .container {
+    padding: 0 var(--space-8);
+  }
+
+  .section {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .field-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .filters {
+    grid-template-columns: 2fr 1fr 1.5fr;
+    align-items: end;
+  }
+
+  /* Items become a grid of cards */
+  .item-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+
+  .item {
+    grid-template-columns: 1fr;
+    padding: var(--space-4);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+  }
+
+  .item-photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 1;
+  }
+
+  .stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  .two-col {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .band {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+  }
+}
+
+/* ---------- 21. Laptop (1024px and up) ---------- */
+@media (min-width: 64rem) {
+  /* Full nav in the header, no Menu button */
+  .menu-button {
+    display: none;
+  }
+
+  .js .site-nav,
+  .site-nav {
+    display: block;
+    width: auto;
+  }
+
+  .site-nav ul {
+    display: flex;
+    gap: var(--space-1);
+    padding: 0;
+  }
+
+  .site-nav a {
+    min-height: var(--header-height);
+    border-left: 0;
+    border-bottom: 2px solid transparent;
+    padding: 2px var(--space-3) 0;
+  }
+
+  .site-nav a:hover {
+    background: none;
+    border-bottom-color: var(--color-line);
+  }
+
+  .site-nav a[aria-current="page"] {
+    border-bottom-color: var(--color-action);
+  }
+
+  .site-nav .nav-officer {
+    margin-left: var(--space-4);
+    padding-left: var(--space-4);
+    border-left: 1px solid var(--color-line);
+  }
+
+  .hero {
+    padding: var(--space-16) 0;
+  }
+
+  .hero-grid {
+    grid-template-columns: 5fr 6fr;
+    align-items: center;
+    gap: var(--space-12);
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .item-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Reserve/Join/Track: form beside a short guide */
+  .form-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-12);
+    align-items: start;
+  }
+
+  .aside-sticky {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-6));
+  }
+
+  /* Tables go back to real rows and columns */
+  .table thead {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+  }
+
+  .table tr {
+    display: table-row;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid var(--color-line);
+    border-radius: 0;
+  }
+
+  .table th,
+  .table td {
+    display: table-cell;
+    padding: var(--space-3);
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  .table th {
+    color: var(--color-muted);
+    font-size: var(--size-small);
+    font-weight: 600;
+    border-bottom: 1px solid var(--color-text);
+  }
+
+  .table td::before {
+    display: none;
+  }
+
+  .table td.actions {
+    display: table-cell;
+    padding-top: var(--space-3);
+    white-space: nowrap;
+  }
+
+  .table td.actions {
+    width: 17rem;
+  }
+
+  .row-actions .button {
+    flex: none;
+  }
+
+  .table th.num,
+  .table td.num {
+    text-align: right;
+  }
+}
+
+/* Legend used as a field label (radio groups) */
+.form legend.label {
+  margin-bottom: var(--space-1);
+  font-size: var(--size-body);
+}
+
+/* Phone table cards: keep status chips and buttons their natural width */
+.table td > * {
+  justify-self: start;
+}
+
+/* Decline-with-reason controls inside a dashboard row */
+.row-actions label {
+  width: 100%;
+  margin: 0;
+  font-size: var(--size-small);
+}
+
+.row-actions select {
+  flex: 1 1 100%;
+}

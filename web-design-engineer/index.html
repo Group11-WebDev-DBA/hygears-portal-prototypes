@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home | PUP Hygears</title>
+  <meta name="description" content="PUP Hygears: reserve tools and materials, track your request, and apply to join.">
+  <link rel="icon" href="../assets/hygears-logo.png">
+  <!-- Fonts: Instrument Sans (all text) and JetBrains Mono (reference numbers). Falls back to Arial offline. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ===== Header (same on every page; becomes header.php later) ===== -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <!-- decorative: the name is written right next to the logo -->
+        <img src="../assets/hygears-logo.png" alt="" width="40" height="40">
+        <span>PUP Hygears</span>
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <ul>
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        <li><a href="track.html">Track Request</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="officer.html" class="nav-officer">Officers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <h1>Borrow the right tool. Build with the team.</h1>
+          <p class="lead">PUP Hygears is a student research organization at PUP Sta. Mesa. We build energy-efficient electric vehicles, the Luna series, for the Shell Eco-marathon. Members can reserve the org's tools and materials here.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="tools.html">Reserve a tool</a>
+            <a class="btn btn-secondary" href="join.html">Apply to join</a>
+          </div>
+          <form class="quick-track" action="track.html" method="get">
+            <label for="quick-ref">Already reserved? Track your request</label>
+            <div class="inline-form">
+              <input type="text" id="quick-ref" name="ref" placeholder="HYG-2026-0142" autocomplete="off">
+              <button class="btn btn-secondary" type="submit">Track</button>
+            </div>
+          </form>
+        </div>
+        <figure class="hero-photo">
+          <img src="../assets/team-luna-1.png" alt="Hygears members standing around the Luna electric car outdoors" width="1435" height="645">
+          <figcaption>The team with the Luna.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section-gray" aria-labelledby="how-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="how-title">How borrowing works</h2>
+          <a href="about.html#rules">Read the borrowing rules</a>
+        </div>
+        <ol class="route">
+        <li class="is-done">
+          <span class="stop-mark" aria-hidden="true">1</span>
+          <span class="stop-name">Reserve online</span>
+          <span class="stop-state">Start here</span>
+          <span class="stop-text">Pick an item and your dates. You get a reference number like HYG-2026-0142.</span>
+        </li>
+        <li class="is-done">
+          <span class="stop-mark" aria-hidden="true">2</span>
+          <span class="stop-name">Officer review</span>
+          <span class="stop-state">Pending</span>
+          <span class="stop-text">An officer approves or declines. Check it anytime on Track Request.</span>
+        </li>
+        <li class="is-done">
+          <span class="stop-mark" aria-hidden="true">3</span>
+          <span class="stop-name">Pick up</span>
+          <span class="stop-state">Approved</span>
+          <span class="stop-text">Show your reference number at <span class="slot">pickup room to confirm</span>.</span>
+        </li>
+        <li class="is-done">
+          <span class="stop-mark" aria-hidden="true">4</span>
+          <span class="stop-name">Return</span>
+          <span class="stop-state">Done</span>
+          <span class="stop-text">Bring tools back by the return date. Consumables are used up.</span>
+        </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="news-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="news-title">Latest from Hygears</h2>
+          <a href="https://www.facebook.com/PUPHygears">More on Facebook</a>
+        </div>
+        <ul class="news">
+          <li>
+            <div class="news-pic">Pubmat<br>4:5</div>
+            <div>
+              <h3>ASCEND 2026 recruitment</h3>
+              <p>Find your missing piece. Apply to one of five committees.</p>
+              <p class="news-meta"><span class="slot">post date</span> &middot; <a href="join.html">Apply to join</a></p>
+            </div>
+          </li>
+          <li>
+            <div class="news-pic">Pubmat<br>4:5</div>
+            <div>
+              <h3>PHYNIX 2026 Research Workshop</h3>
+              <p>Our research workshop for this school year.</p>
+              <p class="news-meta"><span class="slot">workshop date and venue</span></p>
+            </div>
+          </li>
+          <li>
+            <div class="news-pic">Photo<br>4:5</div>
+            <div>
+              <h3>General Assembly: The Force Awakens, Refining Our Legacy</h3>
+              <p>Members gathered for this year's General Assembly.</p>
+              <p class="news-meta"><span class="slot">event date</span></p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="band" aria-labelledby="band-title">
+      <div class="band-inner">
+        <figure class="band-photo">
+          <img src="../assets/luna-night.png" alt="The Luna electric car parked at night beside the PUP Lagoon sign" width="1440" height="653">
+          <figcaption>The Luna at the PUP Lagoon.</figcaption>
+        </figure>
+        <div class="band-text wrap">
+          <h2 id="band-title" class="visually-hidden">Who we are</h2>
+          <blockquote>We don't just build vehicles, we build people to help us build the future!</blockquote>
+          <p class="muted">Members come from these programs:</p>
+          <ul class="program-list">
+            <li>Mechanical</li><li>Electronics and Communications</li><li>Industrial</li>
+            <li>Electrical</li><li>Computer Engineering</li><li>Marketing</li>
+          </ul>
+          <a class="btn btn-primary" href="join.html">Apply to join</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer (same on every page; becomes footer.php later) ===== -->
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <img class="footer-logo" src="../assets/hygears-logo.png" alt="" width="48" height="48">
+        <p class="footer-name">PUP Hygears</p>
+        <p class="footer-line">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+        <p class="footer-line">#GEARINGUpTowardExcellence</p>
+      </div>
+      <div>
+        <h2 class="footer-h">Find us</h2>
+        <address>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</address>
+      </div>
+      <div>
+        <h2 class="footer-h">Contact</h2>
+        <ul class="footer-links">
+          <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+          <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap">
+      <p class="footer-base">Hygears Web Portal prototype. Items, requests and dates marked "Sample" are placeholders until the officers supply the real list.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

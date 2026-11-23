@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reserve an Item | PUP Hygears</title>
+  <meta name="description" content="Reserve a tool or consumable from PUP Hygears and get a reference number.">
+  <meta name="theme-color" content="#FFFFFF">
+  <link rel="icon" href="../assets/hygears-logo.png">
+  <!-- Fonts: Geist for text, Geist Mono for numbers and codes (falls back to system fonts offline) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600&amp;family=Geist+Mono:wght@400;600&amp;display=swap">
+  <link rel="stylesheet" href="style.css">
+  <!-- Tells the CSS that JavaScript is on, so the phone menu can start closed -->
+  <script>document.documentElement.className = "js";</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to Main Content</a>
+
+<!-- Site header: the same on every page (header.php in the real site) -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <img src="../assets/hygears-logo.png" width="36" height="36" alt="">
+      <span translate="no">PUP Hygears</span>
+    </a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Menu</span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tools.html" aria-current="page">Tools</a></li>
+        <li><a href="track.html">Track Request</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="about.html">About &amp; Contact</a></li>
+        <li class="nav-officer"><a href="officer.html">Officer Sign In</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="container">
+      <a href="tools.html" class="small">Back to Tools</a>
+      <h1 style="margin-top: 0.5rem">Reserve an Item</h1>
+      <p>Takes about a minute. You get a reference number when you send it.</p>
+    </div>
+  </div>
+
+  <div class="container section" style="padding-top: 2rem">
+    <div class="form-layout">
+      <div>
+        <form class="form" id="reserve-form" novalidate data-warn-unsaved>
+          <p class="visually-hidden" id="reserve-status" aria-live="polite"></p>
+          <p class="hint">All fields are required.</p>
+
+          <fieldset>
+            <legend>What You Need</legend>
+            <div class="field">
+              <label for="item">Item</label>
+              <select id="item" name="item" required autocomplete="off" aria-describedby="item-error" data-required-msg="Choose the item you want to borrow.">
+                <option value="">Choose an item</option>
+              <option value="digital-multimeter" data-type="tool" data-available="3">Digital Multimeter (3 available)</option>
+              <option value="soldering-station" data-type="tool" data-available="2">Soldering Station (2 available)</option>
+              <option value="cordless-drill" data-type="tool" data-available="1">Cordless Drill (1 available)</option>
+              <option value="torque-wrench" data-type="tool" data-available="0" disabled>Torque Wrench (none available)</option>
+              <option value="wire-crimper" data-type="tool" data-available="2">Wire Crimper (2 available)</option>
+              <option value="heat-gun" data-type="tool" data-available="1">Heat Gun (1 available)</option>
+              <option value="safety-goggles" data-type="tool" data-available="8">Safety Goggles (8 available)</option>
+              <option value="pla-filament" data-type="consumable" data-available="4">PLA Filament, 1&nbsp;kg (4 available)</option>
+              <option value="heat-shrink" data-type="consumable" data-available="6">Heat-Shrink Tubing Pack (6 available)</option>
+              <option value="zip-ties" data-type="consumable" data-available="10">Zip Ties Pack (10 available)</option>
+              <option value="electrical-tape" data-type="consumable" data-available="12">Electrical Tape (12 available)</option>
+              <option value="epoxy-resin" data-type="consumable" data-available="0" disabled>Epoxy Resin Kit (none available)</option>
+              </select>
+              <p class="field-error" id="item-error"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></svg><span></span></p>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="quantity">Quantity</label>
+                <p class="hint" id="quantity-hint">Choose an item first.</p>
+                <input type="number" id="quantity" name="quantity" inputmode="numeric" min="1" value="1" required autocomplete="off"
+                       aria-describedby="quantity-hint quantity-error" data-required-msg="Enter how many you need (1 or more).">
+                <p class="field-error" id="quantity-error"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></svg><span></span></p>
+              </div>
+            </div>
+            <div class="field">
+              <label for="purpose">Purpose</label>
+              <p class="hint" id="purpose-hint">What project or class is it for?</p>
+              <textarea id="purpose" name="purpose" required maxlength="300" autocomplete="off"
+                        placeholder="e.g. Soldering the sensor board for our ECE 3-1 project&hellip;"
+                        aria-describedby="purpose-hint purpose-error" data-required-msg="Tell the officers what you&rsquo;ll use it for."></textarea>
+              <p class="field-error" id="purpose-error"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></svg><span></span></p>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="pickup">Pickup date</label>
+                <input type="date" id="pickup" name="pickup" required autocomplete="off"
+                       aria-describedby="pickup-error" data-required-msg="Choose the day you&rsquo;ll pick it up."
+                       data-range-msg="Pick a date from today onward.">
+                <p class="field-error" id="pickup-error"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></svg><span></span></p>
+              </div>
+              <div class="field" id="return-field">
+                <label for="return">Return date</label>
+                <input type="date" id="return" name="return" required autocomplete="off"
+                       aria-describedby="return-hint return-error" data-required-msg="Choose the day you&rsquo;ll bring it back."
+                       data-range-msg="Return date must be on or after the pickup date.">
+                <p class="hint" id="return-hint" style="margin-top: 0.5rem">Same day or later than pickup.</p>
+                <p class="field-error" id="return-error"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></svg><span></span></p>
+              </div>
+            </div>
+            <p class="hint" id="consumable-note" hidden>Consumables are used up, so there&rsquo;s no return date.</p>
+          </fieldset>
+
+          <fieldset>
+            <legend>Your Details</legend>
+            <div class="field">
+              <label for="name">Full name</label>
+              <input type="text" id="name" name="name" required autocomplete="name" placeholder="e.g. Juan Dela Cruz&hellip;"
+                     aria-describedby="name-error" data-required-msg="Enter your full name.">
+              <p class="field-error" id="name-error"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></svg><span></span></p>
+            </div>
+            <div class="field">
+              <label for="student-no">Student number</label>
+              <p class="hint" id="student-no-hint">As printed on your PUP ID.</p>
+              <input type="text" id="student-no" name="student_number" required autocomplete="off" spellcheck="false"
+                     placeholder="e.g. 2024-01234-MN-0&hellip;" pattern="[0-9]{4}-[0-9]{5}-[A-Za-z]{2}-[0-9]"
+                     aria-describedby="student-no-hint student-no-error"
+                     data-required-msg="Enter your student number."
+                     data-error="Use the format on your ID, like 2024-01234-MN-0.">
+              <p class="field-error" id="student-no-error"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></svg><span></span></p>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <p class="hint" id="email-hint">Officers send updates here.</p>
+              <input type="email" id="email" name="email" required autocomplete="email" spellcheck="false" inputmode="email"
+                     placeholder="e.g. juan@iskolarngbayan.pup.edu.ph&hellip;"
+                     aria-describedby="email-hint email-error"
+                     data-required-msg="Enter your email so officers can reach you."
+                     data-error="Check the email: it needs an @ and a domain, like name@gmail.com.">
+              <p class="field-error" id="email-error"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></svg><span></span></p>
+            </div>
+            <div class="field">
+              <label for="course">Course and section</label>
+              <input type="text" id="course" name="course_section" required autocomplete="off" placeholder="e.g. BSME 2-1&hellip;"
+                     aria-describedby="course-error" data-required-msg="Enter your course and section.">
+              <p class="field-error" id="course-error"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></svg><span></span></p>
+            </div>
+          </fieldset>
+
+          <div class="form-footer">
+            <p>By sending, you agree to the <a href="about.html#rules">borrowing rules</a>.</p>
+            <button class="button button-block" type="submit" id="reserve-submit">Send Reservation</button>
+          </div>
+        </form>
+
+        <section class="result" id="reserve-success" hidden tabindex="-1" aria-labelledby="success-title">
+          <div class="result-head">
+            <h2 id="success-title" style="margin:0">Reservation Sent</h2>
+            <span class="status status-wait"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Pending</span>
+          </div>
+          <p>Save this reference number. You need it to track your request.</p>
+          <div class="ref-box">
+            <span class="ref" id="success-ref" translate="no">HYG-2026-0142</span>
+            <button type="button" class="button button-secondary button-small" id="copy-ref"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button>
+            <span class="small muted" id="copy-status" aria-live="polite"></span>
+          </div>
+          <dl class="summary" id="success-summary"></dl>
+          <ol class="timeline">
+  <li class="is-done"><span class="dot"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 5 5 9-10"/></svg></span><span><strong>Submitted</strong><span class="step-note">Just now</span></span></li>
+  <li class="is-current"><span class="dot"></span><span><strong>Officer Review</strong><span class="step-note">Usually checked after class hours</span></span></li>
+  <li class=""><span class="dot"></span><span><strong>Pick Up</strong><span class="step-note">Bring your PUP ID</span></span></li>
+  <li class=""><span class="dot"></span><span><strong>Return</strong><span class="step-note">On your return date</span></span></li>
+</ol>
+          <div class="button-row">
+            <a class="button" id="track-link" href="track.html?ref=HYG-2026-0142">Track This Request</a>
+            <a class="button button-secondary" href="tools.html">Reserve Another Item</a>
+          </div>
+        </section>
+      </div>
+
+      <aside class="aside-sticky" aria-labelledby="next-title">
+        <h2 id="next-title" style="font-size: var(--size-h3)">What Happens Next</h2>
+        <ol class="timeline">
+  <li class=""><span class="dot"></span><span><strong>Submitted</strong><span class="step-note">You get a reference number</span></span></li>
+  <li class=""><span class="dot"></span><span><strong>Officer Review</strong><span class="step-note">Approved or declined, with a reason</span></span></li>
+  <li class=""><span class="dot"></span><span><strong>Pick Up</strong><span class="step-note">Bring your PUP ID</span></span></li>
+  <li class=""><span class="dot"></span><span><strong>Return</strong><span class="step-note">Tools only, by your return date</span></span></li>
+</ol>
+        <p class="small muted">Review time and pickup place: <span class="slot">from officers</span></p>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<!-- Site footer: the same on every page (footer.php in the real site) -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand">
+          <img src="../assets/hygears-logo.png" width="40" height="40" alt="" loading="lazy">
+          <span translate="no">PUP Hygears</span>
+        </p>
+        <p>Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+        <p translate="no">#GEARINGUpTowardExcellence</p>
+        <p>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</p>
+      </div>
+      <div>
+        <h2>Portal</h2>
+        <ul>
+          <li><a href="tools.html">Tools &amp; Consumables</a></li>
+          <li><a href="track.html">Track Request</a></li>
+          <li><a href="join.html">Join Hygears</a></li>
+          <li><a href="officer.html">Officer Sign In</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+          <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-note">Prototype for the Web Development final project. Item counts, requests and names marked &ldquo;sample&rdquo; are placeholders until the officers send the real list.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

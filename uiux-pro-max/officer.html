@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Officer Desk | PUP Hygears</title>
+<meta name="description" content="Officer dashboard for PUP Hygears reservations and applications.">
+<link rel="icon" href="../assets/hygears-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="index.html">
+      <img src="../assets/hygears-logo.png" alt="" width="44" height="44">
+      <span class="brand-name">PUP Hygears<span class="brand-sub">Web Portal</span></span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Menu</span></button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track Request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html" aria-current="page">Officer</a></li></ul>
+    </nav>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Officers only</p>
+    <h1>Officer desk</h1>
+  </div>
+</section>
+<section class="section section--tight" id="login-view">
+  <div class="wrap narrow">
+    <form class="card form" id="login-form" novalidate>
+      <h2 class="h3"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="11" width="18" height="11" rx="1"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Sign in</h2>
+      <div class="form-grid">
+        <div class="field field--full">
+  <label for="o-email">Officer email</label>
+  <input id="o-email" type="email" autocomplete="username" inputmode="email" required aria-describedby="o-email-err" data-required="Enter your officer email." data-type="Enter an email like officer@gmail.com.">
+  <p class="error" id="o-email-err"></p>
+</div>
+        <div class="field field--full">
+  <label for="o-pass">Password</label>
+  <input id="o-pass" type="password" autocomplete="current-password" required aria-describedby="o-pass-err" data-required="Enter your password.">
+  <p class="error" id="o-pass-err"></p>
+</div>
+      </div>
+      <button class="btn btn--primary btn--big btn--block" type="submit" data-busy="Signing in...">Sign in</button>
+      <p class="hint">Prototype: any email and password opens the sample dashboard. The real site checks officer accounts on the server.</p>
+    </form>
+  </div>
+</section>
+<section class="section section--tight" id="dash-view" hidden>
+  <div class="wrap">
+    <div class="dash-head">
+      <h2 id="dash-h" tabindex="-1">Today's desk <span class="sticker">Sample data</span></h2>
+      <button class="btn btn--sm" type="button" id="sign-out"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Sign out</button>
+    </div>
+    <ul class="stats">
+      <li><a href="#pend-h"><div class="plate"><span class="plate-num"><span id="pend-count">3</span></span><span class="plate-label">pending requests</span></div></a></li>
+      <li><a href="#over-h"><div class="plate plate--alert"><span class="plate-num"><span id="over-count">2</span></span><span class="plate-label">overdue items</span></div></a></li>
+      <li><a href="#apps-h"><div class="plate"><span class="plate-num"><span id="apps-count">2</span></span><span class="plate-label">new applications</span></div></a></li>
+      <li><a href="#stock-h"><div class="plate plate--alert"><span class="plate-num">2</span><span class="plate-label">items out of stock</span></div></a></li>
+    </ul>
+    <h3 id="pend-h">Pending reservations</h3>
+    <div class="table-wrap"><table class="table" aria-labelledby="pend-h"><thead><tr><th scope="col">Reference</th><th scope="col">Student</th><th scope="col">Item</th><th scope="col">Pickup / return</th><th scope="col">Action</th></tr></thead><tbody><tr data-ref="HYG-2026-0143">
+  <th scope="row" data-label="Reference"><span class="mono">HYG-2026-0143</span></th>
+  <td data-label="Student"><span>Mika Santos<span class="sub">BSME 2-1</span></span></td>
+  <td data-label="Item">Soldering station &times; 1</td>
+  <td data-label="Pickup / return">Nov 23 / Nov 24</td>
+  <td class="action-cell"><div class="row-actions"><button class="btn btn--primary btn--sm" type="button" data-act="Approved"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Approve<span class="sr-only"> HYG-2026-0143</span></button><button class="btn btn--sm" type="button" data-act="Declined"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg>Decline<span class="sr-only"> HYG-2026-0143</span></button></div></td>
+</tr><tr data-ref="HYG-2026-0144">
+  <th scope="row" data-label="Reference"><span class="mono">HYG-2026-0144</span></th>
+  <td data-label="Student"><span>Jomar Reyes<span class="sub">BSECE 3-2</span></span></td>
+  <td data-label="Item">Digital multimeter &times; 2</td>
+  <td data-label="Pickup / return">Nov 24 / Nov 26</td>
+  <td class="action-cell"><div class="row-actions"><button class="btn btn--primary btn--sm" type="button" data-act="Approved"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Approve<span class="sr-only"> HYG-2026-0144</span></button><button class="btn btn--sm" type="button" data-act="Declined"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg>Decline<span class="sr-only"> HYG-2026-0144</span></button></div></td>
+</tr><tr data-ref="HYG-2026-0145">
+  <th scope="row" data-label="Reference"><span class="mono">HYG-2026-0145</span></th>
+  <td data-label="Student"><span>Lara Cruz<span class="sub">BSIE 2-3</span></span></td>
+  <td data-label="Item">PLA filament, 1 kg &times; 1</td>
+  <td data-label="Pickup / return">Nov 24 / None (consumable)</td>
+  <td class="action-cell"><div class="row-actions"><button class="btn btn--primary btn--sm" type="button" data-act="Approved"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Approve<span class="sr-only"> HYG-2026-0145</span></button><button class="btn btn--sm" type="button" data-act="Declined"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg>Decline<span class="sr-only"> HYG-2026-0145</span></button></div></td>
+</tr></tbody></table></div>
+    <h3 id="over-h">Overdue items</h3>
+    <div class="table-wrap"><table class="table" aria-labelledby="over-h"><thead><tr><th scope="col">Reference</th><th scope="col">Student</th><th scope="col">Item</th><th scope="col">Was due</th><th scope="col">Action</th></tr></thead><tbody><tr>
+  <th scope="row" data-label="Reference"><span class="mono">HYG-2026-0121</span></th>
+  <td data-label="Student">Carlo Dizon</td><td data-label="Item">Cordless drill</td>
+  <td data-label="Was due"><span class="status status--late"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>Nov 18, 4 days late</span></td>
+  <td class="action-cell"><div class="row-actions"><button class="btn btn--sm" type="button" data-act="Returned"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Mark returned<span class="sr-only"> HYG-2026-0121</span></button></div></td>
+</tr><tr>
+  <th scope="row" data-label="Reference"><span class="mono">HYG-2026-0126</span></th>
+  <td data-label="Student">Ana Villanueva</td><td data-label="Item">Torque wrench</td>
+  <td data-label="Was due"><span class="status status--late"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>Nov 20, 2 days late</span></td>
+  <td class="action-cell"><div class="row-actions"><button class="btn btn--sm" type="button" data-act="Returned"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Mark returned<span class="sr-only"> HYG-2026-0126</span></button></div></td>
+</tr></tbody></table></div>
+    <h3 id="apps-h">New applications</h3>
+    <div class="table-wrap"><table class="table" aria-labelledby="apps-h"><thead><tr><th scope="col">Applicant</th><th scope="col">Course</th><th scope="col">Committee</th><th scope="col">Action</th></tr></thead><tbody><tr>
+  <th scope="row" data-label="Applicant">Bea Mendoza</th><td data-label="Course">Computer Engineering 1-1</td><td data-label="Committee">Creative Media and Design</td>
+  <td class="action-cell"><div class="row-actions"><button class="btn btn--sm" type="button" data-act="Reviewed"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Mark reviewed<span class="sr-only"> Bea Mendoza</span></button></div></td>
+</tr><tr>
+  <th scope="row" data-label="Applicant">Rico Lim</th><td data-label="Course">Electrical Engineering 1-3</td><td data-label="Committee">Innovation and Research</td>
+  <td class="action-cell"><div class="row-actions"><button class="btn btn--sm" type="button" data-act="Reviewed"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Mark reviewed<span class="sr-only"> Rico Lim</span></button></div></td>
+</tr></tbody></table></div>
+    <h3 id="stock-h">Item stock</h3>
+    <div class="table-wrap"><table class="table" aria-labelledby="stock-h"><thead><tr><th scope="col">Item</th><th scope="col">Type</th><th scope="col">Available</th><th scope="col">Stock</th></tr></thead><tbody><tr>
+  <th scope="row" data-label="Item">Heat gun</th><td data-label="Type">Tool</td>
+  <td data-label="Available"><span class="mono">0 / 1</span></td><td data-label="Stock"><span class="status status--out"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg>None left</span></td>
+</tr><tr>
+  <th scope="row" data-label="Item">Epoxy resin kit</th><td data-label="Type">Consumable</td>
+  <td data-label="Available"><span class="mono">0</span></td><td data-label="Stock"><span class="status status--out"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg>None left</span></td>
+</tr><tr>
+  <th scope="row" data-label="Item">Cordless drill</th><td data-label="Type">Tool</td>
+  <td data-label="Available"><span class="mono">1 / 2</span></td><td data-label="Stock"><span class="status status--pending"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>Low</span></td>
+</tr><tr>
+  <th scope="row" data-label="Item">PLA filament, 1 kg</th><td data-label="Type">Consumable</td>
+  <td data-label="Available"><span class="mono">4</span></td><td data-label="Stock"><span class="status status--pending"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>Low</span></td>
+</tr><tr>
+  <th scope="row" data-label="Item">Digital multimeter</th><td data-label="Type">Tool</td>
+  <td data-label="Available"><span class="mono">3 / 4</span></td><td data-label="Stock"><span class="status status--ok"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>OK</span></td>
+</tr><tr>
+  <th scope="row" data-label="Item">Soldering station</th><td data-label="Type">Tool</td>
+  <td data-label="Available"><span class="mono">2 / 3</span></td><td data-label="Stock"><span class="status status--ok"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>OK</span></td>
+</tr><tr>
+  <th scope="row" data-label="Item">Torque wrench</th><td data-label="Type">Tool</td>
+  <td data-label="Available"><span class="mono">1 / 1</span></td><td data-label="Stock"><span class="status status--ok"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>OK</span></td>
+</tr><tr>
+  <th scope="row" data-label="Item">Wire crimper</th><td data-label="Type">Tool</td>
+  <td data-label="Available"><span class="mono">2 / 2</span></td><td data-label="Stock"><span class="status status--ok"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>OK</span></td>
+</tr><tr>
+  <th scope="row" data-label="Item">Safety goggles</th><td data-label="Type">Tool</td>
+  <td data-label="Available"><span class="mono">6 / 8</span></td><td data-label="Stock"><span class="status status--ok"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>OK</span></td>
+</tr><tr>
+  <th scope="row" data-label="Item">Heat-shrink tubing pack</th><td data-label="Type">Consumable</td>
+  <td data-label="Available"><span class="mono">5</span></td><td data-label="Stock"><span class="status status--ok"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>OK</span></td>
+</tr><tr>
+  <th scope="row" data-label="Item">Zip ties pack</th><td data-label="Type">Consumable</td>
+  <td data-label="Available"><span class="mono">8</span></td><td data-label="Stock"><span class="status status--ok"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>OK</span></td>
+</tr><tr>
+  <th scope="row" data-label="Item">Electrical tape</th><td data-label="Type">Consumable</td>
+  <td data-label="Available"><span class="mono">7</span></td><td data-label="Stock"><span class="status status--ok"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>OK</span></td>
+</tr></tbody></table></div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand"><img src="../assets/hygears-logo.png" alt="PUP Hygears logo" width="56" height="56"> PUP Hygears</p>
+      <p class="signoff">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+      <p class="tag">#GEARINGUpTowardExcellence</p>
+    </div>
+    <div>
+      <h2 class="footer-h">Find us</h2>
+      <p>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</p>
+      <ul class="footer-links">
+        <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+        <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUP Hygears</a></li>
+        <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+        <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer-h">Pages</h2>
+      <ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track Request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer</a></li></ul>
+    </div>
+  </div>
+  <div class="wrap footer-base"><p>A student research organization of the Polytechnic University of the Philippines. Prototype: sample data is labelled.</p></div>
+</footer>
+<p id="live" class="sr-only" role="status" aria-live="polite"></p>
+</body>
+</html>

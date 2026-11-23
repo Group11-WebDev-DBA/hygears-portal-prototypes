@@ -1,0 +1,479 @@
+/* =========================================================
+   PUP Hygears Web Portal - "Pit Board" prototype
+   One shared stylesheet for every page.
+   Style: neubrutalism (hard black borders, hard offset shadows,
+   square corners) in the classic Hygears red, white and black.
+   Mobile first: the base rules are for phones, and the media
+   queries at the bottom add columns for tablets and laptops.
+   ========================================================= */
+
+/* ---------- 1. Variables (colours, fonts, sizes) ---------- */
+:root {
+  /* Colours */
+  --red: #D7261E;        /* actions only: buttons, current page. White text on it = 5:1 */
+  --red-dark: #B51E17;   /* button hover and error text */
+  --ink: #14161A;        /* main text, borders and shadows */
+  --muted: #5B6270;      /* hints and small labels (6.3:1 on white) */
+  --white: #FFFFFF;      /* page background, cards, inputs */
+  --gray: #F4F5F7;       /* alternate sections and quiet fills */
+  --line-gray: #D5D8DE;  /* light dividers */
+  --charcoal: #1B1D22;   /* footer and the dark "pit board" plates */
+
+  /* Fonts: one family for reading, one mono for numbers */
+  --font-main: "Space Grotesk", "Segoe UI", Arial, sans-serif;
+  --font-mono: "Space Mono", Consolas, "Courier New", monospace;
+
+  /* Type sizes (phone). Bigger sizes are set in the media queries. */
+  --h1: 2.25rem;
+  --h2: 1.625rem;
+  --h3: 1.25rem;
+  --small: 0.9375rem;
+
+  /* Borders and shadows */
+  --border: 2px solid #14161A;
+  --border-thick: 3px solid #14161A;
+  --shadow: 4px 4px 0 #14161A;
+  --shadow-big: 6px 6px 0 #14161A;
+}
+
+/* ---------- 2. Base ---------- */
+* { box-sizing: border-box; }
+
+/* Anything with the hidden attribute stays hidden, even if a class gives it display: grid */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-main);
+  font-size: 1rem;      /* 16px body text */
+  line-height: 1.55;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+h1, h2, h3 {
+  margin: 0 0 1rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+h1 { font-size: var(--h1); text-transform: uppercase; letter-spacing: -0.5px; }
+h2, .h2 { font-size: var(--h2); text-transform: uppercase; }
+h3, .h3 { font-size: var(--h3); text-transform: none; }
+
+p { margin: 0 0 1rem; max-width: 68ch; }  /* keeps lines about 60-80 characters */
+ul, ol { margin: 0; padding: 0; }
+
+a { color: var(--ink); text-underline-offset: 3px; }
+a:hover { color: var(--red-dark); }
+
+.mono { font-family: var(--font-mono); }
+
+/* Text only screen readers hear */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Keyboard focus: a thick black outline on everything you can tab to */
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+main:focus { outline: none; }
+
+/* Inline SVG icons */
+.i {
+  width: 1.25em; height: 1.25em;
+  flex-shrink: 0;
+  fill: none; stroke: currentColor; stroke-width: 2.25;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.i--lg { width: 2rem; height: 2rem; }
+
+/* "Skip to content" link, shown only when focused */
+.skip {
+  position: absolute; left: 1rem; top: -5rem; z-index: 10;
+  padding: 0.75rem 1rem;
+  background: var(--white); border: var(--border); font-weight: 700;
+}
+.skip:focus { top: 1rem; }
+
+/* Page width container */
+.wrap { max-width: 72rem; margin: 0 auto; padding: 0 1rem; }
+.narrow { max-width: 44rem; }
+
+/* ---------- 3. Header and navigation ---------- */
+.site-header { position: relative; z-index: 5; background: var(--white); border-bottom: var(--border-thick); }
+.header-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 68px; }
+
+.brand { display: flex; align-items: center; gap: 0.75rem; min-height: 48px; text-decoration: none; }
+.brand img { width: 44px; height: 44px; border: var(--border); }
+.brand-name { font-weight: 700; text-transform: uppercase; line-height: 1.1; font-size: 1.0625rem; }
+.brand-sub { display: block; font-family: var(--font-mono); font-weight: 400; text-transform: none; font-size: 0.8125rem; color: var(--muted); }
+
+/* Menu button (phones only) */
+.menu-btn {
+  display: flex; align-items: center; gap: 0.5rem;
+  min-height: 48px; padding: 0 1rem;
+  font-family: var(--font-main); font-size: 1rem; font-weight: 700; text-transform: uppercase;
+  color: var(--ink); background: var(--white);
+  border: var(--border); box-shadow: var(--shadow); cursor: pointer;
+}
+.menu-btn[aria-expanded="true"] { background: var(--gray); box-shadow: 1px 1px 0 var(--ink); }
+
+/* On phones the nav is a drop-down panel under the header */
+.site-nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: var(--white); border-bottom: var(--border-thick); }
+.site-nav.is-open { display: block; }
+.site-nav ul { list-style: none; max-width: 72rem; margin: 0 auto; padding: 0.5rem 1rem 1rem; }
+.site-nav a {
+  display: flex; align-items: center; min-height: 52px; padding: 0 0.75rem;
+  font-weight: 700; text-transform: uppercase; text-decoration: none;
+  border-bottom: 1px solid var(--line-gray);
+}
+/* Current page: red bar on the left (phone) or underneath (laptop) */
+.site-nav a[aria-current="page"] { border-left: 6px solid var(--red); background: var(--gray); }
+
+/* If JavaScript is off, just show the links */
+.no-js .menu-btn { display: none; }
+.no-js .site-nav { display: block; position: static; border: 0; }
+
+/* ---------- 4. Buttons (same look everywhere) ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  min-height: 48px; padding: 0.5rem 1.25rem;
+  font-family: var(--font-main); font-size: 1rem; font-weight: 700; line-height: 1.2;
+  text-transform: uppercase; text-decoration: none; text-align: center;
+  color: var(--ink); background: var(--white);
+  border: var(--border); box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn:hover { color: var(--ink); transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--ink); }
+.btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }  /* "pressed" */
+
+.btn--primary { background: var(--red); color: var(--white); }
+.btn--primary:hover { background: var(--red-dark); color: var(--white); }
+.btn--big { min-height: 56px; font-size: 1.0625rem; }
+.btn--sm { min-height: 44px; padding: 0.25rem 0.875rem; font-size: var(--small); box-shadow: 3px 3px 0 var(--ink); }
+.btn--block { width: 100%; }
+
+/* Unavailable: dashed, grey, no shadow */
+.btn[disabled] { color: var(--muted); background: var(--gray); border-style: dashed; box-shadow: none; transform: none; cursor: not-allowed; }
+
+.text-link { font-weight: 700; }
+.actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; }
+
+/* ---------- 5. Plates: the "pit board" signs for numbers ---------- */
+/* Dark sign with a big mono number, like the boards a pit crew holds up */
+.plate {
+  display: inline-flex; flex-direction: column; align-items: flex-start;
+  min-width: 4.5rem; padding: 0.5rem 0.75rem;
+  color: var(--white); background: var(--charcoal);
+  border: var(--border); border-top: 6px solid var(--line-gray);
+  box-shadow: var(--shadow);
+}
+.plate-num { font-family: var(--font-mono); font-size: 1.75rem; font-weight: 700; line-height: 1; }
+.plate-label { font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.3; text-transform: uppercase; }
+.plate--out { color: var(--ink); background: var(--white); border-top: 6px dashed var(--ink); box-shadow: none; }  /* none left */
+.plate--alert { border-top: 6px dashed var(--white); }                                                         /* needs attention */
+.plate--ref { width: 100%; gap: 0.5rem; padding: 0.75rem 1rem 1rem; box-shadow: var(--shadow-big); }
+.plate--ref .plate-num { font-size: 1.75rem; word-break: break-all; }
+
+/* ---------- 6. Status tags: always an icon AND a word, never colour alone ---------- */
+.status {
+  display: inline-flex; align-items: center; gap: 0.375rem;
+  padding: 0.125rem 0.5rem;
+  font-size: var(--small); font-weight: 700;
+  color: var(--ink); background: var(--white); border: var(--border);
+}
+.status .i { width: 1em; height: 1em; }
+.status--pending { background: var(--gray); }
+.status--approved { background: var(--ink); color: var(--white); }
+.status--declined, .status--out { border-style: dashed; }
+.status--late { color: var(--red-dark); border-color: var(--red-dark); }
+.status--returned, .status--reviewed { background: var(--gray); }
+
+/* Small labels */
+.sticker {   /* "Sample data" stamp */
+  display: inline-block; padding: 0.125rem 0.5rem;
+  font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 700; text-transform: uppercase;
+  background: var(--white); border: 2px dashed var(--ink);
+  transform: rotate(-1.5deg); vertical-align: middle;
+}
+.slot { font-family: var(--font-mono); font-size: 0.8125rem; padding: 0 0.375rem; background: var(--gray); border: 1px dashed var(--muted); }  /* missing fact */
+.tag { display: inline-block; padding: 0 0.5rem; font-size: 0.875rem; font-weight: 700; border: var(--border); }
+.tag--quiet { color: var(--muted); border-color: var(--muted); font-weight: 400; }
+
+/* ---------- 7. Sections and layout helpers ---------- */
+.section { padding: 3rem 0; }
+.section--tight { padding: 2rem 0 3rem; }
+.section--alt, .band { background: var(--gray); border-top: var(--border); border-bottom: var(--border); }
+.section-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; margin-bottom: 1.5rem; }
+.section-head h2 { margin: 0; }
+.eyebrow { margin-bottom: 0.5rem; font-family: var(--font-mono); font-size: 0.875rem; font-weight: 700; text-transform: uppercase; color: var(--muted); }
+.lead { font-size: 1.125rem; }
+.split { display: grid; gap: 2rem; align-items: center; }
+
+/* Photo frame with a hard shadow */
+.frame { margin: 0; border: var(--border-thick); box-shadow: var(--shadow-big); }
+.frame img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+
+.card { padding: 1.5rem; background: var(--white); border: var(--border); box-shadow: var(--shadow); }
+
+/* ---------- 8. Home page ---------- */
+.hero { padding: 2rem 0 3rem; }
+.hero-grid { display: grid; gap: 2rem; }
+.hero .actions .btn { flex: 1 1 14rem; }
+.hero-photo { position: relative; }
+.hero-photo figcaption { position: absolute; left: -0.5rem; bottom: -1rem; }
+.hero-photo .plate-num { font-size: 1.375rem; }
+
+.quick-track { display: grid; gap: 1rem; padding-top: 2rem; padding-bottom: 2rem; }
+.quick-track p { margin: 0; }
+.inline-form { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.inline-form input { flex: 1 1 12rem; }
+.inline-form .btn { flex: 1 1 auto; }
+.q-label { width: 100%; }
+
+.shelf { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+.shelf-item { display: flex; flex-direction: column; justify-content: space-between; gap: 0.75rem; min-height: 8.5rem; padding: 0.875rem; background: var(--white); border: var(--border); }
+.shelf-name { font-weight: 700; line-height: 1.25; }
+
+.news { list-style: none; display: grid; gap: 1.5rem; }
+.news-card h3 { margin-bottom: 0.5rem; }
+.news-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; margin-bottom: 0.75rem; font-size: var(--small); font-weight: 700; color: var(--muted); }
+
+/* ---------- 9. Page headings ---------- */
+.page-head { padding: 2rem 0 1.5rem; background: var(--gray); border-bottom: var(--border); }
+.page-head h1 { margin-bottom: 0.5rem; }
+.page-head .lead { margin-bottom: 0; }
+.page-head--photo .frame { display: none; }   /* photo only on wider screens */
+
+/* ---------- 10. Forms ---------- */
+.form { display: grid; gap: 1.5rem; }
+.form > h2 { display: flex; align-items: center; gap: 0.5rem; margin: 0; }
+.form-note { margin: 0; font-size: var(--small); color: var(--muted); }
+.form-grid { display: grid; gap: 1.5rem; }
+.field { display: grid; gap: 0.25rem; align-content: start; }
+label, legend { font-weight: 700; }
+.hint { margin: 0; font-size: var(--small); color: var(--muted); }
+
+/* Error message under a field: red text with a "!" badge (not colour alone) */
+.error { margin: 0; font-size: var(--small); font-weight: 700; color: var(--red-dark); }
+.error:empty { display: none; }
+.error::before {
+  content: "!";
+  display: inline-block; width: 1.2em; height: 1.2em; margin-right: 0.4em;
+  line-height: 1.2em; text-align: center; font-size: 0.85em;
+  color: var(--white); background: var(--red-dark); border-radius: 50%;
+}
+
+input, select, textarea {
+  width: 100%; min-height: 48px; padding: 0.625rem 0.75rem;
+  font-family: var(--font-main); font-size: 1rem;   /* 16px stops phones zooming in */
+  color: var(--ink); background: var(--white);
+  border: var(--border); border-radius: 0;
+}
+textarea { min-height: 6rem; resize: vertical; }
+input::placeholder, textarea::placeholder { color: var(--muted); }
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline-offset: 0; box-shadow: 4px 4px 0 var(--ink); }
+input[aria-invalid="true"], select[aria-invalid="true"], textarea[aria-invalid="true"] { border: 3px solid var(--red-dark); }
+fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+legend { padding: 0; margin-bottom: 0.375rem; }
+
+/* Box at the top of a form listing what to fix */
+.error-summary { margin-bottom: 1.5rem; padding: 1rem 1.5rem; background: var(--white); border: 3px solid var(--red-dark); }
+.error-summary h2 { margin-bottom: 0.5rem; font-size: var(--h3); text-transform: none; color: var(--red-dark); }
+.error-summary ul { padding-left: 1.25rem; }
+.error-summary a { font-weight: 700; color: var(--red-dark); }
+
+/* Success panel after sending */
+.success { display: grid; gap: 1rem; border-width: 3px; box-shadow: var(--shadow-big); }
+.success h2 { margin: 0; }
+
+/* ---------- 11. Tools catalogue ---------- */
+.filters { display: grid; gap: 1.5rem; margin-bottom: 1.5rem; }
+.input-icon { position: relative; }
+.input-icon .i { position: absolute; left: 0.875rem; top: 0.875rem; }
+.input-icon input { padding-left: 2.75rem; }
+
+/* Category chips scroll sideways on small phones */
+.chips { display: flex; gap: 0.5rem; overflow-x: auto; padding: 0.25rem 0.25rem 0.5rem 0; }
+.chip {
+  flex-shrink: 0; min-height: 44px; padding: 0 0.875rem;
+  font-family: var(--font-main); font-size: var(--small); font-weight: 700;
+  color: var(--ink); background: var(--white); border: var(--border); border-radius: 999px; cursor: pointer;
+}
+.chip[aria-pressed="true"] { color: var(--white); background: var(--ink); }
+
+/* Tools / Consumables switch made from radio buttons */
+.seg { display: flex; flex-wrap: wrap; }
+.seg legend { width: 100%; }
+.seg label { flex: 1 1 auto; }
+.seg input { position: absolute; opacity: 0; }
+.seg span {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 44px; padding: 0 0.875rem; margin-left: -2px;
+  font-weight: 700; background: var(--white); border: var(--border); cursor: pointer;
+}
+.seg input:checked + span { color: var(--white); background: var(--ink); }
+.seg input:focus-visible + span { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+.check { display: inline-flex; align-items: center; gap: 0.625rem; min-height: 44px; cursor: pointer; }
+.check input { width: 1.5rem; height: 1.5rem; min-height: 0; margin: 0; accent-color: var(--ink); }
+
+.results-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 1.5rem; }
+.results-bar p { margin: 0; font-weight: 700; }
+
+/* Item cards: photo on the left on phones, on top on wider screens */
+.catalog { list-style: none; display: grid; gap: 1.5rem; }
+.item { display: grid; grid-template-columns: 5rem 1fr; gap: 1rem; padding: 1rem; }
+.photo-slot {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.25rem;
+  aspect-ratio: 1; font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--muted);
+  background: var(--gray); border: 2px dashed var(--muted);
+}
+.item-tags { display: flex; flex-wrap: wrap; gap: 0.375rem; margin-bottom: 0.5rem; }
+.item h3 { margin-bottom: 0.25rem; }
+.item-desc { margin-bottom: 0.75rem; font-size: var(--small); color: var(--muted); }
+.item-stock { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+.item-stock .plate { min-width: 3.75rem; box-shadow: 3px 3px 0 var(--ink); }
+.item-stock .plate--out { box-shadow: none; }
+.item-stock .plate-num { font-size: 1.5rem; }
+.item .btn { grid-column: 1 / -1; }   /* button spans the whole card */
+
+/* Stock meter: one small box per unit, filled = available (text says the same) */
+.meter { display: flex; gap: 3px; }
+.meter i { width: 0.875rem; height: 0.625rem; background: var(--white); border: 2px solid var(--ink); }
+.meter i.on { background: var(--ink); }
+
+/* ---------- 12. Track page ---------- */
+#track-out { margin-top: 2rem; }
+.results { display: grid; gap: 2rem; }
+.result { display: grid; gap: 0.75rem; }
+.result p { margin: 0; }
+.result-item { font-size: 1.125rem; font-weight: 700; }
+.result .status { justify-self: start; }
+
+/* ---------- 13. Join and About ---------- */
+.join-grid { display: grid; gap: 2rem; }
+.join-grid .committees { order: 2; }   /* on phones the form comes first */
+.list { list-style: none; display: grid; gap: 0.5rem; margin-bottom: 1rem; }
+.list li { position: relative; padding-left: 1.25rem; }
+.list li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 0.6rem; height: 0.6rem; background: var(--ink); }
+.quote { margin: 0 0 1.5rem; padding: 1rem 1.5rem; font-size: 1.125rem; font-weight: 500; background: var(--gray); border-left: 6px solid var(--ink); }
+.signoff { font-family: var(--font-mono); font-size: 0.875rem; font-weight: 700; text-transform: uppercase; }
+.pills { list-style: none; display: flex; flex-wrap: wrap; gap: 0.625rem; margin-bottom: 2rem; }
+.pills li { padding: 0.375rem 0.875rem; font-weight: 700; background: var(--white); border: var(--border); box-shadow: 3px 3px 0 var(--ink); }
+.pills--quiet li { box-shadow: none; }
+.rules { padding-left: 1.5rem; }
+.rules li { margin-bottom: 0.75rem; padding-left: 0.25rem; }
+.rules li::marker { font-family: var(--font-mono); font-weight: 700; }
+.contact-list { list-style: none; display: grid; gap: 0.25rem; margin-bottom: 1rem; }
+.contact-list li { display: flex; align-items: center; gap: 0.625rem; min-height: 44px; }
+.contact-list a { padding: 0.5rem 0; font-weight: 700; }
+
+/* ---------- 14. Officer dashboard ---------- */
+.dash-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+.dash-head h2 { margin: 0; }
+.dash-head .sticker { margin-left: 0.5rem; }
+.stats { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+.stats a { display: block; height: 100%; text-decoration: none; }
+.stats .plate { width: 100%; height: 100%; }
+#dash-view h3 { margin-top: 2rem; }
+.table-wrap { margin-bottom: 1rem; }
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { text-align: left; vertical-align: top; }
+.sub { display: block; font-size: var(--small); color: var(--muted); }
+.row-actions { display: flex; flex-wrap: wrap; gap: 0.625rem; }
+
+/* Phones: each table row turns into a card. The data-label attribute
+   on each cell is shown as a small label in front of the value. */
+@media (max-width: 767px) {
+  .table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .table, .table tbody, .table tr, .table th, .table td { display: block; }
+  .table tr { margin-bottom: 1rem; padding: 0.75rem 1rem; background: var(--white); border: var(--border); box-shadow: var(--shadow); }
+  .table th, .table td { display: flex; gap: 0.75rem; padding: 0.375rem 0; border-bottom: 1px solid var(--line-gray); }
+  .table tr > *:last-child { border-bottom: 0; }
+  .table [data-label]::before {
+    content: attr(data-label);
+    flex: 0 0 7.5rem;
+    font-family: var(--font-mono); font-size: 0.8125rem; text-transform: uppercase; color: var(--muted);
+  }
+  .table .action-cell { display: block; padding-top: 0.75rem; }
+
+  .table .row-actions > * { flex: 1 1 8rem; }   /* one button fills the row, two share it */
+}
+
+/* ---------- 15. Footer ---------- */
+.site-footer { color: var(--white); background: var(--charcoal); border-top: 6px solid var(--ink); }
+.site-footer a { color: var(--white); }
+.site-footer a:hover { color: var(--line-gray); }
+.site-footer a:focus-visible { outline-color: var(--white); }
+.footer-grid { display: grid; gap: 2rem; padding-top: 3rem; padding-bottom: 2rem; }
+.footer-brand { display: flex; align-items: center; gap: 0.875rem; font-size: 1.5rem; font-weight: 700; text-transform: uppercase; }
+.footer-brand img { border: 2px solid var(--white); }
+.footer-h { font-size: var(--h3); text-transform: uppercase; }
+.footer-links { list-style: none; }
+.footer-links a { display: inline-flex; align-items: center; min-height: 44px; }
+.site-footer .tag { padding: 0; border: 0; font-weight: 700; font-size: 1rem; }
+.footer-base { padding-top: 1rem; padding-bottom: 1.5rem; font-size: var(--small); border-top: 1px solid #3A3D45; }
+.footer-base p { margin: 0; color: var(--line-gray); }
+
+/* ---------- 16. Wider screens ---------- */
+/* Large phones and small tablets */
+@media (min-width: 640px) {
+  :root { --h1: 3rem; --h2: 2rem; }
+  .wrap { padding: 0 1.5rem; }
+  .form-grid { grid-template-columns: 1fr 1fr; }
+  .field--full { grid-column: 1 / -1; }
+  .news { grid-template-columns: 1fr 1fr; }
+  .stats { grid-template-columns: repeat(4, 1fr); }
+  .shelf { grid-template-columns: repeat(4, 1fr); }
+  .catalog { grid-template-columns: 1fr 1fr; }
+  .item { grid-template-columns: 1fr; align-content: start; }
+  .photo-slot { aspect-ratio: 2 / 1; }
+  .filters { grid-template-columns: 1fr auto; align-items: end; }
+  .quick-track { grid-template-columns: 1fr 1.2fr; align-items: center; }
+  .plate--ref .plate-num { font-size: 2.5rem; }
+}
+
+/* Tablets: tables go back to normal rows */
+@media (min-width: 768px) {
+  .table-wrap { overflow-x: auto; background: var(--white); border: var(--border); box-shadow: var(--shadow); }
+  .table th, .table td { padding: 0.75rem; border-bottom: var(--border); }
+  .table thead th { font-family: var(--font-mono); font-size: 0.8125rem; text-transform: uppercase; color: var(--white); background: var(--charcoal); }
+  .table tbody tr:last-child th, .table tbody tr:last-child td { border-bottom: 0; }
+  .page-head--photo .frame { display: block; }
+}
+
+/* Laptops: nav in the header, more columns */
+@media (min-width: 992px) {
+  :root { --h1: 4rem; --h2: 2.25rem; }
+  .menu-btn { display: none; }
+  .site-nav, .site-nav.is-open { display: block; position: static; background: none; border: 0; }
+  .site-nav ul { display: flex; gap: 0.25rem; padding: 0; }
+  .site-nav a { min-height: 44px; padding: 0 0.75rem; font-size: var(--small); border: 2px solid transparent; }
+  .site-nav a:hover { color: var(--ink); border-color: var(--ink); }
+  .site-nav a[aria-current="page"] { background: none; border: 2px solid transparent; border-bottom: 5px solid var(--red); }
+  .hero { padding: 3rem 0 4.5rem; }
+  .hero-grid { grid-template-columns: 1.05fr 1fr; align-items: center; gap: 3rem; }
+  .split { grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .catalog { grid-template-columns: repeat(3, 1fr); }
+  .news { grid-template-columns: repeat(3, 1fr); }
+  .join-grid { grid-template-columns: 18rem 1fr; align-items: start; }
+  .join-grid .committees { order: 0; }
+  .results { grid-template-columns: repeat(3, 1fr); }
+  .footer-grid { grid-template-columns: 1.3fr 1.2fr 0.8fr; }
+}
+
+/* People who turn off animations in their phone settings */
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: none; }
+}

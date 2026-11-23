@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Officer Desk | PUP Hygears</title>
+  <meta name="description" content="Officer dashboard for reservations, overdue items, applications and stock.">
+  <link rel="icon" href="../assets/hygears-logo.png">
+  <!-- Fonts: Barlow Semi Condensed (headings) and Barlow (body). Arial is the offline fallback. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ===== Header (same on every page; header.php in the real site) ===== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <img src="../assets/hygears-logo.png" alt="" width="40" height="40">
+      <span>PUP Hygears</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        <li><a href="track.html">Track Request</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="officer.html" aria-current="page">Officer</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="container">
+      <h1>Officer desk</h1>
+      <p>Approve requests, follow up overdue items and see new applications.</p>
+    </div>
+  </div>
+
+  <!-- ===== Login card (prototype: any username and password opens the sample) ===== -->
+  <section class="section" id="login-view">
+    <div class="container">
+      <div class="card login-card">
+        <h2>Officer sign in</h2>
+        <form class="form" id="login-form" novalidate>
+          <div class="field">
+            <label for="o-user">Officer username</label>
+            <input type="text" id="o-user" name="username" autocomplete="username" aria-describedby="o-user-error">
+            <p class="error" id="o-user-error"></p>
+          </div>
+          <div class="field">
+            <label for="o-pass">Password</label>
+            <input type="password" id="o-pass" name="password" autocomplete="current-password" aria-describedby="o-pass-error">
+            <p class="error" id="o-pass-error"></p>
+          </div>
+          <button class="btn btn-full" type="submit">Sign in</button>
+        </form>
+        <p class="hint login-hint">Prototype: any username and password opens the sample desk. The real site checks officer accounts with PHP and hashed passwords.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Dashboard (shown after sign in) ===== -->
+  <section class="section" id="dash-view" hidden aria-labelledby="dash-title">
+    <div class="container">
+      <div class="section-top">
+        <h2 id="dash-title" tabindex="-1">Today at the desk</h2>
+        <button class="btn-ghost btn-sm" type="button" id="logout">Sign out</button>
+      </div>
+      <div class="notice"><p><strong>Sample data.</strong> Names and records here are made up to show the layout.</p></div>
+
+      <!-- Counters link to each section -->
+      <div class="counters">
+        <a class="counter" href="#pending"><strong id="pending-count">3</strong><span>Pending requests</span></a>
+        <a class="counter" href="#overdue"><strong>2</strong><span>Overdue items</span></a>
+        <a class="counter" href="#applications"><strong>3</strong><span>New applications</span></a>
+        <a class="counter" href="#stock"><strong>2</strong><span>Out of stock</span></a>
+      </div>
+      <p class="sr-only" id="desk-status" role="status"></p>
+
+      <!-- Pending reservations -->
+      <div class="dash-section" id="pending">
+        <h3>Pending reservations</h3>
+        <table class="table">
+          <thead>
+            <tr><th scope="col">Reference</th><th scope="col">Student</th><th scope="col">Item</th><th scope="col">Qty</th><th scope="col">Pickup</th><th scope="col">Return</th><th scope="col">Action</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Reference">HYG-2026-0142</td>
+              <td data-label="Student">M. Santos, BSME 2-1</td>
+              <td data-label="Item">Soldering station</td>
+              <td data-label="Qty">1</td>
+              <td data-label="Pickup">Nov 24</td>
+              <td data-label="Return">Nov 26</td>
+              <td class="actions" data-label="Action">
+                <button class="btn btn-sm" type="button" data-decide="approve">Approve <span class="sr-only">HYG-2026-0142</span></button>
+                <button class="btn-ghost btn-sm" type="button" data-decide="decline">Decline <span class="sr-only">HYG-2026-0142</span></button>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="Reference">HYG-2026-0143</td>
+              <td data-label="Student">J. Dela Cruz, BSECE 3-2</td>
+              <td data-label="Item">Digital multimeter</td>
+              <td data-label="Qty">2</td>
+              <td data-label="Pickup">Nov 24</td>
+              <td data-label="Return">Nov 25</td>
+              <td class="actions" data-label="Action">
+                <button class="btn btn-sm" type="button" data-decide="approve">Approve <span class="sr-only">HYG-2026-0143</span></button>
+                <button class="btn-ghost btn-sm" type="button" data-decide="decline">Decline <span class="sr-only">HYG-2026-0143</span></button>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="Reference">HYG-2026-0144</td>
+              <td data-label="Student">A. Reyes, BSIE 2-3</td>
+              <td data-label="Item">PLA filament 1kg</td>
+              <td data-label="Qty">1</td>
+              <td data-label="Pickup">Nov 25</td>
+              <td data-label="Return">Used up</td>
+              <td class="actions" data-label="Action">
+                <button class="btn btn-sm" type="button" data-decide="approve">Approve <span class="sr-only">HYG-2026-0144</span></button>
+                <button class="btn-ghost btn-sm" type="button" data-decide="decline">Decline <span class="sr-only">HYG-2026-0144</span></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Overdue items -->
+      <div class="dash-section" id="overdue">
+        <h3>Overdue items</h3>
+        <table class="table">
+          <thead>
+            <tr><th scope="col">Reference</th><th scope="col">Student</th><th scope="col">Item</th><th scope="col">Was due</th><th scope="col">Late by</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Reference">HYG-2026-0121</td>
+              <td data-label="Student">R. Garcia, BSEE 3-1</td>
+              <td data-label="Item">Torque wrench</td>
+              <td data-label="Was due">Nov 19</td>
+              <td data-label="Late by"><strong>4 days</strong></td>
+            </tr>
+            <tr>
+              <td data-label="Reference">HYG-2026-0126</td>
+              <td data-label="Student">K. Mendoza, BSCpE 2-2</td>
+              <td data-label="Item">Cordless drill</td>
+              <td data-label="Was due">Nov 21</td>
+              <td data-label="Late by"><strong>2 days</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- New applications -->
+      <div class="dash-section" id="applications">
+        <h3>New applications</h3>
+        <table class="table">
+          <thead>
+            <tr><th scope="col">Name</th><th scope="col">Course and year</th><th scope="col">Committee</th><th scope="col">Sent</th></tr>
+          </thead>
+          <tbody>
+            <tr><td data-label="Name">L. Navarro</td><td data-label="Course and year">BSME 1-2</td><td data-label="Committee">Innovation and Research</td><td data-label="Sent">Nov 22</td></tr>
+            <tr><td data-label="Name">P. Villanueva</td><td data-label="Course and year">BSECE 1-1</td><td data-label="Committee">Creative Media and Design</td><td data-label="Sent">Nov 22</td></tr>
+            <tr><td data-label="Name">S. Ramos</td><td data-label="Course and year">Marketing 1-3</td><td data-label="Committee">External Affairs</td><td data-label="Sent">Nov 23</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Item stock, using the same battery cells as the catalog -->
+      <div class="dash-section" id="stock">
+        <div class="section-top">
+          <h3>Item stock</h3>
+          <a href="tools.html">Open catalog</a>
+        </div>
+        <ul class="quick-list">
+          <li><p class="quick-name">Torque wrench <span>Tool</span></p><div class="stock stock-none"><span class="cells" aria-hidden="true"><i></i><i></i></span>0 of 2: none left</div></li>
+          <li><p class="quick-name">Electrical tape <span>Consumable</span></p><div class="stock stock-none"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>0 of 6: none left</div></li>
+          <li><p class="quick-name">Heat gun <span>Tool</span></p><div class="stock"><span class="cells" aria-hidden="true"><i class="on"></i></span>1 of 1 available</div></li>
+          <li><p class="quick-name">Cordless drill <span>Tool</span></p><div class="stock"><span class="cells" aria-hidden="true"><i class="on"></i><i></i></span>1 of 2 available</div></li>
+          <li><p class="quick-name">Soldering station <span>Tool</span></p><div class="stock"><span class="cells" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span>2 of 3 available</div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== Footer (same on every page; footer.php in the real site) ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../assets/hygears-logo.png" alt="" width="48" height="48">
+          <strong>PUP Hygears</strong>
+        </div>
+        <p class="descriptor">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+        <p>Polytechnic University of the Philippines, Sta. Mesa, Manila<br>
+        College of Engineering and Architecture Building, NDC Compound, Anonas St.</p>
+        <p>#GEARINGUpTowardExcellence</p>
+      </div>
+      <div>
+        <h2>Portal</h2>
+        <ul class="footer-links">
+          <li><a href="tools.html">Tools and consumables</a></li>
+          <li><a href="track.html">Track a request</a></li>
+          <li><a href="join.html">Apply to join</a></li>
+          <li><a href="about.html#rules">Borrowing rules</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul class="footer-links">
+          <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+          <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-bottom">Student prototype for the Hygears Web Portal. Item lists and records shown here are sample data.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

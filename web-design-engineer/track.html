@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Track Request | PUP Hygears</title>
+  <meta name="description" content="Check the status of your Hygears reservation with your reference number.">
+  <link rel="icon" href="../assets/hygears-logo.png">
+  <!-- Fonts: Instrument Sans (all text) and JetBrains Mono (reference numbers). Falls back to Arial offline. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ===== Header (same on every page; becomes header.php later) ===== -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <!-- decorative: the name is written right next to the logo -->
+        <img src="../assets/hygears-logo.png" alt="" width="40" height="40">
+        <span>PUP Hygears</span>
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        <li><a href="track.html" aria-current="page">Track Request</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="officer.html" class="nav-officer">Officers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="page-head">
+      <div class="wrap">
+        <h1>Track Request</h1>
+        <p class="lead">Enter the reference number you got when you reserved.</p>
+      </div>
+    </div>
+
+    <div class="wrap section">
+      <div class="layout-split">
+        <div class="side">
+          <form id="track-form" novalidate>
+            <div class="field">
+              <label for="ref">Reference number</label>
+              <span class="hint" id="ref-hint">Looks like HYG-2026-0142</span>
+              <input type="text" id="ref" name="ref" autocomplete="off" autocapitalize="characters" required aria-describedby="ref-hint ref-error">
+              <span class="error-msg" id="ref-error">Enter a reference number like HYG-2026-0142.</span>
+            </div>
+            <button class="btn btn-primary btn-block" type="submit">Track Request</button>
+          </form>
+          <div class="section-gray panel" style="margin-top: 1.5rem;">
+            <p class="small"><strong>Try a sample</strong> <span class="sample-tag">Sample</span></p>
+            <div class="btn-row">
+              <button type="button" class="btn btn-secondary btn-small sample-ref" data-ref="HYG-2026-0142">0142 Pending</button>
+              <button type="button" class="btn btn-secondary btn-small sample-ref" data-ref="HYG-2026-0138">0138 Approved</button>
+              <button type="button" class="btn btn-secondary btn-small sample-ref" data-ref="HYG-2026-0131">0131 Declined</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="main">
+          <!-- Result area, filled in by app.js; aria-live announces the new status -->
+          <div id="track-result" aria-live="polite">
+            <div class="panel panel-white" id="track-empty">
+              <h2>Your request will show here</h2>
+              <p class="muted">You will see where it is on the line: reserved, under review, ready for pickup, or returned.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===== Footer (same on every page; becomes footer.php later) ===== -->
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <img class="footer-logo" src="../assets/hygears-logo.png" alt="" width="48" height="48">
+        <p class="footer-name">PUP Hygears</p>
+        <p class="footer-line">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+        <p class="footer-line">#GEARINGUpTowardExcellence</p>
+      </div>
+      <div>
+        <h2 class="footer-h">Find us</h2>
+        <address>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</address>
+      </div>
+      <div>
+        <h2 class="footer-h">Contact</h2>
+        <ul class="footer-links">
+          <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+          <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap">
+      <p class="footer-base">Hygears Web Portal prototype. Items, requests and dates marked "Sample" are placeholders until the officers supply the real list.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

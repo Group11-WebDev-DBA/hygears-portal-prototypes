@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reserve an Item | PUP Hygears</title>
+  <meta name="description" content="Reserve a Hygears tool or consumable.">
+  <link rel="icon" href="../assets/hygears-logo.png">
+  <!-- Fonts: Barlow Semi Condensed (headings) and Barlow (body). Arial is the offline fallback. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ===== Header (same on every page; header.php in the real site) ===== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <img src="../assets/hygears-logo.png" alt="" width="40" height="40">
+      <span>PUP Hygears</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tools.html" aria-current="page">Tools</a></li>
+        <li><a href="track.html">Track Request</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="officer.html">Officer</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="container">
+      <p class="kicker"><a href="tools.html">Tools and consumables</a> / Reserve</p>
+      <h1>Reserve an item</h1>
+      <p>Fill this in once. You'll get a reference number to track your request.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container split split-form">
+
+      <!-- Left: the chosen item and what happens next -->
+      <aside aria-labelledby="chosen-title">
+        <div class="card card-gray">
+          <p class="kicker">You're reserving</p>
+          <h2 id="chosen-title" class="h3-size">Soldering station</h2>
+          <p class="item-meta" id="chosen-type">Tool (returned)</p>
+          <div class="stock" id="chosen-stock"><span class="cells" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span><span>2 of 3 available</span></div>
+        </div>
+        <ol class="plain-list after-list">
+          <li>An officer reviews your request.</li>
+          <li>Check its status on <a href="track.html">Track Request</a>.</li>
+          <li>Bring your PUP ID at pickup <span class="slot">rule to confirm</span></li>
+        </ol>
+      </aside>
+
+      <!-- Right: the form (checked by app.js, then by PHP in the real site) -->
+      <div>
+        <form class="form" id="reserve-form" novalidate>
+          <div class="field">
+            <label for="item">Item</label>
+            <select id="item" name="item" aria-describedby="item-error">
+              <option value="digital-multimeter" data-type="tool" data-available="3" data-total="4">Digital multimeter (3 available)</option>
+              <option value="soldering-station" data-type="tool" data-available="2" data-total="3">Soldering station (2 available)</option>
+              <option value="cordless-drill" data-type="tool" data-available="1" data-total="2">Cordless drill (1 available)</option>
+              <option value="wire-crimper" data-type="tool" data-available="2" data-total="2">Wire crimper (2 available)</option>
+              <option value="heat-gun" data-type="tool" data-available="1" data-total="1">Heat gun (1 available)</option>
+              <option value="safety-goggles" data-type="tool" data-available="6" data-total="8">Safety goggles (6 available)</option>
+              <option value="pla-filament" data-type="consumable" data-available="3" data-total="5">PLA filament 1kg (3 in stock)</option>
+              <option value="heat-shrink" data-type="consumable" data-available="4" data-total="6">Heat-shrink tubing pack (4 in stock)</option>
+              <option value="zip-ties" data-type="consumable" data-available="5" data-total="6">Zip ties pack (5 in stock)</option>
+              <option value="epoxy-kit" data-type="consumable" data-available="2" data-total="3">Epoxy resin kit (2 in stock)</option>
+            </select>
+            <p class="error" id="item-error"></p>
+          </div>
+
+          <div class="field">
+            <label for="qty">Quantity</label>
+            <input type="number" id="qty" name="qty" min="1" max="2" value="1" inputmode="numeric" aria-describedby="qty-hint qty-error">
+            <p class="hint" id="qty-hint">Up to 2 available.</p>
+            <p class="error" id="qty-error"></p>
+          </div>
+
+          <div class="field">
+            <label for="fullname">Full name</label>
+            <input type="text" id="fullname" name="fullname" autocomplete="name" aria-describedby="fullname-error">
+            <p class="error" id="fullname-error"></p>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="studno">Student number</label>
+              <input type="text" id="studno" name="studno" placeholder="2024-00123-MN-0" autocapitalize="characters" aria-describedby="studno-hint studno-error">
+              <p class="hint" id="studno-hint">As printed on your PUP ID.</p>
+              <p class="error" id="studno-error"></p>
+            </div>
+            <div class="field">
+              <label for="course">Course and section</label>
+              <input type="text" id="course" name="course" placeholder="BSME 2-1" aria-describedby="course-error">
+              <p class="error" id="course-error"></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" inputmode="email" aria-describedby="email-hint email-error">
+            <p class="hint" id="email-hint">We send updates about this request here.</p>
+            <p class="error" id="email-error"></p>
+          </div>
+
+          <div class="field">
+            <label for="purpose">Purpose</label>
+            <textarea id="purpose" name="purpose" aria-describedby="purpose-hint purpose-error"></textarea>
+            <p class="hint" id="purpose-hint">What it's for, e.g. "Soldering the dashboard wiring for our ECE lab project".</p>
+            <p class="error" id="purpose-error"></p>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="pickup">Pickup date</label>
+              <input type="date" id="pickup" name="pickup" aria-describedby="pickup-error">
+              <p class="error" id="pickup-error"></p>
+            </div>
+            <div class="field" id="return-field">
+              <label for="return">Return date</label>
+              <input type="date" id="return" name="return" aria-describedby="return-error">
+              <p class="error" id="return-error"></p>
+            </div>
+          </div>
+          <p class="hint" id="consumable-note" hidden>Consumables are used up, so there's no return date.</p>
+
+          <button class="btn btn-full" type="submit">Send reservation</button>
+          <p class="error" id="form-error" role="alert"></p>
+        </form>
+
+        <!-- Success state (shown by app.js after a valid submit) -->
+        <div class="success" id="reserve-success" tabindex="-1" hidden>
+          <p class="kicker">Request sent</p>
+          <h2>Save your reference number</h2>
+          <p class="ref" id="reserve-ref">HYG-2026-0142</p>
+          <p>Your request is <strong>Pending</strong> until an officer reviews it. Use this number on Track Request to check it.</p>
+          <div class="btn-row">
+            <a class="btn" id="track-link" href="track.html?ref=HYG-2026-0142">Track this request</a>
+            <a class="btn-ghost" href="tools.html">Reserve another item</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== Footer (same on every page; footer.php in the real site) ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../assets/hygears-logo.png" alt="" width="48" height="48">
+          <strong>PUP Hygears</strong>
+        </div>
+        <p class="descriptor">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+        <p>Polytechnic University of the Philippines, Sta. Mesa, Manila<br>
+        College of Engineering and Architecture Building, NDC Compound, Anonas St.</p>
+        <p>#GEARINGUpTowardExcellence</p>
+      </div>
+      <div>
+        <h2>Portal</h2>
+        <ul class="footer-links">
+          <li><a href="tools.html">Tools and consumables</a></li>
+          <li><a href="track.html">Track a request</a></li>
+          <li><a href="join.html">Apply to join</a></li>
+          <li><a href="about.html#rules">Borrowing rules</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul class="footer-links">
+          <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+          <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-bottom">Student prototype for the Hygears Web Portal. Item lists and records shown here are sample data.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

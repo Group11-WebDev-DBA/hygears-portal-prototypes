@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tools & Consumables | PUP Hygears</title>
+  <meta name="description" content="Search the PUP Hygears catalog of tools and consumables and see how many are available now.">
+  <meta name="theme-color" content="#FFFFFF">
+  <link rel="icon" href="../assets/hygears-logo.png">
+  <!-- Fonts: Geist for text, Geist Mono for numbers and codes (falls back to system fonts offline) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600&amp;family=Geist+Mono:wght@400;600&amp;display=swap">
+  <link rel="stylesheet" href="style.css">
+  <!-- Tells the CSS that JavaScript is on, so the phone menu can start closed -->
+  <script>document.documentElement.className = "js";</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to Main Content</a>
+
+<!-- Site header: the same on every page (header.php in the real site) -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <img src="../assets/hygears-logo.png" width="36" height="36" alt="">
+      <span translate="no">PUP Hygears</span>
+    </a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Menu</span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tools.html" aria-current="page">Tools</a></li>
+        <li><a href="track.html">Track Request</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="about.html">About &amp; Contact</a></li>
+        <li class="nav-officer"><a href="officer.html">Officer Sign In</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="container">
+      <h1>Tools &amp; Consumables</h1>
+      <p>Tools are borrowed and returned. Consumables are used up.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <form class="filters" id="filters" role="search" aria-label="Filter items">
+      <div>
+        <label for="q">Search</label>
+        <input type="search" id="q" name="q" placeholder="e.g. multimeter&hellip;" autocomplete="off" spellcheck="false" enterkeyhint="search">
+      </div>
+      <div>
+        <label for="cat">Category</label>
+        <select id="cat" name="cat" autocomplete="off">
+          <option value="">All categories</option>
+              <option value="Electrical">Electrical</option>
+              <option value="Hand Tools">Hand Tools</option>
+              <option value="Power Tools">Power Tools</option>
+              <option value="Safety">Safety</option>
+              <option value="3D Printing">3D Printing</option>
+              <option value="Supplies">Supplies</option>
+        </select>
+      </div>
+      <fieldset class="segmented">
+        <legend>Type</legend>
+        <div class="segmented-options">
+          <label><input type="radio" name="type" value="" checked><span>All</span></label>
+          <label><input type="radio" name="type" value="tool"><span>Tools</span></label>
+          <label><input type="radio" name="type" value="consumable"><span>Consumables</span></label>
+        </div>
+      </fieldset>
+    </form>
+
+    <div class="results-bar">
+      <p id="result-count" class="num" aria-live="polite" style="margin:0">Showing 12 of 12 items</p>
+      <button type="button" class="link-button" id="clear-filters" hidden>Clear Filters</button>
+    </div>
+    <p class="small muted sample-note"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.5"/></svg><span><strong>Sample list.</strong> Items and counts are placeholders until the officers send the real inventory.</span></p>
+
+    <h2 class="visually-hidden">Items</h2>
+
+    <ul class="item-list" id="item-list">
+        <li class="item" data-name="digital multimeter electrical" data-category="Electrical" data-type="tool" data-available="3">
+          <div class="item-photo" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg></div>
+          <div class="item-body">
+            <h3>Digital Multimeter</h3>
+            <p class="meta"><span>Electrical</span><span>Tool, returned</span></p>
+            <p class="small muted">Measures voltage, current and resistance.</p>
+            <p class="stock stock-ok"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 5 5 9-10"/></svg><span><span class="num">3</span> of <span class="num">4</span> available</span></p>
+          </div>
+          <div class="item-action"><a class="button" href="reserve.html?item=digital-multimeter">Reserve<span class="visually-hidden"> Digital Multimeter</span></a></div>
+        </li>
+        <li class="item" data-name="soldering station electrical" data-category="Electrical" data-type="tool" data-available="2">
+          <div class="item-photo" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg></div>
+          <div class="item-body">
+            <h3>Soldering Station</h3>
+            <p class="meta"><span>Electrical</span><span>Tool, returned</span></p>
+            <p class="small muted">Joins wires and components on circuit boards.</p>
+            <p class="stock stock-ok"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 5 5 9-10"/></svg><span><span class="num">2</span> of <span class="num">3</span> available</span></p>
+          </div>
+          <div class="item-action"><a class="button" href="reserve.html?item=soldering-station">Reserve<span class="visually-hidden"> Soldering Station</span></a></div>
+        </li>
+        <li class="item" data-name="cordless drill power tools" data-category="Power Tools" data-type="tool" data-available="1">
+          <div class="item-photo" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg></div>
+          <div class="item-body">
+            <h3>Cordless Drill</h3>
+            <p class="meta"><span>Power Tools</span><span>Tool, returned</span></p>
+            <p class="small muted">Drills holes and drives screws.</p>
+            <p class="stock stock-ok"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 5 5 9-10"/></svg><span><span class="num">1</span> of <span class="num">2</span> available</span></p>
+          </div>
+          <div class="item-action"><a class="button" href="reserve.html?item=cordless-drill">Reserve<span class="visually-hidden"> Cordless Drill</span></a></div>
+        </li>
+        <li class="item" data-name="torque wrench hand tools" data-category="Hand Tools" data-type="tool" data-available="0">
+          <div class="item-photo" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg></div>
+          <div class="item-body">
+            <h3>Torque Wrench</h3>
+            <p class="meta"><span>Hand Tools</span><span>Tool, returned</span></p>
+            <p class="small muted">Tightens bolts to a set torque.</p>
+            <p class="stock stock-out"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg><span>None available now</span></p>
+          </div>
+          <div class="item-action"><p class="unavailable">Out for now. Check again later.</p></div>
+        </li>
+        <li class="item" data-name="wire crimper electrical" data-category="Electrical" data-type="tool" data-available="2">
+          <div class="item-photo" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg></div>
+          <div class="item-body">
+            <h3>Wire Crimper</h3>
+            <p class="meta"><span>Electrical</span><span>Tool, returned</span></p>
+            <p class="small muted">Fixes terminals onto wire ends.</p>
+            <p class="stock stock-ok"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 5 5 9-10"/></svg><span><span class="num">2</span> of <span class="num">2</span> available</span></p>
+          </div>
+          <div class="item-action"><a class="button" href="reserve.html?item=wire-crimper">Reserve<span class="visually-hidden"> Wire Crimper</span></a></div>
+        </li>
+        <li class="item" data-name="heat gun power tools" data-category="Power Tools" data-type="tool" data-available="1">
+          <div class="item-photo" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg></div>
+          <div class="item-body">
+            <h3>Heat Gun</h3>
+            <p class="meta"><span>Power Tools</span><span>Tool, returned</span></p>
+            <p class="small muted">Shrinks tubing and softens plastic.</p>
+            <p class="stock stock-ok"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 5 5 9-10"/></svg><span><span class="num">1</span> of <span class="num">1</span> available</span></p>
+          </div>
+          <div class="item-action"><a class="button" href="reserve.html?item=heat-gun">Reserve<span class="visually-hidden"> Heat Gun</span></a></div>
+        </li>
+        <li class="item" data-name="safety goggles safety" data-category="Safety" data-type="tool" data-available="8">
+          <div class="item-photo" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg></div>
+          <div class="item-body">
+            <h3>Safety Goggles</h3>
+            <p class="meta"><span>Safety</span><span>Tool, returned</span></p>
+            <p class="small muted">Protects your eyes when cutting, drilling or soldering.</p>
+            <p class="stock stock-ok"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 5 5 9-10"/></svg><span><span class="num">8</span> of <span class="num">10</span> available</span></p>
+          </div>
+          <div class="item-action"><a class="button" href="reserve.html?item=safety-goggles">Reserve<span class="visually-hidden"> Safety Goggles</span></a></div>
+        </li>
+        <li class="item" data-name="pla filament, 1 kg 3d printing" data-category="3D Printing" data-type="consumable" data-available="4">
+          <div class="item-photo" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg></div>
+          <div class="item-body">
+            <h3>PLA Filament, 1&nbsp;kg</h3>
+            <p class="meta"><span>3D Printing</span><span>Consumable, used up</span></p>
+            <p class="small muted">Material for 3D-printed parts.</p>
+            <p class="stock stock-ok"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 5 5 9-10"/></svg><span><span class="num">4</span> in stock</span></p>
+          </div>
+          <div class="item-action"><a class="button" href="reserve.html?item=pla-filament">Reserve<span class="visually-hidden"> PLA Filament, 1&nbsp;kg</span></a></div>
+        </li>
+        <li class="item" data-name="heat-shrink tubing pack electrical" data-category="Electrical" data-type="consumable" data-available="6">
+          <div class="item-photo" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg></div>
+          <div class="item-body">
+            <h3>Heat-Shrink Tubing Pack</h3>
+            <p class="meta"><span>Electrical</span><span>Consumable, used up</span></p>
+            <p class="small muted">Insulates soldered joints.</p>
+            <p class="stock stock-ok"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 5 5 9-10"/></svg><span><span class="num">6</span> in stock</span></p>
+          </div>
+          <div class="item-action"><a class="button" href="reserve.html?item=heat-shrink">Reserve<span class="visually-hidden"> Heat-Shrink Tubing Pack</span></a></div>
+        </li>
+        <li class="item" data-name="zip ties pack supplies" data-category="Supplies" data-type="consumable" data-available="10">
+          <div class="item-photo" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg></div>
+          <div class="item-body">
+            <h3>Zip Ties Pack</h3>
+            <p class="meta"><span>Supplies</span><span>Consumable, used up</span></p>
+            <p class="small muted">Bundles and holds wiring in place.</p>
+            <p class="stock stock-ok"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 5 5 9-10"/></svg><span><span class="num">10</span> in stock</span></p>
+          </div>
+          <div class="item-action"><a class="button" href="reserve.html?item=zip-ties">Reserve<span class="visually-hidden"> Zip Ties Pack</span></a></div>
+        </li>
+        <li class="item" data-name="electrical tape electrical" data-category="Electrical" data-type="consumable" data-available="12">
+          <div class="item-photo" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg></div>
+          <div class="item-body">
+            <h3>Electrical Tape</h3>
+            <p class="meta"><span>Electrical</span><span>Consumable, used up</span></p>
+            <p class="small muted">Wraps and insulates wires.</p>
+            <p class="stock stock-ok"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 5 5 9-10"/></svg><span><span class="num">12</span> in stock</span></p>
+          </div>
+          <div class="item-action"><a class="button" href="reserve.html?item=electrical-tape">Reserve<span class="visually-hidden"> Electrical Tape</span></a></div>
+        </li>
+        <li class="item" data-name="epoxy resin kit supplies" data-category="Supplies" data-type="consumable" data-available="0">
+          <div class="item-photo" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg></div>
+          <div class="item-body">
+            <h3>Epoxy Resin Kit</h3>
+            <p class="meta"><span>Supplies</span><span>Consumable, used up</span></p>
+            <p class="small muted">Bonds and fills parts.</p>
+            <p class="stock stock-out"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg><span>None available now</span></p>
+          </div>
+          <div class="item-action"><p class="unavailable">Out for now. Check again later.</p></div>
+        </li>
+    </ul>
+
+    <div class="empty-state" id="empty-state" hidden>
+      <h2>No Matching Items</h2>
+      <p class="muted">Try a shorter word, another category, or clear the filters to see everything.</p>
+      <button type="button" class="button button-secondary" id="clear-filters-2">Clear Filters</button>
+    </div>
+  </div>
+</main>
+
+<!-- Site footer: the same on every page (footer.php in the real site) -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand">
+          <img src="../assets/hygears-logo.png" width="40" height="40" alt="" loading="lazy">
+          <span translate="no">PUP Hygears</span>
+        </p>
+        <p>Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+        <p translate="no">#GEARINGUpTowardExcellence</p>
+        <p>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</p>
+      </div>
+      <div>
+        <h2>Portal</h2>
+        <ul>
+          <li><a href="tools.html">Tools &amp; Consumables</a></li>
+          <li><a href="track.html">Track Request</a></li>
+          <li><a href="join.html">Join Hygears</a></li>
+          <li><a href="officer.html">Officer Sign In</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+          <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-note">Prototype for the Web Development final project. Item counts, requests and names marked &ldquo;sample&rdquo; are placeholders until the officers send the real list.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

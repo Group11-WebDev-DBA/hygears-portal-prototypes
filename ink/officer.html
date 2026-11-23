@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Officer desk, PUP Hygears</title>
+<meta name="description" content="Hygears officers review reservations, overdue items, membership applications and item stock.">
+<link rel="icon" href="../assets/hygears-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700&amp;family=IBM+Plex+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<!-- Adds a "js" class so the CSS knows JavaScript is on (used by the phone menu) -->
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <nav class="pill" aria-label="Main">
+      <a class="brand" href="index.html"><img src="../assets/hygears-logo.png" width="40" height="40" alt="">PUP Hygears</a>
+      <button class="btn btn--quiet btn--sm menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <ul class="nav-links" id="nav-links"><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a class="nav-officer" href="officer.html" aria-current="page">Officer</a></li></ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-head">
+  <div class="container">
+    <h1>Officer desk</h1>
+    <p class="lead">Review reservations, returns, applications and stock.</p>
+  </div>
+</section>
+
+<div class="container">
+  <section class="login" aria-label="Officer sign-in">
+    <form class="slip" id="login-form" novalidate aria-labelledby="login-title">
+      <div class="slip__title"><p class="slip__name" id="login-title">Sign in</p><span class="note">Officers only</span></div>
+      <div class="form-grid">
+        <div class="field"><label for="o-email">Officer email</label><input id="o-email" name="email" type="email" autocomplete="username" required data-req="Enter your officer email." data-bad="That email looks incomplete." aria-describedby="o-email-hint o-email-err"><p class="hint" id="o-email-hint"></p><p class="error" id="o-email-err" aria-live="polite"></p></div>
+        <div class="field"><label for="o-pass">Password</label><input id="o-pass" name="password" type="password" autocomplete="current-password" required data-req="Enter your password." aria-describedby="o-pass-hint o-pass-err"><p class="hint" id="o-pass-hint"></p><p class="error" id="o-pass-err" aria-live="polite"></p></div>
+      </div>
+      <div class="form-foot"><button class="btn" type="submit">Sign in</button></div>
+      <p class="note">Prototype: any email and password open the sample dashboard. Nothing is checked or stored.</p>
+    </form>
+  </section>
+
+  <section class="dash" aria-labelledby="dash-title">
+    <div class="dash-bar">
+      <div><h2 id="dash-title" tabindex="-1">Today at the desk</h2><p class="note">Signed in as <b id="who">an officer</b>. Sample data: the live dashboard reads from the database.</p></div>
+      <button class="btn btn--quiet btn--sm" type="button" id="sign-out">Sign out</button>
+    </div>
+    <dl class="stats">
+      <div><dt>Pending reservations</dt><dd data-count="pending">4</dd></div>
+      <div><dt>Overdue items</dt><dd data-count="overdue">2</dd></div>
+      <div><dt>New applications</dt><dd data-count="apps">3</dd></div>
+      <div><dt>Out of stock</dt><dd>2</dd></div>
+    </dl>
+
+    <section class="panel" aria-labelledby="p-pending">
+      <h2 id="p-pending">Pending reservations</h2>
+      <p class="note">Approve or decline before the pickup date. Each choice can be undone.</p>
+      <table class="table" data-table="pending"><thead><tr><th scope="col">Reference</th><th scope="col">Student</th><th scope="col">Item</th><th scope="col" class="num">Qty</th><th scope="col">Pickup</th><th scope="col">Return</th><th scope="col">Purpose</th><th scope="col">State</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead>
+      <tbody><tr data-row><td class="mono" data-label="Reference">HYG-2026-0142</td><td data-label="Student">2023-00123-MN-0<br>BSME 3-1</td><td class="name" data-label="Item">Digital multimeter</td><td class="num" data-label="Qty"><span class="mono">1</span></td><td data-label="Pickup"><time datetime="2026-11-24">24 Nov 2026</time></td><td data-label="Return"><time datetime="2026-11-27">27 Nov 2026</time></td><td data-label="Purpose">Circuit testing for a capstone prototype</td><td class="state" data-label="State"><span class="tag tag--wait"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5"/></svg>Pending</span></td><td class="act"><div class="actions"><button class="btn btn--sm" type="button" data-act="approve">Approve</button><button class="btn btn--quiet btn--sm" type="button" data-act="decline">Decline</button></div></td></tr><tr data-row><td class="mono" data-label="Reference">HYG-2026-0143</td><td data-label="Student">2024-00456-MN-0<br>BSECE 2-2</td><td class="name" data-label="Item">PLA filament 1kg</td><td class="num" data-label="Qty"><span class="mono">1</span></td><td data-label="Pickup"><time datetime="2026-11-25">25 Nov 2026</time></td><td data-label="Return"><span class="note">None, consumable</span></td><td data-label="Purpose">Printing an enclosure for a lab project</td><td class="state" data-label="State"><span class="tag tag--wait"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5"/></svg>Pending</span></td><td class="act"><div class="actions"><button class="btn btn--sm" type="button" data-act="approve">Approve</button><button class="btn btn--quiet btn--sm" type="button" data-act="decline">Decline</button></div></td></tr><tr data-row><td class="mono" data-label="Reference">HYG-2026-0144</td><td data-label="Student">2022-00789-MN-0<br>BSEE 4-1</td><td class="name" data-label="Item">Torque wrench</td><td class="num" data-label="Qty"><span class="mono">1</span></td><td data-label="Pickup"><time datetime="2026-11-26">26 Nov 2026</time></td><td data-label="Return"><time datetime="2026-11-28">28 Nov 2026</time></td><td data-label="Purpose">Assembling a thesis test rig</td><td class="state" data-label="State"><span class="tag tag--wait"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5"/></svg>Pending</span></td><td class="act"><div class="actions"><button class="btn btn--sm" type="button" data-act="approve">Approve</button><button class="btn btn--quiet btn--sm" type="button" data-act="decline">Decline</button></div></td></tr><tr data-row><td class="mono" data-label="Reference">HYG-2026-0145</td><td data-label="Student">2023-00321-MN-0<br>BSCPE 3-2</td><td class="name" data-label="Item">Zip ties pack</td><td class="num" data-label="Qty"><span class="mono">2</span></td><td data-label="Pickup"><time datetime="2026-11-26">26 Nov 2026</time></td><td data-label="Return"><span class="note">None, consumable</span></td><td data-label="Purpose">Cable management for a robotics build</td><td class="state" data-label="State"><span class="tag tag--wait"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5"/></svg>Pending</span></td><td class="act"><div class="actions"><button class="btn btn--sm" type="button" data-act="approve">Approve</button><button class="btn btn--quiet btn--sm" type="button" data-act="decline">Decline</button></div></td></tr><tr class="empty-row" hidden><td colspan="9"><p><strong>No pending reservations left.</strong></p><p class="note">New requests show up here as students send them.</p></td></tr></tbody></table>
+    </section>
+
+    <section class="panel" aria-labelledby="p-overdue">
+      <h2 id="p-overdue">Overdue items</h2>
+      <table class="table" data-table="overdue"><thead><tr><th scope="col">Reference</th><th scope="col">Student</th><th scope="col">Item</th><th scope="col">Was due</th><th scope="col" class="num">Days late</th><th scope="col">State</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead>
+      <tbody><tr data-row><td class="mono" data-label="Reference">HYG-2026-0118</td><td data-label="Student">2022-00654-MN-0<br>BSIE 4-2</td><td class="name" data-label="Item">Torque wrench</td><td data-label="Was due"><time datetime="2026-11-18">18 Nov 2026</time></td><td class="num" data-label="Days late"><span class="mono" data-due="2026-11-18">late</span></td><td class="state" data-label="State"><span class="tag tag--wait"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5"/></svg>Overdue</span></td><td class="act"><button class="btn btn--quiet btn--sm" type="button" data-act="returned">Mark returned</button></td></tr><tr data-row><td class="mono" data-label="Reference">HYG-2026-0121</td><td data-label="Student">2024-00987-MN-0<br>BSME 2-1</td><td class="name" data-label="Item">Wire crimper</td><td data-label="Was due"><time datetime="2026-11-20">20 Nov 2026</time></td><td class="num" data-label="Days late"><span class="mono" data-due="2026-11-20">late</span></td><td class="state" data-label="State"><span class="tag tag--wait"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5"/></svg>Overdue</span></td><td class="act"><button class="btn btn--quiet btn--sm" type="button" data-act="returned">Mark returned</button></td></tr><tr class="empty-row" hidden><td colspan="7"><p><strong>Nothing left overdue.</strong></p><p class="note">Late returns show up here the day after they are due.</p></td></tr></tbody></table>
+    </section>
+
+    <section class="panel" aria-labelledby="p-apps">
+      <h2 id="p-apps">New applications</h2>
+      <table class="table" data-table="apps"><thead><tr><th scope="col">Student number</th><th scope="col">Course</th><th scope="col">Year and section</th><th scope="col">Committee</th><th scope="col">Applied</th><th scope="col">State</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead>
+      <tbody><tr data-row><td class="mono" data-label="Student number">2025-00111-MN-0</td><td data-label="Course">Mechanical Engineering</td><td data-label="Year and section">1-2</td><td data-label="Committee">Innovation and Research</td><td data-label="Applied"><time datetime="2026-11-21">21 Nov 2026</time></td><td class="state" data-label="State"><span class="tag tag--wait"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5"/></svg>New</span></td><td class="act"><div class="actions"><button class="btn btn--sm" type="button" data-act="accept">Accept</button><button class="btn btn--quiet btn--sm" type="button" data-act="decline">Decline</button></div></td></tr><tr data-row><td class="mono" data-label="Student number">2024-00222-MN-0</td><td data-label="Course">Marketing</td><td data-label="Year and section">2-1</td><td data-label="Committee">Creative Media and Design</td><td data-label="Applied"><time datetime="2026-11-20">20 Nov 2026</time></td><td class="state" data-label="State"><span class="tag tag--wait"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5"/></svg>New</span></td><td class="act"><div class="actions"><button class="btn btn--sm" type="button" data-act="accept">Accept</button><button class="btn btn--quiet btn--sm" type="button" data-act="decline">Decline</button></div></td></tr><tr data-row><td class="mono" data-label="Student number">2025-00333-MN-0</td><td data-label="Course">Computer Engineering</td><td data-label="Year and section">1-4</td><td data-label="Committee">Internal Affairs</td><td data-label="Applied"><time datetime="2026-11-19">19 Nov 2026</time></td><td class="state" data-label="State"><span class="tag tag--wait"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5"/></svg>New</span></td><td class="act"><div class="actions"><button class="btn btn--sm" type="button" data-act="accept">Accept</button><button class="btn btn--quiet btn--sm" type="button" data-act="decline">Decline</button></div></td></tr><tr class="empty-row" hidden><td colspan="7"><p><strong>No new applications left.</strong></p><p class="note">Applications from the Join page show up here.</p></td></tr></tbody></table>
+    </section>
+
+    <section class="panel" aria-labelledby="p-stock">
+      <h2 id="p-stock">Item stock</h2>
+      <table class="table"><thead><tr><th scope="col">Item</th><th scope="col">Type</th><th scope="col">Category</th><th scope="col" class="num">Available</th><th scope="col">State</th></tr></thead>
+      <tbody><tr><td class="name" data-label="Item">Digital multimeter</td><td data-label="Type">Tool</td><td data-label="Category">Electrical</td><td class="num" data-label="Available"><span class="mono">3</span></td><td data-label="State"><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>In stock</span></td></tr><tr><td class="name" data-label="Item">Soldering station</td><td data-label="Type">Tool</td><td data-label="Category">Electrical</td><td class="num" data-label="Available"><span class="mono">0</span></td><td data-label="State"><span class="tag tag--out"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>Out of stock</span></td></tr><tr><td class="name" data-label="Item">Cordless drill</td><td data-label="Type">Tool</td><td data-label="Category">Power tools</td><td class="num" data-label="Available"><span class="mono">2</span></td><td data-label="State"><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>In stock</span></td></tr><tr><td class="name" data-label="Item">Torque wrench</td><td data-label="Type">Tool</td><td data-label="Category">Hand tools</td><td class="num" data-label="Available"><span class="mono">1</span></td><td data-label="State"><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>In stock</span></td></tr><tr><td class="name" data-label="Item">Wire crimper</td><td data-label="Type">Tool</td><td data-label="Category">Hand tools</td><td class="num" data-label="Available"><span class="mono">2</span></td><td data-label="State"><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>In stock</span></td></tr><tr><td class="name" data-label="Item">Heat gun</td><td data-label="Type">Tool</td><td data-label="Category">Power tools</td><td class="num" data-label="Available"><span class="mono">0</span></td><td data-label="State"><span class="tag tag--out"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>Out of stock</span></td></tr><tr><td class="name" data-label="Item">Safety goggles</td><td data-label="Type">Tool</td><td data-label="Category">Safety</td><td class="num" data-label="Available"><span class="mono">6</span></td><td data-label="State"><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>In stock</span></td></tr><tr><td class="name" data-label="Item">PLA filament 1kg</td><td data-label="Type">Consumable</td><td data-label="Category">3D printing</td><td class="num" data-label="Available"><span class="mono">4</span></td><td data-label="State"><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>In stock</span></td></tr><tr><td class="name" data-label="Item">Heat-shrink tubing pack</td><td data-label="Type">Consumable</td><td data-label="Category">Electrical</td><td class="num" data-label="Available"><span class="mono">5</span></td><td data-label="State"><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>In stock</span></td></tr><tr><td class="name" data-label="Item">Zip ties pack</td><td data-label="Type">Consumable</td><td data-label="Category">Fastening</td><td class="num" data-label="Available"><span class="mono">8</span></td><td data-label="State"><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>In stock</span></td></tr><tr><td class="name" data-label="Item">Electrical tape</td><td data-label="Type">Consumable</td><td data-label="Category">Electrical</td><td class="num" data-label="Available"><span class="mono">7</span></td><td data-label="State"><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>In stock</span></td></tr><tr><td class="name" data-label="Item">Epoxy resin kit</td><td data-label="Type">Consumable</td><td data-label="Category">Adhesives</td><td class="num" data-label="Available"><span class="mono">2</span></td><td data-label="State"><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>In stock</span></td></tr></tbody></table>
+    </section>
+  </section>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="colophon">
+      <img src="../assets/hygears-logo.png" width="48" height="48" alt="PUP Hygears logo">
+      <div><p><strong>PUP Hygears</strong> is a student research organization at the Polytechnic University of the Philippines, Sta. Mesa, Manila. Find us on <a href="https://www.instagram.com/puphygears/">Instagram</a>, <a href="https://www.facebook.com/PUPHygears">Facebook</a> and <a href="https://x.com/pup_hygears">X</a>, or write to <a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a>. Photographs by PUP Hygears.</p><p class="tagline">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p></div>
+      <ul class="foot-links"><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer desk</a></li></ul>
+    </div>
+    <p class="legal">A prototype of the Hygears Web Portal, made for a Web Development final project in 2026. Sample data is marked where it appears.</p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

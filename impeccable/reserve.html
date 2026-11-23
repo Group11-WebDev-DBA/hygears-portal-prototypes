@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reserve an item | PUP Hygears</title>
+<meta name="description" content="Reserve a Hygears tool or consumable and get a reference number.">
+<link rel="icon" href="img/hg-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');</script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap head-row">
+    <a class="brand" href="index.html">
+      <img src="img/hg-mark.png" alt="" width="40" height="40">
+      <span>PUP Hygears</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i data-icon="menu"></i>Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tools.html" aria-current="page">Tools</a></li>
+        <li><a href="track.html">Track request</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="officer.html">Officer</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <div class="page-head">
+    <p><a href="tools.html">&larr; Back to the tool board</a></p>
+    <h1>Reserve an item</h1>
+    <p class="lede">Takes about a minute. You'll get a reference number to track your request.</p>
+  </div>
+  <div class="layout-split">
+    <div>
+      <div class="board picked" id="picked" hidden></div>
+      <form class="form form-panel stack-top" id="reserve-form" novalidate>
+        <div class="error-summary" hidden>
+          <p class="es-title" tabindex="-1"><i data-icon="alert"></i>Please fix these before sending</p>
+          <ul></ul>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label for="r-item">Item <span class="req" aria-hidden="true">*</span></label>
+            <select id="r-item" aria-describedby="r-item-error" required></select>
+            <p class="error" id="r-item-error"></p>
+          </div>
+          <div class="field">
+            <label for="r-qty">Quantity <span class="req" aria-hidden="true">*</span></label>
+            <input id="r-qty" type="number" inputmode="numeric" min="1" value="1" aria-describedby="r-qty-hint r-qty-error" required>
+            <p class="hint" id="r-qty-hint">Choose an item first.</p>
+            <p class="error" id="r-qty-error"></p>
+          </div>
+        </div>
+        <p class="hint" id="r-remembered" hidden>Your details are filled in from last time on this phone.</p>
+        <div class="field">
+          <label for="r-name">Full name <span class="req" aria-hidden="true">*</span></label>
+          <input id="r-name" type="text" autocomplete="name" aria-describedby="r-name-error" required>
+          <p class="error" id="r-name-error"></p>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label for="r-sn">Student number <span class="req" aria-hidden="true">*</span></label>
+            <input id="r-sn" type="text" autocapitalize="characters" placeholder="e.g. 2024-01234-MN-0" aria-describedby="r-sn-hint r-sn-error" required>
+            <p class="hint" id="r-sn-hint">As printed on your PUP ID.</p>
+            <p class="error" id="r-sn-error"></p>
+          </div>
+          <div class="field">
+            <label for="r-course">Course and section <span class="req" aria-hidden="true">*</span></label>
+            <input id="r-course" type="text" placeholder="e.g. BSME 2-1" aria-describedby="r-course-error" required>
+            <p class="error" id="r-course-error"></p>
+          </div>
+        </div>
+        <div class="field">
+          <label for="r-email">Email <span class="req" aria-hidden="true">*</span></label>
+          <input id="r-email" type="email" autocomplete="email" inputmode="email" aria-describedby="r-email-hint r-email-error" required>
+          <p class="hint" id="r-email-hint">We send updates about your request here.</p>
+          <p class="error" id="r-email-error"></p>
+        </div>
+        <div class="field">
+          <label for="r-purpose">What is it for? <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="r-purpose" aria-describedby="r-purpose-hint r-purpose-error" required></textarea>
+          <p class="hint" id="r-purpose-hint">For example: soldering the motor controller board for our ECE project.</p>
+          <p class="error" id="r-purpose-error"></p>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label for="r-pickup">Pickup date <span class="req" aria-hidden="true">*</span></label>
+            <input id="r-pickup" type="date" aria-describedby="r-pickup-error" required>
+            <p class="error" id="r-pickup-error"></p>
+          </div>
+          <div class="field" id="r-return-field">
+            <label for="r-return">Return date <span class="req" aria-hidden="true">*</span></label>
+            <input id="r-return" type="date" aria-describedby="r-return-error" required>
+            <p class="error" id="r-return-error"></p>
+          </div>
+        </div>
+        <p class="hint" id="r-consumable-note" hidden>Consumables are used up, so there's no return date.</p>
+        <label class="choice"><input type="checkbox" id="r-remember" checked> Remember my details on this phone</label>
+        <div class="btn-row"><button class="btn btn--primary" type="submit">Reserve item</button></div>
+        <p class="hint"><span class="req" aria-hidden="true">*</span> Required. Fields marked with a star must be filled in.</p>
+      </form>
+
+      <section class="form-panel" id="reserve-done" hidden aria-live="polite">
+        <div class="result">
+          <h2 tabindex="-1">Request sent</h2>
+          <div class="result-board">
+            <div class="board" id="done-board"></div>
+            <div>
+              <p class="ref-label">Your reference number</p>
+              <p class="ref-big num" id="done-ref"></p>
+              <span class="chip chip--pending"><i data-icon="clock"></i>Pending review</span>
+            </div>
+          </div>
+          <p>Save or screenshot this number. Officers will review your request and email you.</p>
+          <dl class="details">
+            <dt>Item</dt><dd id="done-item"></dd>
+            <dt>Pickup</dt><dd id="done-pickup"></dd>
+            <dt>Return</dt><dd id="done-return"></dd>
+          </dl>
+          <div class="btn-row">
+            <a class="btn btn--primary" id="done-track" href="track.html">Track request</a>
+            <a class="btn btn--ghost" href="tools.html">Back to the board</a>
+          </div>
+        </div>
+      </section>
+    </div>
+    <aside class="board" aria-labelledby="rules-title">
+      <div class="plate">
+        <h2 id="rules-title">Before you borrow</h2>
+        <ul class="small plate-list">
+          <li>Bring your PUP ID at pickup.</li>
+          <li>Return tools on or before the return date, clean and complete.</li>
+          <li>Report damage to an officer right away.</li>
+        </ul>
+        <p class="small muted flush">Draft rules, to confirm with officers. <a href="about.html#rules">All borrowing rules</a></p>
+      </div>
+    </aside>
+  </div>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <img src="img/hg-mark.png" alt="PUP Hygears logo" width="48" height="48">
+          <strong>PUP Hygears</strong>
+        </div>
+        <p class="signoff">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership
+          <span class="tag">#GEARINGUpTowardExcellence</span></p>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul class="foot-list">
+          <li><i data-icon="mail"></i><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><i data-icon="link"></i><a href="https://www.facebook.com/PUPHygears">Facebook: PUP Hygears</a></li>
+          <li><i data-icon="link"></i><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><i data-icon="link"></i><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Find us</h2>
+        <ul class="foot-list">
+          <li><i data-icon="pin"></i><span>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-note">A student research organization of the Polytechnic University of the Philippines. Prototype: items, requests and officer data shown are samples.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hygears Web Portal: design directions</title>
+<style>
+  /* Simple picker page for comparing the prototypes */
+  body { margin: 0; padding: 24px; background: #F4F5F7; color: #14161A; font: 16px/1.5 Arial, sans-serif; }
+  h1 { font-size: 24px; margin: 0 0 4px; }
+  .sub { margin: 0 0 24px; color: #5B6270; }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .card { background: #FFFFFF; border: 1px solid #DADDE3; padding: 16px; }
+  .card h2 { font-size: 18px; margin: 0 0 2px; }
+  .card h2 a { color: #14161A; }
+  .skill { font-size: 13px; color: #5B6270; margin: 0 0 8px; }
+  .card p { font-size: 14px; margin: 0 0 12px; }
+  .frame { height: 420px; overflow: hidden; border: 1px solid #DADDE3; }
+  iframe { width: 250%; height: 250%; border: 0; transform: scale(.4); transform-origin: 0 0; pointer-events: none; }
+  .links { font-size: 14px; margin-top: 10px; }
+  .links a { color: #B51E17; margin-right: 10px; }
+  @media (max-width: 1000px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } .frame { height: 300px; } }
+</style>
+</head>
+<body>
+<h1>Hygears Web Portal: design directions</h1>
+<p class="sub">Same 7 pages and content in each, built with a different design skill. Prototypes only: forms don't send anything yet. Some are still being updated to the white / gray / red palette.</p>
+<div class="grid">
+  <div class="card"><h2><a href="ink/index.html">Ink</a></h2><p class="skill">Hallmark skill</p><p>Clean catalogue with a "reservation slip" that repeats across pages.</p><div class="frame"><iframe src="ink/index.html" title="Ink"></iframe></div><div class="links"><a href="ink/tools.html">Tools</a><a href="ink/officer.html">Officer</a></div></div>
+  <div class="card"><h2><a href="almanac/index.html">Almanac</a></h2><p class="skill">Hallmark skill</p><p>A printed research record: serif body, ruled tables, live tool desk on the home page.</p><div class="frame"><iframe src="almanac/index.html" title="Almanac"></iframe></div><div class="links"><a href="almanac/tools.html">Tools</a><a href="almanac/officer.html">Officer</a></div></div>
+  <div class="card"><h2><a href="taste/index.html">Taste</a></h2><p class="skill">taste-skill</p><p>Photo-led, with the Luna car up front and every request as a ticket.</p><div class="frame"><iframe src="taste/index.html" title="Taste"></iframe></div><div class="links"><a href="taste/tools.html">Tools</a><a href="taste/officer.html">Officer</a></div></div>
+  <div class="card"><h2><a href="frontend-design/index.html">Shadow Board</a></h2><p class="skill">Anthropic frontend-design</p><p>Tools hang on a pegboard over their outlines; phone tab bar at the bottom.</p><div class="frame"><iframe src="frontend-design/index.html" title="Shadow Board"></iframe></div><div class="links"><a href="frontend-design/tools.html">Tools</a><a href="frontend-design/officer.html">Officer</a></div></div>
+  <div class="card"><h2><a href="impeccable/index.html">Shadow Board (white)</a></h2><p class="skill">impeccable</p><p>White and gray board with black tool silhouettes and peg dots for stock.</p><div class="frame"><iframe src="impeccable/index.html" title="Impeccable"></iframe></div><div class="links"><a href="impeccable/tools.html">Tools</a><a href="impeccable/officer.html">Officer</a></div></div>
+  <div class="card"><h2><a href="uiux-pro-max/index.html">Pit Board</a></h2><p class="skill">ui-ux-pro-max</p><p>Bold neubrutalist blocks; every number sits on a dark pit-board plate.</p><div class="frame"><iframe src="uiux-pro-max/index.html" title="Pit Board"></iframe></div><div class="links"><a href="uiux-pro-max/tools.html">Tools</a><a href="uiux-pro-max/officer.html">Officer</a></div></div>
+  <div class="card"><h2><a href="vercel-guidelines/index.html">Spec</a></h2><p class="skill">Vercel Web Interface Guidelines</p><p>Calm and precise, with a 4-step request timeline and careful form behaviour.</p><div class="frame"><iframe src="vercel-guidelines/index.html" title="Spec"></iframe></div><div class="links"><a href="vercel-guidelines/tools.html">Tools</a><a href="vercel-guidelines/officer.html">Officer</a></div></div>
+  <div class="card"><h2><a href="web-design-engineer/index.html">Route Line</a></h2><p class="skill">garden-skills web-design-engineer</p><p>Requests travel a transit-map line; the catalog is a departure board.</p><div class="frame"><iframe src="web-design-engineer/index.html" title="Route Line"></iframe></div><div class="links"><a href="web-design-engineer/tools.html">Tools</a><a href="web-design-engineer/officer.html">Officer</a></div></div>
+  <div class="card"><h2><a href="superdesign/index.html">Superdesign</a></h2><p class="skill">superdesign (in progress)</p><p>Still being built.</p><div class="frame"><iframe src="superdesign/index.html" title="Superdesign"></iframe></div><div class="links"><a href="superdesign/tools.html">Tools</a><a href="superdesign/officer.html">Officer</a></div></div>
+</div>
+</body>
+</html>

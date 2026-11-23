@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PUP Hygears: borrow tools, join the team</title>
+<meta name="description" content="Reserve tools and consumables from PUP Hygears, the student electric vehicle organization at PUP Sta. Mesa, or apply to join.">
+<link rel="icon" href="../assets/hygears-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700&amp;family=IBM+Plex+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<!-- Adds a "js" class so the CSS knows JavaScript is on (used by the phone menu) -->
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <nav class="pill" aria-label="Main">
+      <a class="brand" href="index.html"><img src="../assets/hygears-logo.png" width="40" height="40" alt="">PUP Hygears</a>
+      <button class="btn btn--quiet btn--sm menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <ul class="nav-links" id="nav-links"><li><a href="index.html" aria-current="page">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a class="nav-officer" href="officer.html">Officer</a></li></ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="hero">
+  <div class="container hero__grid">
+    <div>
+      <h1>Tools for your build, lent by Hygears.</h1>
+      <p class="lead">Reserve a tool online, pick it up, bring it back.</p>
+      <div class="actions"><a class="btn btn--quiet" href="tools.html">Browse the catalogue</a><a class="btn btn--quiet" href="join.html">Apply to join</a></div>
+    </div>
+    <form class="slip" id="counter" action="tools.html#reserve" method="get" aria-labelledby="counter-title">
+      <div class="slip__title"><p class="slip__name" id="counter-title">Start a reservation</p><span class="note">Sample stock</span></div>
+      <div class="form-grid">
+        <div class="field field--full"><label for="c-item">Item</label><select id="c-item" name="item" aria-describedby="c-item-hint c-item-err"><option value="">Choose an item</option><option value="dmm" data-available="3" data-type="tool">Digital multimeter (3 available)</option><option value="solder" data-available="0" data-type="tool" disabled>Soldering station (none left)</option><option value="drill" data-available="2" data-type="tool">Cordless drill (2 available)</option><option value="torque" data-available="1" data-type="tool">Torque wrench (1 available)</option><option value="crimper" data-available="2" data-type="tool">Wire crimper (2 available)</option><option value="heatgun" data-available="0" data-type="tool" disabled>Heat gun (none left)</option><option value="goggles" data-available="6" data-type="tool">Safety goggles (6 available)</option><option value="pla" data-available="4" data-type="consumable">PLA filament 1kg (4 available)</option><option value="shrink" data-available="5" data-type="consumable">Heat-shrink tubing pack (5 available)</option><option value="zip" data-available="8" data-type="consumable">Zip ties pack (8 available)</option><option value="tape" data-available="7" data-type="consumable">Electrical tape (7 available)</option><option value="epoxy" data-available="2" data-type="consumable">Epoxy resin kit (2 available)</option></select><p class="hint" id="c-item-hint">Pick an item to see how many are on the shelf.</p><p class="error" id="c-item-err" aria-live="polite"></p></div>
+        <div class="field"><label for="c-qty">Quantity</label><input id="c-qty" name="qty" type="number" min="1" value="1" inputmode="numeric" aria-describedby="c-qty-hint c-qty-err"><p class="hint" id="c-qty-hint"></p><p class="error" id="c-qty-err" aria-live="polite"></p></div>
+        <div class="field"><label for="c-pickup">Pickup date</label><input id="c-pickup" name="pickup" type="date" aria-describedby="c-pickup-hint c-pickup-err"><p class="hint" id="c-pickup-hint"></p><p class="error" id="c-pickup-err" aria-live="polite"></p></div>
+      </div>
+      <div class="slip__foot"><p><span class="note">Your reference number</span><br><span class="mono">HYG-2026-0000</span> <span class="note">comes with the full form</span></p><button class="btn" type="submit">Reserve</button></div>
+    </form>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container split split--even">
+    <figure class="photo"><img src="../assets/team-luna-1.png" width="1435" height="645" loading="lazy" alt="Hygears members gather around their black Luna car on a tree-lined road on the PUP campus, some kneeling in front."><figcaption>The team with a Luna car on campus at PUP Sta. Mesa.</figcaption></figure>
+    <div class="intro">
+      <h2>Students who build electric cars</h2>
+      <blockquote class="words"><p>&ldquo;The PUP Hygears is an organization that aims to further enhance the awareness of the PUP Students in the field of research and help produce well-trained and competent students through real-life training in innovation and production of a highly efficient vehicle&hellip;&rdquo;</p><footer>PUP Hygears, in their own words</footer></blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="section section--band" aria-labelledby="faq-title">
+  <div class="container split">
+    <h2 id="faq-title">Before you borrow</h2>
+    <div class="faq">
+      <details open><summary><h3>Who can borrow from Hygears?</h3></summary><div class="answer"><p>PUP students with a project. An officer approves each request before pickup.</p></div></details>
+      <details><summary><h3>What is the difference between a tool and a consumable?</h3></summary><div class="answer"><p>Tools come back by your return date. Consumables, like zip ties, are yours to use up.</p><p><a href="tools.html">See the catalogue</a></p></div></details>
+      <details><summary><h3>How do I know my request was approved?</h3></summary><div class="answer"><p>Every request gets a reference number like <span class="mono">HYG-2026-0142</span>. Enter it to see where your request stands.</p><p><a href="track.html">Track a request</a></p></div></details>
+      <details><summary><h3>What does Hygears build?</h3></summary><div class="answer"><p>The Luna series of energy-efficient electric vehicles, entered in the Shell Eco-marathon.</p></div></details>
+      <details><summary><h3>Can I join?</h3></summary><div class="answer"><p>Yes. Members come from Mechanical, Electronics and Communications, Industrial, Electrical and Computer Engineering, and Marketing.</p><p><a href="join.html">Apply to join</a></p></div></details>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="notices-title">
+  <div class="container">
+    <div class="section-head"><h2 id="notices-title">Notices from the desk</h2><p class="note">Sample notices. Officers post the real ones from their dashboard.</p></div>
+    <ul class="rows">
+      <li><time datetime="2026-11-20">20 November 2026</time><h3>Reservations move online</h3><p>Keep your reference number to track the request.</p></li>
+      <li><time datetime="2026-11-12">12 November 2026</time><h3>Membership applications are open</h3><p>Pick your preferred committee on the form.</p></li>
+      <li><time datetime="2026-11-05">5 November 2026</time><h3>Bring tools back on time</h3><p>Someone else holds the next reservation.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class="close" aria-labelledby="join-title">
+  <div class="container">
+    <h2 id="join-title" class="visually-hidden">Join Hygears</h2>
+    <blockquote><p class="big-quote">&ldquo;We don&rsquo;t just build vehicles, we build people to help us build the future!&rdquo;</p><footer>The Hygears tagline, #GEARINGUpTowardExcellence</footer></blockquote>
+    <div class="actions"><a class="btn" href="join.html">Apply to join</a></div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="colophon">
+      <img src="../assets/hygears-logo.png" width="48" height="48" alt="PUP Hygears logo">
+      <div><p><strong>PUP Hygears</strong> is a student research organization at the Polytechnic University of the Philippines, Sta. Mesa, Manila. Find us on <a href="https://www.instagram.com/puphygears/">Instagram</a>, <a href="https://www.facebook.com/PUPHygears">Facebook</a> and <a href="https://x.com/pup_hygears">X</a>, or write to <a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a>. Photographs by PUP Hygears.</p><p class="tagline">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p></div>
+      <ul class="foot-links"><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer desk</a></li></ul>
+    </div>
+    <p class="legal">A prototype of the Hygears Web Portal, made for a Web Development final project in 2026. Sample data is marked where it appears.</p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

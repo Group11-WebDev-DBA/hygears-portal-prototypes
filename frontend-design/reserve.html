@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reserve an item | PUP Hygears</title>
+<meta name="description" content="Reserve a tool or consumable from PUP Hygears and get a reference number.">
+<link rel="icon" href="../assets/hygears-logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap masthead__bar">
+    <a class="brand" href="index.html"><img src="../assets/hygears-logo.png" width="40" height="40" alt="">PUP Hygears</a>
+    <nav class="nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Home</a></li>
+        <li><a href="tools.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></svg>Tools</a></li>
+        <li><a href="track.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>Track</a></li>
+        <li><a href="join.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M19 8v6M16 11h6"/></svg>Join</a></li>
+        <li><a href="about.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>About</a></li>
+      </ul>
+    </nav>
+    <a class="officer-link" href="officer.html">Officer sign in</a>
+  </div>
+</header>
+<main id="main">
+
+<div class="page-head">
+  <div class="wrap">
+    <p><a href="tools.html">Back to tools</a></p>
+    <h1>Reserve an item</h1>
+    <p class="lede">Fill this in once. You'll get a reference number to track your request.</p>
+  </div>
+</div>
+<section class="section">
+  <div class="wrap">
+    <div class="item-summary" id="item-summary" hidden>
+      <div class="board"><div class="slot"><div class="slot__wall"></div></div></div>
+      <div>
+        <h2>Item</h2>
+        <p class="item-use"></p>
+        <p class="item-count meta"></p>
+      </div>
+    </div>
+    <form class="form" id="reserve-form" novalidate>
+      <div class="form-summary" role="alert" tabindex="-1"></div>
+        <div class="field">
+          <label for="f-itemId">Item</label>
+          <p class="hint" id="h-itemId">Only items with stock left can be picked.</p>
+          <select class="select" id="f-itemId" name="itemId" aria-describedby="h-itemId e-itemId" required></select>
+          <p class="error" id="e-itemId"><span></span></p>
+        </div>
+        <div class="field-row"><div class="field">
+          <label for="f-qty">Quantity</label>
+          <p class="hint" id="qty-hint">How many you need.</p>
+          
+          <input class="input" id="f-qty" name="qty" aria-describedby="qty-hint e-qty" type="number" inputmode="numeric" min="1" value="1" required>
+          <p class="error" id="e-qty"><span></span></p>
+        </div></div>
+        <div class="field">
+          <label for="f-purpose">What it's for</label>
+          <p class="hint" id="h-purpose">One sentence is enough. Officers use this to approve requests.</p>
+          <textarea class="textarea" id="f-purpose" name="purpose" aria-describedby="h-purpose e-purpose" required></textarea>
+          <p class="error" id="e-purpose"><span></span></p>
+        </div>
+        <div class="field-row"><div class="field">
+          <label for="f-pickup">Pickup date</label>
+          <p class="hint" id="h-pickup">The day you'll collect it at the workshop.</p>
+          <input class="input" id="f-pickup" name="pickup" aria-describedby="h-pickup e-pickup" type="date" required>
+          <p class="error" id="e-pickup"><span></span></p>
+        </div><div class="field" id="return-field">
+          <label for="f-returnDate">Return date</label>
+          <p class="hint" id="h-returnDate">Tools only. On or after the pickup date.</p>
+          <input class="input" id="f-returnDate" name="returnDate" aria-describedby="h-returnDate e-returnDate" type="date" required>
+          <p class="error" id="e-returnDate"><span></span></p>
+        </div></div>
+        <div class="field">
+          <label for="f-fullName">Full name</label>
+          
+          <input class="input" id="f-fullName" name="fullName" aria-describedby="e-fullName" type="text" autocomplete="name" required>
+          <p class="error" id="e-fullName"><span></span></p>
+        </div>
+        <div class="field">
+          <label for="f-studentNo">Student number</label>
+          <p class="hint" id="h-studentNo">As shown on your PUP ID, like 2024-00123-MN-0.</p>
+          <input class="input" id="f-studentNo" name="studentNo" aria-describedby="h-studentNo e-studentNo" type="text" autocomplete="off" required>
+          <p class="error" id="e-studentNo"><span></span></p>
+        </div>
+        <div class="field">
+          <label for="f-email">Email</label>
+          <p class="hint" id="h-email">Your PUP webmail or Gmail. We send the reference number and updates here.</p>
+          <input class="input" id="f-email" name="email" aria-describedby="h-email e-email" type="email" autocomplete="email" inputmode="email" required>
+          <p class="error" id="e-email"><span></span></p>
+        </div>
+        <div class="field">
+          <label for="f-course">Course and section</label>
+          <p class="hint" id="h-course">Like BSME 2-1.</p>
+          <input class="input" id="f-course" name="course" aria-describedby="h-course e-course" type="text" required>
+          <p class="error" id="e-course"><span></span></p>
+        </div>
+      <button class="btn btn--primary btn--block" type="submit">Reserve</button>
+      <p class="hint">Requests are reviewed by Hygears officers. Read the <a href="about.html#rules">borrowing rules</a> first. Your name, student number, email and course are remembered on this device to make your next request faster.</p>
+    </form>
+    <div id="reserve-done" hidden>
+      <h2 tabindex="-1">Reserved. Keep this number.</h2>
+      <p>We sent a copy to <strong data-email></strong>. An officer will review your request, then you can pick it up at the workshop.</p>
+      <article class="tag tag--pending" aria-label="Reservation tag">
+        <span class="status"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Pending</span>
+        <span class="tag__ref">HYG-2026-0142</span>
+        <dl><dt>Item</dt><dd data-item></dd><dt>Pickup</dt><dd data-pickup></dd><dt>Return</dt><dd data-return></dd></dl>
+        <p class="meta m-0">Sample reference number. The real site creates a new one for each request.</p>
+      </article>
+      <div class="btn-row mt-5">
+        <a class="btn btn--primary" href="track.html">Track request</a>
+        <a class="btn btn--outline" href="tools.html">Back to tools</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <p class="footer__brand"><img src="../assets/hygears-logo.png" width="44" height="44" alt="">PUP Hygears</p>
+        <p>Engineering Innovation • Research • Technology • Leadership</p>
+        <p>#GEARINGUpTowardExcellence</p>
+      </div>
+      <div>
+        <p class="footer__label">Find us</p>
+        <address>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</address>
+      </div>
+      <div>
+        <p class="footer__label">Message us</p>
+        <ul class="contact-list">
+          <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUP Hygears</a></li>
+          <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer__note">Prototype of the Hygears Web Portal. Items, counts and requests marked "sample" are placeholders until the officers send the real list.</p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

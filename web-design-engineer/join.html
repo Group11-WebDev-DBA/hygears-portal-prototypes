@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Join Hygears | PUP Hygears</title>
+  <meta name="description" content="Apply to join PUP Hygears and choose your preferred committee.">
+  <link rel="icon" href="../assets/hygears-logo.png">
+  <!-- Fonts: Instrument Sans (all text) and JetBrains Mono (reference numbers). Falls back to Arial offline. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ===== Header (same on every page; becomes header.php later) ===== -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <!-- decorative: the name is written right next to the logo -->
+        <img src="../assets/hygears-logo.png" alt="" width="40" height="40">
+        <span>PUP Hygears</span>
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        <li><a href="track.html">Track Request</a></li>
+        <li><a href="join.html" aria-current="page">Join</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="officer.html" class="nav-officer">Officers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="page-head">
+      <div class="wrap">
+        <h1>Join Hygears</h1>
+        <p class="lead">Open to PUP students from any program. Pick the committee you want to start in.</p>
+      </div>
+    </div>
+
+    <div class="wrap section">
+      <div class="layout-split">
+        <aside class="side side-last">
+          <p class="pull">"We don't just build vehicles, we build people to help us build the future!"</p>
+          <h2>What happens next</h2>
+          <ol class="route">
+        <li class="is-current">
+          <span class="stop-mark" aria-hidden="true">1</span>
+          <span class="stop-name">Send this form</span>
+          <span class="stop-state">You are here</span>
+        </li>
+        <li class="is-next">
+          <span class="stop-mark" aria-hidden="true">2</span>
+          <span class="stop-name">Officers review</span>
+          <span class="stop-state">Next</span>
+          <span class="stop-text">Officers read every application.</span>
+        </li>
+        <li class="is-next">
+          <span class="stop-mark" aria-hidden="true">3</span>
+          <span class="stop-name">We email you</span>
+          <span class="stop-state">Later</span>
+          <span class="stop-text"><span class="slot">next step, e.g. orientation</span></span>
+        </li>
+          </ol>
+        </aside>
+
+        <div class="main">
+          <form id="join-form" novalidate>
+            <div class="form-alert" id="join-alert" role="alert" tabindex="-1">
+              <p>Please fix the highlighted fields below.</p>
+            </div>
+            <fieldset>
+              <legend class="form-group-title">About you</legend>
+              <div class="field">
+                <label for="j-name">Full name</label>
+                <input type="text" id="j-name" name="name" autocomplete="name" required aria-describedby="j-name-error">
+                <span class="error-msg" id="j-name-error">Enter your full name.</span>
+              </div>
+              <div class="field">
+                <label for="j-studno">Student number</label>
+                <span class="hint" id="j-studno-hint">Format: 2024-00123-MN-0</span>
+                <input type="text" id="j-studno" name="student_number" autocomplete="off" required data-check="studno" aria-describedby="j-studno-hint j-studno-error">
+                <span class="error-msg" id="j-studno-error">Use the format 2024-00123-MN-0.</span>
+              </div>
+              <div class="field">
+                <label for="j-email">Email</label>
+                <input type="email" id="j-email" name="email" autocomplete="email" required aria-describedby="j-email-error">
+                <span class="error-msg" id="j-email-error">Enter an email like juan@gmail.com.</span>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="j-course">Course</label>
+                  <select id="j-course" name="course" required aria-describedby="j-course-error">
+                    <option value="">Choose your course</option>
+                    <option>BS Mechanical Engineering</option>
+                    <option>BS Electronics Engineering</option>
+                    <option>BS Industrial Engineering</option>
+                    <option>BS Electrical Engineering</option>
+                    <option>BS Computer Engineering</option>
+                    <option>Marketing</option>
+                    <option>Other program</option>
+                  </select>
+                  <span class="error-msg" id="j-course-error">Choose your course.</span>
+                </div>
+                <div class="field">
+                  <label for="j-year">Year and section</label>
+                  <span class="hint" id="j-year-hint">e.g. 1-2</span>
+                  <input type="text" id="j-year" name="year_section" required aria-describedby="j-year-hint j-year-error">
+                  <span class="error-msg" id="j-year-error">Enter your year and section.</span>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset id="committee-field" class="field" aria-describedby="committee-error">
+              <legend class="form-group-title">Preferred committee</legend>
+              <div class="choice-list">
+                <label class="choice"><input type="radio" name="committee" value="Finance and Operations" required> Finance and Operations</label>
+                <label class="choice"><input type="radio" name="committee" value="Internal Affairs" required> Internal Affairs</label>
+                <label class="choice"><input type="radio" name="committee" value="Innovation and Research" required> Innovation and Research</label>
+                <label class="choice"><input type="radio" name="committee" value="External Affairs" required> External Affairs</label>
+                <label class="choice"><input type="radio" name="committee" value="Creative Media and Design" required> Creative Media and Design</label>
+              </div>
+              <span class="error-msg" id="committee-error">Choose one committee. You can change later.</span>
+            </fieldset>
+
+            <fieldset>
+              <legend class="form-group-title">Why Hygears?</legend>
+              <div class="field">
+                <label for="j-reason">Reason for joining</label>
+                <span class="hint" id="j-reason-hint">A few sentences is enough. At least 20 characters.</span>
+                <textarea id="j-reason" name="reason" required minlength="20" aria-describedby="j-reason-hint j-reason-error"></textarea>
+                <span class="error-msg" id="j-reason-error">Write at least 20 characters about why you want to join.</span>
+              </div>
+            </fieldset>
+
+            <button class="btn btn-primary btn-block" type="submit">Apply to Hygears</button>
+          </form>
+
+          <div class="panel" id="join-success" hidden tabindex="-1">
+            <p class="status"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg> Application sent</p>
+            <h2>Thanks, <span id="join-first-name">future member</span>!</h2>
+            <p>The officers will review your application and email you at <strong id="join-email-out">your email</strong>.</p>
+            <ol class="route">
+        <li class="is-done">
+          <span class="stop-mark" aria-hidden="true"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></span>
+          <span class="stop-name">Send this form</span>
+          <span class="stop-state">Done</span>
+        </li>
+        <li class="is-current">
+          <span class="stop-mark" aria-hidden="true">2</span>
+          <span class="stop-name">Officers review</span>
+          <span class="stop-state">In review</span>
+        </li>
+        <li class="is-next">
+          <span class="stop-mark" aria-hidden="true">3</span>
+          <span class="stop-name">We email you</span>
+          <span class="stop-state">Next</span>
+        </li>
+            </ol>
+            <p class="footer-line">#GEARINGUpTowardExcellence</p>
+            <a class="btn btn-secondary" href="index.html">Back to home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===== Footer (same on every page; becomes footer.php later) ===== -->
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <img class="footer-logo" src="../assets/hygears-logo.png" alt="" width="48" height="48">
+        <p class="footer-name">PUP Hygears</p>
+        <p class="footer-line">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+        <p class="footer-line">#GEARINGUpTowardExcellence</p>
+      </div>
+      <div>
+        <h2 class="footer-h">Find us</h2>
+        <address>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</address>
+      </div>
+      <div>
+        <h2 class="footer-h">Contact</h2>
+        <ul class="footer-links">
+          <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+          <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap">
+      <p class="footer-base">Hygears Web Portal prototype. Items, requests and dates marked "Sample" are placeholders until the officers supply the real list.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

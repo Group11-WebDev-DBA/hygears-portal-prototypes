@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Officer dashboard | PUP Hygears</title>
+  <meta name="description" content="Hygears officer dashboard: approve reservations, track overdue items, review applications and stock.">
+  <link rel="icon" href="../assets/hygears-logo.png">
+  <!-- Fonts: Instrument Sans (all text) and JetBrains Mono (reference numbers). Falls back to Arial offline. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ===== Header (same on every page; becomes header.php later) ===== -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <!-- decorative: the name is written right next to the logo -->
+        <img src="../assets/hygears-logo.png" alt="" width="40" height="40">
+        <span>PUP Hygears</span>
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        <li><a href="track.html">Track Request</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="officer.html" class="nav-officer" aria-current="page">Officers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <!-- Step 1: sign-in card -->
+      <section class="signin" id="signin" aria-labelledby="signin-title">
+        <div class="panel panel-white">
+          <h1 id="signin-title">Officer sign-in</h1>
+          <p class="muted">For Hygears officers only. <span class="sample-tag">Prototype</span></p>
+          <form id="signin-form" novalidate>
+            <div class="form-alert" id="signin-alert" role="alert" tabindex="-1">
+              <p>Enter your email and password.</p>
+            </div>
+            <div class="field">
+              <label for="o-email">Officer email</label>
+              <input type="email" id="o-email" name="email" autocomplete="username" required aria-describedby="o-email-error">
+              <span class="error-msg" id="o-email-error">Enter your officer email.</span>
+            </div>
+            <div class="field">
+              <label for="o-pass">Password</label>
+              <input type="password" id="o-pass" name="password" autocomplete="current-password" required aria-describedby="o-pass-error">
+              <span class="error-msg" id="o-pass-error">Enter your password.</span>
+            </div>
+            <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+            <p class="small muted" style="margin-top: 1rem;">Prototype only: any email and password opens the sample dashboard. The real site checks accounts in PHP.</p>
+          </form>
+        </div>
+      </section>
+
+      <!-- Step 2: dashboard, shown after sign-in -->
+      <div id="dashboard" hidden>
+        <div class="dash-bar">
+          <h1 tabindex="-1" id="dash-title">Officer dashboard</h1>
+          <div class="btn-row">
+            <span class="sample-tag">Sample data</span>
+            <button type="button" class="btn btn-secondary btn-small" id="signout">Sign out</button>
+          </div>
+        </div>
+
+        <p class="visually-hidden" id="dash-announce" aria-live="polite"></p>
+
+        <ul class="dash-summary">
+          <li><a href="#pending"><strong id="count-pending">3</strong><span>Pending requests</span></a></li>
+          <li><a href="#overdue"><strong id="count-overdue">2</strong><span>Overdue items</span></a></li>
+          <li><a href="#applications"><strong id="count-apps">2</strong><span>New applications</span></a></li>
+          <li><a href="#stock"><strong id="count-out">2</strong><span>Items out of stock</span></a></li>
+        </ul>
+
+        <section class="dash-section" id="pending" aria-labelledby="pending-title">
+          <h2 id="pending-title">Pending requests</h2>
+          <table class="table" id="pending-table">
+            <thead><tr><th>Reference</th><th>Student</th><th>Item</th><th>Dates</th><th>Status</th><th><span class="visually-hidden">Actions</span></th></tr></thead>
+            <tbody>
+              <tr>
+                <td data-label="Reference"><span class="code">HYG-2026-0142</span></td>
+                <td data-label="Student">Juan Dela Cruz<br><span class="small muted">BSME 2-1</span></td>
+                <td data-label="Item">Soldering station &times; 1<br><span class="small muted">Wiring the dashboard</span></td>
+                <td data-label="Dates">Nov 25 to Nov 27</td>
+                <td data-label="Status" class="row-status"><span class="status"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 4.5V8l2.5 1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg> Pending</span></td>
+                <td class="actions">
+                  <button type="button" class="btn btn-primary btn-small" data-decide="Approved">Approve<span class="visually-hidden"> HYG-2026-0142</span></button>
+                  <button type="button" class="btn btn-secondary btn-small" data-decide="Declined">Decline<span class="visually-hidden"> HYG-2026-0142</span></button>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Reference"><span class="code">HYG-2026-0141</span></td>
+                <td data-label="Student">Maria Santos<br><span class="small muted">BSECE 3-2</span></td>
+                <td data-label="Item">Digital multimeter &times; 2<br><span class="small muted">Circuits lab project</span></td>
+                <td data-label="Dates">Nov 24 to Nov 26</td>
+                <td data-label="Status" class="row-status"><span class="status"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 4.5V8l2.5 1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg> Pending</span></td>
+                <td class="actions">
+                  <button type="button" class="btn btn-primary btn-small" data-decide="Approved">Approve<span class="visually-hidden"> HYG-2026-0141</span></button>
+                  <button type="button" class="btn btn-secondary btn-small" data-decide="Declined">Decline<span class="visually-hidden"> HYG-2026-0141</span></button>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Reference"><span class="code">HYG-2026-0140</span></td>
+                <td data-label="Student">Carlo Reyes<br><span class="small muted">BSIE 2-3</span></td>
+                <td data-label="Item">Zip ties pack &times; 3<br><span class="small muted">Cable routing on the Luna</span></td>
+                <td data-label="Dates">Nov 24 (consumable)</td>
+                <td data-label="Status" class="row-status"><span class="status"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 4.5V8l2.5 1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg> Pending</span></td>
+                <td class="actions">
+                  <button type="button" class="btn btn-primary btn-small" data-decide="Approved">Approve<span class="visually-hidden"> HYG-2026-0140</span></button>
+                  <button type="button" class="btn btn-secondary btn-small" data-decide="Declined">Decline<span class="visually-hidden"> HYG-2026-0140</span></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="dash-section" id="overdue" aria-labelledby="overdue-title">
+          <h2 id="overdue-title">Overdue items</h2>
+          <table class="table" id="overdue-table">
+            <thead><tr><th>Reference</th><th>Student</th><th>Item</th><th>Was due</th><th><span class="visually-hidden">Actions</span></th></tr></thead>
+            <tbody>
+              <tr>
+                <td data-label="Reference"><span class="code">HYG-2026-0122</span></td>
+                <td data-label="Student">Ana Lopez</td>
+                <td data-label="Item">Cordless drill</td>
+                <td data-label="Was due">Nov 18 <span class="small muted">(5 days late)</span></td>
+                <td class="actions">
+                  <button type="button" class="btn btn-secondary btn-small" data-returned>Mark returned<span class="visually-hidden"> HYG-2026-0122</span></button>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Reference"><span class="code">HYG-2026-0119</span></td>
+                <td data-label="Student">Mark Villanueva</td>
+                <td data-label="Item">Torque wrench</td>
+                <td data-label="Was due">Nov 20 <span class="small muted">(3 days late)</span></td>
+                <td class="actions">
+                  <button type="button" class="btn btn-secondary btn-small" data-returned>Mark returned<span class="visually-hidden"> HYG-2026-0119</span></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="dash-section" id="applications" aria-labelledby="apps-title">
+          <h2 id="apps-title">New applications</h2>
+          <table class="table" id="apps-table">
+            <thead><tr><th>Name</th><th>Course</th><th>Committee</th><th>Sent</th><th><span class="visually-hidden">Actions</span></th></tr></thead>
+            <tbody>
+              <tr>
+                <td data-label="Name">Bea Ramos</td>
+                <td data-label="Course">BS Computer Engineering 1-2</td>
+                <td data-label="Committee">Creative Media and Design</td>
+                <td data-label="Sent">Nov 22</td>
+                <td class="actions">
+                  <button type="button" class="btn btn-secondary btn-small" data-reviewed>Mark reviewed<span class="visually-hidden"> Bea Ramos</span></button>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Name">Josh Mendoza</td>
+                <td data-label="Course">BS Electrical Engineering 1-1</td>
+                <td data-label="Committee">Innovation and Research</td>
+                <td data-label="Sent">Nov 21</td>
+                <td class="actions">
+                  <button type="button" class="btn btn-secondary btn-small" data-reviewed>Mark reviewed<span class="visually-hidden"> Josh Mendoza</span></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="dash-section" id="stock" aria-labelledby="stock-title">
+          <h2 id="stock-title">Item stock</h2>
+          <table class="table">
+            <thead><tr><th>Item</th><th>Type</th><th>Available</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr>
+                <td data-label="Item">Digital multimeter</td>
+                <td data-label="Type">Tool</td>
+                <td data-label="Available">3 of 4</td>
+                <td data-label="Status"><span class="status"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg> OK</span></td>
+              </tr>
+              <tr>
+                <td data-label="Item">Soldering station</td>
+                <td data-label="Type">Tool</td>
+                <td data-label="Available">2 of 3</td>
+                <td data-label="Status"><span class="status"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg> OK</span></td>
+              </tr>
+              <tr>
+                <td data-label="Item">Cordless drill</td>
+                <td data-label="Type">Tool</td>
+                <td data-label="Available">1 of 2</td>
+                <td data-label="Status"><span class="status"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 4.5V8l2.5 1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg> Low</span></td>
+              </tr>
+              <tr>
+                <td data-label="Item">Torque wrench</td>
+                <td data-label="Type">Tool</td>
+                <td data-label="Available">0 of 1</td>
+                <td data-label="Status"><span class="status"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2.5"/></svg> Out</span></td>
+              </tr>
+              <tr>
+                <td data-label="Item">Wire crimper</td>
+                <td data-label="Type">Tool</td>
+                <td data-label="Available">2 of 2</td>
+                <td data-label="Status"><span class="status"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg> OK</span></td>
+              </tr>
+              <tr>
+                <td data-label="Item">Heat gun</td>
+                <td data-label="Type">Tool</td>
+                <td data-label="Available">1 of 1</td>
+                <td data-label="Status"><span class="status"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg> OK</span></td>
+              </tr>
+              <tr>
+                <td data-label="Item">Safety goggles</td>
+                <td data-label="Type">Tool</td>
+                <td data-label="Available">8 of 10</td>
+                <td data-label="Status"><span class="status"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg> OK</span></td>
+              </tr>
+              <tr>
+                <td data-label="Item">PLA filament 1kg</td>
+                <td data-label="Type">Consumable</td>
+                <td data-label="Available">4</td>
+                <td data-label="Status"><span class="status"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg> OK</span></td>
+              </tr>
+              <tr>
+                <td data-label="Item">Heat-shrink tubing pack</td>
+                <td data-label="Type">Consumable</td>
+                <td data-label="Available">6</td>
+                <td data-label="Status"><span class="status"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg> OK</span></td>
+              </tr>
+              <tr>
+                <td data-label="Item">Zip ties pack</td>
+                <td data-label="Type">Consumable</td>
+                <td data-label="Available">10</td>
+                <td data-label="Status"><span class="status"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg> OK</span></td>
+              </tr>
+              <tr>
+                <td data-label="Item">Electrical tape</td>
+                <td data-label="Type">Consumable</td>
+                <td data-label="Available">0</td>
+                <td data-label="Status"><span class="status"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2.5"/></svg> Out</span></td>
+              </tr>
+              <tr>
+                <td data-label="Item">Epoxy resin kit</td>
+                <td data-label="Type">Consumable</td>
+                <td data-label="Available">2</td>
+                <td data-label="Status"><span class="status"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 4.5V8l2.5 1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg> Low</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===== Footer (same on every page; becomes footer.php later) ===== -->
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <img class="footer-logo" src="../assets/hygears-logo.png" alt="" width="48" height="48">
+        <p class="footer-name">PUP Hygears</p>
+        <p class="footer-line">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+        <p class="footer-line">#GEARINGUpTowardExcellence</p>
+      </div>
+      <div>
+        <h2 class="footer-h">Find us</h2>
+        <address>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</address>
+      </div>
+      <div>
+        <h2 class="footer-h">Contact</h2>
+        <ul class="footer-links">
+          <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+          <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap">
+      <p class="footer-base">Hygears Web Portal prototype. Items, requests and dates marked "Sample" are placeholders until the officers supply the real list.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

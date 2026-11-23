@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apply to join: PUP Hygears</title>
+<meta name="description" content="Apply for membership in PUP Hygears and choose the committee you want to work in.">
+<link rel="icon" href="../assets/hygears-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="container site-head__bar">
+    <a class="brand" href="index.html" aria-label="PUP Hygears home"><img src="../assets/hygears-logo.png" width="222" height="224" alt="">PUP Hygears</a>
+    <nav class="nav" aria-label="Main">
+      <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="tools.html">Tools</a></li>
+          <li><a href="track.html">Track request</a></li>
+          <li><a href="join.html" aria-current="page">Join</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="officer.html">Officers</a></li>
+      </ul>
+    </nav>
+    <form class="search" action="tools.html" method="get" role="search">
+      <label class="visually-hidden" for="nav-q">Search tools and consumables</label>
+      <input class="input input--sm" id="nav-q" name="q" type="search" placeholder="Search tools" autocomplete="off">
+      <button class="btn btn--sm" type="submit">Search</button>
+    </form>
+  </div>
+</header>
+<main id="main">
+  <section class="page-head">
+    <div class="container">
+      <h1>Apply to join Hygears</h1>
+      <p class="lead">Tell the officers who you are and which committee you want.</p>
+    </div>
+  </section>
+
+  <section class="section--s">
+    <div class="container split split--7-5 split--top">
+      <form class="panel form" id="join-form" data-endpoint="" novalidate>
+        <div class="form__row">
+          <div class="field">
+          <label for="j-name">Full name</label>
+          <input class="input" id="j-name" name="full_name" autocomplete="name" required data-error="Enter your full name." aria-describedby="j-name-error">
+          
+          <p class="error" id="j-name-error" aria-live="polite"></p>
+        </div>
+          <div class="field">
+          <label for="j-sn">Student number</label>
+          <input class="input" id="j-sn" name="student_number" required data-error="Enter your student number as printed on your ID." aria-describedby="j-sn-hint j-sn-error">
+          <p class="hint" id="j-sn-hint">As printed on your PUP ID.</p>
+          <p class="error" id="j-sn-error" aria-live="polite"></p>
+        </div>
+        </div>
+        <div class="form__row">
+          <div class="field">
+          <label for="j-email">Email</label>
+          <input class="input" id="j-email" name="email" type="email" autocomplete="email" required data-error="Enter an email like name@example.com." aria-describedby="j-email-error">
+          
+          <p class="error" id="j-email-error" aria-live="polite"></p>
+        </div>
+          <div class="field">
+          <label for="j-year">Year and section</label>
+          <input class="input" id="j-year" name="year_section" required data-error="Enter your year and section, like 2-1." aria-describedby="j-year-hint j-year-error">
+          <p class="hint" id="j-year-hint">For example, 2-1.</p>
+          <p class="error" id="j-year-error" aria-live="polite"></p>
+        </div>
+        </div>
+        <div class="form__row">
+          <div class="field">
+          <label for="j-course">Course</label>
+          <select class="input" id="j-course" name="course" required data-error="Choose your course." aria-describedby="j-course-error"><option value="">Choose your course</option><option>Mechanical Engineering</option><option>Electronics and Communications Engineering</option><option>Industrial Engineering</option><option>Electrical Engineering</option><option>Computer Engineering</option><option>Marketing</option><option>Other program</option></select>
+          
+          <p class="error" id="j-course-error" aria-live="polite"></p>
+        </div>
+          <div class="field">
+          <label for="j-committee">Preferred committee</label>
+          <select class="input" id="j-committee" name="committee" required data-error="Choose the committee you would like to join." aria-describedby="j-committee-error"><option value="">Choose a committee</option><option>Finance and Operations</option><option>Internal Affairs</option><option>Innovation and Research</option><option>External Affairs</option><option>Creative Media and Design</option></select>
+          
+          <p class="error" id="j-committee-error" aria-live="polite"></p>
+        </div>
+        </div>
+        <div class="field">
+          <label for="j-reason">Why do you want to join?</label>
+          <textarea class="input" id="j-reason" name="reason" required minlength="20" data-error="Write a sentence or two, at least 20 characters." aria-describedby="j-reason-hint j-reason-error"></textarea>
+          <p class="hint" id="j-reason-hint">A sentence or two is enough.</p>
+          <p class="error" id="j-reason-error" aria-live="polite"></p>
+        </div>
+        <div class="actions"><button class="btn btn--primary" type="submit">Apply</button></div>
+        <p class="form__status" id="join-status" role="status"></p>
+      </form>
+
+      <aside class="stack">
+        <h2>Who joins</h2>
+        <dl class="dl">
+          <div><dt>Programs</dt><dd>Mechanical Engineering, Electronics and Communications Engineering, Industrial Engineering, Electrical Engineering, Computer Engineering, Marketing</dd></div>
+          <div><dt>Committees</dt><dd>Finance and Operations, Internal Affairs, Innovation and Research, External Affairs, Creative Media and Design</dd></div>
+          <div><dt>After you apply</dt><dd>Officers review each application.</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+</main>
+<footer class="site-foot">
+  <div class="container">
+    <p class="site-foot__mark"><img src="../assets/hygears-logo.png" width="222" height="224" alt="">PUP Hygears</p>
+    <p class="site-foot__line">“We don’t just build vehicles, we build people to help us build the future!” #GEARINGUpTowardExcellence</p>
+    <div class="site-foot__cols">
+      <div><h2>Pages</h2><ul><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li></ul></div>
+      <div><h2>Contact</h2><ul>
+        <li><a href="https://www.instagram.com/puphygears">Instagram: puphygears</a></li>
+        <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+        <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+      </ul></div>
+      <div><h2>Where</h2><p>Polytechnic University of the Philippines, Sta. Mesa, Manila</p></div>
+    </div>
+    <p class="site-foot__legal">A student research organization of PUP. Prototype for review: sample data is marked as sample.</p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

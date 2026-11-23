@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join Hygears | PUP Hygears</title>
+<meta name="description" content="Apply to become a member of PUP Hygears.">
+<link rel="icon" href="../assets/hygears-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="index.html">
+      <img src="../assets/hygears-logo.png" alt="" width="44" height="44">
+      <span class="brand-name">PUP Hygears<span class="brand-sub">Web Portal</span></span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Menu</span></button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track Request</a></li><li><a href="join.html" aria-current="page">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer</a></li></ul>
+    </nav>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="page-head page-head--photo">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">ASCEND 2026 &bull; Membership</p>
+      <h1>Be the missing piece.</h1>
+      <p class="lead">Hygears trains students through real work on an energy-efficient vehicle. Any PUP student can apply.</p>
+    </div>
+    <figure class="frame"><img src="../assets/luna-night.png" alt="The Luna electric vehicle parked at night at PUP" width="1440" height="653"></figure>
+  </div>
+</section>
+<section class="section section--tight">
+  <div class="wrap join-grid">
+    <aside class="card committees" aria-labelledby="com-h">
+      <h2 id="com-h" class="h3">Committees</h2>
+      <ul class="list"><li>Finance and Operations</li><li>Internal Affairs</li><li>Innovation and Research</li><li>External Affairs</li><li>Creative Media and Design</li></ul>
+      <p class="hint">Right now ASCEND 2026 applications also run through a Google Form on the Hygears Facebook page.</p>
+    </aside>
+    <div>
+      <div class="error-summary" id="j-summary" tabindex="-1" role="alert" hidden></div>
+      <form class="card form" id="join-form" novalidate>
+        <h2 class="h3">Application form</h2>
+        <p class="form-note">All fields are required.</p>
+        <div class="form-grid"><div class="field">
+  <label for="j-name">Full name</label>
+  <input id="j-name" name="name" type="text" autocomplete="name" required minlength="3" aria-describedby="j-name-err" data-required="Enter your full name.">
+  <p class="error" id="j-name-err"></p>
+</div><div class="field">
+  <label for="j-sn">Student number</label>
+  <p class="hint" id="j-sn-hint">As on your PUP ID, like 2025-12345-MN-0</p><input id="j-sn" name="sn" type="text" required pattern="\d{4}-\d{5}-[A-Za-z]{2}-\d" autocapitalize="characters" aria-describedby="j-sn-hint j-sn-err" data-required="Enter your student number." data-pattern="Use the format on your PUP ID, like 2025-12345-MN-0.">
+  <p class="error" id="j-sn-err"></p>
+</div><div class="field">
+  <label for="j-email">Email</label>
+  <p class="hint" id="j-email-hint">The officers reply here</p><input id="j-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="j-email-hint j-email-err" data-required="Enter your email." data-type="Enter an email like juan@gmail.com.">
+  <p class="error" id="j-email-err"></p>
+</div><div class="field">
+  <label for="j-course">Course</label>
+  <select id="j-course" name="course" required aria-describedby="j-course-err" data-required="Choose your course."><option value="">Choose your course</option><option>Mechanical Engineering</option><option>Electronics and Communications Engineering</option><option>Industrial Engineering</option><option>Electrical Engineering</option><option>Computer Engineering</option><option>Marketing</option><option>Other</option></select>
+  <p class="error" id="j-course-err"></p>
+</div><div class="field">
+  <label for="j-year">Year and section</label>
+  <p class="hint" id="j-year-hint">Like 1-2</p><input id="j-year" name="year" type="text" required aria-describedby="j-year-hint j-year-err" data-required="Enter your year and section.">
+  <p class="error" id="j-year-err"></p>
+</div><div class="field">
+  <label for="j-committee">Preferred committee</label>
+  <p class="hint" id="j-committee-hint">You can change this later</p><select id="j-committee" name="committee" required aria-describedby="j-committee-hint j-committee-err" data-required="Choose a committee, or Not sure yet."><option value="">Choose a committee</option><option>Finance and Operations</option><option>Internal Affairs</option><option>Innovation and Research</option><option>External Affairs</option><option>Creative Media and Design</option><option>Not sure yet</option></select>
+  <p class="error" id="j-committee-err"></p>
+</div><div class="field field--full">
+  <label for="j-reason">Why do you want to join?</label>
+  <p class="hint" id="j-reason-hint">A few sentences is enough</p><textarea id="j-reason" name="reason" rows="5" required minlength="20" aria-describedby="j-reason-hint j-reason-err" data-required="Tell us why you want to join." data-short="Write a bit more (at least 20 characters)."></textarea>
+  <p class="error" id="j-reason-err"></p>
+</div></div>
+        <button class="btn btn--primary btn--big btn--block" type="submit">Apply</button>
+      </form>
+      <div class="success card" id="join-done" tabindex="-1" hidden>
+        <h2>Application sent</h2>
+        <p id="join-summary">Thanks for applying. The officers will email you about the next step.</p>
+        <a class="btn" href="index.html">Back to home</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand"><img src="../assets/hygears-logo.png" alt="PUP Hygears logo" width="56" height="56"> PUP Hygears</p>
+      <p class="signoff">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+      <p class="tag">#GEARINGUpTowardExcellence</p>
+    </div>
+    <div>
+      <h2 class="footer-h">Find us</h2>
+      <p>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</p>
+      <ul class="footer-links">
+        <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+        <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUP Hygears</a></li>
+        <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+        <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer-h">Pages</h2>
+      <ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track Request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer</a></li></ul>
+    </div>
+  </div>
+  <div class="wrap footer-base"><p>A student research organization of the Polytechnic University of the Philippines. Prototype: sample data is labelled.</p></div>
+</footer>
+<p id="live" class="sr-only" role="status" aria-live="polite"></p>
+</body>
+</html>

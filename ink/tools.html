@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tools and consumables, PUP Hygears</title>
+<meta name="description" content="Search the Hygears tools and consumables, see what is available now and reserve an item.">
+<link rel="icon" href="../assets/hygears-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700&amp;family=IBM+Plex+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<!-- Adds a "js" class so the CSS knows JavaScript is on (used by the phone menu) -->
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <nav class="pill" aria-label="Main">
+      <a class="brand" href="index.html"><img src="../assets/hygears-logo.png" width="40" height="40" alt="">PUP Hygears</a>
+      <button class="btn btn--quiet btn--sm menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <ul class="nav-links" id="nav-links"><li><a href="index.html">Home</a></li><li><a href="tools.html" aria-current="page">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a class="nav-officer" href="officer.html">Officer</a></li></ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-head">
+  <div class="container">
+    <h1>Tools and consumables</h1>
+    <p class="lead">See what is on the shelf now, then reserve it.</p>
+    <p class="note">Sample list. The real inventory comes from the org.</p>
+  </div>
+</section>
+
+<section class="catalogue" aria-label="Catalogue">
+  <div class="container">
+    <form class="toolbar" role="search" id="filters">
+      <div class="field"><label for="q">Search items</label><input id="q" name="q" type="search" autocomplete="off" aria-describedby="q-hint q-err"><p class="hint" id="q-hint">Try drill, tape or filament.</p><p class="error" id="q-err" aria-live="polite"></p></div>
+      <div class="field"><label for="cat">Category</label><select id="cat" name="cat" aria-describedby="cat-hint cat-err"><option value="">All categories</option><option>3D printing</option><option>Adhesives</option><option>Electrical</option><option>Fastening</option><option>Hand tools</option><option>Power tools</option><option>Safety</option></select><p class="hint" id="cat-hint"></p><p class="error" id="cat-err" aria-live="polite"></p></div>
+      <fieldset class="seg field"><legend>Type</legend>
+        <input type="radio" name="type" id="t-all" value="" checked><label for="t-all">All</label>
+        <input type="radio" name="type" id="t-tool" value="tool"><label for="t-tool">Tools</label>
+        <input type="radio" name="type" id="t-con" value="consumable"><label for="t-con">Consumables</label>
+      </fieldset>
+    </form>
+    <p class="note" id="count" aria-live="polite">Showing all 12 items.</p>
+    <table class="table table--thumbs" id="items">
+      <caption class="visually-hidden">Tools and consumables, with how many are available now</caption>
+      <thead><tr><th scope="col"><span class="visually-hidden">Photo</span></th><th scope="col">Item</th><th scope="col">Category</th><th scope="col">Type</th><th scope="col" class="num">Available now</th><th scope="col">State</th><th scope="col"><span class="visually-hidden">Action</span></th></tr></thead>
+      <tbody>
+        <tr data-name="digital multimeter" data-category="Electrical" data-type="tool">
+          <td class="cell-thumb"><div class="thumb">Photo<br>to come</div></td>
+          <td><span class="name">Digital multimeter</span></td><td data-label="Category">Electrical</td><td data-label="Type">Tool, returned</td>
+          <td class="num" data-label="Available now"><span class="mono">3</span></td><td><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Available</span></td><td class="act"><a class="btn btn--quiet btn--sm" href="?item=dmm#reserve" data-reserve="dmm" aria-label="Reserve Digital multimeter">Reserve</a></td></tr><tr data-name="soldering station" data-category="Electrical" data-type="tool">
+          <td class="cell-thumb"><div class="thumb">Photo<br>to come</div></td>
+          <td><span class="name">Soldering station</span></td><td data-label="Category">Electrical</td><td data-label="Type">Tool, returned</td>
+          <td class="num" data-label="Available now"><span class="mono">0</span></td><td><span class="tag tag--out"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>None left</span></td><td class="act"><span class="note">Back when returned</span></td></tr><tr data-name="cordless drill" data-category="Power tools" data-type="tool">
+          <td class="cell-thumb"><div class="thumb">Photo<br>to come</div></td>
+          <td><span class="name">Cordless drill</span></td><td data-label="Category">Power tools</td><td data-label="Type">Tool, returned</td>
+          <td class="num" data-label="Available now"><span class="mono">2</span></td><td><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Available</span></td><td class="act"><a class="btn btn--quiet btn--sm" href="?item=drill#reserve" data-reserve="drill" aria-label="Reserve Cordless drill">Reserve</a></td></tr><tr data-name="torque wrench" data-category="Hand tools" data-type="tool">
+          <td class="cell-thumb"><div class="thumb">Photo<br>to come</div></td>
+          <td><span class="name">Torque wrench</span></td><td data-label="Category">Hand tools</td><td data-label="Type">Tool, returned</td>
+          <td class="num" data-label="Available now"><span class="mono">1</span></td><td><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Available</span></td><td class="act"><a class="btn btn--quiet btn--sm" href="?item=torque#reserve" data-reserve="torque" aria-label="Reserve Torque wrench">Reserve</a></td></tr><tr data-name="wire crimper" data-category="Hand tools" data-type="tool">
+          <td class="cell-thumb"><div class="thumb">Photo<br>to come</div></td>
+          <td><span class="name">Wire crimper</span></td><td data-label="Category">Hand tools</td><td data-label="Type">Tool, returned</td>
+          <td class="num" data-label="Available now"><span class="mono">2</span></td><td><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Available</span></td><td class="act"><a class="btn btn--quiet btn--sm" href="?item=crimper#reserve" data-reserve="crimper" aria-label="Reserve Wire crimper">Reserve</a></td></tr><tr data-name="heat gun" data-category="Power tools" data-type="tool">
+          <td class="cell-thumb"><div class="thumb">Photo<br>to come</div></td>
+          <td><span class="name">Heat gun</span></td><td data-label="Category">Power tools</td><td data-label="Type">Tool, returned</td>
+          <td class="num" data-label="Available now"><span class="mono">0</span></td><td><span class="tag tag--out"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>None left</span></td><td class="act"><span class="note">Back when returned</span></td></tr><tr data-name="safety goggles" data-category="Safety" data-type="tool">
+          <td class="cell-thumb"><div class="thumb">Photo<br>to come</div></td>
+          <td><span class="name">Safety goggles</span></td><td data-label="Category">Safety</td><td data-label="Type">Tool, returned</td>
+          <td class="num" data-label="Available now"><span class="mono">6</span></td><td><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Available</span></td><td class="act"><a class="btn btn--quiet btn--sm" href="?item=goggles#reserve" data-reserve="goggles" aria-label="Reserve Safety goggles">Reserve</a></td></tr><tr data-name="pla filament 1kg" data-category="3D printing" data-type="consumable">
+          <td class="cell-thumb"><div class="thumb">Photo<br>to come</div></td>
+          <td><span class="name">PLA filament 1kg</span></td><td data-label="Category">3D printing</td><td data-label="Type">Consumable, used up</td>
+          <td class="num" data-label="Available now"><span class="mono">4</span></td><td><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Available</span></td><td class="act"><a class="btn btn--quiet btn--sm" href="?item=pla#reserve" data-reserve="pla" aria-label="Reserve PLA filament 1kg">Reserve</a></td></tr><tr data-name="heat-shrink tubing pack" data-category="Electrical" data-type="consumable">
+          <td class="cell-thumb"><div class="thumb">Photo<br>to come</div></td>
+          <td><span class="name">Heat-shrink tubing pack</span></td><td data-label="Category">Electrical</td><td data-label="Type">Consumable, used up</td>
+          <td class="num" data-label="Available now"><span class="mono">5</span></td><td><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Available</span></td><td class="act"><a class="btn btn--quiet btn--sm" href="?item=shrink#reserve" data-reserve="shrink" aria-label="Reserve Heat-shrink tubing pack">Reserve</a></td></tr><tr data-name="zip ties pack" data-category="Fastening" data-type="consumable">
+          <td class="cell-thumb"><div class="thumb">Photo<br>to come</div></td>
+          <td><span class="name">Zip ties pack</span></td><td data-label="Category">Fastening</td><td data-label="Type">Consumable, used up</td>
+          <td class="num" data-label="Available now"><span class="mono">8</span></td><td><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Available</span></td><td class="act"><a class="btn btn--quiet btn--sm" href="?item=zip#reserve" data-reserve="zip" aria-label="Reserve Zip ties pack">Reserve</a></td></tr><tr data-name="electrical tape" data-category="Electrical" data-type="consumable">
+          <td class="cell-thumb"><div class="thumb">Photo<br>to come</div></td>
+          <td><span class="name">Electrical tape</span></td><td data-label="Category">Electrical</td><td data-label="Type">Consumable, used up</td>
+          <td class="num" data-label="Available now"><span class="mono">7</span></td><td><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Available</span></td><td class="act"><a class="btn btn--quiet btn--sm" href="?item=tape#reserve" data-reserve="tape" aria-label="Reserve Electrical tape">Reserve</a></td></tr><tr data-name="epoxy resin kit" data-category="Adhesives" data-type="consumable">
+          <td class="cell-thumb"><div class="thumb">Photo<br>to come</div></td>
+          <td><span class="name">Epoxy resin kit</span></td><td data-label="Category">Adhesives</td><td data-label="Type">Consumable, used up</td>
+          <td class="num" data-label="Available now"><span class="mono">2</span></td><td><span class="tag tag--in"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Available</span></td><td class="act"><a class="btn btn--quiet btn--sm" href="?item=epoxy#reserve" data-reserve="epoxy" aria-label="Reserve Epoxy resin kit">Reserve</a></td></tr>
+      </tbody>
+    </table>
+    <div class="table-empty" id="no-match" hidden>
+      <p><strong>No items match your search.</strong></p>
+      <p>Check the spelling, or clear the filters to see the whole shelf.</p>
+      <p><button class="btn btn--quiet btn--sm" type="button" id="clear-filters">Clear filters</button></p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--band reserve" id="reserve" aria-labelledby="reserve-title">
+  <div class="container split">
+    <div class="section-head">
+      <h2 id="reserve-title">Reserve an item</h2>
+      <p class="lead">An officer reviews every request before pickup.</p>
+      <p class="note">Tools come back by the return date. Consumables are used up, so they need no return date.</p>
+    </div>
+    <div>
+      <form class="slip" id="reserve-form" data-endpoint="" novalidate aria-labelledby="reserve-title">
+        <div class="form-grid">
+          <div class="field"><label for="r-name">Full name</label><input id="r-name" name="name" type="text" autocomplete="name" required data-req="Enter your full name." aria-describedby="r-name-hint r-name-err"><p class="hint" id="r-name-hint">As it appears on your PUP ID.</p><p class="error" id="r-name-err" aria-live="polite"></p></div>
+          <div class="field"><label for="r-sn">Student number</label><input id="r-sn" name="student_number" type="text" required pattern="[0-9]{4}-[0-9]{5}-[A-Za-z]{2}-[0-9]" data-req="Enter your student number." data-bad="Write it like 2023-00123-MN-0." aria-describedby="r-sn-hint r-sn-err"><p class="hint" id="r-sn-hint">Like 2023-00123-MN-0.</p><p class="error" id="r-sn-err" aria-live="polite"></p></div>
+          <div class="field"><label for="r-email">Email</label><input id="r-email" name="email" type="email" autocomplete="email" required data-req="Enter your email." data-bad="That email looks incomplete. Write it as name@example.com." aria-describedby="r-email-hint r-email-err"><p class="hint" id="r-email-hint">Updates on your request go here.</p><p class="error" id="r-email-err" aria-live="polite"></p></div>
+          <div class="field"><label for="r-course">Course and section</label><input id="r-course" name="course_section" type="text" required data-req="Enter your course and section." aria-describedby="r-course-hint r-course-err"><p class="hint" id="r-course-hint">Like BSME 3-1.</p><p class="error" id="r-course-err" aria-live="polite"></p></div>
+          <div class="field"><label for="r-item">Item</label><select id="r-item" name="item" required data-req="Choose an item." aria-describedby="r-item-hint r-item-err"><option value="">Choose an item</option><option value="dmm" data-available="3" data-type="tool">Digital multimeter (3 available)</option><option value="solder" data-available="0" data-type="tool" disabled>Soldering station (none left)</option><option value="drill" data-available="2" data-type="tool">Cordless drill (2 available)</option><option value="torque" data-available="1" data-type="tool">Torque wrench (1 available)</option><option value="crimper" data-available="2" data-type="tool">Wire crimper (2 available)</option><option value="heatgun" data-available="0" data-type="tool" disabled>Heat gun (none left)</option><option value="goggles" data-available="6" data-type="tool">Safety goggles (6 available)</option><option value="pla" data-available="4" data-type="consumable">PLA filament 1kg (4 available)</option><option value="shrink" data-available="5" data-type="consumable">Heat-shrink tubing pack (5 available)</option><option value="zip" data-available="8" data-type="consumable">Zip ties pack (8 available)</option><option value="tape" data-available="7" data-type="consumable">Electrical tape (7 available)</option><option value="epoxy" data-available="2" data-type="consumable">Epoxy resin kit (2 available)</option></select><p class="hint" id="r-item-hint">Items with none left cannot be picked.</p><p class="error" id="r-item-err" aria-live="polite"></p></div>
+          <div class="field"><label for="r-qty">Quantity</label><input id="r-qty" name="qty" type="number" min="1" value="1" inputmode="numeric" required data-req="Enter how many you need." data-bad="Enter a number from 1 to what is available." aria-describedby="r-qty-hint r-qty-err"><p class="hint" id="r-qty-hint">Pick an item first.</p><p class="error" id="r-qty-err" aria-live="polite"></p></div>
+          <div class="field field--full"><label for="r-purpose">Purpose</label><textarea id="r-purpose" name="purpose" required minlength="10" data-req="Tell the officers what it is for." data-bad="Add a little more detail, at least 10 characters." aria-describedby="r-purpose-hint r-purpose-err"></textarea><p class="hint" id="r-purpose-hint">Which project is it for? One or two sentences.</p><p class="error" id="r-purpose-err" aria-live="polite"></p></div>
+          <div class="field"><label for="r-pickup">Pickup date</label><input id="r-pickup" name="pickup" type="date" required data-req="Choose a pickup date." data-bad="Choose today or a later date." aria-describedby="r-pickup-hint r-pickup-err"><p class="hint" id="r-pickup-hint">Today or later.</p><p class="error" id="r-pickup-err" aria-live="polite"></p></div>
+          <div class="field"><label for="r-return">Return date</label><input id="r-return" name="return" type="date" required data-req="Choose a return date." data-bad="The return date must be on or after the pickup date." aria-describedby="r-return-hint r-return-err"><p class="hint" id="r-return-hint">Tools only. On or after the pickup date.</p><p class="error" id="r-return-err" aria-live="polite"></p></div>
+        </div>
+        <div class="form-foot"><button class="btn" type="submit">Send request</button><p class="note">This prototype sends nothing.</p></div>
+      </form>
+      <div class="slip" id="reserve-done" tabindex="-1" hidden></div>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="colophon">
+      <img src="../assets/hygears-logo.png" width="48" height="48" alt="PUP Hygears logo">
+      <div><p><strong>PUP Hygears</strong> is a student research organization at the Polytechnic University of the Philippines, Sta. Mesa, Manila. Find us on <a href="https://www.instagram.com/puphygears/">Instagram</a>, <a href="https://www.facebook.com/PUPHygears">Facebook</a> and <a href="https://x.com/pup_hygears">X</a>, or write to <a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a>. Photographs by PUP Hygears.</p><p class="tagline">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p></div>
+      <ul class="foot-links"><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer desk</a></li></ul>
+    </div>
+    <p class="legal">A prototype of the Hygears Web Portal, made for a Web Development final project in 2026. Sample data is marked where it appears.</p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

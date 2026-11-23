@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Officer desk | PUP Hygears</title>
+<meta name="description" content="Officer dashboard for Hygears reservations, overdue items, applications and stock.">
+<link rel="icon" href="img/hg-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');</script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap head-row">
+    <a class="brand" href="index.html">
+      <img src="img/hg-mark.png" alt="" width="40" height="40">
+      <span>PUP Hygears</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i data-icon="menu"></i>Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        <li><a href="track.html">Track request</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="officer.html" aria-current="page">Officer</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <section id="login" class="login" aria-labelledby="login-title">
+    <div class="page-head"><h1 id="login-title">Officer sign-in</h1></div>
+    <form class="form form-panel" id="login-form" novalidate>
+      <div class="error-summary" hidden><p class="es-title" tabindex="-1"><i data-icon="alert"></i>Please fix these</p><ul></ul></div>
+      <div class="field">
+        <label for="o-user">Username</label>
+        <input id="o-user" type="text" autocomplete="username" aria-describedby="o-user-error">
+        <p class="error" id="o-user-error"></p>
+      </div>
+      <div class="field">
+        <label for="o-pass">Password</label>
+        <input id="o-pass" type="password" autocomplete="current-password" aria-describedby="o-pass-error">
+        <p class="error" id="o-pass-error"></p>
+      </div>
+      <button class="btn btn--primary" type="submit">Sign in</button>
+      <p class="hint">Prototype: any username and password opens the sample desk. The real site checks officer accounts on the server.</p>
+    </form>
+  </section>
+
+  <section id="desk" hidden aria-labelledby="desk-title">
+    <div class="page-head">
+      <div class="desk-head">
+        <h1 id="desk-title" tabindex="-1">Officer desk</h1>
+        <button class="btn btn--ghost btn--small" type="button" id="sign-out">Sign out</button>
+      </div>
+      <span class="sample-flag"><i data-icon="info"></i>Sample data</span>
+      <ul class="jump" aria-label="Jump to">
+        <li><a href="#pending-title"><b id="n-pending">3</b> pending</a></li>
+        <li><a href="#overdue-title"><b>2</b> overdue</a></li>
+        <li><a href="#apps-title"><b>2</b> new applications</a></li>
+        <li><a href="#stock-title"><b>2</b> out of stock</a></li>
+      </ul>
+      <p class="live-msg" id="desk-msg" role="status" aria-live="polite"></p>
+    </div>
+
+    <section class="section section--first" aria-labelledby="pending-title">
+      <h2 id="pending-title">Pending reservations</h2>
+      <table class="table">
+        <thead><tr><th scope="col">Reference</th><th scope="col">Student</th><th scope="col">Item</th><th scope="col">Dates</th><th scope="col">Purpose</th><th scope="col">Action</th></tr></thead>
+        <tbody id="pending-body">
+          <tr data-ref="HYG-2026-0137">
+            <td data-label="Reference"><strong class="num">HYG-2026-0137</strong></td>
+            <td data-label="Student"><span>Sample student A<br><span class="small muted num">2024-01234-MN-0</span></span></td>
+            <td data-label="Item">1 × Soldering station</td>
+            <td data-label="Dates">Nov 24 to Nov 26</td>
+            <td data-label="Purpose">Motor controller board</td>
+            <td class="actions-cell"><div class="actions">
+              <button class="btn btn--primary btn--small" type="button" data-act="approve" aria-label="Approve HYG-2026-0137">Approve</button>
+              <button class="btn btn--ghost btn--small" type="button" data-act="decline" aria-label="Decline HYG-2026-0137">Decline</button>
+            </div></td>
+          </tr>
+          <tr data-ref="HYG-2026-0139">
+            <td data-label="Reference"><strong class="num">HYG-2026-0139</strong></td>
+            <td data-label="Student"><span>Sample student B<br><span class="small muted num">2023-04567-MN-0</span></span></td>
+            <td data-label="Item">1 × Cordless drill</td>
+            <td data-label="Dates">Nov 25 to Nov 25</td>
+            <td data-label="Purpose">Chassis bracket holes</td>
+            <td class="actions-cell"><div class="actions">
+              <button class="btn btn--primary btn--small" type="button" data-act="approve" aria-label="Approve HYG-2026-0139">Approve</button>
+              <button class="btn btn--ghost btn--small" type="button" data-act="decline" aria-label="Decline HYG-2026-0139">Decline</button>
+            </div></td>
+          </tr>
+          <tr data-ref="HYG-2026-0140">
+            <td data-label="Reference"><strong class="num">HYG-2026-0140</strong></td>
+            <td data-label="Student"><span>Sample student C<br><span class="small muted num">2025-07890-MN-0</span></span></td>
+            <td data-label="Item">2 × Heat-shrink tubing pack</td>
+            <td data-label="Dates">Nov 24, consumable</td>
+            <td data-label="Purpose">Wiring harness insulation</td>
+            <td class="actions-cell"><div class="actions">
+              <button class="btn btn--primary btn--small" type="button" data-act="approve" aria-label="Approve HYG-2026-0140">Approve</button>
+              <button class="btn btn--ghost btn--small" type="button" data-act="decline" aria-label="Decline HYG-2026-0140">Decline</button>
+            </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section" aria-labelledby="overdue-title">
+      <h2 id="overdue-title">Overdue items</h2>
+      <table class="table">
+        <thead><tr><th scope="col">Reference</th><th scope="col">Student</th><th scope="col">Item</th><th scope="col">Was due</th><th scope="col">Action</th></tr></thead>
+        <tbody>
+          <tr data-ref="HYG-2026-0118">
+            <td data-label="Reference"><strong class="num">HYG-2026-0118</strong></td>
+            <td data-label="Student">Sample student D</td>
+            <td data-label="Item">1 × Heat gun</td>
+            <td data-label="Was due"><span class="chip chip--overdue"><i data-icon="alert"></i>Nov 18, 4 days late</span></td>
+            <td class="actions-cell"><div class="actions"><button class="btn btn--ghost btn--small" type="button" data-act="returned" aria-label="Mark HYG-2026-0118 returned">Mark returned</button></div></td>
+          </tr>
+          <tr data-ref="HYG-2026-0124">
+            <td data-label="Reference"><strong class="num">HYG-2026-0124</strong></td>
+            <td data-label="Student">Sample student E</td>
+            <td data-label="Item">1 × Torque wrench</td>
+            <td data-label="Was due"><span class="chip chip--overdue"><i data-icon="alert"></i>Nov 20, 2 days late</span></td>
+            <td class="actions-cell"><div class="actions"><button class="btn btn--ghost btn--small" type="button" data-act="returned" aria-label="Mark HYG-2026-0124 returned">Mark returned</button></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section" aria-labelledby="apps-title">
+      <h2 id="apps-title">New applications</h2>
+      <table class="table">
+        <thead><tr><th scope="col">Applicant</th><th scope="col">Course</th><th scope="col">Committee</th><th scope="col">Reason</th><th scope="col">Action</th></tr></thead>
+        <tbody>
+          <tr data-name="Sample applicant F">
+            <td data-label="Applicant">Sample applicant F</td>
+            <td data-label="Course">BS Electrical Engineering 1-3</td>
+            <td data-label="Committee">Innovation and Research</td>
+            <td data-label="Reason">Wants to learn battery and motor design on a real vehicle.</td>
+            <td class="actions-cell"><div class="actions"><button class="btn btn--ghost btn--small" type="button" data-act="reviewed" aria-label="Mark application from Sample applicant F reviewed">Mark reviewed</button></div></td>
+          </tr>
+          <tr data-name="Sample applicant G">
+            <td data-label="Applicant">Sample applicant G</td>
+            <td data-label="Course">BS Business Administration, Marketing 2-1</td>
+            <td data-label="Committee">Creative Media and Design</td>
+            <td data-label="Reason">Makes pubmats for a class org and wants to help with ASCEND posts.</td>
+            <td class="actions-cell"><div class="actions"><button class="btn btn--ghost btn--small" type="button" data-act="reviewed" aria-label="Mark application from Sample applicant G reviewed">Mark reviewed</button></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section" aria-labelledby="stock-title">
+      <div class="section-head"><h2 id="stock-title">Stock on the board</h2><p class="small muted">Dashed outline = none left.</p></div>
+      <div class="board"><ul class="board-grid board-grid--wide" id="stock-board" aria-label="Item stock"></ul></div>
+    </section>
+  </section>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <img src="img/hg-mark.png" alt="PUP Hygears logo" width="48" height="48">
+          <strong>PUP Hygears</strong>
+        </div>
+        <p class="signoff">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership
+          <span class="tag">#GEARINGUpTowardExcellence</span></p>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul class="foot-list">
+          <li><i data-icon="mail"></i><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><i data-icon="link"></i><a href="https://www.facebook.com/PUPHygears">Facebook: PUP Hygears</a></li>
+          <li><i data-icon="link"></i><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><i data-icon="link"></i><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Find us</h2>
+        <ul class="foot-list">
+          <li><i data-icon="pin"></i><span>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-note">A student research organization of the Polytechnic University of the Philippines. Prototype: items, requests and officer data shown are samples.</p>
+  </div>
+</footer>
+</body>
+</html>

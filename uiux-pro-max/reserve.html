@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reserve an Item | PUP Hygears</title>
+<meta name="description" content="Reserve a tool or consumable from PUP Hygears.">
+<link rel="icon" href="../assets/hygears-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="index.html">
+      <img src="../assets/hygears-logo.png" alt="" width="44" height="44">
+      <span class="brand-name">PUP Hygears<span class="brand-sub">Web Portal</span></span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Menu</span></button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul><li><a href="index.html">Home</a></li><li><a href="tools.html" aria-current="page">Tools</a></li><li><a href="track.html">Track Request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer</a></li></ul>
+    </nav>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow"><a class="text-link" href="tools.html">Tools</a> / Reserve</p>
+    <h1>Reserve an item</h1>
+    <p class="lead">Fill this in once. You get a reference number right away to track your request.</p>
+  </div>
+</section>
+<section class="section section--tight">
+  <div class="wrap narrow">
+    <div class="error-summary" id="r-summary" tabindex="-1" role="alert" hidden></div>
+    <form class="card form" id="reserve-form" novalidate>
+      <p class="form-note">All fields are required.</p>
+      <div class="form-grid"><div class="field">
+  <label for="r-name">Full name</label>
+  <input id="r-name" name="name" type="text" autocomplete="name" required minlength="3" aria-describedby="r-name-err" data-required="Enter your full name.">
+  <p class="error" id="r-name-err"></p>
+</div><div class="field">
+  <label for="r-sn">Student number</label>
+  <p class="hint" id="r-sn-hint">As on your PUP ID, like 2024-12345-MN-0</p><input id="r-sn" name="sn" type="text" required pattern="\d{4}-\d{5}-[A-Za-z]{2}-\d" autocapitalize="characters" aria-describedby="r-sn-hint r-sn-err" data-required="Enter your student number." data-pattern="Use the format on your PUP ID, like 2024-12345-MN-0.">
+  <p class="error" id="r-sn-err"></p>
+</div><div class="field">
+  <label for="r-email">Email</label>
+  <p class="hint" id="r-email-hint">We send updates about your request here</p><input id="r-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="r-email-hint r-email-err" data-required="Enter your email." data-type="Enter an email like juan@gmail.com.">
+  <p class="error" id="r-email-err"></p>
+</div><div class="field">
+  <label for="r-course">Course and section</label>
+  <p class="hint" id="r-course-hint">Like BSME 2-1</p><input id="r-course" name="course" type="text" required aria-describedby="r-course-hint r-course-err" data-required="Enter your course and section.">
+  <p class="error" id="r-course-err"></p>
+</div><div class="field field--full">
+  <label for="r-item">Item</label>
+  <p class="hint" id="r-item-hint">Items with none left can't be chosen</p><select id="r-item" name="item" required aria-describedby="r-item-hint r-item-err" data-required="Choose the item you want to borrow."><option value="">Choose an item</option><option value="multimeter" data-available="3" data-type="tool" data-unit="units">Digital multimeter (3 available)</option><option value="soldering" data-available="2" data-type="tool" data-unit="units">Soldering station (2 available)</option><option value="drill" data-available="1" data-type="tool" data-unit="units">Cordless drill (1 available)</option><option value="torque" data-available="1" data-type="tool" data-unit="units">Torque wrench (1 available)</option><option value="crimper" data-available="2" data-type="tool" data-unit="units">Wire crimper (2 available)</option><option value="heatgun" data-available="0" data-type="tool" data-unit="units" disabled>Heat gun (0 available)</option><option value="goggles" data-available="6" data-type="tool" data-unit="pairs">Safety goggles (6 available)</option><option value="pla" data-available="4" data-type="consumable" data-unit="spools">PLA filament, 1 kg (4 available)</option><option value="shrink" data-available="5" data-type="consumable" data-unit="packs">Heat-shrink tubing pack (5 available)</option><option value="zipties" data-available="8" data-type="consumable" data-unit="packs">Zip ties pack (8 available)</option><option value="tape" data-available="7" data-type="consumable" data-unit="rolls">Electrical tape (7 available)</option><option value="epoxy" data-available="0" data-type="consumable" data-unit="kits" disabled>Epoxy resin kit (0 available)</option></select>
+  <p class="error" id="r-item-err"></p>
+</div><div class="field">
+  <label for="r-qty">Quantity</label>
+  <p class="hint" id="r-qty-hint">Choose an item first</p><input id="r-qty" name="qty" type="number" min="1" value="1" inputmode="numeric" required aria-describedby="r-qty-hint r-qty-err" data-required="Enter how many you need.">
+  <p class="error" id="r-qty-err"></p>
+</div><div class="field">
+  <label for="r-pickup">Pickup date</label>
+  <p class="hint" id="r-pickup-hint">Today or later</p><input id="r-pickup" name="pickup" type="date" required aria-describedby="r-pickup-hint r-pickup-err" data-required="Choose a pickup date.">
+  <p class="error" id="r-pickup-err"></p>
+</div><div class="field" id="return-field"><label for="r-return">Return date</label><p class="hint" id="r-return-hint">On or after the pickup date</p><input id="r-return" name="return" type="date" required aria-describedby="r-return-hint r-return-err" data-required="Choose a return date."><p class="error" id="r-return-err"></p></div><div class="field field--full">
+  <label for="r-purpose">Purpose</label>
+  <p class="hint" id="r-purpose-hint">What project or class it's for</p><textarea id="r-purpose" name="purpose" rows="3" required minlength="10" aria-describedby="r-purpose-hint r-purpose-err" data-required="Tell us what you need it for." data-short="Add a little more detail (at least 10 characters)."></textarea>
+  <p class="error" id="r-purpose-err"></p>
+</div></div>
+      <button class="btn btn--primary btn--big btn--block" type="submit">Reserve</button>
+    </form>
+    <div class="success card" id="reserve-done" tabindex="-1" hidden>
+      <h2>Request sent</h2>
+      <p>Keep this reference number. The officers review requests and you'll see the result on Track Request.</p>
+      <div class="plate plate--ref"><span class="plate-label">Reference number</span><span class="plate-num" id="ref-out">HYG-2026-0142</span><span class="status status--pending"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Pending</span></div>
+      <p id="ref-summary"></p>
+      <div class="actions">
+        <a class="btn btn--primary" id="ref-track" href="track.html"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Track Request</a>
+        <a class="btn" href="tools.html">Back to tools</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand"><img src="../assets/hygears-logo.png" alt="PUP Hygears logo" width="56" height="56"> PUP Hygears</p>
+      <p class="signoff">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+      <p class="tag">#GEARINGUpTowardExcellence</p>
+    </div>
+    <div>
+      <h2 class="footer-h">Find us</h2>
+      <p>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</p>
+      <ul class="footer-links">
+        <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+        <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUP Hygears</a></li>
+        <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+        <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer-h">Pages</h2>
+      <ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track Request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer</a></li></ul>
+    </div>
+  </div>
+  <div class="wrap footer-base"><p>A student research organization of the Polytechnic University of the Philippines. Prototype: sample data is labelled.</p></div>
+</footer>
+<p id="live" class="sr-only" role="status" aria-live="polite"></p>
+</body>
+</html>

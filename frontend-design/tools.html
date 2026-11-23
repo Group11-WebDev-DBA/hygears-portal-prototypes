@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tools and consumables | PUP Hygears</title>
+<meta name="description" content="Search the Hygears tools and consumables, see how many are available, and reserve one.">
+<link rel="icon" href="../assets/hygears-logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap masthead__bar">
+    <a class="brand" href="index.html"><img src="../assets/hygears-logo.png" width="40" height="40" alt="">PUP Hygears</a>
+    <nav class="nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Home</a></li>
+        <li><a href="tools.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></svg>Tools</a></li>
+        <li><a href="track.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>Track</a></li>
+        <li><a href="join.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M19 8v6M16 11h6"/></svg>Join</a></li>
+        <li><a href="about.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>About</a></li>
+      </ul>
+    </nav>
+    <a class="officer-link" href="officer.html">Officer sign in</a>
+  </div>
+</header>
+<main id="main">
+
+<div class="page-head">
+  <div class="wrap">
+    <h1>Tools and consumables</h1>
+    <p class="lede">Dark tool: you can reserve it. Pale outline: all out right now.</p>
+  </div>
+</div>
+<section class="section section--board" aria-labelledby="wall-title">
+  <div class="wrap">
+    <h2 class="visually-hidden" id="wall-title">The tool wall</h2>
+    <form class="filters" id="filter-form" role="search">
+      <div class="field">
+        <label for="search">Search items</label>
+        <input class="input" id="search" type="search" placeholder="Try soldering, tape or drill" autocomplete="off">
+      </div>
+      <div class="field">
+        <span id="cat-label" class="chips-label">Category</span>
+        <div class="chips" id="cat-chips" role="group" aria-labelledby="cat-label">
+          <button type="button" class="chip" data-value="All" aria-pressed="true">All</button>
+          <button type="button" class="chip" data-value="Electrical" aria-pressed="false">Electrical</button>
+          <button type="button" class="chip" data-value="Hand tools" aria-pressed="false">Hand tools</button>
+          <button type="button" class="chip" data-value="Power tools" aria-pressed="false">Power tools</button>
+          <button type="button" class="chip" data-value="Safety" aria-pressed="false">Safety</button>
+          <button type="button" class="chip" data-value="Materials" aria-pressed="false">Materials</button>
+        </div>
+      </div>
+      <div class="field">
+        <span id="type-label" class="chips-label">Type</span>
+        <div class="chips" id="type-chips" role="group" aria-labelledby="type-label">
+          <button type="button" class="chip" data-value="all" aria-pressed="true">Everything</button>
+          <button type="button" class="chip" data-value="tool" aria-pressed="false">Tools (return)</button>
+          <button type="button" class="chip" data-value="consumable" aria-pressed="false">Consumables (keep)</button>
+        </div>
+      </div>
+    </form>
+    <div class="section__head mb-3">
+      <p class="results-note" id="results-note" role="status" aria-live="polite">12 items shown</p>
+      <span class="sample">Sample list and counts</span>
+    </div>
+    <ul class="board" id="board" aria-label="Tools and consumables"></ul>
+  </div>
+</section>
+
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <p class="footer__brand"><img src="../assets/hygears-logo.png" width="44" height="44" alt="">PUP Hygears</p>
+        <p>Engineering Innovation • Research • Technology • Leadership</p>
+        <p>#GEARINGUpTowardExcellence</p>
+      </div>
+      <div>
+        <p class="footer__label">Find us</p>
+        <address>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</address>
+      </div>
+      <div>
+        <p class="footer__label">Message us</p>
+        <ul class="contact-list">
+          <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUP Hygears</a></li>
+          <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer__note">Prototype of the Hygears Web Portal. Items, counts and requests marked "sample" are placeholders until the officers send the real list.</p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

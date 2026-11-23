@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Track a Request | PUP Hygears</title>
+  <meta name="description" content="Check if your Hygears reservation is pending, approved or declined.">
+  <link rel="icon" href="../assets/hygears-logo.png">
+  <!-- Fonts: Barlow Semi Condensed (headings) and Barlow (body). Arial is the offline fallback. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ===== Header (same on every page; header.php in the real site) ===== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <img src="../assets/hygears-logo.png" alt="" width="40" height="40">
+      <span>PUP Hygears</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        <li><a href="track.html" aria-current="page">Track Request</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="officer.html">Officer</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="container">
+      <h1>Track a request</h1>
+      <p>Enter the reference number you got after reserving.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container split">
+
+      <!-- Lookup form (app.js checks it against sample requests) -->
+      <div>
+        <form class="form" id="track-form" novalidate>
+          <div class="field">
+            <label for="ref">Reference number</label>
+            <input type="text" id="ref" name="ref" placeholder="HYG-2026-0142" autocapitalize="characters" aria-describedby="ref-hint ref-error">
+            <p class="hint" id="ref-hint">Format: HYG, the year, then 4 digits.</p>
+            <p class="error" id="ref-error" role="alert"></p>
+          </div>
+          <button class="btn btn-full" type="submit">Track request</button>
+        </form>
+
+        <div class="card card-gray try-card">
+          <h2 class="h3-size">Try a sample</h2>
+          <p class="hint">These three show each possible status.</p>
+          <div class="sample-btns">
+            <button class="btn-ghost btn-sm" type="button" data-ref="HYG-2026-0142">0142 &middot; Pending</button>
+            <button class="btn-ghost btn-sm" type="button" data-ref="HYG-2026-0137">0137 &middot; Approved</button>
+            <button class="btn-ghost btn-sm" type="button" data-ref="HYG-2026-0129">0129 &middot; Declined</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Result card, filled in by app.js -->
+      <div aria-live="polite">
+        <div class="card" id="track-result" hidden>
+          <p class="kicker">Request <span id="r-ref">HYG-2026-0142</span></p>
+          <h2 id="r-title">Soldering station</h2>
+          <p><span class="status" id="r-status">&#9675; Pending</span></p>
+
+          <ol class="progress" aria-label="Request progress">
+            <li id="p1">Sent</li>
+            <li id="p2">Reviewed</li>
+            <li id="p3">Ready for pickup</li>
+          </ol>
+
+          <p id="r-message">An officer hasn't reviewed this yet.</p>
+
+          <dl class="details">
+            <div><dt>Quantity</dt><dd id="r-qty">1</dd></div>
+            <div><dt>Pickup date</dt><dd id="r-pickup">-</dd></div>
+            <div><dt>Return date</dt><dd id="r-return">-</dd></div>
+          </dl>
+        </div>
+
+        <div class="card card-gray" id="track-empty">
+          <h2 class="h3-size">Your result shows here</h2>
+          <p class="muted">Lost your number? Email <a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a> with your name and the item.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== Footer (same on every page; footer.php in the real site) ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../assets/hygears-logo.png" alt="" width="48" height="48">
+          <strong>PUP Hygears</strong>
+        </div>
+        <p class="descriptor">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+        <p>Polytechnic University of the Philippines, Sta. Mesa, Manila<br>
+        College of Engineering and Architecture Building, NDC Compound, Anonas St.</p>
+        <p>#GEARINGUpTowardExcellence</p>
+      </div>
+      <div>
+        <h2>Portal</h2>
+        <ul class="footer-links">
+          <li><a href="tools.html">Tools and consumables</a></li>
+          <li><a href="track.html">Track a request</a></li>
+          <li><a href="join.html">Apply to join</a></li>
+          <li><a href="about.html#rules">Borrowing rules</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul class="footer-links">
+          <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+          <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-bottom">Student prototype for the Hygears Web Portal. Item lists and records shown here are sample data.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

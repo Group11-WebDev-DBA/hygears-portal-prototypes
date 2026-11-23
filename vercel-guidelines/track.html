@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Track Request | PUP Hygears</title>
+  <meta name="description" content="Check whether your PUP Hygears reservation is pending, approved or declined.">
+  <meta name="theme-color" content="#FFFFFF">
+  <link rel="icon" href="../assets/hygears-logo.png">
+  <!-- Fonts: Geist for text, Geist Mono for numbers and codes (falls back to system fonts offline) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600&amp;family=Geist+Mono:wght@400;600&amp;display=swap">
+  <link rel="stylesheet" href="style.css">
+  <!-- Tells the CSS that JavaScript is on, so the phone menu can start closed -->
+  <script>document.documentElement.className = "js";</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to Main Content</a>
+
+<!-- Site header: the same on every page (header.php in the real site) -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <img src="../assets/hygears-logo.png" width="36" height="36" alt="">
+      <span translate="no">PUP Hygears</span>
+    </a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Menu</span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        <li><a href="track.html" aria-current="page">Track Request</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="about.html">About &amp; Contact</a></li>
+        <li class="nav-officer"><a href="officer.html">Officer Sign In</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="container">
+      <h1>Track Request</h1>
+      <p>Enter the reference number you got when you reserved.</p>
+    </div>
+  </div>
+
+  <div class="container section" style="padding-top: 2rem">
+    <form class="form track-form" id="track-form" novalidate>
+      <div class="field" style="margin-bottom: 0">
+        <label for="ref">Reference number</label>
+        <p class="hint" id="ref-hint">Starts with HYG, like HYG-2026-0142.</p>
+        <div class="search-row">
+          <input type="text" id="ref" name="ref" required autocomplete="off" spellcheck="false" autocapitalize="characters"
+                 placeholder="e.g. HYG-2026-0142&hellip;" aria-describedby="ref-hint ref-error"
+                 data-required-msg="Enter your reference number."
+                 data-error="That doesn&rsquo;t look like a reference number. Use the format HYG-2026-0142.">
+          <button class="button" type="submit">Track</button>
+        </div>
+        <p class="field-error" id="ref-error"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></svg><span></span></p>
+      </div>
+      <div class="samples">
+        <span class="small muted" style="width:100%">Sample requests to try:</span>
+        <a href="track.html?ref=HYG-2026-0142"><span class="ref">0142</span> Pending</a>
+        <a href="track.html?ref=HYG-2026-0139"><span class="ref">0139</span> Approved</a>
+        <a href="track.html?ref=HYG-2026-0127"><span class="ref">0127</span> Declined</a>
+      </div>
+    </form>
+
+    <div id="track-result" aria-live="polite" style="margin-top: 2rem"></div>
+  </div>
+</main>
+
+<!-- Site footer: the same on every page (footer.php in the real site) -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand">
+          <img src="../assets/hygears-logo.png" width="40" height="40" alt="" loading="lazy">
+          <span translate="no">PUP Hygears</span>
+        </p>
+        <p>Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+        <p translate="no">#GEARINGUpTowardExcellence</p>
+        <p>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</p>
+      </div>
+      <div>
+        <h2>Portal</h2>
+        <ul>
+          <li><a href="tools.html">Tools &amp; Consumables</a></li>
+          <li><a href="track.html">Track Request</a></li>
+          <li><a href="join.html">Join Hygears</a></li>
+          <li><a href="officer.html">Officer Sign In</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+          <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-note">Prototype for the Web Development final project. Item counts, requests and names marked &ldquo;sample&rdquo; are placeholders until the officers send the real list.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

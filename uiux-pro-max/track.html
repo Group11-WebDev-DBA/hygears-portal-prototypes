@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Track Request | PUP Hygears</title>
+<meta name="description" content="Check the status of your PUP Hygears reservation.">
+<link rel="icon" href="../assets/hygears-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="index.html">
+      <img src="../assets/hygears-logo.png" alt="" width="44" height="44">
+      <span class="brand-name">PUP Hygears<span class="brand-sub">Web Portal</span></span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Menu</span></button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html" aria-current="page">Track Request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer</a></li></ul>
+    </nav>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Track Request</p>
+    <h1>Where's my request?</h1>
+    <p class="lead">Type the reference number you got after reserving.</p>
+  </div>
+</section>
+<section class="section section--tight">
+  <div class="wrap narrow">
+    <form class="card form" id="track-form" novalidate>
+      <div class="field field--full">
+  <label for="t-ref">Reference number</label>
+  <p class="hint" id="t-ref-hint">Like HYG-2026-0142</p><input id="t-ref" name="ref" type="text" required pattern="[Hh][Yy][Gg]-\d{4}-\d{4}" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-describedby="t-ref-hint t-ref-err" data-required="Enter your reference number." data-pattern="Reference numbers look like HYG-2026-0142.">
+  <p class="error" id="t-ref-err"></p>
+</div>
+      <button class="btn btn--primary btn--big btn--block" type="submit" data-busy="Checking..."><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Track Request</button>
+    </form>
+    <div id="track-out" aria-live="polite"></div>
+  </div>
+</section>
+<section class="section section--alt" aria-labelledby="ex-h">
+  <div class="wrap">
+    <div class="section-head"><h2 id="ex-h">What each status means</h2><span class="sticker">Sample requests</span></div>
+    <div class="results">
+      <article class="card result">
+  <div class="plate plate--ref"><span class="plate-label">Reference number</span><span class="plate-num">HYG-2026-0137</span><span class="status status--pending"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Pending</span></div>
+  <p class="result-item">Digital multimeter &times; 1</p>
+  <p>An officer hasn't reviewed it yet. Check again later.</p>
+</article>
+      <article class="card result">
+  <div class="plate plate--ref"><span class="plate-label">Reference number</span><span class="plate-num">HYG-2026-0142</span><span class="status status--approved"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Approved</span></div>
+  <p class="result-item">Soldering station &times; 1</p>
+  <p>Pick it up on your pickup date at the Hygears area. Bring your PUP ID.</p>
+</article>
+      <article class="card result">
+  <div class="plate plate--ref"><span class="plate-label">Reference number</span><span class="plate-num">HYG-2026-0129</span><span class="status status--declined"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg>Declined</span></div>
+  <p class="result-item">Heat gun &times; 1</p>
+  <p>Not available on those dates. Try other dates or another item.</p>
+</article>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand"><img src="../assets/hygears-logo.png" alt="PUP Hygears logo" width="56" height="56"> PUP Hygears</p>
+      <p class="signoff">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+      <p class="tag">#GEARINGUpTowardExcellence</p>
+    </div>
+    <div>
+      <h2 class="footer-h">Find us</h2>
+      <p>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</p>
+      <ul class="footer-links">
+        <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+        <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUP Hygears</a></li>
+        <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+        <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer-h">Pages</h2>
+      <ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track Request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer</a></li></ul>
+    </div>
+  </div>
+  <div class="wrap footer-base"><p>A student research organization of the Polytechnic University of the Philippines. Prototype: sample data is labelled.</p></div>
+</footer>
+<p id="live" class="sr-only" role="status" aria-live="polite"></p>
+</body>
+</html>

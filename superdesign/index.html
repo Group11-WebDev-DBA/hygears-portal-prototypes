@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home | PUP Hygears</title>
+  <meta name="description" content="Borrow workshop tools and join PUP Hygears, the student research organization behind the Luna electric vehicles.">
+  <link rel="icon" href="../assets/hygears-logo.png">
+  <!-- Fonts: Barlow Semi Condensed (headings) and Barlow (body). Arial is the offline fallback. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ===== Header (same on every page; header.php in the real site) ===== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <img src="../assets/hygears-logo.png" alt="" width="40" height="40">
+      <span>PUP Hygears</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        <li><a href="track.html">Track Request</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="officer.html">Officer</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <!-- ===== Hero: dark band with the Luna photo ===== -->
+  <section class="band-dark" aria-labelledby="hero-title">
+    <div class="hero">
+      <div class="hero-photo">
+        <img src="../assets/luna-night.png" alt="A Hygears Luna electric car parked at night by the PUP Lagoon sign" width="1440" height="653">
+      </div>
+      <div class="hero-text">
+        <p class="kicker">PUP Hygears &middot; Sta. Mesa, Manila</p>
+        <h1 id="hero-title">Borrow the right tool. Build with the team behind Luna.</h1>
+        <p class="lead">Reserve workshop tools and consumables online, then track your request. Or apply to join the student research organization that builds energy-efficient electric vehicles for the Shell Eco-marathon.</p>
+        <div class="btn-row">
+          <a class="btn" href="tools.html">Find a tool</a>
+          <a class="btn-on-dark" href="join.html">Apply to join</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Available now: quick search + a few items ===== -->
+  <section class="section section-gray" aria-labelledby="now-title">
+    <div class="container">
+      <div class="section-top">
+        <h2 id="now-title">Available now</h2>
+        <a href="tools.html">See all 12 items</a>
+      </div>
+
+      <form class="field" action="tools.html" method="get" role="search">
+        <label for="home-search">Search tools and consumables</label>
+        <div class="search-row">
+          <input type="search" id="home-search" name="q" placeholder="e.g. soldering, multimeter, filament">
+          <button class="btn-ghost" type="submit">Search</button>
+        </div>
+      </form>
+
+      <p class="hint legend-hint">Each battery shows units on the shelf: filled cells are in, empty cells are borrowed. Sample stock.</p>
+      <ul class="quick-list">
+        <li>
+          <p class="quick-name">Soldering station <span>Electrical &middot; Tool</span></p>
+          <div class="stock"><span class="cells" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span>2 of 3 available</div>
+          <a class="btn btn-sm" href="reserve.html?item=soldering-station">Reserve <span class="sr-only">soldering station</span></a>
+        </li>
+        <li>
+          <p class="quick-name">Digital multimeter <span>Electrical &middot; Tool</span></p>
+          <div class="stock"><span class="cells" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>3 of 4 available</div>
+          <a class="btn btn-sm" href="reserve.html?item=digital-multimeter">Reserve <span class="sr-only">digital multimeter</span></a>
+        </li>
+        <li>
+          <p class="quick-name">PLA filament 1kg <span>Fabrication &middot; Consumable</span></p>
+          <div class="stock"><span class="cells" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>3 of 5 in stock</div>
+          <a class="btn btn-sm" href="reserve.html?item=pla-filament">Reserve <span class="sr-only">PLA filament</span></a>
+        </li>
+        <li>
+          <p class="quick-name">Torque wrench <span>Hand tools &middot; Tool</span></p>
+          <div class="stock stock-none"><span class="cells" aria-hidden="true"><i></i><i></i></span>None left right now</div>
+          <span class="btn-off btn-sm">Out of stock</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== How borrowing works: three cells that fill up ===== -->
+  <section class="section" aria-labelledby="how-title">
+    <div class="container">
+      <h2 id="how-title">How borrowing works</h2>
+      <ol class="steps">
+        <li class="step">
+          <span class="step-cell on" aria-hidden="true">1</span>
+          <div><h3>Reserve</h3><p>Pick an item, choose your pickup date and send the form. You get a reference number.</p></div>
+        </li>
+        <li class="step">
+          <span class="step-cell on" aria-hidden="true">2</span>
+          <div><h3>Wait for approval</h3><p>An officer approves or declines it. Check anytime on <a href="track.html">Track Request</a>.</p></div>
+        </li>
+        <li class="step">
+          <span class="step-cell on" aria-hidden="true">3</span>
+          <div><h3>Pick up and return</h3><p>Collect it at the workshop. Return tools by the return date; consumables are yours to use up.</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== Announcements + Join ===== -->
+  <section class="section section-gray" aria-labelledby="news-title">
+    <div class="container">
+      <div class="section-top">
+        <h2 id="news-title">Latest from Hygears</h2>
+        <a href="https://www.facebook.com/PUPHygears">More on Facebook</a>
+      </div>
+      <ul class="news">
+        <li>
+          <p class="kicker">Recruitment</p>
+          <h3>ASCEND 2026 is open</h3>
+          <p>Find your missing piece. Hygears is looking for new members for its five committees.</p>
+          <p><span class="slot">Deadline: officers to post</span></p>
+          <a href="join.html">Apply to join</a>
+        </li>
+        <li>
+          <p class="kicker">Event</p>
+          <h3>PHYNIX 2026 Research Workshop</h3>
+          <p>The org's research workshop for this school year.</p>
+          <p><span class="slot">Date and venue: officers to post</span></p>
+        </li>
+        <li>
+          <p class="kicker">Org news</p>
+          <h3>General Assembly: The Force Awakens</h3>
+          <p>"Refining Our Legacy", the assembly that opened the year for members.</p>
+          <p><span class="slot">Photos: pubmat slot</span></p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="join-title">
+    <div class="container split split-wide">
+      <div>
+        <p class="kicker">Membership</p>
+        <h2 id="join-title">We don't just build vehicles, we build people.</h2>
+        <p>Members come from Mechanical, Electronics and Communications, Industrial, Electrical and Computer Engineering, and Marketing. Pick the committee you want to grow in when you apply.</p>
+      </div>
+      <div class="card card-gray">
+        <h3>Ready to join?</h3>
+        <p>Seven short fields, no account needed.</p>
+        <a class="btn btn-full" href="join.html">Apply to join</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== Footer (same on every page; footer.php in the real site) ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../assets/hygears-logo.png" alt="" width="48" height="48">
+          <strong>PUP Hygears</strong>
+        </div>
+        <p class="descriptor">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+        <p>Polytechnic University of the Philippines, Sta. Mesa, Manila<br>
+        College of Engineering and Architecture Building, NDC Compound, Anonas St.</p>
+        <p>#GEARINGUpTowardExcellence</p>
+      </div>
+      <div>
+        <h2>Portal</h2>
+        <ul class="footer-links">
+          <li><a href="tools.html">Tools and consumables</a></li>
+          <li><a href="track.html">Track a request</a></li>
+          <li><a href="join.html">Apply to join</a></li>
+          <li><a href="about.html#rules">Borrowing rules</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul class="footer-links">
+          <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+          <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-bottom">Student prototype for the Hygears Web Portal. Item lists and records shown here are sample data.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

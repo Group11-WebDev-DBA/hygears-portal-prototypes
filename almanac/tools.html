@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tools and consumables: PUP Hygears</title>
+<meta name="description" content="Search the Hygears workshop list, see what is available now and reserve a tool or consumable.">
+<link rel="icon" href="../assets/hygears-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="container site-head__bar">
+    <a class="brand" href="index.html" aria-label="PUP Hygears home"><img src="../assets/hygears-logo.png" width="222" height="224" alt="">PUP Hygears</a>
+    <nav class="nav" aria-label="Main">
+      <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="tools.html" aria-current="page">Tools</a></li>
+          <li><a href="track.html">Track request</a></li>
+          <li><a href="join.html">Join</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="officer.html">Officers</a></li>
+      </ul>
+    </nav>
+    <form class="search" action="tools.html" method="get" role="search">
+      <label class="visually-hidden" for="nav-q">Search tools and consumables</label>
+      <input class="input input--sm" id="nav-q" name="q" type="search" placeholder="Search tools" autocomplete="off">
+      <button class="btn btn--sm" type="submit">Search</button>
+    </form>
+  </div>
+</header>
+<main id="main">
+  <section class="page-head">
+    <div class="container">
+      <h1>Tools and consumables</h1>
+      <p class="lead">Search the workshop list, see what is available now, and reserve it.</p>
+    </div>
+  </section>
+
+  <section class="section--s">
+    <div class="container">
+      <div class="sheet" id="catalog">
+        <form class="filters" id="f-form" role="search">
+          <div class="field">
+            <label for="f-q">Search by name</label>
+            <input class="input" id="f-q" name="q" type="search" autocomplete="off" placeholder="multimeter, filament">
+          </div>
+          <div class="field">
+            <label for="f-cat">Category</label>
+            <select class="input" id="f-cat" name="category">
+              <option value="">All categories</option>
+              <option>Electrical</option><option>Fabrication</option><option>Hand tools</option><option>Power tools</option><option>Safety</option>
+            </select>
+          </div>
+          <fieldset class="seg">
+            <legend>Type</legend>
+            <input type="radio" name="type" id="t-all" value="all" checked><label for="t-all">All</label>
+            <input type="radio" name="type" id="t-tool" value="tool"><label for="t-tool">Tools</label>
+            <input type="radio" name="type" id="t-cons" value="consumable"><label for="t-cons">Consumables</label>
+          </fieldset>
+        </form>
+        <table class="table table--stack table--hover">
+          <caption><span class="sheet__title">Workshop list</span> <span class="muted small" id="catalog-count" aria-live="polite">Showing 12 of 12 items</span></caption>
+          <thead><tr><th scope="col">Photo</th><th scope="col">Item</th><th scope="col">Category</th><th scope="col">Type</th><th scope="col" class="num">Available now</th><th scope="col"><span class="visually-hidden">Action</span></th></tr></thead>
+          <tbody>
+            <tr data-name="digital multimeter" data-cat="Electrical" data-type="tool"><td><span class="thumb" aria-hidden="true">photo</span></td><td class="item">Digital multimeter</td><td data-label="Category">Electrical</td><td data-label="Type">Tool</td><td class="num" data-label="Available now">4</td><td class="act"><a class="btn btn--sm" href="reserve.html?item=digital-multimeter">Reserve</a></td></tr>
+            <tr data-name="soldering station" data-cat="Electrical" data-type="tool"><td><span class="thumb" aria-hidden="true">photo</span></td><td class="item">Soldering station</td><td data-label="Category">Electrical</td><td data-label="Type">Tool</td><td class="num" data-label="Available now">2</td><td class="act"><a class="btn btn--sm" href="reserve.html?item=soldering-station">Reserve</a></td></tr>
+            <tr data-name="cordless drill" data-cat="Power tools" data-type="tool"><td><span class="thumb" aria-hidden="true">photo</span></td><td class="item">Cordless drill</td><td data-label="Category">Power tools</td><td data-label="Type">Tool</td><td class="num" data-label="Available now">0</td><td class="act"><button class="btn btn--sm" type="button" disabled>None left</button></td></tr>
+            <tr data-name="torque wrench" data-cat="Hand tools" data-type="tool"><td><span class="thumb" aria-hidden="true">photo</span></td><td class="item">Torque wrench</td><td data-label="Category">Hand tools</td><td data-label="Type">Tool</td><td class="num" data-label="Available now">3</td><td class="act"><a class="btn btn--sm" href="reserve.html?item=torque-wrench">Reserve</a></td></tr>
+            <tr data-name="wire crimper" data-cat="Electrical" data-type="tool"><td><span class="thumb" aria-hidden="true">photo</span></td><td class="item">Wire crimper</td><td data-label="Category">Electrical</td><td data-label="Type">Tool</td><td class="num" data-label="Available now">5</td><td class="act"><a class="btn btn--sm" href="reserve.html?item=wire-crimper">Reserve</a></td></tr>
+            <tr data-name="heat gun" data-cat="Power tools" data-type="tool"><td><span class="thumb" aria-hidden="true">photo</span></td><td class="item">Heat gun</td><td data-label="Category">Power tools</td><td data-label="Type">Tool</td><td class="num" data-label="Available now">1</td><td class="act"><a class="btn btn--sm" href="reserve.html?item=heat-gun">Reserve</a></td></tr>
+            <tr data-name="safety goggles" data-cat="Safety" data-type="tool"><td><span class="thumb" aria-hidden="true">photo</span></td><td class="item">Safety goggles</td><td data-label="Category">Safety</td><td data-label="Type">Tool</td><td class="num" data-label="Available now">12</td><td class="act"><a class="btn btn--sm" href="reserve.html?item=safety-goggles">Reserve</a></td></tr>
+            <tr data-name="pla filament, 1 kg" data-cat="Fabrication" data-type="consumable"><td><span class="thumb" aria-hidden="true">photo</span></td><td class="item">PLA filament, 1 kg</td><td data-label="Category">Fabrication</td><td data-label="Type">Consumable</td><td class="num" data-label="Available now">6</td><td class="act"><a class="btn btn--sm" href="reserve.html?item=pla-filament">Reserve</a></td></tr>
+            <tr data-name="heat-shrink tubing pack" data-cat="Electrical" data-type="consumable"><td><span class="thumb" aria-hidden="true">photo</span></td><td class="item">Heat-shrink tubing pack</td><td data-label="Category">Electrical</td><td data-label="Type">Consumable</td><td class="num" data-label="Available now">8</td><td class="act"><a class="btn btn--sm" href="reserve.html?item=heat-shrink">Reserve</a></td></tr>
+            <tr data-name="zip ties pack" data-cat="Fabrication" data-type="consumable"><td><span class="thumb" aria-hidden="true">photo</span></td><td class="item">Zip ties pack</td><td data-label="Category">Fabrication</td><td data-label="Type">Consumable</td><td class="num" data-label="Available now">15</td><td class="act"><a class="btn btn--sm" href="reserve.html?item=zip-ties">Reserve</a></td></tr>
+            <tr data-name="electrical tape" data-cat="Electrical" data-type="consumable"><td><span class="thumb" aria-hidden="true">photo</span></td><td class="item">Electrical tape</td><td data-label="Category">Electrical</td><td data-label="Type">Consumable</td><td class="num" data-label="Available now">10</td><td class="act"><a class="btn btn--sm" href="reserve.html?item=electrical-tape">Reserve</a></td></tr>
+            <tr data-name="epoxy resin kit" data-cat="Fabrication" data-type="consumable"><td><span class="thumb" aria-hidden="true">photo</span></td><td class="item">Epoxy resin kit</td><td data-label="Category">Fabrication</td><td data-label="Type">Consumable</td><td class="num" data-label="Available now">2</td><td class="act"><a class="btn btn--sm" href="reserve.html?item=epoxy-kit">Reserve</a></td></tr>
+            <tr class="row-empty" id="catalog-empty" hidden><td colspan="6">No items match those filters. <button class="btn btn--sm" type="button" id="catalog-clear">Clear filters</button></td></tr>
+          </tbody>
+        </table>
+        <p class="muted small sheet__foot">Sample list from the brief. Photos and real counts come from the officers.</p>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-foot">
+  <div class="container">
+    <p class="site-foot__mark"><img src="../assets/hygears-logo.png" width="222" height="224" alt="">PUP Hygears</p>
+    <p class="site-foot__line">“We don’t just build vehicles, we build people to help us build the future!” #GEARINGUpTowardExcellence</p>
+    <div class="site-foot__cols">
+      <div><h2>Pages</h2><ul><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li></ul></div>
+      <div><h2>Contact</h2><ul>
+        <li><a href="https://www.instagram.com/puphygears">Instagram: puphygears</a></li>
+        <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+        <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+      </ul></div>
+      <div><h2>Where</h2><p>Polytechnic University of the Philippines, Sta. Mesa, Manila</p></div>
+    </div>
+    <p class="site-foot__legal">A student research organization of PUP. Prototype for review: sample data is marked as sample.</p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join PUP Hygears</title>
+<meta name="description" content="Apply to join PUP Hygears, the student electric vehicle organization at PUP Sta. Mesa.">
+<link rel="icon" href="../assets/hygears-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700&amp;family=IBM+Plex+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<!-- Adds a "js" class so the CSS knows JavaScript is on (used by the phone menu) -->
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <nav class="pill" aria-label="Main">
+      <a class="brand" href="index.html"><img src="../assets/hygears-logo.png" width="40" height="40" alt="">PUP Hygears</a>
+      <button class="btn btn--quiet btn--sm menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <ul class="nav-links" id="nav-links"><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html" aria-current="page">Join</a></li><li><a href="about.html">About</a></li><li><a class="nav-officer" href="officer.html">Officer</a></li></ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-head">
+  <div class="container">
+    <h1>Join Hygears</h1>
+    <p class="lead">Apply here. An officer reviews every application.</p>
+  </div>
+</section>
+
+<section class="join-photo" aria-label="The team">
+  <div class="container">
+    <figure class="photo"><img src="../assets/team-2.png" width="1440" height="650" alt="More than twenty Hygears members in matching red and black team shirts stand in a line with arms crossed on the PUP campus."><figcaption>Hygears members in team shirts on campus.</figcaption></figure>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="apply-title">
+  <div class="container split">
+    <div class="section-head">
+      <h2 id="apply-title">The application</h2>
+      <p>Members come from Mechanical, Electronics and Communications, Industrial, Electrical and Computer Engineering, and Marketing.</p>
+      <p>Pick the committee you would most like to work in.</p>
+    </div>
+    <div>
+      <form class="slip" id="join-form" data-endpoint="" novalidate aria-labelledby="apply-title">
+        <div class="form-grid">
+          <div class="field"><label for="j-name">Full name</label><input id="j-name" name="name" type="text" autocomplete="name" required data-req="Enter your full name." aria-describedby="j-name-hint j-name-err"><p class="hint" id="j-name-hint">As it appears on your PUP ID.</p><p class="error" id="j-name-err" aria-live="polite"></p></div>
+          <div class="field"><label for="j-sn">Student number</label><input id="j-sn" name="student_number" type="text" required pattern="[0-9]{4}-[0-9]{5}-[A-Za-z]{2}-[0-9]" data-req="Enter your student number." data-bad="Write it like 2023-00123-MN-0." aria-describedby="j-sn-hint j-sn-err"><p class="hint" id="j-sn-hint">Like 2023-00123-MN-0.</p><p class="error" id="j-sn-err" aria-live="polite"></p></div>
+          <div class="field"><label for="j-email">Email</label><input id="j-email" name="email" type="email" autocomplete="email" required data-req="Enter your email." data-bad="That email looks incomplete. Write it as name@example.com." aria-describedby="j-email-hint j-email-err"><p class="hint" id="j-email-hint">Officers reply here.</p><p class="error" id="j-email-err" aria-live="polite"></p></div>
+          <div class="field"><label for="j-course">Course</label><select id="j-course" name="course" required data-req="Choose your program." aria-describedby="j-course-hint j-course-err"><option value="">Choose your program</option><option>Mechanical Engineering</option><option>Electronics and Communications Engineering</option><option>Industrial Engineering</option><option>Electrical Engineering</option><option>Computer Engineering</option><option>Marketing</option><option>Other program</option></select><p class="hint" id="j-course-hint"></p><p class="error" id="j-course-err" aria-live="polite"></p></div>
+          <div class="field"><label for="j-year">Year and section</label><input id="j-year" name="year_section" type="text" required data-req="Enter your year and section." aria-describedby="j-year-hint j-year-err"><p class="hint" id="j-year-hint">Like 2-1.</p><p class="error" id="j-year-err" aria-live="polite"></p></div>
+          <div class="field"><label for="j-committee">Preferred committee</label><select id="j-committee" name="committee" required data-req="Choose a committee." aria-describedby="j-committee-hint j-committee-err"><option value="">Choose a committee</option><option>Finance and Operations</option><option>Internal Affairs</option><option>Innovation and Research</option><option>External Affairs</option><option>Creative Media and Design</option></select><p class="hint" id="j-committee-hint">You can change it later with the officers.</p><p class="error" id="j-committee-err" aria-live="polite"></p></div>
+          <div class="field field--full"><label for="j-reason">Reason for joining</label><textarea id="j-reason" name="reason" required minlength="30" data-req="Tell us why you want to join." data-bad="Write a little more, at least 30 characters." aria-describedby="j-reason-hint j-reason-err"></textarea><p class="hint" id="j-reason-hint">What do you want to learn or build? A few sentences.</p><p class="error" id="j-reason-err" aria-live="polite"></p></div>
+        </div>
+        <div class="form-foot"><button class="btn" type="submit">Apply</button><p class="note">This prototype sends nothing.</p></div>
+      </form>
+      <div class="slip" id="join-done" tabindex="-1" hidden></div>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="colophon">
+      <img src="../assets/hygears-logo.png" width="48" height="48" alt="PUP Hygears logo">
+      <div><p><strong>PUP Hygears</strong> is a student research organization at the Polytechnic University of the Philippines, Sta. Mesa, Manila. Find us on <a href="https://www.instagram.com/puphygears/">Instagram</a>, <a href="https://www.facebook.com/PUPHygears">Facebook</a> and <a href="https://x.com/pup_hygears">X</a>, or write to <a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a>. Photographs by PUP Hygears.</p><p class="tagline">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p></div>
+      <ul class="foot-links"><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer desk</a></li></ul>
+    </div>
+    <p class="legal">A prototype of the Hygears Web Portal, made for a Web Development final project in 2026. Sample data is marked where it appears.</p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

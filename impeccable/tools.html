@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tools and consumables | PUP Hygears</title>
+<meta name="description" content="See which Hygears tools and consumables are available now and reserve one.">
+<link rel="icon" href="img/hg-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');</script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap head-row">
+    <a class="brand" href="index.html">
+      <img src="img/hg-mark.png" alt="" width="40" height="40">
+      <span>PUP Hygears</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i data-icon="menu"></i>Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tools.html" aria-current="page">Tools</a></li>
+        <li><a href="track.html">Track request</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="officer.html">Officer</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <div class="page-head">
+    <h1>The tool board</h1>
+    <p class="lede">Black shape: on the board now. Dashed outline: every unit is out.</p>
+    <span class="sample-flag"><i data-icon="info"></i>Sample list. Officers will load the real inventory.</span>
+  </div>
+
+  <form class="filters" role="search" onsubmit="return false">
+    <div class="field">
+      <label for="q">Search items</label>
+      <div class="search"><i data-icon="search"></i><input id="q" type="search" placeholder="Try soldering, drill, tape" autocomplete="off"></div>
+    </div>
+    <div class="field">
+      <label for="cat">Category</label>
+      <select id="cat"><option value="">All categories</option></select>
+    </div>
+    <fieldset class="field">
+      <legend class="legend">Type</legend>
+      <div class="seg">
+        <label><input type="radio" name="type" value="all" id="type-all" checked><span>All</span></label>
+        <label><input type="radio" name="type" value="tool"><span>Tools</span></label>
+        <label><input type="radio" name="type" value="consumable"><span>Consumables</span></label>
+      </div>
+    </fieldset>
+  </form>
+
+  <p class="result-count" id="count" role="status" aria-live="polite"></p>
+  <div class="board">
+    <ul class="board-grid board-grid--wide" id="tool-board" aria-label="Items"></ul>
+    <div class="empty" id="empty" hidden>
+      <p><strong>Nothing on the board matches that.</strong> Check the spelling or clear the filters.</p>
+      <button class="btn btn--ghost" type="button" id="clear-filters">Clear filters</button>
+    </div>
+  </div>
+  <p class="muted small stack-top">Need something that isn't listed? Email <a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a>.</p>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <img src="img/hg-mark.png" alt="PUP Hygears logo" width="48" height="48">
+          <strong>PUP Hygears</strong>
+        </div>
+        <p class="signoff">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership
+          <span class="tag">#GEARINGUpTowardExcellence</span></p>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul class="foot-list">
+          <li><i data-icon="mail"></i><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><i data-icon="link"></i><a href="https://www.facebook.com/PUPHygears">Facebook: PUP Hygears</a></li>
+          <li><i data-icon="link"></i><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><i data-icon="link"></i><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Find us</h2>
+        <ul class="foot-list">
+          <li><i data-icon="pin"></i><span>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-note">A student research organization of the Polytechnic University of the Philippines. Prototype: items, requests and officer data shown are samples.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join Hygears | PUP Hygears</title>
+<meta name="description" content="Apply to join PUP Hygears, the student research organization behind the Luna electric vehicles.">
+<link rel="icon" href="img/hg-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');</script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap head-row">
+    <a class="brand" href="index.html">
+      <img src="img/hg-mark.png" alt="" width="40" height="40">
+      <span>PUP Hygears</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i data-icon="menu"></i>Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        <li><a href="track.html">Track request</a></li>
+        <li><a href="join.html" aria-current="page">Join</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="officer.html">Officer</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <div class="page-head">
+    <h1>Join Hygears</h1>
+    <p class="lede">ASCEND 2026: find your missing piece. Tell us who you are and where you'd like to help; officers review every application.</p>
+  </div>
+  <div class="layout-split">
+    <div>
+      <form class="form form-panel" id="join-form" novalidate>
+        <div class="error-summary" hidden>
+          <p class="es-title" tabindex="-1"><i data-icon="alert"></i>Please fix these before applying</p>
+          <ul></ul>
+        </div>
+        <div class="field">
+          <label for="j-name">Full name <span class="req" aria-hidden="true">*</span></label>
+          <input id="j-name" type="text" autocomplete="name" aria-describedby="j-name-error" required>
+          <p class="error" id="j-name-error"></p>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label for="j-sn">Student number <span class="req" aria-hidden="true">*</span></label>
+            <input id="j-sn" type="text" autocapitalize="characters" placeholder="e.g. 2025-01234-MN-0" aria-describedby="j-sn-hint j-sn-error" required>
+            <p class="hint" id="j-sn-hint">As printed on your PUP ID.</p>
+            <p class="error" id="j-sn-error"></p>
+          </div>
+          <div class="field">
+            <label for="j-email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input id="j-email" type="email" autocomplete="email" inputmode="email" aria-describedby="j-email-error" required>
+            <p class="error" id="j-email-error"></p>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label for="j-course">Course <span class="req" aria-hidden="true">*</span></label>
+            <select id="j-course" aria-describedby="j-course-error" required><option value="">Choose your course</option><option>BS Mechanical Engineering</option><option>BS Electronics Engineering</option><option>BS Industrial Engineering</option><option>BS Electrical Engineering</option><option>BS Computer Engineering</option><option>BS Business Administration, Marketing</option><option>Other PUP course</option></select>
+            <p class="error" id="j-course-error"></p>
+          </div>
+          <div class="field">
+            <label for="j-year">Year and section <span class="req" aria-hidden="true">*</span></label>
+            <input id="j-year" type="text" placeholder="e.g. 1-2" aria-describedby="j-year-error" required>
+            <p class="error" id="j-year-error"></p>
+          </div>
+        </div>
+        <fieldset>
+          <legend class="legend">Preferred committee <span class="req" aria-hidden="true">*</span></legend>
+          <p class="hint">Pick the one you'd most like. You can talk to officers about others later.</p>
+          <div class="choice-grid">
+            <label class="choice"><input type="radio" name="committee" id="j-committee-1" value="Finance and Operations" aria-describedby="j-committee-1-error"> Finance and Operations</label>
+            <label class="choice"><input type="radio" name="committee" id="j-committee-2" value="Internal Affairs"> Internal Affairs</label>
+            <label class="choice"><input type="radio" name="committee" id="j-committee-3" value="Innovation and Research"> Innovation and Research</label>
+            <label class="choice"><input type="radio" name="committee" id="j-committee-4" value="External Affairs"> External Affairs</label>
+            <label class="choice"><input type="radio" name="committee" id="j-committee-5" value="Creative Media and Design"> Creative Media and Design</label>
+          </div>
+          <p class="error" id="j-committee-1-error"></p>
+        </fieldset>
+        <div class="field">
+          <label for="j-reason">Why do you want to join? <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="j-reason" aria-describedby="j-reason-hint j-reason-error" required></textarea>
+          <p class="hint" id="j-reason-hint">A few sentences is enough. Skills, interests, what you want to learn.</p>
+          <p class="error" id="j-reason-error"></p>
+        </div>
+        <div class="btn-row"><button class="btn btn--primary" type="submit">Apply</button></div>
+        <p class="hint"><span class="req" aria-hidden="true">*</span> Required.</p>
+      </form>
+      <section class="form-panel" id="join-done" hidden aria-live="polite">
+        <div class="result">
+          <h2 tabindex="-1">Application sent</h2>
+          <p>Thanks, <strong id="join-done-name"></strong>. Your application for <strong id="join-done-committee"></strong> is with the officers. We'll write to <strong id="join-done-email"></strong> about next steps.</p>
+          <p>Meanwhile, follow <a href="https://www.facebook.com/PUPHygears">PUP Hygears on Facebook</a> for assembly and workshop dates.</p>
+          <div class="btn-row"><a class="btn btn--ghost" href="index.html">Back to home</a></div>
+        </div>
+      </section>
+    </div>
+    <aside>
+      <figure class="about-photo">
+        <img src="img/team-lineup.jpg" alt="A row of Hygears members standing together for a team photo." width="1200" height="542" loading="lazy">
+        <figcaption>Members come from five engineering programs and Marketing.</figcaption>
+      </figure>
+    </aside>
+  </div>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <img src="img/hg-mark.png" alt="PUP Hygears logo" width="48" height="48">
+          <strong>PUP Hygears</strong>
+        </div>
+        <p class="signoff">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership
+          <span class="tag">#GEARINGUpTowardExcellence</span></p>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul class="foot-list">
+          <li><i data-icon="mail"></i><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><i data-icon="link"></i><a href="https://www.facebook.com/PUPHygears">Facebook: PUP Hygears</a></li>
+          <li><i data-icon="link"></i><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><i data-icon="link"></i><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Find us</h2>
+        <ul class="foot-list">
+          <li><i data-icon="pin"></i><span>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-note">A student research organization of the Polytechnic University of the Philippines. Prototype: items, requests and officer data shown are samples.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Track a request, PUP Hygears</title>
+<meta name="description" content="Check whether your Hygears tool reservation is pending, approved or declined.">
+<link rel="icon" href="../assets/hygears-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700&amp;family=IBM+Plex+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<!-- Adds a "js" class so the CSS knows JavaScript is on (used by the phone menu) -->
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <nav class="pill" aria-label="Main">
+      <a class="brand" href="index.html"><img src="../assets/hygears-logo.png" width="40" height="40" alt="">PUP Hygears</a>
+      <button class="btn btn--quiet btn--sm menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <ul class="nav-links" id="nav-links"><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html" aria-current="page">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a class="nav-officer" href="officer.html">Officer</a></li></ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-head" id="track">
+  <div class="container">
+    <h1>Track request</h1>
+    <p class="lead">Enter the reference number from your reservation slip.</p>
+    <form class="track-form" id="track-form" novalidate>
+      <div class="field"><label for="ref">Reference number</label><input id="ref" name="ref" type="text" autocomplete="off" spellcheck="false" required data-req="Enter your reference number." aria-describedby="ref-hint ref-err"><p class="hint" id="ref-hint">Looks like HYG-2026-0142.</p><p class="error" id="ref-err" aria-live="polite"></p></div>
+      <button class="btn" type="submit">Track request</button>
+    </form>
+    <div class="result" id="track-result" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="section section--band" aria-labelledby="states-title">
+  <div class="container">
+    <div class="section-head"><h2 id="states-title">What each state means</h2><p class="note">Sample requests. Open a number to try the tracker.</p></div>
+    <ul class="rows"><li><div><a class="mono" href="?ref=HYG-2026-0142#track">HYG-2026-0142</a><div class="state-line"><span class="tag tag--wait"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5"/></svg>Pending</span></div></div><div><h3>Digital multimeter, 1 unit</h3><p class="note">Pickup 24 Nov 2026, return 27 Nov 2026</p></div><p>No officer has reviewed it yet. Check again before your pickup date.</p></li><li><div><a class="mono" href="?ref=HYG-2026-0137#track">HYG-2026-0137</a><div class="state-line"><span class="tag tag--on"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Approved</span></div></div><div><h3>Cordless drill, 1 unit</h3><p class="note">Pickup 23 Nov 2026, return 25 Nov 2026</p></div><p>Pick it up on your pickup date at <span class="fill">pickup room to be confirmed</span>.</p></li><li><div><a class="mono" href="?ref=HYG-2026-0129#track">HYG-2026-0129</a><div class="state-line"><span class="tag tag--out"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>Declined</span></div></div><div><h3>Heat gun, 1 unit</h3><p class="note">Pickup 22 Nov 2026, return 24 Nov 2026</p></div><p>Officer&rsquo;s note (sample): both heat guns are out until 28 Nov. Try a later date.</p></li></ul>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="colophon">
+      <img src="../assets/hygears-logo.png" width="48" height="48" alt="PUP Hygears logo">
+      <div><p><strong>PUP Hygears</strong> is a student research organization at the Polytechnic University of the Philippines, Sta. Mesa, Manila. Find us on <a href="https://www.instagram.com/puphygears/">Instagram</a>, <a href="https://www.facebook.com/PUPHygears">Facebook</a> and <a href="https://x.com/pup_hygears">X</a>, or write to <a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a>. Photographs by PUP Hygears.</p><p class="tagline">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p></div>
+      <ul class="foot-links"><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer desk</a></li></ul>
+    </div>
+    <p class="legal">A prototype of the Hygears Web Portal, made for a Web Development final project in 2026. Sample data is marked where it appears.</p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tools and Consumables | PUP Hygears</title>
+  <meta name="description" content="See which Hygears tools and consumables are available now and reserve one.">
+  <link rel="icon" href="../assets/hygears-logo.png">
+  <!-- Fonts: Barlow Semi Condensed (headings) and Barlow (body). Arial is the offline fallback. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ===== Header (same on every page; header.php in the real site) ===== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <img src="../assets/hygears-logo.png" alt="" width="40" height="40">
+      <span>PUP Hygears</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tools.html" aria-current="page">Tools</a></li>
+        <li><a href="track.html">Track Request</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="officer.html">Officer</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <!-- ===== Page heading ===== -->
+  <div class="page-head">
+    <div class="container">
+      <h1>Tools and consumables</h1>
+      <p>Tools are borrowed and returned. Consumables are used up. Reserve what's in, then pick it up at the workshop.</p>
+    </div>
+  </div>
+
+  <section class="section" aria-label="Item catalog">
+    <div class="container">
+      <div class="notice"><p><strong>Sample list.</strong> The real items and counts will come from the org's inventory.</p></div>
+
+      <!-- Filters: search, category, type, available only (app.js) -->
+      <form class="filters" id="filters" role="search" aria-label="Filter items">
+        <div class="field">
+          <label for="search">Search by name</label>
+          <input type="search" id="search" name="q" placeholder="e.g. soldering">
+        </div>
+        <div class="field">
+          <label for="category">Category</label>
+          <select id="category" name="category">
+            <option value="all">All categories</option>
+            <option value="Electrical">Electrical</option>
+            <option value="Fabrication">Fabrication</option>
+            <option value="Hand tools">Hand tools</option>
+            <option value="Power tools">Power tools</option>
+            <option value="Safety">Safety</option>
+            <option value="Supplies">Supplies</option>
+          </select>
+        </div>
+        <fieldset class="type-switch">
+          <legend>Type</legend>
+          <label><input type="radio" name="type" value="all" checked> All</label>
+          <label><input type="radio" name="type" value="tool"> Tools</label>
+          <label><input type="radio" name="type" value="consumable"> Consumables</label>
+        </fieldset>
+        <label class="check"><input type="checkbox" id="available-only"> Available now only</label>
+      </form>
+
+      <p class="result-count" id="result-count" aria-live="polite">Showing 12 of 12 items</p>
+
+      <ul class="item-grid" id="item-grid">
+        <li class="item" data-name="digital multimeter" data-category="Electrical" data-type="tool" data-available="3">
+          <div class="photo-slot">Photo slot</div>
+          <h3>Digital multimeter</h3>
+          <p class="item-meta">Electrical &middot; Tool (returned)</p>
+          <p class="item-meta">Measures voltage, current and resistance when testing circuits.</p>
+          <div class="stock"><span class="cells" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>3 of 4 available</div>
+          <a class="btn" href="reserve.html?item=digital-multimeter">Reserve <span class="sr-only">digital multimeter</span></a>
+        </li>
+        <li class="item" data-name="soldering station" data-category="Electrical" data-type="tool" data-available="2">
+          <div class="photo-slot">Photo slot</div>
+          <h3>Soldering station</h3>
+          <p class="item-meta">Electrical &middot; Tool (returned)</p>
+          <p class="item-meta">Temperature-controlled iron for wiring and board repairs.</p>
+          <div class="stock"><span class="cells" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span>2 of 3 available</div>
+          <a class="btn" href="reserve.html?item=soldering-station">Reserve <span class="sr-only">soldering station</span></a>
+        </li>
+        <li class="item" data-name="cordless drill" data-category="Power tools" data-type="tool" data-available="1">
+          <div class="photo-slot">Photo slot</div>
+          <h3>Cordless drill</h3>
+          <p class="item-meta">Power tools &middot; Tool (returned)</p>
+          <p class="item-meta">Drilling and driving screws on the chassis and jigs.</p>
+          <div class="stock"><span class="cells" aria-hidden="true"><i class="on"></i><i></i></span>1 of 2 available</div>
+          <a class="btn" href="reserve.html?item=cordless-drill">Reserve <span class="sr-only">cordless drill</span></a>
+        </li>
+        <li class="item" data-name="torque wrench" data-category="Hand tools" data-type="tool" data-available="0">
+          <div class="photo-slot">Photo slot</div>
+          <h3>Torque wrench</h3>
+          <p class="item-meta">Hand tools &middot; Tool (returned)</p>
+          <p class="item-meta">Tightens bolts to a set torque on wheels and mounts.</p>
+          <div class="stock stock-none"><span class="cells" aria-hidden="true"><i></i><i></i></span>None left right now</div>
+          <span class="btn-off">Out of stock</span>
+        </li>
+        <li class="item" data-name="wire crimper" data-category="Hand tools" data-type="tool" data-available="2">
+          <div class="photo-slot">Photo slot</div>
+          <h3>Wire crimper</h3>
+          <p class="item-meta">Hand tools &middot; Tool (returned)</p>
+          <p class="item-meta">Fixes connectors onto wire ends for clean, solid joints.</p>
+          <div class="stock"><span class="cells" aria-hidden="true"><i class="on"></i><i class="on"></i></span>2 of 2 available</div>
+          <a class="btn" href="reserve.html?item=wire-crimper">Reserve <span class="sr-only">wire crimper</span></a>
+        </li>
+        <li class="item" data-name="heat gun" data-category="Power tools" data-type="tool" data-available="1">
+          <div class="photo-slot">Photo slot</div>
+          <h3>Heat gun</h3>
+          <p class="item-meta">Power tools &middot; Tool (returned)</p>
+          <p class="item-meta">Shrinks heat-shrink tubing and softens plastic parts.</p>
+          <div class="stock"><span class="cells" aria-hidden="true"><i class="on"></i></span>1 of 1 available</div>
+          <a class="btn" href="reserve.html?item=heat-gun">Reserve <span class="sr-only">heat gun</span></a>
+        </li>
+        <li class="item" data-name="safety goggles" data-category="Safety" data-type="tool" data-available="6">
+          <div class="photo-slot">Photo slot</div>
+          <h3>Safety goggles</h3>
+          <p class="item-meta">Safety &middot; Tool (returned)</p>
+          <p class="item-meta">Eye protection for cutting, drilling and soldering.</p>
+          <div class="stock"><span class="cells" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>6 of 8 available</div>
+          <a class="btn" href="reserve.html?item=safety-goggles">Reserve <span class="sr-only">safety goggles</span></a>
+        </li>
+        <li class="item" data-name="pla filament 1kg" data-category="Fabrication" data-type="consumable" data-available="3">
+          <div class="photo-slot">Photo slot</div>
+          <h3>PLA filament 1kg</h3>
+          <p class="item-meta">Fabrication &middot; Consumable (used up)</p>
+          <p class="item-meta">3D printer filament for brackets, covers and prototypes.</p>
+          <div class="stock"><span class="cells" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>3 of 5 in stock</div>
+          <a class="btn" href="reserve.html?item=pla-filament">Reserve <span class="sr-only">pla filament 1kg</span></a>
+        </li>
+        <li class="item" data-name="heat-shrink tubing pack" data-category="Electrical" data-type="consumable" data-available="4">
+          <div class="photo-slot">Photo slot</div>
+          <h3>Heat-shrink tubing pack</h3>
+          <p class="item-meta">Electrical &middot; Consumable (used up)</p>
+          <p class="item-meta">Insulates and protects soldered wire joints.</p>
+          <div class="stock"><span class="cells" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>4 of 6 in stock</div>
+          <a class="btn" href="reserve.html?item=heat-shrink">Reserve <span class="sr-only">heat-shrink tubing pack</span></a>
+        </li>
+        <li class="item" data-name="zip ties pack" data-category="Supplies" data-type="consumable" data-available="5">
+          <div class="photo-slot">Photo slot</div>
+          <h3>Zip ties pack</h3>
+          <p class="item-meta">Supplies &middot; Consumable (used up)</p>
+          <p class="item-meta">Bundles and routes cables and hoses.</p>
+          <div class="stock"><span class="cells" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>5 of 6 in stock</div>
+          <a class="btn" href="reserve.html?item=zip-ties">Reserve <span class="sr-only">zip ties pack</span></a>
+        </li>
+        <li class="item" data-name="electrical tape" data-category="Electrical" data-type="consumable" data-available="0">
+          <div class="photo-slot">Photo slot</div>
+          <h3>Electrical tape</h3>
+          <p class="item-meta">Electrical &middot; Consumable (used up)</p>
+          <p class="item-meta">Insulates wires and marks cables.</p>
+          <div class="stock stock-none"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>None left right now</div>
+          <span class="btn-off">Out of stock</span>
+        </li>
+        <li class="item" data-name="epoxy resin kit" data-category="Fabrication" data-type="consumable" data-available="2">
+          <div class="photo-slot">Photo slot</div>
+          <h3>Epoxy resin kit</h3>
+          <p class="item-meta">Fabrication &middot; Consumable (used up)</p>
+          <p class="item-meta">Two-part adhesive for bonding and composite repairs.</p>
+          <div class="stock"><span class="cells" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span>2 of 3 in stock</div>
+          <a class="btn" href="reserve.html?item=epoxy-kit">Reserve <span class="sr-only">epoxy resin kit</span></a>
+        </li>
+      </ul>
+
+      <div class="card card-gray" id="no-results" hidden>
+        <h3>No items match</h3>
+        <p>Try a shorter search word or clear the filters.</p>
+        <button class="btn-ghost" type="button" id="clear-filters">Clear filters</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== Footer (same on every page; footer.php in the real site) ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../assets/hygears-logo.png" alt="" width="48" height="48">
+          <strong>PUP Hygears</strong>
+        </div>
+        <p class="descriptor">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+        <p>Polytechnic University of the Philippines, Sta. Mesa, Manila<br>
+        College of Engineering and Architecture Building, NDC Compound, Anonas St.</p>
+        <p>#GEARINGUpTowardExcellence</p>
+      </div>
+      <div>
+        <h2>Portal</h2>
+        <ul class="footer-links">
+          <li><a href="tools.html">Tools and consumables</a></li>
+          <li><a href="track.html">Track a request</a></li>
+          <li><a href="join.html">Apply to join</a></li>
+          <li><a href="about.html#rules">Borrowing rules</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul class="footer-links">
+          <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+          <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-bottom">Student prototype for the Hygears Web Portal. Item lists and records shown here are sample data.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
