@@ -86,3 +86,66 @@ No blockers.
 10. The phone hero photo is shorter (14rem to 12rem).
 
 **Still open:** 11 to 14 above. Plus real item photos, the workshop room and pickup hours, the confirmed borrowing rules (marked Draft) and announcement dates (marked as slots). The "Bring your PUP ID" line is a proposed rule, tagged "rule to confirm".
+
+---
+
+## News feature (2026-11-24)
+
+Added per `../FEATURE-NEWS.md`: `news.html` (category switch, newest first), `article.html?id=N`, a "Latest from Hygears" strip on Home (3 newest posts), Applications open / closed on Join (`join.html?applications=closed` previews closed), and a **Posts** section on the officer desk (table with Edit / Unpublish, "Write a new post", the New post form with a FileReader preview, Save draft / Publish, a fifth "Published posts" counter). News is in every header and lights up on News and the article page. Posts live in `localStorage` under `hygears-charge-posts`, so a post published on the officer desk shows on News, Home and its article in the same browser. Post cards reuse the 2px ink top rule of the old announcement rows; the filter reuses the Tools type switch.
+
+Checked by script in headless Chrome (empty Publish, draft with a title only, a .txt file, a 3 MB PNG, a real PNG with preview, publish, unpublish, edit) and by screenshots at 390 x 844 and 1280 x 800.
+
+### Mika, reading on her phone
+- Works: News, the article and the Home strip are one column; cards show cover, category, date, title, summary and Read more. The article body is 18px with roomy lines, and Back to News is a full 44px link.
+- **Major:** the category filter's six radio boxes stacked into five rows, so the whole first screen of `news.html` was filter and not one post showed.
+- **Major:** every cover photo (cards, article, officer preview) ignored its 2:1 or 16:9 shape and drew at its full `height="720"` attribute, so one photo filled two phone screens.
+
+### Paolo, posting from his phone and the office laptop
+- Works: empty Publish shows "Give the post a title.", "Choose a category." and "Write the post body before publishing." at once, with red borders and focus on Title. A draft saves with only a title. A .txt file gets "This file isn't a photo. Choose a JPG, PNG or WebP image."; a 3 MB PNG gets "This photo is 3.0 MB. Choose one under 2 MB." A real photo shows a preview, then asks for a photo description. Publish puts the post first in the table and says where it went, with links to the post and News. Unpublish / Publish flips a row and announces it; Edit refills the form and keeps the photo.
+- **Blocker (as handed over):** the Posts section was missing from `officer.html`. The JS for it was written, but none of its form elements existed, so officers could not post at all.
+- Minor: on phones the "(sample)" tag in a post row sat in its own column beside the title.
+- Minor: the success line said "now at the top of News" even when an edited post is dated older.
+
+### Bea, from Facebook
+- Works: the posts are the same events she saw on Facebook (PHYNIX 2026, the General Assembly, ASCEND 2026, the SOLIDWORKS finalist, Luna), each marked Sample. With applications closed, Join says "Recruitment opens once a season" and "Follow us for the next ASCEND", with Follow on Facebook and Read the News buttons, so the page is not a dead end.
+
+### Senior UI/UX critique
+- Works: News feels like part of Charge: same ink rules, kicker labels, type switch and gray photo slots. The article column keeps lines near 65 to 70 characters on a laptop.
+- Minor: the selected category was shown only by the radio dot.
+- Minor (open): Edit and Unpublish buttons in a row sit very close on laptop (same as Approve / Decline elsewhere).
+
+### Sir Cadaoas
+- Works: one style.css, CSS variables, red only on buttons and the current-page bar, status as icon plus word ("✓ Published", "○ Draft"), labels, hints and errors on every post field, alt text on covers (the officer must describe the photo).
+- Minor: three inline `style=""` attributes (news hint, post saved text, textarea heights).
+
+### Hans, rebuilding in PHP
+- Works: every post field is named after its `posts` column (`title`, `category`, `published_at`, `cover_image`, `cover_alt`, `summary`, `body`, `caption_by`), the JS is commented by section, and it only uses what was taught plus FileReader and localStorage, both commented.
+- Minor: `news.html?cat=` built a CSS selector from the link text, so a quote in the link threw an error.
+
+### Accessibility
+- Works: the filter is a fieldset with a legend; "Showing X of 5 posts" is a live region; the post saved message is `role="status"` and gets focus; Edit / Unpublish buttons carry the post title as sr-only text; Read more is hidden from keyboard and screen readers because the title link goes to the same place; status is never colour alone.
+
+### Fix list (News feature)
+| # | Severity | Issue | Page |
+|---|---|---|---|
+| N1 | Blocker | Posts section and New post form missing | Officer |
+| N2 | Major | Cover photos ignore their aspect ratio | News, Home, Article, Officer |
+| N3 | Major | Category filter fills the phone's first screen | News |
+| N4 | Minor | Selected category shown by radio dot only | News |
+| N5 | Minor | "(sample)" splits off the title in phone rows | Officer |
+| N6 | Minor | Inline styles | News, Officer |
+| N7 | Minor | A quote in `?cat=` throws | News |
+| N8 | Minor | "Top of News" wording on edits | Officer |
+| N9 | Minor | Row action buttons close together on laptop | Officer |
+
+### After fixes
+1. N1: the Posts section (table, "Write a new post" link, New post form with title, category, date, cover photo, photo description, summary, body, caption by, Publish / Save draft / Cancel edit) is now in `officer.html`, plus a fifth counter. The scripted run passes with no JS errors, and the published post then shows first on `news.html`, on Home and at `article.html?id=7`, with HTML typed into the title or body shown as plain text.
+2. N2: `img { height: auto; }` in the base rules, so `aspect-ratio` wins over the width/height attributes. Phone and laptop shots confirm 2:1 cards, a 16:9 article cover and a normal-size preview.
+3. N3: `.news-filter` is a tighter version of the type switch (less padding, smaller text). Three rows instead of five; the first cover now shows on the first phone screen.
+4. N4: the chosen option gets a thicker ink border and bold text (`.is-on`, set in `showNews`).
+5. N5: title and tag wrapped in one `<span>`.
+6. N6: `.news-hint`, `.post-done p` and `.body-input` classes replace the inline styles.
+7. N7: the start category is found by looping over the radios and comparing values; an unknown `?cat=` just shows All.
+8. N8: the message now says the post "is published on News".
+
+**Still open:** N9. Real text, dates and photos for all five sample posts; the real recruitment season for the open/closed switch (`APPLICATIONS_OPEN` in app.js). The 360px check for News and the post form was done by reading the CSS (one column, wrapping options, full-width fields), not with a 360 screenshot.

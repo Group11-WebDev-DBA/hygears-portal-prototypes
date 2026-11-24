@@ -26,6 +26,7 @@
     <nav class="site-nav" id="site-nav" aria-label="Main">
       <ul>
         <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">News</a></li>
         <li><a href="tools.html">Tools</a></li>
         <li><a href="track.html">Track Request</a></li>
         <li><a href="join.html">Join</a></li>
@@ -77,11 +78,12 @@
       <div class="notice"><p><strong>Sample data.</strong> Names and records here are made up to show the layout.</p></div>
 
       <!-- Counters link to each section -->
-      <div class="counters">
+      <div class="counters counters-5">
         <a class="counter" href="#pending"><strong id="pending-count">3</strong><span>Pending requests</span></a>
         <a class="counter" href="#overdue"><strong>2</strong><span>Overdue items</span></a>
         <a class="counter" href="#applications"><strong>3</strong><span>New applications</span></a>
         <a class="counter" href="#stock"><strong>2</strong><span>Out of stock</span></a>
+        <a class="counter" href="#posts"><strong id="posts-count">5</strong><span>Published posts</span></a>
       </div>
       <p class="sr-only" id="desk-status" role="status"></p>
 
@@ -174,6 +176,97 @@
         </table>
       </div>
 
+      <!-- Posts: what shows on News and Home -->
+      <div class="dash-section" id="posts">
+        <div class="section-top">
+          <h3>Posts</h3>
+          <a class="btn btn-sm" href="#post-editor">Write a new post</a>
+        </div>
+        <table class="table">
+          <caption>Published posts show on News and Home. Unpublish hides a post without deleting it.</caption>
+          <thead>
+            <tr><th scope="col">Title</th><th scope="col">Category</th><th scope="col">Date</th><th scope="col">Status</th><th scope="col">Action</th></tr>
+          </thead>
+          <!-- Rows drawn by app.js from the saved posts (SELECT * FROM posts in the real site) -->
+          <tbody id="post-rows"></tbody>
+        </table>
+
+        <div class="post-editor" id="post-editor">
+          <div class="success post-done" id="post-done" tabindex="-1" role="status" hidden>
+            <p class="kicker" id="post-done-title"></p>
+            <p id="post-done-text"></p>
+          </div>
+
+          <!-- The real form posts to PHP (enctype="multipart/form-data" for the photo) and INSERTs into posts -->
+          <form class="form" id="post-form" novalidate aria-labelledby="post-form-title">
+            <h4 id="post-form-title">New post</h4>
+            <p class="hint">Title, category and body are needed to publish. A draft can skip the body.</p>
+            <div class="field">
+              <label for="p-title">Title</label>
+              <input type="text" id="p-title" name="title" maxlength="140" autocomplete="off" aria-describedby="p-title-error">
+              <p class="error" id="p-title-error"></p>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label for="p-category">Category</label>
+                <select id="p-category" name="category" aria-describedby="p-category-error">
+                  <option value="">Choose a category</option>
+                  <option>Competition</option>
+                  <option>Progress report</option>
+                  <option>Workshop</option>
+                  <option>Announcement</option>
+                  <option>Recruitment</option>
+                </select>
+                <p class="error" id="p-category-error"></p>
+              </div>
+              <div class="field">
+                <label for="p-date">Date</label>
+                <input type="date" id="p-date" name="published_at" aria-describedby="p-date-error">
+                <p class="error" id="p-date-error"></p>
+              </div>
+            </div>
+            <div class="field">
+              <label for="p-cover">Cover photo (optional)</label>
+              <input type="file" id="p-cover" name="cover_image" accept="image/jpeg,image/png,image/webp" aria-describedby="p-cover-hint p-cover-error">
+              <p class="hint" id="p-cover-hint">JPG, PNG or WebP, up to 2 MB. Landscape photos fit best.</p>
+              <p class="error" id="p-cover-error" aria-live="polite"></p>
+              <div class="cover-preview" id="p-preview-box" hidden>
+                <img id="p-preview" alt="Preview of the chosen cover photo" width="1440" height="720">
+                <button class="link-btn" type="button" id="p-remove">Remove photo</button>
+              </div>
+            </div>
+            <div class="field" id="p-alt-field" hidden>
+              <label for="p-alt">Describe the photo</label>
+              <input type="text" id="p-alt" name="cover_alt" maxlength="150" autocomplete="off" aria-describedby="p-alt-hint p-alt-error">
+              <p class="hint" id="p-alt-hint">Read aloud to screen reader users, e.g. "Members testing the Luna at PUP".</p>
+              <p class="error" id="p-alt-error"></p>
+            </div>
+            <div class="field">
+              <label for="p-summary">Summary (optional)</label>
+              <textarea id="p-summary" name="summary" maxlength="200" rows="2" aria-describedby="p-summary-hint"></textarea>
+              <p class="hint" id="p-summary-hint">One or two lines for the News list. Left blank, the start of the body is used.</p>
+            </div>
+            <div class="field">
+              <label for="p-body">Body</label>
+              <textarea id="p-body" name="body" rows="10" class="body-input" aria-describedby="p-body-hint p-body-error"></textarea>
+              <p class="hint" id="p-body-hint">Leave a blank line between paragraphs.</p>
+              <p class="error" id="p-body-error"></p>
+            </div>
+            <div class="field">
+              <label for="p-caption">Caption by (optional)</label>
+              <input type="text" id="p-caption" name="caption_by" maxlength="80" autocomplete="off" aria-describedby="p-caption-hint">
+              <p class="hint" id="p-caption-hint">The writer credited at the end, as on the Facebook posts.</p>
+            </div>
+            <p class="error" id="post-form-error" role="alert"></p>
+            <div class="btn-row">
+              <button class="btn" type="submit" name="action" value="publish">Publish</button>
+              <button class="btn-ghost" type="submit" name="action" value="draft">Save draft</button>
+              <button class="link-btn" type="button" id="p-cancel" hidden>Cancel edit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
       <!-- Item stock, using the same battery cells as the catalog -->
       <div class="dash-section" id="stock">
         <div class="section-top">
@@ -209,6 +302,7 @@
       <div>
         <h2>Portal</h2>
         <ul class="footer-links">
+          <li><a href="news.html">News</a></li>
           <li><a href="tools.html">Tools and consumables</a></li>
           <li><a href="track.html">Track a request</a></li>
           <li><a href="join.html">Apply to join</a></li>

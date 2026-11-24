@@ -114,3 +114,56 @@ Re-checked with phone screenshots (Tools at 390, dashboard at 360) and laptop sc
 - **11:** steps use literal 01/02/03. Copy changed to "Build Skills, Not Just Vehicles" and "apply to join the team". The legend offset is gone, and the selects have `autocomplete="off"`.
 
 **Still open (minor):** the nav label while signed in. Students' details aren't remembered (would need localStorage or a PHP session). The announcement cards need real pubmats and dates. Borrowing period, late policy, review time and pickup place still need officer input. Fonts load from Google Fonts, so offline they fall back to system fonts.
+
+## News feature (2026-11-24)
+
+Added per `../FEATURE-NEWS.md`: `news.html` (category filter, newest first), `article.html?id=N`, a "Latest from Hygears" strip on Home (replaces the three Announcements slots), Applications open/closed on Join, and a **Posts** section on the officer dashboard (list with Edit / Unpublish, New Post form with FileReader preview, Save Draft / Publish). News is in every header and in the footer Portal list. Posts live in `localStorage` under `hygears-spec-posts`, so a published post shows on News and Home in the same browser.
+
+Checked with phone screenshots at 390 x 844 (News, article top and body, Home strip, officer form, officer post cards, Join closed), laptop at 1280 x 800 (News, article, officer list) and 1024 (header fit), a 360px overflow check on every page, and a headless Chrome script that ran the officer flow end to end (empty publish, draft, wrong file type, 3 MB file, good PNG, publish, unpublish a sample, edit) and then read News, Home and the article.
+
+### Student reading an article on a phone
+News shows one card per row: photo, mono category, date, title, two lines, Read more. The article is 18px with roomy lines, and the photos sit between paragraphs with captions. Back to News is at the top, More Posts at the end.
+- **Minor, index.html:** the "All news" link beside "Latest from Hygears" was a 20px-tall text link, hard to hit with a thumb.
+- **Minor, index.html:** three full cards make Home long on a phone (accepted: they replace the three pubmat slots that were there before).
+
+### Officer publishing a post (phone, then laptop)
+Empty Publish lists three errors and jumps to Title. Save Draft works with just a title. A .txt file and a 3 MB PNG each get a plain message and are dropped; a real PNG shows a preview with Remove Photo. Publish puts the post at the top of the list, says "Published ... View the post or open News", and the post is first on News and Home.
+- **Major, officer.html phone:** the New Post form sat under six stacked post cards, a long scroll before you could start writing.
+- **Major, app.js:** the photo errors flashed and vanished. The shared live-validation listener on the form re-checked the file input after the change handler and cleared the message.
+- **Minor, officer.html laptop:** dates in the posts table wrapped onto two lines ("24 Nov / 2026").
+
+### Bea, from Facebook, looking for news
+News is the second item in the header and the Home strip links to it. Posts cover the same events as their Facebook page (PHYNIX, the General Assembly, ASCEND, the SOLIDWORKS finalist), each marked Sample. Join now says "Applications open: ASCEND 2026", and the closed state points to Facebook and News instead of a dead form.
+- **Minor (open):** `join.html?applications=closed` still shows the aside line about this year's Google Form.
+
+### UI critic: does News fit?
+Yes. It reuses the card, `.meta`, the mono label face, the dashed "from officers" slot for missing covers, and the results bar and sample note from Tools. The officer list is the same table-to-cards pattern as the rest of the dashboard. The article is the one new layout, kept to a 44rem column on the same type scale. Red still only marks actions and the current page.
+
+### Sir Cadaoas rules
+One style.css (section 22 added), the same header and footer with News highlighted on news.html and article.html, labels/hints/errors on every new field, alt text on covers and inline photos, 16px+ body (article 18px, line-height 1.7, 68ch), 44px tap targets, no sideways scroll at 360px, and `[hidden]{display:none !important}` already in the base styles. Sample text uses only the brief's facts: no results, numbers or quotes beyond the org's own lines.
+
+### Hans: rebuild in PHP
+Each post field is a `posts` column (`post_id, title, category, summary, body, cover_image, cover_alt, caption_by, status, published_at, created_by`). `getPublishedPosts()` is the SELECT, `postCardHtml()` is the loop body, `escapeHtml()` is `htmlspecialchars`, and the two submit buttons are `name="action"` for `$_POST['action']`. FileReader is only the preview; PHP uses `move_uploaded_file` into `uploads/`.
+- **Minor:** `event.submitter` and data URLs each need a one-line explanation at the defense (both are commented).
+
+### Accessibility
+New pages keep the skip link and landmarks. The post count is a live region, cards are `h3` under an `h2`, and the title is the card's one tab stop (Read more is hidden from the keyboard so it isn't read twice). The success panel takes focus, Edit/Unpublish buttons carry the post title in hidden text, and errors use `aria-describedby` + `aria-invalid`.
+- **Major, officer.html:** officer-uploaded covers got a generated alt ("Cover photo: title") that says nothing about the picture.
+
+### Regression
+Home, Tools (`?q=solder` still shows 1 item), Reserve, Track (`?ref=` lookup), Join, About and the officer approve/decline flow load with no script errors and with the new nav item. The header still fits on one line at 1024px.
+
+### Fix list
+1. **Major:** photo errors cleared by the shared live-validation listener.
+2. **Major:** no way to describe an uploaded cover for screen readers.
+3. **Major:** New Post form buried under the list on phones.
+4. **Minor:** "All news" tap target; table dates wrapping.
+5. **Minor (open):** closed-state aside text; long Home on phones.
+
+### After fixes
+- **1:** the file check now uses `setCustomValidity`, so the shared validator shows the same message. An old error is cleared on submit when no file is chosen. Re-tested: both messages stay.
+- **2:** added "Describe the photo", shown and required only when a photo is chosen. It's saved as `cover_alt` and refilled on Edit.
+- **3:** a "Write a New Post" button under the Posts heading jumps to the form.
+- **4:** `.section-head-row > a` is now a 44px target, and `.table time` doesn't wrap.
+
+Re-ran the officer script (every step passes, no script errors) and re-shot the officer form on the laptop. **Still open:** the closed-state aside line; posts are per browser until PHP/MySQL; photos are capped at 2 MB because the prototype stores them in localStorage; all five posts need real text and dates from the officers.

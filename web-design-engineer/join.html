@@ -27,6 +27,7 @@
       <nav id="site-nav" class="site-nav" aria-label="Main">
         <ul>
         <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">News</a></li>
         <li><a href="tools.html">Tools</a></li>
         <li><a href="track.html">Track Request</a></li>
         <li><a href="join.html" aria-current="page">Join</a></li>
@@ -72,6 +73,18 @@
         </aside>
 
         <div class="main">
+          <!-- Recruitment is seasonal: app.js shows one of these (join.html?applications=closed previews closed) -->
+          <p class="panel apply-state" id="apply-open"><span class="status"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg> Applications open</span><br>ASCEND 2026 recruitment is on. Fill in the form below.</p>
+          <div class="panel apply-state" id="apply-closed" hidden>
+            <p class="status"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 4.5V8l2.5 1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg> Applications closed</p>
+            <h2>Recruitment opens once a season</h2>
+            <p>Follow us for the next ASCEND so you don't miss it.</p>
+            <div class="btn-row">
+              <a class="btn btn-secondary" href="https://www.facebook.com/PUPHygears">Follow on Facebook</a>
+              <a class="btn btn-secondary" href="news.html">Read the News</a>
+            </div>
+          </div>
+
           <form id="join-form" novalidate>
             <div class="form-alert" id="join-alert" role="alert" tabindex="-1">
               <p>Please fix the highlighted fields below.</p>

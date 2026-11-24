@@ -53,6 +53,23 @@
   <div class="container section" style="padding-top: 2rem">
     <div class="form-layout">
       <div>
+        <!-- Recruitment is seasonal: app.js shows one of these two (join.html?applications=closed previews closed) -->
+        <div class="notice apply-state" id="apply-open">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 5 5 9-10"/></svg>
+          <p><strong>Applications open: ASCEND 2026.</strong> Apply below and pick the committee you want to grow in.</p>
+        </div>
+        <section class="result apply-state" id="apply-closed" hidden aria-labelledby="closed-title">
+          <div class="result-head">
+            <h2 id="closed-title" style="margin:0">Applications Are Closed</h2>
+            <span class="status status-wait"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Closed</span>
+          </div>
+          <p>Hygears recruits once a season. Follow us for the next ASCEND so you don&rsquo;t miss it.</p>
+          <div class="button-row">
+            <a class="button button-secondary" href="https://www.facebook.com/PUPHygears">Follow on Facebook</a>
+            <a class="button button-secondary" href="news.html">Read the News</a>
+          </div>
+        </section>
+
         <form class="form" id="join-form" novalidate data-warn-unsaved>
           <p class="visually-hidden" id="join-status" aria-live="polite"></p>
           <p class="hint">All fields are required.</p>

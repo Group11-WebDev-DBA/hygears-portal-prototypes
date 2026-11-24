@@ -87,6 +87,7 @@
       <a class="stat" href="#overdue"><span class="stat-number">2</span><span class="stat-label">Overdue items</span></a>
       <a class="stat" href="#applications"><span class="stat-number">2</span><span class="stat-label">New applications</span></a>
       <a class="stat" href="#stock"><span class="stat-number">2</span><span class="stat-label">Items out of stock</span></a>
+      <a class="stat" href="#posts"><span class="stat-number" id="posts-count">5</span><span class="stat-label">Published posts</span></a>
     </nav>
 
     <section class="dash-section" aria-labelledby="pending">
@@ -161,6 +162,106 @@
             <tr><td data-label="Name">Sample: Mark Aquino</td><td data-label="Course">BS Electrical Engineering 1-1</td><td data-label="Committee">Innovation and Research</td><td data-label="Applied"><time data-date="2026-11-21">2026-11-21</time></td></tr>
         </tbody>
       </table>
+    </section>
+
+    <section class="dash-section" aria-labelledby="posts">
+      <h2 id="posts"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Posts</h2>
+      <p class="button-row" style="margin-bottom: 1rem"><a class="button" href="#post-editor">Write a New Post</a></p>
+      <table class="table">
+        <caption>Published posts show on News and Home. Unpublish hides a post without deleting it.</caption>
+        <thead><tr><th scope="col">Title</th><th scope="col">Category</th><th scope="col">Date</th><th scope="col">Status</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead>
+        <!-- Rows drawn by app.js from the saved posts (SELECT * FROM posts in the real site) -->
+        <tbody id="post-rows"></tbody>
+      </table>
+
+      <div class="post-editor" id="post-editor">
+        <section class="result post-message" id="post-message" hidden tabindex="-1" aria-labelledby="post-message-title">
+          <div class="result-head">
+            <h3 id="post-message-title" style="margin:0">Post Saved</h3>
+            <span class="status status-ok"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 5 5 9-10"/></svg>Saved</span>
+          </div>
+          <p id="post-message-text"></p>
+        </section>
+
+        <!-- The real form posts to PHP (enctype multipart/form-data for the photo) and INSERTs into posts -->
+        <form class="form" id="post-form" novalidate data-warn-unsaved aria-labelledby="post-form-title">
+          <h3 id="post-form-title">New Post</h3>
+          <p class="visually-hidden" id="post-status" aria-live="polite"></p>
+          <p class="hint">Title and body are needed to publish. A draft only needs a title.</p>
+
+          <div class="field">
+            <label for="p-title">Title</label>
+            <input type="text" id="p-title" name="title" required maxlength="140" autocomplete="off"
+                   placeholder="e.g. PHYNIX 2026 Research Workshop&hellip;" aria-describedby="p-title-error"
+                   data-required-msg="Give the post a title.">
+            <p class="field-error" id="p-title-error"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></svg><span></span></p>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="p-category">Category</label>
+              <select id="p-category" name="category" required autocomplete="off" aria-describedby="p-category-error"
+                      data-required-msg="Choose a category.">
+                <option value="">Choose a category</option>
+                <option value="Competition">Competition</option>
+                <option value="Progress report">Progress report</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Announcement">Announcement</option>
+                <option value="Recruitment">Recruitment</option>
+              </select>
+              <p class="field-error" id="p-category-error"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></svg><span></span></p>
+            </div>
+            <div class="field">
+              <label for="p-date">Date</label>
+              <input type="date" id="p-date" name="published_at" required aria-describedby="p-date-error"
+                     data-required-msg="Choose the post date.">
+              <p class="field-error" id="p-date-error"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></svg><span></span></p>
+            </div>
+          </div>
+          <div class="field">
+            <label for="p-cover">Cover photo <span class="optional">(optional)</span></label>
+            <p class="hint" id="p-cover-hint">JPG, PNG or WebP, up to 2 MB. Landscape photos fit best.</p>
+            <input type="file" id="p-cover" name="cover_image" accept="image/jpeg,image/png,image/webp"
+                   aria-describedby="p-cover-hint p-cover-error">
+            <p class="field-error" id="p-cover-error"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></svg><span></span></p>
+            <div class="cover-preview" id="p-preview-box" hidden>
+              <img id="p-preview" alt="Preview of the chosen cover photo" width="1440" height="810">
+              <button type="button" class="link-button" id="p-remove">Remove Photo</button>
+            </div>
+          </div>
+          <div class="field" id="p-alt-field" hidden>
+            <label for="p-alt">Describe the photo</label>
+            <p class="hint" id="p-alt-hint">Read aloud to screen reader users, e.g. &ldquo;Members testing the Luna car at PUP&rdquo;.</p>
+            <input type="text" id="p-alt" name="cover_alt" required maxlength="150" autocomplete="off"
+                   aria-describedby="p-alt-hint p-alt-error" data-required-msg="Describe the photo in a few words.">
+            <p class="field-error" id="p-alt-error"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></svg><span></span></p>
+          </div>
+          <div class="field">
+            <label for="p-summary">Summary <span class="optional">(optional)</span></label>
+            <p class="hint" id="p-summary-hint">One or two lines for the News list. Left blank, the start of the body is used.</p>
+            <textarea id="p-summary" name="summary" maxlength="200" rows="2" autocomplete="off" style="min-height: 4.5rem"
+                      aria-describedby="p-summary-hint"></textarea>
+          </div>
+          <div class="field">
+            <label for="p-body">Body</label>
+            <p class="hint" id="p-body-hint">Leave a blank line between paragraphs.</p>
+            <textarea id="p-body" name="body" rows="10" autocomplete="off" style="min-height: 14rem"
+                      aria-describedby="p-body-hint p-body-error"
+                      data-required-msg="Write the post body before publishing."></textarea>
+            <p class="field-error" id="p-body-error"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></svg><span></span></p>
+          </div>
+          <div class="field">
+            <label for="p-caption">Caption by <span class="optional">(optional)</span></label>
+            <p class="hint" id="p-caption-hint">The writer credited at the end, as on the Facebook posts.</p>
+            <input type="text" id="p-caption" name="caption_by" maxlength="80" autocomplete="off"
+                   placeholder="e.g. Creative Media and Design&hellip;" aria-describedby="p-caption-hint">
+          </div>
+          <div class="form-footer button-row">
+            <button class="button" type="submit" name="action" value="publish">Publish</button>
+            <button class="button button-secondary" type="submit" name="action" value="draft">Save Draft</button>
+            <button class="link-button" type="button" id="p-cancel" hidden>Cancel Edit</button>
+          </div>
+        </form>
+      </div>
     </section>
 
     <section class="dash-section" aria-labelledby="stock">

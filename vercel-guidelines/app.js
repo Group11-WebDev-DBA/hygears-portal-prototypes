@@ -869,6 +869,7 @@ if (postForm) {
   var MAX_PHOTO_MB = 2;
   var PHOTO_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
+  watchFields(postForm);
   document.getElementById("p-date").value = todayText();
 
   // Draws the officer's table of posts (newest first, drafts included)
@@ -910,6 +911,7 @@ if (postForm) {
     if (src) coverPreview.src = src;
     else coverPreview.removeAttribute("src");
     coverBox.hidden = !src;
+    document.getElementById("p-alt-field").hidden = !src; // a photo needs a description
   }
 
   // Back to an empty "New post" form
@@ -930,16 +932,21 @@ if (postForm) {
   coverInput.addEventListener("change", function () {
     var file = coverInput.files[0];
     var problem = "";
-    if (!file) return;
+    coverInput.setCustomValidity("");
+    if (!file) {
+      showFieldError(coverInput, "");
+      return;
+    }
     if (PHOTO_TYPES.indexOf(file.type) === -1) {
       problem = "This file isn’t a photo. Choose a JPG, PNG or WebP image.";
     } else if (file.size > MAX_PHOTO_MB * 1024 * 1024) {
       problem = "This photo is " + (file.size / 1024 / 1024).toFixed(1) + " MB. Choose one under " + MAX_PHOTO_MB + " MB.";
     }
     if (problem) {
+      // setCustomValidity keeps the message, so the shared validation shows it too
+      coverInput.setCustomValidity(problem);
       coverInput.value = ""; // forget the bad file; the old photo (if any) stays
       showFieldError(coverInput, problem);
-      coverInput.focus();
       return;
     }
     showFieldError(coverInput, "");
@@ -962,6 +969,8 @@ if (postForm) {
     var action = event.submitter ? event.submitter.value : "publish";
     bodyInput.required = action === "publish"; // a draft only needs a title
     postMessage.hidden = true;
+    // The bad file was already dropped, so an old photo error must not block saving
+    if (!coverInput.files.length) coverInput.setCustomValidity("");
     if (!validateForm(postForm, postStatus)) return;
 
     var all = loadPosts();
@@ -982,7 +991,7 @@ if (postForm) {
     post.body = bodyText;
     post.caption_by = document.getElementById("p-caption").value.trim();
     post.cover_image = coverData;
-    post.cover_alt = coverData ? "Cover photo: " + post.title : "";
+    post.cover_alt = coverData ? document.getElementById("p-alt").value.trim() : "";
     post.status = action === "publish" ? "published" : "draft";
     post.sample = false;
 
@@ -1026,6 +1035,7 @@ if (postForm) {
       bodyInput.value = post.body;
       document.getElementById("p-caption").value = post.caption_by || "";
       showPreview(post.cover_image);
+      document.getElementById("p-alt").value = post.cover_alt || "";
       document.getElementById("post-form-title").textContent = "Edit Post";
       document.getElementById("p-cancel").hidden = false;
       postMessage.hidden = true;

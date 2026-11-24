@@ -26,6 +26,7 @@
     <nav class="site-nav" id="site-nav" aria-label="Main">
       <ul>
         <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="news.html">News</a></li>
         <li><a href="tools.html">Tools</a></li>
         <li><a href="track.html">Track Request</a></li>
         <li><a href="join.html">Join</a></li>
@@ -97,8 +98,21 @@
     </div>
   </section>
 
+  <!-- ===== Latest from Hygears: the 3 newest posts ===== -->
+  <section class="section" aria-labelledby="news-title">
+    <div class="container">
+      <div class="section-top">
+        <h2 id="news-title">Latest from Hygears</h2>
+        <a href="news.html">All news</a>
+      </div>
+      <!-- Drawn by app.js from the saved posts (a PHP loop with LIMIT 3 in the real site) -->
+      <ul class="post-list" id="latest-posts"></ul>
+      <noscript><p><a href="news.html">Read the latest news</a>.</p></noscript>
+    </div>
+  </section>
+
   <!-- ===== How borrowing works: three cells that fill up ===== -->
-  <section class="section" aria-labelledby="how-title">
+  <section class="section section-gray" aria-labelledby="how-title">
     <div class="container">
       <h2 id="how-title">How borrowing works</h2>
       <ol class="steps">
@@ -118,41 +132,10 @@
     </div>
   </section>
 
-  <!-- ===== Announcements + Join ===== -->
-  <section class="section section-gray" aria-labelledby="news-title">
-    <div class="container">
-      <div class="section-top">
-        <h2 id="news-title">Latest from Hygears</h2>
-        <a href="https://www.facebook.com/PUPHygears">More on Facebook</a>
-      </div>
-      <ul class="news">
-        <li>
-          <p class="kicker">Recruitment</p>
-          <h3>ASCEND 2026 is open</h3>
-          <p>Find your missing piece. Hygears is looking for new members for its five committees.</p>
-          <p><span class="slot">Deadline: officers to post</span></p>
-          <a href="join.html">Apply to join</a>
-        </li>
-        <li>
-          <p class="kicker">Event</p>
-          <h3>PHYNIX 2026 Research Workshop</h3>
-          <p>The org's research workshop for this school year.</p>
-          <p><span class="slot">Date and venue: officers to post</span></p>
-        </li>
-        <li>
-          <p class="kicker">Org news</p>
-          <h3>General Assembly: The Force Awakens</h3>
-          <p>"Refining Our Legacy", the assembly that opened the year for members.</p>
-          <p><span class="slot">Photos: pubmat slot</span></p>
-        </li>
-      </ul>
-    </div>
-  </section>
-
   <section class="section" aria-labelledby="join-title">
     <div class="container split split-wide">
       <div>
-        <p class="kicker">Membership</p>
+        <p class="kicker">Membership &middot; ASCEND 2026 applications open</p>
         <h2 id="join-title">We don't just build vehicles, we build people.</h2>
         <p>Members come from Mechanical, Electronics and Communications, Industrial, Electrical and Computer Engineering, and Marketing. Pick the committee you want to grow in when you apply.</p>
       </div>
@@ -182,6 +165,7 @@
       <div>
         <h2>Portal</h2>
         <ul class="footer-links">
+          <li><a href="news.html">News</a></li>
           <li><a href="tools.html">Tools and consumables</a></li>
           <li><a href="track.html">Track a request</a></li>
           <li><a href="join.html">Apply to join</a></li>

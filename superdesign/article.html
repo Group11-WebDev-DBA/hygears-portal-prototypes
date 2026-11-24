@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>News | PUP Hygears</title>
+  <meta name="description" content="A news post from PUP Hygears.">
+  <link rel="icon" href="../assets/hygears-logo.png">
+  <!-- Fonts: Barlow Semi Condensed (headings) and Barlow (body). Arial is the offline fallback. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ===== Header (same on every page; header.php in the real site) ===== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <img src="../assets/hygears-logo.png" alt="" width="40" height="40">
+      <span>PUP Hygears</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news.html" aria-current="page">News</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        <li><a href="track.html">Track Request</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="officer.html">Officer</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="section">
+    <div class="container">
+      <div class="article">
+        <a class="back-link" href="news.html">&larr; Back to News</a>
+        <!-- Filled by app.js from article.html?id=N (SELECT ... WHERE post_id = ? in the real site) -->
+        <article id="article">
+          <h1>Loading the post&hellip;</h1>
+          <noscript><p>Turn on JavaScript to read posts in this prototype.</p></noscript>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-gray" id="more-posts-section" aria-labelledby="more-title">
+    <div class="container">
+      <div class="section-top">
+        <h2 id="more-title">More posts</h2>
+        <a href="news.html">All news</a>
+      </div>
+      <ul class="post-list" id="more-posts"></ul>
+    </div>
+  </section>
+</main>
+
+<!-- ===== Footer (same on every page; footer.php in the real site) ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../assets/hygears-logo.png" alt="" width="48" height="48">
+          <strong>PUP Hygears</strong>
+        </div>
+        <p class="descriptor">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+        <p>Polytechnic University of the Philippines, Sta. Mesa, Manila<br>
+        College of Engineering and Architecture Building, NDC Compound, Anonas St.</p>
+        <p>#GEARINGUpTowardExcellence</p>
+      </div>
+      <div>
+        <h2>Portal</h2>
+        <ul class="footer-links">
+          <li><a href="news.html">News</a></li>
+          <li><a href="tools.html">Tools and consumables</a></li>
+          <li><a href="track.html">Track a request</a></li>
+          <li><a href="join.html">Apply to join</a></li>
+          <li><a href="about.html#rules">Borrowing rules</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul class="footer-links">
+          <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+          <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-bottom">Student prototype for the Hygears Web Portal. Item lists and records shown here are sample data.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

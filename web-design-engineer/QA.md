@@ -71,3 +71,51 @@ Checked against `ui-requirements-nov21.md`.
 - Verified by scripted run after fixes: filled Reserve shows HYG-2026-0142 with the route at "Pending"; empty Join shows the summary, every field error and the committee error; officer Approve/Decline updates status and the pending count drops to 1.
 
 **Still open:** real pubmats and dates for the news rows, pickup room, review time, ID and replacement rules, the real item list and photos, the step after a membership review, Undo for officer actions, and fonts loading offline.
+
+## News feature (2026-11-24)
+
+Added per `../FEATURE-NEWS.md`: `news.html` (category chips, newest first), `article.html?id=N`, a "Latest from Hygears" strip on Home built from the newest 3 posts (it replaces the three pubmat rows), Applications open/closed on Join, and a **Posts** section on the officer dashboard (table with Edit / Unpublish, a "Write a new post" jump button, the New post form with FileReader preview, Save draft / Publish, plus a fifth summary count). News is in every header. Posts live in `localStorage` under `hygears-routeline-posts`, so a published post shows on News and Home in the same browser.
+
+Checked with phone screenshots at 390 x 844 (News, article top and body, Home strip, officer post rows, officer form with preview and errors, Join closed), laptop at 1280 x 800 (News, article, officer table and form), a 360px overflow check, and a headless Chrome script that signed in and ran the officer flow end to end (empty publish, draft, wrong file type, 3 MB file, good PNG, missing photo description, publish, unpublish a sample, edit), then read News, Home and the article.
+
+### Student reading an article on a phone
+News uses the same ruled rows as the departure board: thumbnail left, category in the stop-label style, date, title, summary, Read more. The article is 18px with line-height 1.7, photos between paragraphs with captions, Back to News on top and More posts at the end.
+- **Minor, news.html / index.html:** the "Cover photo from officers" slot in a row was underlined, because it sits inside the thumbnail link.
+- **Minor, news.html phone:** the Sample tag wraps under the date on narrow rows (accepted: it goes away when real posts replace the samples).
+
+### Officer publishing a post (phone, then laptop)
+The red "Write a new post" button sits next to the Posts heading, so the form is one tap away even under six stacked rows. Empty Publish shows the summary box and three field errors and focuses Title. Save draft needs only a title. A .txt file and a 3 MB PNG each get a plain message and are dropped; a real PNG shows a preview with Remove photo and asks for a photo description. Publish puts the post first in the table and says where it went, with links to the post and to News.
+- **Major, style.css:** there was no `[hidden] { display: none !important; }` rule. Nothing broke yet, but any `hidden` element with a display rule (the preview box, the photo-description field) would have stayed visible.
+
+### Bea, from Facebook, looking for news
+News is the second header link, and Home's strip now links to "All news" instead of only Facebook. The sample posts match what she saw on their page (PHYNIX, the General Assembly, ASCEND, the SOLIDWORKS finalist), each tagged Sample.
+- **Major, join.html closed state:** the aside's "What happens next" route still said "Send this form: You are here" while the form was hidden.
+
+### UI critic: does News fit?
+Yes. It is the site's own vocabulary: ruled rows with a 2px ink top rule (like the catalog board), uppercase stop-label type for the category, the pill chips from Tools for the filter, the dashed slot for missing photos, and the officer table that becomes labelled rows on phones. No new colours; red stays on buttons and the current-page bar.
+
+### Sir Cadaoas rules
+One style.css (section 15 added), the same header with News highlighted on news.html and article.html, labels, hints and error messages on every new field, a summary alert on the form, alt text on every cover and inline photo, 16px+ body (article 18px), 44px+ tap targets, no sideways scroll at 360px, sentence-case headings like the rest of the site. Sample text uses only the brief's facts.
+
+### Hans: rebuild in PHP
+`posts` columns map one to one to the post fields. `getPublishedPosts()` is the SELECT, `postRowHtml()` is the loop body, `escapeHtml()` is `htmlspecialchars`, and the two submit buttons are `name="action"` for `$_POST['action']`. The form reuses the existing `validateForm()` and `showError()`, so there is no second validation system to explain.
+- **Minor:** `e.submitter`, `FileReader` and data URLs each need one sentence at the defense (commented in app.js).
+
+### Accessibility
+Chips use `aria-pressed` like Tools, the post count is a live region, rows are `h3` under an `h2`, the thumbnail and Read more links are hidden from the keyboard so each row is one tab stop, Edit/Unpublish carry the post title in hidden text, Unpublish announces through the existing `dash-announce` live region, and the success panel is `role="status"` and takes focus. Photo errors are written into the field's `error-msg`, which is tied to the input by `aria-describedby`.
+
+### Regression
+Home, Tools, Reserve, Track (`?ref=HYG-2026-0138`), Join, About and the officer sign-in and Approve/Decline flow load with no script errors and the new nav item. The laptop header still fits on one line.
+
+### Fix list
+1. **Major:** no `[hidden]` override in style.css.
+2. **Major:** closed Join still showed the "You are here" route.
+3. **Minor:** underlined slot text in post rows.
+4. **Minor (accepted):** Sample tag wrapping on phones.
+
+### After fixes
+- **1:** `[hidden] { display: none !important; }` added to the base styles.
+- **2:** the closed state also hides the aside, so the page shows only the closed panel with Follow on Facebook and Read the News. Re-shot at 390px.
+- **3:** `.post-thumb` has no underline. Re-shot News on the laptop.
+
+Re-ran the officer script after the fixes: every step passes with no script errors. **Still open:** posts are per browser until PHP/MySQL; photos are capped at 2 MB because the prototype stores them in localStorage; all five posts need real text, dates and photos from the officers; Undo for officer actions (from the first QA) is still open.

@@ -27,6 +27,7 @@
       <nav id="site-nav" class="site-nav" aria-label="Main">
         <ul>
         <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="news.html">News</a></li>
         <li><a href="tools.html">Tools</a></li>
         <li><a href="track.html">Track Request</a></li>
         <li><a href="join.html">Join</a></li>
@@ -101,34 +102,11 @@
       <div class="wrap">
         <div class="section-head">
           <h2 id="news-title">Latest from Hygears</h2>
-          <a href="https://www.facebook.com/PUPHygears">More on Facebook</a>
+          <a class="read-more" href="news.html">All news</a>
         </div>
-        <ul class="news">
-          <li>
-            <div class="news-pic">Pubmat<br>4:5</div>
-            <div>
-              <h3>ASCEND 2026 recruitment</h3>
-              <p>Find your missing piece. Apply to one of five committees.</p>
-              <p class="news-meta"><span class="slot">post date</span> &middot; <a href="join.html">Apply to join</a></p>
-            </div>
-          </li>
-          <li>
-            <div class="news-pic">Pubmat<br>4:5</div>
-            <div>
-              <h3>PHYNIX 2026 Research Workshop</h3>
-              <p>Our research workshop for this school year.</p>
-              <p class="news-meta"><span class="slot">workshop date and venue</span></p>
-            </div>
-          </li>
-          <li>
-            <div class="news-pic">Photo<br>4:5</div>
-            <div>
-              <h3>General Assembly: The Force Awakens, Refining Our Legacy</h3>
-              <p>Members gathered for this year's General Assembly.</p>
-              <p class="news-meta"><span class="slot">event date</span></p>
-            </div>
-          </li>
-        </ul>
+        <!-- The 3 newest published posts, drawn by app.js (a PHP loop with LIMIT 3 in the real site) -->
+        <ul class="post-list" id="latest-posts"></ul>
+        <noscript><p><a href="news.html">Read the latest news</a>.</p></noscript>
       </div>
     </section>
 

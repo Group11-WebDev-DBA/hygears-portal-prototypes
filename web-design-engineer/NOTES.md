@@ -29,7 +29,7 @@ No orange, amber or cream anywhere outside the logo image.
 Both from Google Fonts via one `<link>`; offline they fall back to Helvetica/Arial and Consolas.
 
 ## Files
-`index.html`, `tools.html`, `reserve.html`, `track.html`, `join.html`, `about.html`, `officer.html`, one `style.css` (tokens in `:root`, numbered commented sections, mobile first with 48em and 64em breakpoints), one `app.js` (plain functions, one section per page, commented). Photos and logo are linked from `../assets/`. `QA.md` has the visitor reviews and fixes.
+`index.html`, `news.html`, `article.html`, `tools.html`, `reserve.html`, `track.html`, `join.html`, `about.html`, `officer.html`, one `style.css` (tokens in `:root`, numbered commented sections, mobile first with 48em and 64em breakpoints), one `app.js` (plain functions, one section per page, commented). Photos and logo are linked from `../assets/`. `QA.md` has the visitor reviews and fixes.
 
 ## How the states work (prototype)
 - Tools: search, category, Tools/Consumables chips, Available now only; Reserve links to `reserve.html?item=<slug>`, which pre-selects the item and caps the quantity.
@@ -37,9 +37,26 @@ Both from Google Fonts via one `<link>`; offline they fall back to Helvetica/Ari
 - Track: samples 0142 Pending (with Cancel), 0138 Approved, 0131 Declined; also reads `track.html?ref=`.
 - Officer: any email + password opens the sample dashboard (PHP will do real sign-in with `password_verify`). Approve / Decline / Mark returned / Mark reviewed update the row and the counts.
 
+## News (added 2026-11-24)
+Hygears posts all year, but recruitment and borrowing are seasonal, so the portal now has News, drawn in the same signage language: ruled rows like the departure board, category in the stop-label style, the Tools chips as the filter.
+- `news.html`: newest first, chips for Competition, Progress report, Workshop, Announcement, Recruitment (`news.html?cat=Workshop` opens filtered).
+- `article.html?id=N`: category and date, title, cover, 18px body with inline photos and captions, "Caption by", Back to News, More posts. No id shows the newest.
+- Home: "Latest from Hygears" is now the 3 newest posts.
+- Join: Applications open / closed (`APPLICATIONS_OPEN` in app.js; preview with `join.html?applications=closed`).
+- Officer dashboard: **Posts** (table with Edit / Unpublish, "Write a new post", New post form with title, category, date, cover photo with preview, photo description, summary, body, caption by, Save draft / Publish) and a fifth summary count.
+
+Try it: sign in on `officer.html`, Write a new post, Publish, then open `news.html` in the same browser. Posts are kept in localStorage under `hygears-routeline-posts` (clear it to get the samples back).
+
+How it maps to the real build:
+- `posts` table: `post_id, title, category, summary, body, cover_image, cover_alt, caption_by, status ('draft'/'published'), published_at, created_by`. Cover files go in `uploads/`.
+- `news.html` = `SELECT * FROM posts WHERE status = 'published' ORDER BY published_at DESC` (`AND category = ?` for a chip, `LIMIT 3` for Home). `article.html` = `... WHERE post_id = ? AND status = 'published'`.
+- The officer form = INSERT/UPDATE with prepared statements; the submit buttons send `action=publish|draft`. FileReader is only the preview: PHP checks type and size again and saves with `move_uploaded_file`.
+- The samples' inline photos would be a small `post_photos` table, or left out of v1.
+
+Real material still needed for News: text, dates and photos for all five sample posts (each is marked Sample and written only from the Facebook page facts), and the real recruitment season for the open/closed switch.
+
 ## Needs real material
 - Real item list, counts and photos (all items marked Sample).
-- Pubmats and dates for the three announcements (ASCEND 2026, PHYNIX 2026, General Assembly).
 - Pickup room, review time, ID requirement, replacement policy; borrowing rules are a marked draft.
 - What happens after a membership application is reviewed (their real recruitment uses a Google Form).
 - The current orange-red version of the HG mark if they want it; the site uses the provided red one.

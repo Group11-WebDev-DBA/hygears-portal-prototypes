@@ -30,15 +30,28 @@ No cream, beige, amber or orange.
 
 ## Files
 
-`index.html`, `tools.html`, `reserve.html`, `track.html`, `join.html`, `about.html`, `officer.html`, one `style.css` (sections numbered, tokens in `:root`, mobile first with breakpoints at 48rem and 64rem), one `app.js` (10 commented sections, plain functions). Photos come from `../assets/`.
+`index.html`, `news.html`, `article.html`, `tools.html`, `reserve.html`, `track.html`, `join.html`, `about.html`, `officer.html`, one `style.css` (sections numbered, tokens in `:root`, mobile first with breakpoints at 48rem and 64rem), one `app.js` (11 commented sections, plain functions). Photos come from `../assets/`.
 
 For the PHP rebuild: the header/footer blocks are marked `header.php` / `footer.php`. Item cards and table rows are plain repeated markup for a PHP loop. Form `name`s use the planned column names. The sample bits in `app.js` (the reference number, `REQUESTS`, sign-in) are where MySQL and sessions plug in.
 
 ## What still needs real material
 
 - The real inventory: item names, categories, counts and photos. All 12 items and counts are samples.
-- Announcement pubmats and dates (three slots on Home: ASCEND 2026, PHYNIX 2026, General Assembly).
 - Borrowing rules: longest borrowing period, the late/damage policy, review time and pickup place (dashed "from officers" slots on About and Reserve).
 - The real reference-number format, if it differs from `HYG-2026-0142`, and the real decline reasons.
 - Confirmation that the student number format `2024-01234-MN-0` matches PUP IDs (it's used as the example and the validation pattern).
 - The current orange-red version of the HG mark, if they want it instead of the older red one.
+
+## News (added 2026-11-24)
+
+Hygears posts all year, but recruitment and borrowing are seasonal, so the portal now has News. `news.html` lists posts newest first with a category filter (Competition, Progress report, Workshop, Announcement, Recruitment). `article.html?id=N` shows one post: category and date, title, cover, 18px body with inline photos and captions, "Caption by", Back to News and More Posts. Home shows the 3 newest as "Latest from Hygears" (replacing the three Announcements slots). Join shows Applications open / closed (`APPLICATIONS_OPEN` in app.js; preview the closed state with `join.html?applications=closed`). The officer dashboard has a **Posts** section: a list with Edit / Unpublish, and a New Post form (title, category, date, cover photo with preview, photo description, summary, body, caption by, Save Draft / Publish).
+
+Try it: open `officer.html?view=dashboard`, Write a New Post, Publish, then open `news.html` in the same browser. Posts are kept in localStorage under `hygears-spec-posts` (clear it to get the samples back).
+
+How it maps to the real build:
+- `posts` table: `post_id, title, category, summary, body, cover_image, cover_alt, caption_by, status ('draft'/'published'), published_at, created_by`. Cover files go in `uploads/`.
+- `news.html` = `SELECT * FROM posts WHERE status = 'published' ORDER BY published_at DESC` (add `AND category = ?` for the filter, `LIMIT 3` for Home). `article.html` = `... WHERE post_id = ? AND status = 'published'`.
+- The officer form = INSERT/UPDATE with prepared statements. The two submit buttons send `action=publish|draft`. FileReader is only the preview: PHP checks the type and size again and saves the file with `move_uploaded_file`.
+- The samples' inline article photos (`photos`) would be a small `post_photos` table, or left out of v1.
+
+Still needs real material: the text, dates and photos for all five sample posts (each is marked Sample and written only from the Facebook page facts), and the real recruitment season for the open/closed switch.

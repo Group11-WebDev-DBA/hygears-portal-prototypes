@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>News | PUP Hygears</title>
+  <meta name="description" content="Competitions, progress reports, workshops and announcements from PUP Hygears.">
+  <link rel="icon" href="../assets/hygears-logo.png">
+  <!-- Fonts: Instrument Sans (all text) and JetBrains Mono (reference numbers). Falls back to Arial offline. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ===== Header (same on every page; becomes header.php later) ===== -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <!-- decorative: the name is written right next to the logo -->
+        <img src="../assets/hygears-logo.png" alt="" width="40" height="40">
+        <span>PUP Hygears</span>
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news.html" aria-current="page">News</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        <li><a href="track.html">Track Request</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="officer.html" class="nav-officer">Officers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="page-head">
+      <div class="wrap">
+        <h1>News</h1>
+        <p class="lead">Competitions, progress reports, workshops and announcements from PUP Hygears.</p>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="news-filter">
+        <span class="filter-label" id="cat-label">Category</span>
+        <div class="chips" role="group" aria-labelledby="cat-label">
+            <button type="button" class="chip news-chip" data-cat="all" aria-pressed="true">All</button>
+            <button type="button" class="chip news-chip" data-cat="Competition" aria-pressed="false">Competition</button>
+            <button type="button" class="chip news-chip" data-cat="Progress report" aria-pressed="false">Progress report</button>
+            <button type="button" class="chip news-chip" data-cat="Workshop" aria-pressed="false">Workshop</button>
+            <button type="button" class="chip news-chip" data-cat="Announcement" aria-pressed="false">Announcement</button>
+            <button type="button" class="chip news-chip" data-cat="Recruitment" aria-pressed="false">Recruitment</button>
+        </div>
+      </div>
+      <p class="result-count" id="news-count" aria-live="polite">Loading posts&hellip;</p>
+      <p class="small muted"><span class="sample-tag">Sample</span> Posts are written from the org's Facebook page until the officers publish real ones.</p>
+
+      <h2 class="visually-hidden">Posts</h2>
+      <!-- Rows drawn by app.js from the saved posts (a PHP loop over the posts table in the real site) -->
+      <ul class="post-list" id="news-list"></ul>
+      <noscript><p>Turn on JavaScript to see the posts in this prototype.</p></noscript>
+
+      <div class="empty-state" id="news-empty">
+        <h2>No posts in this category yet</h2>
+        <p class="muted">Try another category, or tap All.</p>
+      </div>
+    </div>
+</main>
+
+  <!-- ===== Footer (same on every page; becomes footer.php later) ===== -->
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <img class="footer-logo" src="../assets/hygears-logo.png" alt="" width="48" height="48">
+        <p class="footer-name">PUP Hygears</p>
+        <p class="footer-line">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+        <p class="footer-line">#GEARINGUpTowardExcellence</p>
+      </div>
+      <div>
+        <h2 class="footer-h">Find us</h2>
+        <address>College of Engineering and Architecture Building, NDC Compound, Anonas St., Sta. Mesa, Manila</address>
+      </div>
+      <div>
+        <h2 class="footer-h">Contact</h2>
+        <ul class="footer-links">
+          <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+          <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+          <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+          <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap">
+      <p class="footer-base">Hygears Web Portal prototype. Items, requests and dates marked "Sample" are placeholders until the officers supply the real list.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

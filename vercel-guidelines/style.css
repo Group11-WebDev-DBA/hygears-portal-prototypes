@@ -1799,3 +1799,15 @@ input[type="file"] {
     grid-template-columns: repeat(5, 1fr);
   }
 }
+
+/* "All news" beside a section title: a full-size tap target */
+.section-head-row > a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+}
+
+/* Dates in the officer tables stay on one line */
+.table time {
+  white-space: nowrap;
+}
