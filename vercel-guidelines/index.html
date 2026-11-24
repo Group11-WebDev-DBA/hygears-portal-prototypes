@@ -31,6 +31,7 @@
     <nav id="site-nav" class="site-nav" aria-label="Main">
       <ul>
         <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="news.html">News</a></li>
         <li><a href="tools.html">Tools</a></li>
         <li><a href="track.html">Track Request</a></li>
         <li><a href="join.html">Join</a></li>
@@ -85,33 +86,16 @@
 
   <section class="section" aria-labelledby="news-title">
     <div class="container">
-      <div class="section-head">
-        <h2 id="news-title">Announcements</h2>
-        <p>Latest from the organization.</p>
+      <div class="section-head section-head-row">
+        <div>
+          <h2 id="news-title">Latest from Hygears</h2>
+          <p>Competitions, progress reports and workshops.</p>
+        </div>
+        <a href="news.html">All news</a>
       </div>
-      <div class="card-grid">
-        <article class="card news-card">
-          <div class="pubmat-slot">Campaign graphic from Creative Media and Design</div>
-          <p class="meta"><span class="slot">Date from officers</span></p>
-          <h3>ASCEND 2026 Recruitment</h3>
-          <p>Applications for new members are open. Pick the committee you want to grow in and apply.</p>
-          <a href="join.html">Apply to Join</a>
-        </article>
-        <article class="card news-card">
-          <div class="pubmat-slot">Campaign graphic from Creative Media and Design</div>
-          <p class="meta"><span class="slot">Date from officers</span></p>
-          <h3>PHYNIX 2026 Research Workshop</h3>
-          <p>A research workshop run by the organization for PUP students.</p>
-          <a href="about.html">About Hygears</a>
-        </article>
-        <article class="card news-card">
-          <div class="pubmat-slot">Campaign graphic from Creative Media and Design</div>
-          <p class="meta"><span class="slot">Date from officers</span></p>
-          <h3>General Assembly: &ldquo;The Force Awakens: Refining Our Legacy&rdquo;</h3>
-          <p>The organization&rsquo;s general assembly for members.</p>
-          <a href="about.html">About Hygears</a>
-        </article>
-      </div>
+      <!-- The 3 newest published posts, drawn by app.js (a PHP loop with LIMIT 3 in the real site) -->
+      <ul class="card-grid post-list" id="latest-posts"></ul>
+      <noscript><p><a href="news.html">Read the latest news</a>.</p></noscript>
     </div>
   </section>
 
@@ -146,6 +130,7 @@
       <div>
         <h2>Portal</h2>
         <ul>
+          <li><a href="news.html">News</a></li>
           <li><a href="tools.html">Tools &amp; Consumables</a></li>
           <li><a href="track.html">Track Request</a></li>
           <li><a href="join.html">Join Hygears</a></li>

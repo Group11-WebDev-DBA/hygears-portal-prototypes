@@ -805,7 +805,7 @@ if (articleBox) {
   if (!post) {
     articleBox.innerHTML = '<h1>Post Not Found</h1><p>This post was unpublished or never existed. ' +
       '<a href="news.html">See all news</a>.</p>';
-    document.getElementById("more-title").hidden = true;
+    document.getElementById("more-title").closest("section").hidden = true;
   } else {
     document.title = post.title + " | PUP Hygears";
 
