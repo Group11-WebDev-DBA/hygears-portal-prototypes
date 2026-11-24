@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>News, PUP Hygears</title>
+<meta name="description" content="Competitions, progress reports, workshops and announcements from PUP Hygears.">
+<link rel="icon" href="../assets/hygears-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<!-- Adds a "js" class so the CSS knows JavaScript is on (used to hide the officer dashboard until sign-in) -->
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="container site-head__bar">
+    <a class="brand" href="index.html" aria-label="PUP Hygears home"><img src="../assets/hygears-logo.png" width="222" height="224" alt="">PUP Hygears</a>
+    <nav class="nav" aria-label="Main">
+      <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="news.html" aria-current="page">News</a></li>
+          <li><a href="tools.html">Tools</a></li>
+          <li><a href="track.html">Track request</a></li>
+          <li><a href="join.html">Join</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="officer.html">Officers</a></li>
+      </ul>
+    </nav>
+    <form class="search" action="tools.html" method="get" role="search">
+      <label class="visually-hidden" for="nav-q">Search tools and consumables</label>
+      <input class="input input--sm" id="nav-q" name="q" type="search" placeholder="Search tools" autocomplete="off">
+      <button class="btn btn--sm" type="submit">Search</button>
+    </form>
+  </div>
+</header>
+<main id="main">
+  <section class="page-head">
+    <div class="container">
+      <h1>News</h1>
+      <p class="lead">Competitions, progress reports, workshops and announcements from Hygears.</p>
+      <p class="muted small news-note">Sample posts written from events on the Hygears Facebook page. Officers publish the real ones from the dashboard.</p>
+    </div>
+  </section>
+
+  <section class="section--s" aria-label="Posts">
+    <div class="container">
+      <form class="news-filter" id="news-filter">
+        <fieldset class="seg"><legend>Show</legend>
+          <input type="radio" name="cat" id="nc-all" value="" checked><label for="nc-all">All posts</label>
+          <input type="radio" name="cat" id="nc-comp" value="Competition"><label for="nc-comp">Competition</label>
+          <input type="radio" name="cat" id="nc-prog" value="Progress report"><label for="nc-prog">Progress report</label>
+          <input type="radio" name="cat" id="nc-work" value="Workshop"><label for="nc-work">Workshop</label>
+          <input type="radio" name="cat" id="nc-ann" value="Announcement"><label for="nc-ann">Announcement</label>
+          <input type="radio" name="cat" id="nc-rec" value="Recruitment"><label for="nc-rec">Recruitment</label>
+        </fieldset>
+      </form>
+      <p class="muted small" id="news-count" aria-live="polite"></p>
+      <!-- app.js fills this list (PHP: SELECT * FROM posts WHERE status = 'published' ORDER BY published_at DESC) -->
+      <div class="posts" id="news-list"><noscript><p>Turn on JavaScript to see the posts in this prototype. The real site lists them with PHP.</p></noscript></div>
+      <p class="muted" id="news-empty" hidden>No posts in this category yet. <a href="news.html">Show all posts</a></p>
+    </div>
+  </section>
+</main>
+<footer class="site-foot">
+  <div class="container">
+    <p class="site-foot__mark"><img src="../assets/hygears-logo.png" width="222" height="224" alt="">PUP Hygears</p>
+    <p class="site-foot__line">“We don’t just build vehicles, we build people to help us build the future!” #GEARINGUpTowardExcellence</p>
+    <p class="site-foot__line">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+    <div class="site-foot__cols">
+      <div><h2>Pages</h2><ul><li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li></ul></div>
+      <div><h2>Contact</h2><ul>
+        <li><a href="https://www.instagram.com/puphygears">Instagram: puphygears</a></li>
+        <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+        <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+      </ul></div>
+      <div><h2>Where</h2><p>Polytechnic University of the Philippines, Sta. Mesa, Manila</p></div>
+    </div>
+    <p class="site-foot__legal">A student research organization of PUP. Prototype for review: sample data is marked as sample.</p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

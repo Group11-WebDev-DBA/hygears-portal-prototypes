@@ -44,3 +44,12 @@ One family: **Archivo** (Google Fonts). Headings use `font-stretch: 75%` (its na
 
 ## Process note
 The impeccable skill's launcher scripts were not run (safety rule). Its written guidance was followed by hand: mode, a world taken from the audience's own workshop, craft floor, and a critique pass in QA.md.
+
+## News feature (2026-11-24)
+- **Pages:** `news.html` (Category select, newest first, 1/2/3 columns) and `article.html?id=N` (no id = newest). Home's "Latest from Hygears" is now the 3 newest posts as cards with an "All news" link. Join shows an "Applications open" chip, or with `join.html?season=closed` a closed panel with "Follow us for the next ASCEND".
+- **Nav:** News is the second item on every page.
+- **Look:** post cards are the board's white label plates with a 4px near-black top edge under a photo; a post with no photo gets a dashed "Photo to come" slot. Article body is 18px at 1.65, max 40rem.
+- **Officer Posts:** a "published posts" jump link, a table (cards on phones) with Published/Draft chips and Edit / Unpublish, then the New post form: title, category, date, cover photo with FileReader preview and Remove, photo description (required only with a photo), summary, body, caption by, Publish / Save draft / Cancel edit. Covers must be JPG/PNG/WebP under 2 MB.
+- **Storage:** posts live in localStorage under `hg-posts-impeccable` (own key, so other prototypes opened from file:// don't mix in). Clear it to get the five samples back.
+- **Real build:** `posts` table: post_id, title, category, summary, body, cover_image (file name), caption_by, status (draft/published), published_at, created_by (officer). Covers go in `uploads/`. news.html = `SELECT ... WHERE status = 'published' ORDER BY published_at DESC`; the officer form = INSERT/UPDATE with prepared statements.
+- **Needs real material:** real post text, dates, covers and caption writers (all five posts are marked sample).

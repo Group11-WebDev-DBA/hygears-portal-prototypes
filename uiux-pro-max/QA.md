@@ -79,3 +79,46 @@ Still open:
 - The white HG mark for the dark footer.
 - Phone-table semantics in older screen readers (see 7).
 - The login is a prototype that accepts anything. The PHP build needs `password_verify()` and sessions.
+
+
+## News feature (2026-11-24)
+
+Added per `../FEATURE-NEWS.md`: `news.html` ("From the pit lane."), `article.html`, a "Latest from Hygears" strip on Home (it replaces the three Announcement cards), an Applications open / closed tag on Join (`join.html?season=closed` shows the closed card), a Posts section on the officer desk with a fifth counter plate, and News in every header (after Home). Screens: news phone 390 and laptop 1280, article `?id=5` phone (full), officer Posts phone and laptop (signed in by script), home strip laptop, join closed phone. Behaviour checked with a headless script that signed in and drove the officer form: empty Publish, a .txt file, a 3 MB file, a real PNG, Publish, then read news.html, index.html and `article.html?id=6`.
+
+### Student reading an article on a phone
+"Back to News at the top, then the date on a little black pit-board plate, the category box and a 'Sample article' sticker. The title is big and uppercase like every page. The text is 18px with space between paragraphs, the photos have the same thick frame and hard shadow as Home, and the inline one has a caption bar."
+- Pass.
+
+### Officer publishing (phone, then laptop)
+"There's a 'published posts' plate with the other counters, so I can jump to Posts. On the phone the posts table turns into the same cards as the reservations. Empty Publish gave 'Fix 3 things to continue' with links (title, category, body). A .txt file and a 3 MB file each got a message under the field. A real photo showed a preview in a frame, then asked me to describe it. Publish shows 'Saving...' for a moment like the other forms, then my post is at the top of the table with 'Published ... shows on News in this browser', and first on News, Home and its own page."
+- Major (fixed): on the laptop the posts table wrapped the date onto two lines and stacked Edit above Unpublish in every row.
+- Blocker caught while building (fixed before testing): the error-summary box and the Summary textarea both had `id="p-summary"`. The box is now `p-errors`.
+- Minor (open): photos are stored as data URLs in localStorage, so a few 2 MB photos fill it. The form catches it and says to use a smaller photo; the real site saves files in `uploads/`.
+
+### Bea from Facebook looking for news
+"News is in the menu right after Home and the cards are the things their page posts about: PHYNIX, the General Assembly with the Merakis, ASCEND and the SOLIDWORKS finalist. The Recruitment chip filters to ASCEND. Everything says Sample."
+- Pass. No invented results, numbers or quotes.
+
+### UI critic: does News fit?
+"Yes. Cards are the catalogue's bordered hard-shadow cards, the dates are pit-board plates (the site's one idea: every number on a plate), the filter is the Tools chip row, the category is the existing `.tag`, the officer list is the existing card-on-phone table, the form is the Join form, status uses the Published (solid) / Draft (gray) tags."
+- Minor (fixed): on Join, the Applications open/closed tag touched the lead paragraph.
+- Minor (open): Home's lower "Apply to join" button is still red, and in the closed state the Committees card still mentions the Google Form.
+
+### Sir Cadaoas
+- Pass: same header/footer on all 9 pages, News current on news.html (`aria-current="page"`) and article.html (`aria-current="true"`), one style.css (new section 14b, commented), same h1/h2/h3 variables, every new field has a label, hint and error, alt text on every photo (a cover photo must be described before publishing), red only on Publish.
+
+### Hans (PHP rebuild)
+"Same style as the rest of app.js: top-level `const`, plain functions, string concatenation, one section per page. `SAMPLE_POSTS` is the posts table; `getPosts()`/`savePosts()` are the SELECT and INSERT/UPDATE; the next id is AUTO_INCREMENT. Required fields use the same `required` + `data-required` attributes as Join, so `setupForm()` checks them with no new code. The file check sets `data-extra-error`, which the existing `checkField()` already reads. FileReader is only the preview; PHP uses `move_uploaded_file()` and `htmlspecialchars()` where this uses `esc()`."
+- Pass.
+
+### Accessibility
+- Pass: chips are buttons with `aria-pressed`, the post count is `aria-live`, each card has one title link plus "Read more" with the title in hidden text, Edit/Unpublish buttons carry the post title in hidden text, the error summary takes focus and links to fields, the publish result takes focus and is also announced through `#live`, the photo description is disabled (skipped) when there is no photo.
+
+### Regression
+Home hero, quick track, shelf, Tools, Reserve, Track, Join (open), About and the rest of the officer desk are unchanged. The phone menu lists 7 items; the counter plates are 2 per row on phones, 4 then 1 on tablets and 5 in a row from 992px.
+
+### After fixes
+- Posts table: `.posts-table` keeps the date on one line and the two buttons side by side from 768px.
+- Duplicate id removed (`p-errors`).
+- `.page-head .status` gets a top margin.
+- Still open: photo size vs. localStorage (prototype only), Home's red Apply button, the Google Form line on a closed Join page.

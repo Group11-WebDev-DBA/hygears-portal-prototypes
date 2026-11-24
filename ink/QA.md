@@ -70,3 +70,70 @@ Re-checked phone and laptop on officer (signed in) and tools: all fixed.
 - Phone officer cards are still long (about 380px each). Fine for a prototype; the real site could show 5 per page with PHP.
 - Nine-field reserve form on a phone. Name, student number, email and course could be remembered after the first request once there are accounts.
 - No "back in stock" date for items with none left; needs the borrow records from the database.
+
+
+---
+
+# News feature (QA run 2026-11-24)
+
+Added per `../FEATURE-NEWS.md`: `news.html`, `article.html`, the "Latest from Hygears" strip on Home, the applications open/closed state on Join, a Posts section on the Officer desk, and News in every header and footer. Checked at 390 x 844 and 360 x 800 (phone) and 1280 x 800 and 980 wide (laptop) on news, article (`?id=3`), home, join (`?season=closed`) and officer (signed in, with a photo chosen). The publish flow was run end to end in headless Chrome: empty form, wrong file type, a 3 MB file, a good PNG with preview, missing photo description, publish, unpublish a sample, edit and save, then news.html, index.html and article.html read back in the same browser profile. No page scrolls sideways at 360px.
+
+## 1. A student reading an article on a phone
+"I tapped the ASCEND post from News. The category and date are on top, the title is big, then the team photo and the text. The text is a good size and the lines aren't too long. Back to News is right at the top, and at the end there are three more posts. The News list itself was the problem at first: six filter buttons took three rows and the first post was a huge empty 'Photo to come' box, so I saw no news on the first screen."
+- Works: 18px body at 1.7 line height, about 68 characters per line; Back to News at the top; More posts at the end; "Sample article" marked.
+- Fails: News list on a phone, filter in three rows plus an empty 200px photo slot before the first headline. **Major**
+
+## 2. Paolo, officer, publishing on phone and laptop
+"New post is a red button next to Sign out, so I don't scroll past four tables to find it. The form is the same gray slip as everything else. I picked a photo and saw it straight away, with Remove photo under it. Publish with nothing filled in: every missing field said what to do. A 3 MB photo got 'That photo is 3.0 MB. Use one under 2 MB.' I published, the post sat on top of the list with a message linking to News, and it was there on News. On the laptop the dates broke over two lines. When I edited a post and saved, the message said 'Published' again, which made me think I'd posted it twice."
+- Works: preview with FileReader, type and size checks, required title, category, date and body, Publish vs Save draft, Edit and Unpublish/Publish per row, status message that gets focus.
+- Fails: date column wrapped on laptop. **Minor**
+- Fails: edit confirmation said "Published". **Minor**
+- Fails (found reading the code, fixed before the visit): the site-wide "no past dates" rule also hit the post date, so an officer couldn't post about last week's event. **Major**
+
+## 3. Bea, from Facebook, looking for news
+"News is the second link in the menu. The ASCEND post and the General Assembly are there, and 'Merakis' and 'Nex-thinkers' are their own words. When I opened the closed version of Join it still said 'Apply here' and 'Pick the committee you would most like to work in' with no form under it, which is confusing."
+- Works: News in nav, highlighted on news and article; posts use the org's own event names; Join shows "Applications open" with the ASCEND line.
+- Fails: Join closed state left the application heading and committee text on the page, and the lead still said "Apply here". **Major**
+
+## 4. Senior UI/UX designer
+"News is built from parts the site already has: the black top rule from the catalogue rows, the gray tags, the Tools segmented filter, the slip for the form. No new colours: red is only on Publish, New post and the nav marker. It looks like the same site. The article is a calm single column. Weak spots: on a laptop the article column sits left with an empty right side (consistent with every page head here, so I'd leave it), and three 24px card titles in a row are heavy but readable."
+- No new issues beyond the phone list (see 1).
+
+## 5. Sir Cadaoas
+- Palette and accent: category tags are gray with words, red only for actions. Pass.
+- Same h1/h2/h3 sizes; article body 18px (1.125rem), line height 1.7, max 68ch. Pass.
+- One `style.css` (new section 14), one `app.js`, same header and footer, News marked current on news and article. Pass.
+- Labels, hints and error text on every New post field; alt text on every photo, and officers must describe their cover photo. Pass.
+- "The officer publishes from the browser and the list updates. That's the dynamic part the defense needs, once PHP saves it."
+
+## 6. Hans, rebuilding it in PHP
+"The posts are one array of objects whose keys match the `posts` columns. news.html is a loop over the published ones, newest first, which is `SELECT ... WHERE status = 'published' ORDER BY published_at DESC` and a `while` loop in PHP. The form fields use the column names (`title`, `category`, `summary`, `body`, `caption_by`). New things to look up before the defense: `FileReader` and data URLs (PHP replaces them with `move_uploaded_file` into `uploads/`), `JSON.stringify`/`JSON.parse` for localStorage, and `sort()` with a compare function. All commented."
+- No blockers. **Minor:** the lookups above.
+
+## 7. Accessibility
+- Filter is a fieldset with a legend and real radio buttons; the post count is `aria-live`.
+- Each post has one heading; "Read more" carries the title for screen readers; list thumbnails have empty alt because the title follows, while the article's photos have full alt text.
+- Officer: Edit and Unpublish buttons are labelled with the post title; the status message is `role="status"` and gets focus; Edit moves focus to the form heading; every field has a label, hint and `aria-live` error.
+- Fails (fixed while building): the spec's form had no way to give the cover photo alt text. **Major**
+
+## Fix list (News feature)
+1. **Major** News list on a phone: filter in three rows and an empty photo slot before the first headline.
+2. **Major** Join closed state still showed the application heading and "Apply here".
+3. **Major** Post date blocked past dates. (fixed before the visits)
+4. **Major** No alt text for officer cover photos. (fixed while building)
+5. **Minor** Officer posts table: dates wrap on laptop.
+6. **Minor** Editing a post said "Published".
+
+## After fixes
+- 1: filter buttons on News are 44px tall with smaller padding and text, so six fit in two rows at 390px; posts without a photo hide the empty slot on phones (it stays from 640px up so the grid lines up). Re-shot: the first headline is on the first screen.
+- 2: the closed message moved under the page heading, the whole application section (`#apply`) hides when closed, and the lead now reads "Applications open each ASCEND recruitment season".
+- 3: the post date has `data-nomin`, and the "no past dates" loop skips it.
+- 4: "Photo description" field, checked in `extraCheck` only when a photo is chosen.
+- 5: `white-space: nowrap` on the Date column.
+- 6: edits now say "Saved changes to ...".
+
+**Still open**
+- Browser storage holds about 5 MB, so only a few posts with photos fit. When it is full the form says so. The real site saves files to `uploads/` and keeps only the file name.
+- News, the home strip and the article are drawn by JavaScript, so without JS they show a short note. PHP will print them on the server.
+- No Delete (the spec asks for Edit and Unpublish). Clearing the browser's site data brings the sample posts back.
+- Two samples have no photo, so laptop News and Home show one "Photo to come" box.

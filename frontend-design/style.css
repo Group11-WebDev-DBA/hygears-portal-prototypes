@@ -97,11 +97,11 @@ a:hover { text-decoration-thickness: 0.14em; }
 
 /* Phone: the main nav is a thumb bar fixed to the bottom of the screen */
 .nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: var(--dark); }
-.nav ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); }
+.nav ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); }
 .nav a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: var(--tabbar); color: var(--dark-text); text-decoration: none; font-size: 0.8125rem; font-weight: 600; }
 .nav svg { width: 1.375rem; height: 1.375rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 /* current tab: white text and a red bar along its top edge */
-.nav a[aria-current="page"] { color: #FFFFFF; box-shadow: inset 0 4px 0 var(--red); }
+.nav a[aria-current] { color: #FFFFFF; box-shadow: inset 0 4px 0 var(--red); }
 .nav a:focus-visible { outline-color: #FFFFFF; outline-offset: -4px; }
 
 /* ---------- Buttons ---------- */
@@ -271,12 +271,45 @@ fieldset.field { border: 0; padding: 0; margin: 0; min-width: 0; }
 
 .tag-row { display: grid; gap: var(--s6); }
 
-/* ---------- Announcements ---------- */
-.news { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
-.news li { display: grid; grid-template-columns: 5.5rem 1fr; gap: var(--s4); padding-top: var(--s5); padding-bottom: var(--s5); border-bottom: 1px solid var(--line); }
-.pubmat { aspect-ratio: 1; display: grid; place-items: center; text-align: center; padding: var(--s2); background: var(--board); border: 1px dashed var(--edge); font-size: 0.8125rem; color: var(--ink-soft); line-height: 1.25; }
-.news h3 { margin-bottom: var(--s2); }
-.news p { margin-bottom: var(--s2); }
+/* ---------- News: post cards (news.html, the home strip, "More posts") ---------- */
+/* Each post is a white label plate under its photo, like the plates under the tools */
+.posts { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s5); }
+.post { display: flex; flex-direction: column; min-width: 0; background: var(--paper); border: 1px solid var(--line); }
+.post__cover { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+/* no photo yet: a dashed slot, like an empty spot on the board */
+.post__slot { aspect-ratio: 16 / 9; display: grid; place-items: center; background: var(--board); color: var(--ink-soft); font-size: var(--small); border-bottom: 1px dashed var(--edge); }
+.post__plate { flex: 1; display: flex; flex-direction: column; gap: var(--s2); padding: var(--s4); border-top: 4px solid var(--ink); }
+.post__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3); margin: 0; font-size: var(--small); color: var(--ink-soft); }
+.post__cat { font-weight: 700; color: var(--ink); border: 2px solid var(--ink); padding: 0 var(--s2); }
+.post h3 { font-size: 1.1875rem; line-height: 1.25; margin: 0; }
+.post h3 a { text-decoration: none; }
+.post h3 a:hover { text-decoration: underline; }
+.post p { margin: 0; }
+.post__more { margin-top: auto; display: inline-flex; align-items: center; min-height: var(--tap); font-weight: 700; }
+
+/* ---------- Article page ---------- */
+.back { margin: 0; padding-top: var(--s4); }
+.back a { display: inline-flex; align-items: center; min-height: var(--tap); font-weight: 700; }
+.back a::before { content: "\2190"; margin-right: var(--s2); }   /* left arrow */
+.article { max-width: 42rem; padding-top: var(--s4); padding-bottom: var(--s7); }
+.article .post__meta { margin-bottom: var(--s4); }
+.article figure { margin: var(--s5) 0; }
+.article figure img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border: 2px solid var(--ink); }
+.article figcaption { margin-top: var(--s2); font-size: var(--small); color: var(--ink-soft); }
+/* reading text: 18px, about 70 characters a line */
+.article__body p { font-size: 1.125rem; line-height: 1.65; max-width: 38rem; margin-bottom: var(--s5); }
+.article__by { padding-top: var(--s4); border-top: 1px solid var(--line); color: var(--ink-soft); }
+.article__by strong { color: var(--ink); }
+
+/* ---------- Officer: Posts section ---------- */
+.posts-desk { margin-top: var(--s7); padding-top: var(--s6); border-top: 6px solid var(--ink); }
+.posts-desk .queue { margin-bottom: var(--s4); }
+.textarea--short { min-height: 5rem; }
+.textarea--long { min-height: 14rem; }
+.input--file { padding: var(--s2); }
+.preview { display: grid; gap: var(--s3); max-width: 24rem; }
+.preview img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border: 2px solid var(--ink); }
+.preview .btn { justify-self: start; }
 
 /* ---------- Photo + quote band ---------- */
 .quote-band { background: var(--dark); color: #FFFFFF; }
@@ -354,10 +387,10 @@ address { font-style: normal; }
   .board--mini .slot__use { display: none; }
   .field-row { grid-template-columns: 1fr 1fr; }
   .tiles { grid-template-columns: 1fr 1fr; }
-  .tally { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .tally { grid-template-columns: repeat(5, minmax(0, 1fr)); }
   .tag-row { grid-template-columns: 1fr 1fr; }
   .footer__grid { grid-template-columns: 1.4fr 1fr 1fr; }
-  .news li { grid-template-columns: 7.5rem 1fr; gap: var(--s5); }
+  .posts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 /* ---------- Laptop: nav moves into the header ---------- */
@@ -371,7 +404,7 @@ address { font-style: normal; }
   .nav { position: static; background: none; padding: 0; margin-left: auto; }
   .nav ul { display: flex; gap: var(--s1); }
   .nav a { flex-direction: row; gap: var(--s2); min-height: 4.5rem; padding-left: var(--s3); padding-right: var(--s3); color: var(--ink); font-size: 1rem; }
-  .nav a[aria-current="page"] { color: var(--ink); box-shadow: inset 0 -5px 0 var(--red); }
+  .nav a[aria-current] { color: var(--ink); box-shadow: inset 0 -5px 0 var(--red); }
   .nav a:hover { text-decoration: underline; }
   .nav a:focus-visible { outline-color: var(--ink); }
   .officer-link { margin-left: var(--s3); border-left: 1px solid var(--line); padding-left: var(--s4); }
@@ -383,6 +416,9 @@ address { font-style: normal; }
   .quote-band .wrap { display: grid; grid-template-columns: 1.3fr 1fr; gap: var(--s6); align-items: center; }
   .quote-band img { aspect-ratio: 4 / 3; }
   .desk { grid-template-columns: 1.3fr 1fr; align-items: start; }
+  .posts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .posts-desk .queue { grid-template-columns: 1fr 1fr; }   /* two post cards a row, so Edit/Unpublish stay button-sized */
+  .posts-desk .form { max-width: 48rem; }
   .item-summary { grid-template-columns: 9rem 1fr; }
 }
 

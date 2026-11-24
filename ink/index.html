@@ -20,7 +20,7 @@
     <nav class="pill" aria-label="Main">
       <a class="brand" href="index.html"><img src="../assets/hygears-logo.png" width="40" height="40" alt="">PUP Hygears</a>
       <button class="btn btn--quiet btn--sm menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
-      <ul class="nav-links" id="nav-links"><li><a href="index.html" aria-current="page">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a class="nav-officer" href="officer.html">Officer</a></li></ul>
+      <ul class="nav-links" id="nav-links"><li><a href="index.html" aria-current="page">Home</a></li><li><a href="news.html">News</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a class="nav-officer" href="officer.html">Officer</a></li></ul>
     </nav>
   </div>
 </header>
@@ -31,7 +31,7 @@
       <p class="eyebrow">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
       <h1>Tools for your build, lent by Hygears.</h1>
       <p class="lead">Reserve a tool online, pick it up, bring it back.</p>
-      <div class="actions"><a class="btn btn--quiet" href="tools.html">Browse the catalogue</a><a class="btn btn--quiet" href="join.html">Apply to join</a></div>
+      <div class="actions"><a class="btn btn--quiet" href="tools.html">Browse the catalogue</a><a class="btn btn--quiet" href="news.html">Read the news</a></div>
     </div>
     <form class="slip" id="counter" action="tools.html#reserve" method="get" aria-labelledby="counter-title">
       <div class="slip__title"><p class="slip__name" id="counter-title">Start a reservation</p><span class="note">Sample stock</span></div>
@@ -68,14 +68,11 @@
   </div>
 </section>
 
-<section class="section" aria-labelledby="notices-title">
+<section class="section" aria-labelledby="latest-title">
   <div class="container">
-    <div class="section-head"><h2 id="notices-title">Notices from the desk</h2><p class="note">Sample notices. Officers post the real ones from their dashboard.</p></div>
-    <ul class="rows">
-      <li><time datetime="2026-11-20">20 November 2026</time><h3>Reservations move online</h3><p>Keep your reference number to track the request.</p></li>
-      <li><time datetime="2026-11-12">12 November 2026</time><h3>Membership applications are open</h3><p>Pick your preferred committee on the form.</p></li>
-      <li><time datetime="2026-11-05">5 November 2026</time><h3>Bring tools back on time</h3><p>Someone else holds the next reservation.</p></li>
-    </ul>
+    <div class="section-head section-head--row"><h2 id="latest-title">Latest from Hygears</h2><a class="btn btn--quiet btn--sm" href="news.html">All news</a></div>
+    <!-- app.js fills this with the 3 newest published posts (PHP: SELECT ... LIMIT 3) -->
+    <div class="posts" id="latest-posts"><noscript><p><a href="news.html">Read the news</a></p></noscript></div>
   </div>
 </section>
 
@@ -83,7 +80,7 @@
   <div class="container">
     <h2 id="join-title" class="visually-hidden">Join Hygears</h2>
     <blockquote><p class="big-quote">&ldquo;We don&rsquo;t just build vehicles, we build people to help us build the future!&rdquo;</p><footer>The Hygears tagline, #GEARINGUpTowardExcellence</footer></blockquote>
-    <div class="actions"><a class="btn" href="join.html">Apply to join</a></div>
+    <div class="actions"><a class="btn btn--quiet" href="join.html">Membership and ASCEND</a></div>
   </div>
 </section>
 </main>
@@ -92,7 +89,7 @@
     <div class="colophon">
       <img src="../assets/hygears-logo.png" width="48" height="48" alt="PUP Hygears logo">
       <div><p><strong>PUP Hygears</strong> is a student research organization at the Polytechnic University of the Philippines, Sta. Mesa, Manila. Find us on <a href="https://www.instagram.com/puphygears/">Instagram</a>, <a href="https://www.facebook.com/PUPHygears">Facebook</a> and <a href="https://x.com/pup_hygears">X</a>, or write to <a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a>. Photographs by PUP Hygears.</p><p class="tagline">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p></div>
-      <ul class="foot-links"><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer desk</a></li></ul>
+      <ul class="foot-links"><li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer desk</a></li></ul>
     </div>
     <p class="legal">A prototype of the Hygears Web Portal, made for a Web Development final project in 2026. Sample data is marked where it appears.</p>
   </div>

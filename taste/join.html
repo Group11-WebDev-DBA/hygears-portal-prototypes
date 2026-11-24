@@ -26,6 +26,7 @@
     <a class="skip-link" href="#top">Skip to content</a>
     <a class="nav__logo" href="index.html"><img src="img/hygears-logo.png" alt="" width="32" height="32">PUP Hygears</a>
     <nav class="nav__links" id="site-menu" aria-label="Main">
+      <a class="nav__link" href="news.html">News</a>
       <a class="nav__link" href="tools.html">Tools</a>
       <a class="nav__link" href="track.html">Track</a>
       <a class="nav__link" href="join.html" aria-current="page">Join</a>
@@ -46,10 +47,17 @@
     <div class="wrap">
       <p class="t-label">Membership</p>
       <h1 id="page-h">Apply to join PUP Hygears</h1>
-      <p class="t-lead">Members train on a real vehicle build, the Luna series, and help the team compete in the Shell Eco-marathon.</p>
+      <p class="t-lead">Members train on a real vehicle build, the Luna series, and help the team compete in the Shell Eco-marathon. Applications open each ASCEND recruitment season.</p>
+      <!-- Recruitment season: app.js shows the open line or the closed card (the real site reads an officer setting) -->
+      <p class="season" id="apps-open"><span class="badge badge--approved"><svg class="ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Applications open</span> ASCEND 2026 recruitment is on. <span class="t-small muted">Sample: officers set the real dates.</span></p>
+      <div class="form-card season-closed" id="apps-closed" hidden>
+        <span class="badge badge--declined"><svg class="ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>Applications closed</span>
+        <h2>Follow us for the next ASCEND</h2>
+        <p>Hygears recruits once a season. The call for applicants goes up on <a class="link" href="https://www.facebook.com/PUPHygears">Facebook</a> and <a class="link" href="https://www.instagram.com/puphygears">Instagram</a> first, and on <a class="link" href="news.html">News</a>.</p>
+      </div>
     </div>
   </section>
-  <section class="block" aria-label="Application">
+  <section class="block" id="apply" aria-label="Application">
     <div class="wrap grid">
       <div class="span-7">
         <form class="form form-card" id="join-form" novalidate>
@@ -128,7 +136,7 @@
           <li><a href="tools.html">Tools</a></li><li><a href="reserve.html">Reservation form</a></li><li><a href="track.html">Track a request</a></li>
         </ul></div>
         <div class="span-2"><h3>Hygears</h3><ul>
-          <li><a href="join.html">Membership</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li>
+          <li><a href="news.html">News</a></li><li><a href="join.html">Membership</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li>
         </ul></div>
       </div>
       <div class="footer__legal">

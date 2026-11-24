@@ -245,14 +245,12 @@ main:focus { outline: none; }
 .shelf-item { display: flex; flex-direction: column; justify-content: space-between; gap: 0.75rem; min-height: 8.5rem; padding: 0.875rem; background: var(--white); border: var(--border); }
 .shelf-name { font-weight: 700; line-height: 1.25; }
 
-.news { list-style: none; display: grid; gap: 1.5rem; }
-.news-card h3 { margin-bottom: 0.5rem; }
-.news-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; margin-bottom: 0.75rem; font-size: var(--small); font-weight: 700; color: var(--muted); }
 
 /* ---------- 9. Page headings ---------- */
 .page-head { padding: 2rem 0 1.5rem; background: var(--gray); border-bottom: var(--border); }
 .page-head h1 { margin-bottom: 0.5rem; }
 .page-head .lead { margin-bottom: 0; }
+.page-head .status { margin: 0.75rem 0 0; }   /* "Applications open / closed" on Join */
 .page-head--photo .frame { display: none; }   /* photo only on wider screens */
 
 /* ---------- 10. Forms ---------- */
@@ -411,6 +409,49 @@ legend { padding: 0; margin-bottom: 0.375rem; }
   .table .row-actions > * { flex: 1 1 8rem; }   /* one button fills the row, two share it */
 }
 
+/* ---------- 14b. News (news.html, article.html, home strip, officer Posts) ---------- */
+/* Post cards are the same bordered, hard-shadow cards as the catalogue.
+   The date sits on a small pit-board plate, like every other number on the site. */
+.post-grid { list-style: none; display: grid; gap: 1.5rem; }
+.post { display: flex; flex-direction: column; padding: 0; min-width: 0; }
+.post-cover { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-bottom: var(--border); }
+.post-cover--empty { display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--muted); background: var(--gray); border-bottom: 2px dashed var(--muted); }
+.post-body { flex: 1; display: flex; flex-direction: column; gap: 0.625rem; padding: 1rem 1.25rem 1.25rem; }
+.post-body p { margin: 0; }
+.post-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.625rem; }
+.post-date { min-width: 0; padding: 0.25rem 0.5rem; box-shadow: 3px 3px 0 var(--ink); }
+.post-date .plate-num { font-size: 1.25rem; }
+.post-date .plate-label { font-size: 0.75rem; }
+.post h3 { margin: 0; }
+.post h3 a { text-decoration: none; }
+.post h3 a:hover { text-decoration: underline; }
+.post .text-link { margin-top: auto; display: inline-flex; align-items: center; min-height: 44px; }
+.news-filter { margin-bottom: 1.5rem; }
+
+/* Article: one readable column, 18px body, about 70 characters a line */
+.back { margin-bottom: 1rem; }
+.back-link { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; }
+.article { max-width: 44rem; }
+.article .post-meta { margin-bottom: 1rem; }
+.article figure { margin: 1.5rem 0; }
+.article figcaption { padding: 0.5rem 0.75rem; font-size: var(--small); background: var(--white); border-top: var(--border); }
+.article-body p { font-size: 1.125rem; line-height: 1.65; max-width: 40rem; margin-bottom: 1.25rem; }
+.byline { padding-top: 1rem; border-top: var(--border); color: var(--muted); }
+.byline strong { color: var(--ink); }
+
+/* Officer: Posts list and the New post form */
+.post-msg { min-height: 1.5rem; font-weight: 700; }
+.post-form { margin-top: 1.5rem; max-width: 48rem; }
+.post-form h2 { margin: 0; }
+textarea.textarea--long { min-height: 14rem; }
+input[type="file"] { padding: 0.5rem; border-style: dashed; }
+.preview { display: grid; gap: 0.75rem; max-width: 24rem; justify-items: start; }
+.preview .frame { width: 100%; }
+.post-actions { margin-top: 0; }
+/* laptop table: keep the date and the two buttons on one line each */
+.posts-table .mono { white-space: nowrap; }
+@media (min-width: 768px) { .posts-table .row-actions { flex-wrap: nowrap; } }
+
 /* ---------- 15. Footer ---------- */
 .site-footer { color: var(--white); background: var(--charcoal); border-top: 6px solid var(--ink); }
 .site-footer a { color: var(--white); }
@@ -433,10 +474,10 @@ legend { padding: 0; margin-bottom: 0.375rem; }
   .wrap { padding: 0 1.5rem; }
   .form-grid { grid-template-columns: 1fr 1fr; }
   .field--full { grid-column: 1 / -1; }
-  .news { grid-template-columns: 1fr 1fr; }
   .stats { grid-template-columns: repeat(4, 1fr); }
   .shelf { grid-template-columns: repeat(4, 1fr); }
   .catalog { grid-template-columns: 1fr 1fr; }
+  .post-grid { grid-template-columns: 1fr 1fr; }
   .item { grid-template-columns: 1fr; align-content: start; }
   .photo-slot { aspect-ratio: 2 / 1; }
   .filters { grid-template-columns: 1fr auto; align-items: end; }
@@ -466,7 +507,8 @@ legend { padding: 0; margin-bottom: 0.375rem; }
   .hero-grid { grid-template-columns: 1.05fr 1fr; align-items: center; gap: 3rem; }
   .split { grid-template-columns: 1fr 1fr; gap: 3rem; }
   .catalog { grid-template-columns: repeat(3, 1fr); }
-  .news { grid-template-columns: repeat(3, 1fr); }
+  .post-grid { grid-template-columns: repeat(3, 1fr); }
+  .stats { grid-template-columns: repeat(5, 1fr); }
   .join-grid { grid-template-columns: 18rem 1fr; align-items: start; }
   .join-grid .committees { order: 0; }
   .results { grid-template-columns: repeat(3, 1fr); }

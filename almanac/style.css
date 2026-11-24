@@ -277,7 +277,7 @@ main > :last-child { padding-bottom: var(--section); }
 .figures b { display: block; font: 600 2.25rem/1 var(--font-head); font-variant-numeric: tabular-nums; }
 .figures span { color: var(--muted); font-size: var(--small); text-decoration: underline; text-decoration-color: var(--rule); }
 @media (min-width: 768px) {
-  .figures { grid-template-columns: repeat(4, 1fr); }
+  .figures { grid-template-columns: repeat(5, 1fr); }
   .figures li { padding-left: 24px; border-left: 1px solid var(--rule); }
   .figures li:first-child { padding-left: 0; border-left: 0; }
 }
@@ -303,3 +303,59 @@ main > :last-child { padding-bottom: var(--section); }
 .site-foot__cols li a { display: inline-block; padding: 8px 0; }
 .site-foot__legal { margin-top: 40px; color: #B4B9C2; font-size: var(--small); }
 @media (min-width: 768px) { .site-foot__cols { grid-template-columns: repeat(3, 1fr); gap: 32px; } }
+
+/* ---------- 12. News: post list, article page, officer posts ---------- */
+/* Post list: ruled rows like the notices. Phone: photo on top. Wider: photo left, text right. */
+.posts { min-width: 0; border-bottom: 1px solid var(--rule); }
+.post { display: grid; grid-template-columns: 1fr; gap: 12px; padding: 20px 0; border-top: 1px solid var(--rule); }
+.post:first-child { border-top: 2px solid var(--text); }
+.post .frame { aspect-ratio: 16 / 9; }
+/* Dashed slot for a post with no photo yet: hidden on phones so the text moves up */
+.post__slot { display: none; align-items: center; justify-content: center; aspect-ratio: 16 / 9; border: 1px dashed var(--muted); color: var(--muted); font-size: var(--small); }
+.post__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; color: var(--muted); font-size: var(--small); }
+.post__meta .num { color: var(--text); }
+.post h3 a { text-decoration: none; }
+.post h3 a:hover { text-decoration: underline; text-decoration-color: var(--red); }
+.post .more { display: inline-flex; align-items: center; min-height: 44px; }
+@media (min-width: 640px) {
+  /* minmax(0, ...) lets long titles wrap instead of widening the column */
+  .post { grid-template-columns: minmax(0, 2fr) minmax(0, 5fr); gap: 24px; }
+  .post__slot { display: flex; }
+}
+/* The category word: small caps-like sans label, no colour */
+.kind { font-family: var(--font-head); font-weight: 600; color: var(--text); }
+
+.news-note { margin-top: 12px; }
+.news-filter { margin-bottom: 12px; }
+/* Smaller filter buttons than on Tools so six fit on two rows on a phone (still 44px tall) */
+.news-filter .seg label { min-height: 44px; padding: 0 12px; }
+#news-count { margin-bottom: 16px; }
+
+/* Article: one readable column, about 70 characters per line */
+.back { padding-top: 24px; }
+.back a { display: inline-flex; align-items: center; min-height: 44px; }
+.article { max-width: 46rem; padding: 16px 0 0; }
+.article h1 { max-width: none; margin: 12px 0 16px; }
+.article .lead { color: var(--muted); }
+.article .photo { margin: 32px 0; }
+.article__body p { max-width: 66ch; margin-top: 20px; font-size: 1.125rem; line-height: 1.7; }
+.article__by { margin-top: 32px; padding-top: 16px; border-top: 2px solid var(--text); color: var(--muted); font-size: var(--small); }
+
+/* Officer posts */
+.posts-head { margin: 0 0 8px; }
+.post-form { margin-top: 32px; background: var(--white); border-top: 2px solid var(--text); }
+.cover-preview { display: grid; gap: 12px; max-width: 24rem; margin-top: 8px; }
+.cover-preview .btn { justify-self: start; }
+.input--file { padding: 10px 14px; }
+textarea.input--short { min-height: 4.5rem; }
+textarea.input--tall { min-height: 14rem; }
+.post-status { margin: 12px 0; padding: 12px 16px; background: var(--white); border-left: 4px solid var(--text); font-weight: 500; }
+.post-status:empty { display: none; }
+.table td[data-label="Date"] { white-space: nowrap; }
+/* Laptop: Edit and Unpublish side by side */
+@media (min-width: 640px) { #post-table .actions { flex-wrap: nowrap; justify-content: flex-end; } }
+
+/* Join: applications open or closed */
+.season { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 16px; }
+.season-closed { max-width: 40rem; margin-top: 24px; }
+.season-closed .season { margin: 0 0 12px; }

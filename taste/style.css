@@ -401,3 +401,60 @@ td .btn-row { flex-direction: row; }
 @media (prefers-reduced-motion: reduce) {
   .hero-copy > * { animation: none; }
 }
+
+/* ---------- 20. News: post cards, article page, officer posts ---------- */
+/* text only screen readers hear (table header for the action buttons) */
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* post cards reuse .items (1, 2, then 3 columns) and .card */
+.post__cover { aspect-ratio: 16 / 9; width: 100%; object-fit: cover; border-radius: 12px; background: var(--surface); }
+.post .slot { aspect-ratio: 16 / 9; display: none; }   /* phones skip the empty slot so the words move up */
+.post__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.post h3 a { color: var(--ink); text-decoration: none; }
+.post h3 a:hover { text-decoration: underline; }
+.post .card__go { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--ink); }
+/* news filter: the category select with the count beside it from 640px */
+.filters--news { display: flex; flex-direction: column; gap: var(--s-3); }
+.filters--news .field { max-width: 360px; }
+.filters--news .results-bar { margin: 0; }
+.news-head { margin-bottom: var(--s-6); }
+
+/* article: one readable column, about 70 characters per line */
+.page-head--article { padding-bottom: var(--s-7); }
+.back a { display: inline-flex; align-items: center; min-height: 44px; }
+.article { max-width: 760px; margin-top: var(--s-4); }
+.article h1 { margin: var(--s-4) 0; }
+.article .t-lead { color: var(--muted); }
+.article figure { margin: var(--s-6) 0; }
+.article figure img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius); }
+.article figcaption { margin-top: var(--s-3); font-size: var(--t-small); color: var(--muted); }
+.article__body p { max-width: 68ch; margin-top: var(--s-5); font-size: 1.125rem; line-height: 1.7; }
+.article__by { margin-top: var(--s-6); padding-top: var(--s-4); border-top: 1px solid var(--line); font-size: var(--t-small); color: var(--muted); }
+.fill { padding: 0 4px; border: 1px dashed var(--line-strong); border-radius: 4px; }
+.more-head { margin-bottom: var(--s-5); }
+
+/* officer posts */
+.dash-actions { flex-direction: row; flex-wrap: wrap; }
+.posts-note { margin-bottom: var(--s-4); }
+.post-status:empty { display: none; }
+.post-status { margin-bottom: var(--s-4); padding: 12px 16px; border-left: 3px solid var(--ink); background: var(--surface); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.post-form { margin-top: var(--s-6); }
+.cover-preview { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-3); margin-top: var(--s-2); }
+.cover-preview img { width: 100%; max-width: 360px; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; border: 1px solid var(--line); }
+.field textarea.short { min-height: 72px; }
+.field textarea.tall { min-height: 220px; }
+.field input[type="file"] { padding: 10px; }
+td.nowrap { white-space: nowrap; }
+#t-posts .btn-row { flex-wrap: nowrap; }
+
+/* join: applications open or closed */
+.season { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: var(--s-5); }
+.season-closed { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-4); max-width: 640px; margin-top: var(--s-5); }
+.season-closed h2 { font-size: var(--t-h3); }
+
+@media (min-width: 640px) {
+  .post .slot { display: flex; }
+  .filters--news { flex-direction: row; align-items: flex-end; gap: var(--s-5); }
+  .filters--news .field { width: 360px; }
+  .filters--news .results-bar { padding-bottom: 12px; }
+}

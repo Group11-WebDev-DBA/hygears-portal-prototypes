@@ -74,3 +74,44 @@ Re-shot officer desk (390) and join (390) after the first fix batch, then index 
 - **CSS:** rewritten into 14 commented sections, hex variables only, fixed sizes with one media query for the larger headings, Flexbox and simple Grid. The only extras are one `@keyframes` for the lift and a `prefers-reduced-motion` query.
 - **Fixes 3 to 14** are in. The officer table keeps references on one line, and the buttons sit side by side on laptop.
 - **Still open:** #15 and #16 (phone length on the officer desk and tools pages, which could use a collapsible filter bar or tabs), #17 (JS walkthrough). The logo is the old red PNG, so the white HG mark the brief allows on the dark footer isn't available yet.
+
+
+## News feature (2026-11-24)
+
+Added per `../FEATURE-NEWS.md`: `news.html`, `article.html`, a "Latest from Hygears" card strip on Home (it replaces the four announcement rows and now links to News instead of Facebook), an Applications open / closed state on Join (`join.html?season=closed`), a Posts section on the officer desk with a jump link, and News in every header (second item, after Home). Screens: news phone 390 and laptop 1280, article `?id=3` phone (full length), officer Posts phone and laptop (signed in by script), home strip laptop, join closed phone. Behaviour checked with a headless script that signed in and drove the officer form: empty Publish, a .txt file, a 3 MB file, a real PNG, Publish, then read news.html, index.html and `article.html?id=6`.
+
+### Student reading an article on a phone
+"Back to News is at the top with an arrow, then the category in caps, the date, a gray 'Sample article' flag and the uppercase title like every other page. The paragraphs are 18px with room between them, and the inline photo has a caption. More posts at the end use the same cards as News."
+- Pass. Minor: the uppercase h1 is long for the SOLIDWORKS title (four lines on a phone). Kept: the h1 style must match every page.
+
+### Officer publishing (phone, then laptop)
+"A '5 published posts' button sits with the other jump links. On the phone the posts table turns into cards like the reservations, with Edit and Unpublish side by side. Empty Publish gave the red summary box with three links (title, category, body). The .txt and 3 MB files got plain errors under the field. A real photo showed a preview, then asked me to describe it. Publish put my post first in the table with 'Published ... shows on News in this browser', and it was first on News, on Home and on its own page."
+- Pass after one fix. Minor (open): photos are saved as data URLs in localStorage, so a few 2 MB photos fill it; the form catches that and says to use a smaller photo. The real site stores files in `uploads/`.
+
+### Bea from Facebook looking for news
+"News is in the menu right after Home. The posts match their Facebook page: PHYNIX, the General Assembly with the Merakis, ASCEND, the SOLIDWORKS finalist, and a Luna progress report marked sample. The category select lets me show only Recruitment."
+- Pass. Every post is marked sample; nothing invented.
+
+### UI critic: does News fit?
+"It's the shadow board's language: white plates with a 4px black top edge (the same plate as the tools), a dashed gray slot when a post has no photo (the same dashed-outline idea as a missing tool), uppercase narrow headings, the Tools page's Category select, the officer tables and chips, the form panel and error summary from Join."
+- Major (fixed): on the laptop the News category select was squeezed to about 130px ("All categorie") because it inherited the Tools page's three-column filter grid.
+- Minor (fixed): on the closed Join box the heading touched the paragraph.
+- Minor (open): Home's dark band still has a red "Apply to join" button, so Join isn't fully secondary yet.
+
+### Sir Cadaoas
+- Pass: same header/footer on all 9 pages, News current on news.html (`aria-current="page"`) and marked on article.html (`aria-current="true"`), one style.css (new section 15, commented), same h1/h2/h3, labels, required stars, hints and errors on every new field, alt text on every photo, red only on Publish and links.
+
+### Hans (PHP rebuild)
+"`SAMPLE_POSTS` is the posts table, `getPosts()`/`savePosts()` stand in for SELECT and INSERT/UPDATE, the next id is AUTO_INCREMENT. FileReader is only the preview; PHP will use `move_uploaded_file()` into `uploads/` and `htmlspecialchars()` where this uses `esc()`. The new code uses plain `function` callbacks and string concatenation."
+- Minor (open, from round 1 #17): the older parts of app.js still use arrow functions and template literals, so the file mixes two styles.
+
+### Accessibility
+- Pass: the category select has a label, the post count is a live status, each card has one title link plus "Read more" with the title in hidden text, the publish result is a status line that takes focus, errors use `aria-invalid` plus `aria-describedby`, the error summary links to each field, and the photo description is required when a cover is chosen (it is disabled and skipped when there's no photo).
+
+### Regression
+Home hero board, Tools filters, Reserve, Track, Join (open state), About and the rest of the officer desk are unchanged. The phone menu now lists 7 items. No sideways scroll on News, the article or the officer Posts cards at 390px.
+
+### After fixes
+- `.filters.filters--news` is one column with a 20rem cap, so the select shows "All categories" in full.
+- `.closed-panel h2` gets a bottom margin.
+- Still open: photo size vs. localStorage (prototype only), Home's red Apply button, mixed JS styles.

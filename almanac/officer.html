@@ -21,6 +21,7 @@
     <nav class="nav" aria-label="Main">
       <ul>
           <li><a href="index.html">Home</a></li>
+          <li><a href="news.html">News</a></li>
           <li><a href="tools.html">Tools</a></li>
           <li><a href="track.html">Track request</a></li>
           <li><a href="join.html">Join</a></li>
@@ -39,7 +40,7 @@
   <section class="page-head">
     <div class="container">
       <h1>Officer dashboard</h1>
-      <p class="lead">Approve reservations, follow up overdue items, and read new applications.</p>
+      <p class="lead">Approve reservations, follow up overdue items, read new applications and post news.</p>
     </div>
   </section>
 
@@ -78,6 +79,7 @@
         <li><a href="#overdue-table"><b>1</b><span>Overdue items</span></a></li>
         <li><a href="#apps-table"><b>2</b><span>New applications</span></a></li>
         <li><a href="#stock-table"><b>4</b><span>Items out or low</span></a></li>
+        <li><a href="#posts"><b id="fig-posts">5</b><span>Published posts</span></a></li>
       </ul>
       <div class="dash">
         <div class="sheet dash__wide">
@@ -124,6 +126,71 @@
             </tbody>
           </table>
         </div>
+        <div class="sheet dash__wide" id="posts">
+          <div class="sheet__foot posts-head"><h2 class="sheet__title" id="posts-title">Posts</h2><a class="btn btn--sm" href="#post-form">New post</a></div>
+          <p class="muted small">Published posts show on News, newest first. Drafts stay here until you publish them.</p>
+          <p class="post-status" id="post-status" role="status" tabindex="-1"></p>
+          <!-- app.js fills the rows from the posts saved in this browser (PHP: SELECT * FROM posts ORDER BY published_at DESC) -->
+          <table class="table table--stack table--actions-below" id="post-table">
+            <caption class="visually-hidden">Posts, newest first</caption>
+            <thead><tr><th scope="col">Title</th><th scope="col">Category</th><th scope="col" class="num">Date</th><th scope="col">Status</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead>
+            <tbody id="post-rows"></tbody>
+          </table>
+
+          <form class="panel form post-form" id="post-form" novalidate aria-labelledby="post-form-title">
+            <div class="sheet__foot"><p class="sheet__title" id="post-form-title" tabindex="-1">New post</p><span class="muted small">Prototype: saved in this browser only</span></div>
+            <div class="field">
+              <label for="np-title">Title</label>
+              <input class="input" id="np-title" name="title" maxlength="120" required data-error="Give the post a title." aria-describedby="np-title-hint np-title-error">
+              <p class="hint" id="np-title-hint">Up to 120 characters. Say what happened.</p>
+              <p class="error" id="np-title-error" aria-live="polite"></p>
+            </div>
+            <div class="form__row">
+              <div class="field">
+                <label for="np-cat">Category</label>
+                <select class="input" id="np-cat" name="category" required data-error="Choose a category." aria-describedby="np-cat-error"><option value="">Choose a category</option><option>Competition</option><option>Progress report</option><option>Workshop</option><option>Announcement</option><option>Recruitment</option></select>
+                <p class="error" id="np-cat-error" aria-live="polite"></p>
+              </div>
+              <div class="field">
+                <label for="np-date">Date</label>
+                <input class="input" id="np-date" name="date" type="date" required data-error="Pick the post date." aria-describedby="np-date-hint np-date-error">
+                <p class="hint" id="np-date-hint">Shown on the post. Newest dates go first.</p>
+                <p class="error" id="np-date-error" aria-live="polite"></p>
+              </div>
+            </div>
+            <div class="field">
+              <label for="np-cover">Cover photo</label>
+              <input class="input input--file" id="np-cover" name="cover" type="file" accept="image/jpeg,image/png,image/webp" data-error="" aria-describedby="np-cover-hint np-cover-error">
+              <p class="hint" id="np-cover-hint">JPG, PNG or WebP, up to 2 MB. Optional: posts without one show a photo slot.</p>
+              <p class="error" id="np-cover-error" aria-live="polite"></p>
+              <div class="cover-preview" id="np-preview-box" hidden><div class="frame frame--wide"><img id="np-preview" src="" alt="Preview of the chosen cover photo"></div><button class="btn btn--sm" type="button" id="np-remove">Remove photo</button></div>
+            </div>
+            <div class="field">
+              <label for="np-alt">Photo description</label>
+              <input class="input" id="np-alt" name="cover_alt" maxlength="200" data-error="" aria-describedby="np-alt-hint np-alt-error">
+              <p class="hint" id="np-alt-hint">What the photo shows, for screen readers. Needed when there is a photo.</p>
+              <p class="error" id="np-alt-error" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="np-summary">Summary</label>
+              <textarea class="input input--short" id="np-summary" name="summary" maxlength="200" aria-describedby="np-summary-hint"></textarea>
+              <p class="hint" id="np-summary-hint">One or two lines for the News list. Leave empty to use the start of the body.</p>
+            </div>
+            <div class="field">
+              <label for="np-body">Body</label>
+              <textarea class="input input--tall" id="np-body" name="body" required data-error="Write the post body." aria-describedby="np-body-hint np-body-error"></textarea>
+              <p class="hint" id="np-body-hint">Leave a blank line between paragraphs.</p>
+              <p class="error" id="np-body-error" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="np-by">Caption writer</label>
+              <input class="input" id="np-by" name="caption_by" maxlength="80" aria-describedby="np-by-hint">
+              <p class="hint" id="np-by-hint">Credited on the post, like the captions on Facebook.</p>
+            </div>
+            <p class="error" id="np-form-error" aria-live="polite"></p>
+            <div class="actions"><button class="btn btn--primary" type="submit" data-status="published">Publish</button><button class="btn" type="submit" data-status="draft">Save draft</button><button class="btn" type="button" id="np-cancel" hidden>Cancel editing</button></div>
+          </form>
+        </div>
       </div>
     </div>
   </section>
@@ -134,7 +201,7 @@
     <p class="site-foot__line">“We don’t just build vehicles, we build people to help us build the future!” #GEARINGUpTowardExcellence</p>
     <p class="site-foot__line">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
     <div class="site-foot__cols">
-      <div><h2>Pages</h2><ul><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li></ul></div>
+      <div><h2>Pages</h2><ul><li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li></ul></div>
       <div><h2>Contact</h2><ul>
         <li><a href="https://www.instagram.com/puphygears">Instagram: puphygears</a></li>
         <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>

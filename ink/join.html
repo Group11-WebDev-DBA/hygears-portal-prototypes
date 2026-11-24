@@ -20,7 +20,7 @@
     <nav class="pill" aria-label="Main">
       <a class="brand" href="index.html"><img src="../assets/hygears-logo.png" width="40" height="40" alt="">PUP Hygears</a>
       <button class="btn btn--quiet btn--sm menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
-      <ul class="nav-links" id="nav-links"><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html" aria-current="page">Join</a></li><li><a href="about.html">About</a></li><li><a class="nav-officer" href="officer.html">Officer</a></li></ul>
+      <ul class="nav-links" id="nav-links"><li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html" aria-current="page">Join</a></li><li><a href="about.html">About</a></li><li><a class="nav-officer" href="officer.html">Officer</a></li></ul>
     </nav>
   </div>
 </header>
@@ -28,7 +28,14 @@
 <section class="page-head">
   <div class="container">
     <h1>Join Hygears</h1>
-    <p class="lead">Apply here. An officer reviews every application.</p>
+    <p class="lead">Applications open each ASCEND recruitment season. An officer reviews every application.</p>
+    <!-- Recruitment season: app.js shows one of these two lines (the real site reads an officer setting) -->
+    <p class="state-line" id="apps-open"><span class="tag tag--on"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Applications open</span> ASCEND 2026 recruitment is on. <span class="note">Sample: officers set the real dates.</span></p>
+    <p class="state-line" id="apps-closed-line" hidden><span class="tag tag--out"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>Applications closed</span> Hygears recruits once a season through ASCEND.</p>
+    <div class="slip apps-closed" id="apps-closed" hidden>
+      <div class="slip__title"><p class="slip__name">Applications are closed for now</p></div>
+      <p>Follow us for the next ASCEND. The call for applicants goes up on <a href="https://www.facebook.com/PUPHygears">Facebook</a> and <a href="https://www.instagram.com/puphygears/">Instagram</a> first, and on <a href="news.html">News</a>.</p>
+    </div>
   </div>
 </section>
 
@@ -38,7 +45,7 @@
   </div>
 </section>
 
-<section class="section" aria-labelledby="apply-title">
+<section class="section" id="apply" aria-labelledby="apply-title">
   <div class="container split">
     <div class="section-head">
       <h2 id="apply-title">The application</h2>
@@ -68,7 +75,7 @@
     <div class="colophon">
       <img src="../assets/hygears-logo.png" width="48" height="48" alt="PUP Hygears logo">
       <div><p><strong>PUP Hygears</strong> is a student research organization at the Polytechnic University of the Philippines, Sta. Mesa, Manila. Find us on <a href="https://www.instagram.com/puphygears/">Instagram</a>, <a href="https://www.facebook.com/PUPHygears">Facebook</a> and <a href="https://x.com/pup_hygears">X</a>, or write to <a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a>. Photographs by PUP Hygears.</p><p class="tagline">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p></div>
-      <ul class="foot-links"><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer desk</a></li></ul>
+      <ul class="foot-links"><li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer desk</a></li></ul>
     </div>
     <p class="legal">A prototype of the Hygears Web Portal, made for a Web Development final project in 2026. Sample data is marked where it appears.</p>
   </div>

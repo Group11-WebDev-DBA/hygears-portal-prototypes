@@ -62,3 +62,12 @@ There's no cream, amber or orange anywhere except inside the logo image. Status 
 - The white HG mark for the charcoal footer. Only the red version is in `../assets/`.
 - Confirmation that PUP student numbers look like `2024-12345-MN-0`.
 - Real officer accounts. The prototype login accepts anything.
+
+## News feature (2026-11-24)
+- **Pages:** `news.html` ("From the pit lane.", category chips, newest first, 1/2/3 columns) and `article.html?id=N` (no id = newest). Home's Announcements became "Latest from Hygears" (the 3 newest posts). Join shows an "Applications open" tag, or with `join.html?season=closed` a closed card with "Follow us for the next ASCEND".
+- **Nav:** News comes after Home on every page.
+- **Look:** post cards are the catalogue's hard-shadow cards; the date sits on a small pit-board plate (big day number, month and year), so posts follow the site's one idea. No photo = a dashed "Photo to come" slot. Article body is 18px at 1.65, max 40rem; photos use the `.frame` with a caption bar.
+- **Officer Posts:** a fifth counter plate ("published posts"), a table (cards on phones) with Published/Draft tags and Edit / Unpublish, then the New post form: title, category, date, cover photo with FileReader preview and Remove, photo description (required only with a photo), summary, body, caption by, Publish / Save draft / Cancel edit. Covers must be JPG/PNG/WebP under 2 MB. Validation reuses `setupForm()` (HTML `required` + `data-required` messages).
+- **Storage:** posts are saved in localStorage under `hyg-posts-pitboard` (own key, so other prototypes opened from file:// don't mix in). Clear it to get the five samples back.
+- **Real build:** `posts` table: post_id, title, category, summary, body, cover_image (file name), caption_by, status (draft/published), published_at, created_by (officer). Covers go in `uploads/`. news.html = `SELECT ... WHERE status = 'published' ORDER BY published_at DESC`; the officer form = INSERT/UPDATE with prepared statements.
+- **Needs real material:** real post text, dates, covers and caption writers (all five posts are marked sample).

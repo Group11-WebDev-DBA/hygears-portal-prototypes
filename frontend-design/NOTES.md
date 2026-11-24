@@ -48,3 +48,12 @@ One family: **Archivo** (Google Fonts, variable width and weight).
 - Borrowing rules: written as a draft, marked "officers to confirm".
 - The ASCEND 2026 Google Form link on Join.
 - Photos are the org's originals at 1.6 to 2 MB each. Resize to about 1440px JPG (~200 KB) before the real site goes up.
+
+## News feature (2026-11-24)
+- **Pages:** `news.html` (category chips, newest first, one column on phones, three on laptops) and `article.html?id=N` (no id = the newest post). Home's Announcements became "Latest from Hygears" (the 3 newest). Join shows "Applications open" or, with `join.html?season=closed`, a closed box with "Follow us for the next ASCEND".
+- **Nav:** News sits between Home and Tools. On phones the bottom tab bar now has six tabs.
+- **Look:** post cards are the tool wall's label plates (white, 4px ink top edge) under a 16:9 photo; posts with no photo get a dashed "Photo to come" slot. The article body is 18px at 1.65 line height, about 70 characters a line.
+- **Officer Posts:** a "Published posts" tally box jumps to it. A list of request-style cards with Edit and Unpublish/Publish, then the New post form (title, category, date, cover photo with FileReader preview, photo description, summary, body, caption by, Publish / Save draft). Title, category, date and body are required; covers must be JPG/PNG/WebP under 2 MB.
+- **Storage:** posts are saved in localStorage under `hyg-posts-shadowboard` (its own key, so other prototypes opened from file:// don't mix in). Clear it to get the five samples back.
+- **Real build:** `posts` table: post_id, title, category, summary, body, cover_image (file name), caption_by, status (draft/published), published_at, created_by (officer). Cover files go in `uploads/`. news.html = `SELECT ... WHERE status = 'published' ORDER BY published_at DESC`; the officer form = INSERT/UPDATE with prepared statements; `esc()` becomes `htmlspecialchars()`.
+- **Needs real material:** real post text, dates, covers and caption writers (all five posts are marked sample).

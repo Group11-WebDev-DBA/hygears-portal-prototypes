@@ -25,6 +25,7 @@
     <nav class="site-nav" id="site-nav" aria-label="Main">
       <ul>
         <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">News</a></li>
         <li><a href="tools.html">Tools</a></li>
         <li><a href="track.html">Track request</a></li>
         <li><a href="join.html">Join</a></li>
@@ -67,6 +68,7 @@
         <li><a href="#overdue-title"><b>2</b> overdue</a></li>
         <li><a href="#apps-title"><b>2</b> new applications</a></li>
         <li><a href="#stock-title"><b>2</b> out of stock</a></li>
+        <li><a href="#posts-title"><b id="n-posts">5</b> published posts</a></li>
       </ul>
       <p class="live-msg" id="desk-msg" role="status" aria-live="polite"></p>
     </div>
@@ -163,6 +165,76 @@
       <div class="section-head"><h2 id="stock-title">Stock on the board</h2><p class="small muted">Dashed outline = none left.</p></div>
       <div class="board"><ul class="board-grid board-grid--wide" id="stock-board" aria-label="Item stock"></ul></div>
     </section>
+    <section class="section" aria-labelledby="posts-title">
+      <div class="section-head"><h2 id="posts-title">Posts</h2><a href="#post-form-title">Write a new post</a></div>
+      <p class="hint">Posts show on News and on the home page. Prototype: they are saved in this browser only.</p>
+      <p class="live-msg" id="post-msg" tabindex="-1" role="status" aria-live="polite"></p>
+      <table class="table">
+        <thead><tr><th scope="col">Title</th><th scope="col">Category</th><th scope="col">Date</th><th scope="col">Status</th><th scope="col">Action</th></tr></thead>
+        <tbody id="post-rows"></tbody>
+      </table>
+
+      <h2 class="form-title" id="post-form-title" tabindex="-1">New post</h2>
+      <form class="form form-panel" id="post-form" novalidate>
+        <div class="error-summary" hidden><p class="es-title" tabindex="-1"><i data-icon="alert"></i>Please fix these before saving</p><ul></ul></div>
+        <div class="field">
+          <label for="p-title">Title <span class="req" aria-hidden="true">*</span></label>
+          <input id="p-title" type="text" maxlength="120" aria-describedby="p-title-error" required>
+          <p class="error" id="p-title-error"></p>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label for="p-cat">Category <span class="req" aria-hidden="true">*</span></label>
+            <select id="p-cat" aria-describedby="p-cat-error" required><option value="">Choose a category</option><option>Competition</option><option>Progress report</option><option>Workshop</option><option>Announcement</option><option>Recruitment</option></select>
+            <p class="error" id="p-cat-error"></p>
+          </div>
+          <div class="field">
+            <label for="p-date">Date <span class="req" aria-hidden="true">*</span></label>
+            <input id="p-date" type="date" aria-describedby="p-date-error" required>
+            <p class="error" id="p-date-error"></p>
+          </div>
+        </div>
+        <div class="field">
+          <label for="p-cover">Cover photo</label>
+          <input id="p-cover" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="p-cover-hint p-cover-error">
+          <p class="hint" id="p-cover-hint">Optional. JPG, PNG or WebP, up to 2 MB.</p>
+          <p class="error" id="p-cover-error"></p>
+        </div>
+        <div class="preview" id="p-preview" hidden>
+          <img id="p-preview-img" src="" alt="Preview of the cover photo">
+          <button class="btn btn--ghost btn--small" type="button" id="p-remove">Remove photo</button>
+        </div>
+        <div class="field" id="p-alt-field" hidden>
+          <label for="p-alt">Describe the photo <span class="req" aria-hidden="true">*</span></label>
+          <input id="p-alt" type="text" maxlength="160" aria-describedby="p-alt-hint p-alt-error" disabled>
+          <p class="hint" id="p-alt-hint">For screen reader users, e.g. "Members around the Luna car on campus".</p>
+          <p class="error" id="p-alt-error"></p>
+        </div>
+        <div class="field">
+          <label for="p-summary">Summary</label>
+          <textarea id="p-summary" class="textarea--short" maxlength="220" aria-describedby="p-summary-hint"></textarea>
+          <p class="hint" id="p-summary-hint">Optional. One or two lines for the News list; left empty, the start of the body is used.</p>
+        </div>
+        <div class="field">
+          <label for="p-body">Body <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="p-body" class="textarea--long" aria-describedby="p-body-hint p-body-error" required></textarea>
+          <p class="hint" id="p-body-hint">Leave a blank line between paragraphs.</p>
+          <p class="error" id="p-body-error"></p>
+        </div>
+        <div class="field">
+          <label for="p-by">Caption by</label>
+          <input id="p-by" type="text" maxlength="80" aria-describedby="p-by-hint">
+          <p class="hint" id="p-by-hint">Optional. The writer credited at the end, as on our Facebook posts.</p>
+        </div>
+        <p class="error" id="p-save-error" role="alert"></p>
+        <div class="btn-row">
+          <button class="btn btn--primary" type="submit" data-status="published">Publish</button>
+          <button class="btn btn--ghost" type="submit" data-status="draft">Save draft</button>
+          <button class="btn btn--ghost" type="button" id="p-cancel" hidden>Cancel edit</button>
+        </div>
+      </form>
+    </section>
+
   </section>
 </main>
 <footer class="site-foot">

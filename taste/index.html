@@ -26,6 +26,7 @@
     <a class="skip-link" href="#top">Skip to content</a>
     <a class="nav__logo" href="index.html"><img src="img/hygears-logo.png" alt="" width="32" height="32">PUP Hygears</a>
     <nav class="nav__links" id="site-menu" aria-label="Main">
+      <a class="nav__link" href="news.html">News</a>
       <a class="nav__link" href="tools.html">Tools</a>
       <a class="nav__link" href="track.html">Track</a>
       <a class="nav__link" href="join.html">Join</a>
@@ -54,7 +55,7 @@
           <p class="t-lead">PUP Hygears builds the Luna electric vehicles at PUP Sta. Mesa, Manila. Students can reserve a multimeter, a drill or filament online and track the request by its reference number.</p>
           <div class="btn-row">
             <a class="btn btn--primary" href="tools.html">Reserve a tool<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h8"/><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
-            <a class="btn btn--secondary" href="join.html">Join Hygears</a>
+            <a class="btn btn--secondary" href="news.html">Read the news</a>
           </div>
         </div>
         <div class="hero-visual frame span-6 start-7">
@@ -102,28 +103,12 @@
 
   <section class="section screen" id="news" aria-labelledby="news-h">
     <div class="wrap">
-      <div class="grid">
-        <div class="span-6">
-          <div class="section-head">
-            <h2 id="news-h">Hygears announcements. <span class="muted">Sample posts until the officers write real ones.</span></h2>
-          </div>
-          <ul class="rows">
-            <li><h3>Tool reservations move to this portal</h3><p>Reserve from the catalog and keep your reference number for pickup.</p></li>
-            <li><h3>Membership applications are open</h3><p>Pick a preferred committee on the form; officers reply by email.</p></li>
-            <li><h3>Luna build update</h3><p>Officers post build and Shell Eco-marathon news here and on Facebook.</p></li>
-          </ul>
-        </div>
-        <aside class="follow span-6 start-7" aria-labelledby="follow-h">
-          <div class="panel" role="img" aria-label="The officer dashboard form for posting an announcement">
-            <div class="mini mini--field"><span class="muted">Title</span><b>Membership applications are open</b></div>
-            <div class="mini mini--field mini--area"><span class="muted">Post</span><span>Pick a preferred committee on the join form. Officers reply by email.</span></div>
-            <div class="mini__chips"><span class="badge">Finance and Operations</span><span class="badge">Internal Affairs</span><span class="badge">Innovation and Research</span><span class="badge">External Affairs</span><span class="badge">Creative Media and Design</span></div>
-            <div class="mini"><span class="grow muted">Shows on the home page</span><span class="mini__btn">Publish</span></div>
-          </div>
-          <h3 id="follow-h">Posted from the officer dashboard</h3>
-          <p>Build news also goes out on <a class="link" href="https://www.facebook.com/PUPHygears">Facebook</a> and <a class="link" href="https://www.instagram.com/puphygears">Instagram</a> under <span class="hashtag">#GEARINGUpTowardExcellence</span>.</p>
-        </aside>
+      <div class="section-head--split news-head">
+        <div><h2 id="news-h">Latest from Hygears. <span class="muted">Posted by the officers.</span></h2></div>
+        <a class="btn btn--secondary" href="news.html">All news<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h8"/><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
       </div>
+      <!-- app.js fills this with the 3 newest published posts (PHP: the same query with LIMIT 3) -->
+      <ul class="items posts" id="latest-posts"><noscript><li><a href="news.html">Read the news</a></li></noscript></ul>
     </div>
   </section>
 
@@ -171,7 +156,7 @@
           <li><a href="tools.html">Tools</a></li><li><a href="reserve.html">Reservation form</a></li><li><a href="track.html">Track a request</a></li>
         </ul></div>
         <div class="span-2"><h3>Hygears</h3><ul>
-          <li><a href="join.html">Membership</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li>
+          <li><a href="news.html">News</a></li><li><a href="join.html">Membership</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li>
         </ul></div>
       </div>
       <div class="footer__legal">

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Article, PUP Hygears</title>
+<meta name="description" content="A news post from PUP Hygears.">
+<link rel="icon" href="../assets/hygears-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<!-- Adds a "js" class so the CSS knows JavaScript is on (used to hide the officer dashboard until sign-in) -->
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="container site-head__bar">
+    <a class="brand" href="index.html" aria-label="PUP Hygears home"><img src="../assets/hygears-logo.png" width="222" height="224" alt="">PUP Hygears</a>
+    <nav class="nav" aria-label="Main">
+      <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="news.html" aria-current="page">News</a></li>
+          <li><a href="tools.html">Tools</a></li>
+          <li><a href="track.html">Track request</a></li>
+          <li><a href="join.html">Join</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="officer.html">Officers</a></li>
+      </ul>
+    </nav>
+    <form class="search" action="tools.html" method="get" role="search">
+      <label class="visually-hidden" for="nav-q">Search tools and consumables</label>
+      <input class="input input--sm" id="nav-q" name="q" type="search" placeholder="Search tools" autocomplete="off">
+      <button class="btn btn--sm" type="submit">Search</button>
+    </form>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <p class="back"><a href="news.html">&larr; Back to News</a></p>
+    <article class="article" id="article" aria-labelledby="article-title">
+      <noscript><p>Turn on JavaScript to read this post in the prototype. The real site loads it with PHP.</p></noscript>
+    </article>
+  </div>
+
+  <section class="section" aria-labelledby="more-title">
+    <div class="container split split--4-8 split--top">
+      <div class="stack--tight">
+        <h2 id="more-title">More posts</h2>
+        <p><a href="news.html">All news</a></p>
+      </div>
+      <div class="posts" id="more-posts"></div>
+    </div>
+  </section>
+</main>
+<footer class="site-foot">
+  <div class="container">
+    <p class="site-foot__mark"><img src="../assets/hygears-logo.png" width="222" height="224" alt="">PUP Hygears</p>
+    <p class="site-foot__line">“We don’t just build vehicles, we build people to help us build the future!” #GEARINGUpTowardExcellence</p>
+    <p class="site-foot__line">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
+    <div class="site-foot__cols">
+      <div><h2>Pages</h2><ul><li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li></ul></div>
+      <div><h2>Contact</h2><ul>
+        <li><a href="https://www.instagram.com/puphygears">Instagram: puphygears</a></li>
+        <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>
+        <li><a href="https://x.com/pup_hygears">X: @pup_hygears</a></li>
+        <li><a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a></li>
+      </ul></div>
+      <div><h2>Where</h2><p>Polytechnic University of the Philippines, Sta. Mesa, Manila</p></div>
+    </div>
+    <p class="site-foot__legal">A student research organization of PUP. Prototype for review: sample data is marked as sample.</p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

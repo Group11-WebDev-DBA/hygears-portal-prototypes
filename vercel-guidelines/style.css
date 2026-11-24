@@ -1631,3 +1631,171 @@ textarea::placeholder {
 .row-actions select {
   flex: 1 1 100%;
 }
+
+/* ---------- 22. News: post cards, article page, officer post form ---------- */
+/* Card grid used as a list (<ul>) of posts */
+.post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cover photo on a card: same 16:9 frame as the pubmat slot */
+.post-cover {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  margin-bottom: var(--space-4);
+  border-radius: 4px;
+}
+
+/* Category label: mono, like the other small labels */
+.tag {
+  font-family: var(--font-mono);
+  color: var(--color-text);
+}
+
+.post-card h3 a {
+  text-decoration: none;
+}
+
+.post-card h3 a:hover {
+  text-decoration: underline;
+}
+
+.read-more {
+  margin-top: auto; /* keeps "Read more" on the bottom line of every card */
+  font-weight: 600;
+}
+
+.section-head-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+}
+
+.news-filters {
+  max-width: 20rem;
+  margin: var(--space-4) 0 var(--space-3);
+}
+
+/* One article: a narrow column so lines stay about 60 to 80 characters */
+.article {
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--tap);
+  margin: var(--space-4) 0;
+}
+
+.article h1 {
+  margin-top: var(--space-2);
+}
+
+.sample-flag {
+  display: inline-block;
+  padding: var(--space-1) var(--space-2);
+  border: 1px dashed var(--color-field);
+  border-radius: 4px;
+  color: var(--color-muted);
+  font-size: var(--size-small);
+}
+
+.article-cover,
+.article-photo {
+  margin: var(--space-6) 0;
+}
+
+.article-cover img,
+.article-photo img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.article-photo figcaption {
+  margin-top: var(--space-2);
+  color: var(--color-muted);
+  font-size: var(--size-small);
+}
+
+/* Body text: 18px with roomy lines for long reading */
+.article-body p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  max-width: 68ch;
+  margin-bottom: var(--space-6);
+}
+
+.byline {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-line);
+  color: var(--color-muted);
+  font-size: var(--size-small);
+}
+
+/* Officer: photo picker and its preview */
+input[type="file"] {
+  width: 100%;
+  min-height: var(--tap);
+  padding: var(--space-2);
+  border: 1px dashed var(--color-field);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  font: inherit;
+  font-size: var(--size-small);
+}
+
+.cover-preview {
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+}
+
+.cover-preview img {
+  width: 100%;
+  max-width: 24rem;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.post-editor {
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-line);
+}
+
+.post-message {
+  margin-bottom: var(--space-6);
+}
+
+.post-message p {
+  margin: 0;
+}
+
+/* Join: applications open / closed banner */
+.apply-state {
+  margin-bottom: var(--space-6);
+}
+
+@media (min-width: 48rem) {
+  /* Five dashboard counts in one row */
+  .stats {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}

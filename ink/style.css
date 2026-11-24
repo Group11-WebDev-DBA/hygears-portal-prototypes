@@ -248,7 +248,7 @@ blockquote { margin: 0; }
 .table-empty { padding: 32px 0; border-bottom: 1px solid var(--rule); }
 .table-empty p + p { margin-top: 12px; }
 .table .row-done td { color: var(--muted); }
-.table .mono, .table td[data-label="Student"] { white-space: nowrap; }
+.table .mono, .table td[data-label="Student"], .table td[data-label="Date"] { white-space: nowrap; }
 
 /* Phone and tablet: every table row becomes a stacked card.
    Each cell shows its column name from data-label. */
@@ -333,3 +333,47 @@ blockquote { margin: 0; }
 .foot-links a { display: inline-block; padding: 10px 0; font-weight: 400; }
 .legal { margin-top: 32px; font-size: var(--small); color: #B4B9C2; }
 @media (min-width: 960px) { .colophon { grid-template-columns: auto 7fr 4fr; gap: 32px; } }
+
+/* ---------- 14. News: post list, article page, officer posts ---------- */
+/* Post list: one column on phones, then 2 and 3. Each post hangs from a black rule, like the catalogue rows. */
+.posts { display: grid; grid-template-columns: 1fr; gap: 40px; }
+@media (min-width: 640px) { .posts { grid-template-columns: 1fr 1fr; gap: 40px 32px; } }
+@media (min-width: 960px) { .posts { grid-template-columns: 1fr 1fr 1fr; } }
+.post { display: flex; flex-direction: column; gap: 12px; padding-top: 16px; border-top: 1px solid var(--text); }
+.post__cover img, .post__slot { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; }
+/* Dashed slot when a post has no photo yet (same look as the photo boxes on Tools) */
+.post__slot { display: none; align-items: center; justify-content: center; border: 1px dashed var(--muted); background: var(--gray-bg); font-size: var(--small); color: var(--muted); }
+/* Phones skip the empty slot so the text moves up; wider screens keep it so the grid lines up */
+@media (min-width: 640px) { .post__slot { display: flex; } }
+.post__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: var(--small); color: var(--muted); }
+.post h3 a { text-decoration: none; }
+.post h3 a:hover { text-decoration: underline; text-decoration-color: var(--red); }
+/* "Read more" is a real link with a 44px tap area */
+.post .more { display: inline-flex; align-items: center; min-height: 44px; margin-top: auto; }
+
+.news-filter { margin-bottom: 16px; }
+/* Smaller filter buttons than on Tools, so six fit in two rows on a phone (still 44px tall) */
+.news-filter .seg label { min-height: 44px; padding: 0 12px; font-size: var(--small); }
+.news-filter + .note { margin-bottom: 24px; }
+.section-head--row { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+.more-all { margin-top: 40px; }
+
+/* Article: one readable column, about 70 characters per line at 18px */
+.back { padding: 24px 0 0; }
+.back a { display: inline-flex; align-items: center; min-height: 44px; }
+.article { max-width: 44rem; padding: 16px 0 var(--section); }
+.article h1 { max-width: none; margin: 12px 0 16px; }
+.article .lead { color: var(--muted); }
+.article .photo { margin: 32px 0; }
+.article__body p { max-width: 68ch; margin-top: 20px; font-size: 1.125rem; line-height: 1.7; }
+.article__by { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--rule); font-size: var(--small); color: var(--muted); }
+
+/* Officer posts: the form preview box for the chosen cover photo */
+.post-form { margin-top: 32px; }
+.cover-preview { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; margin-top: 8px; }
+.cover-preview img { width: 100%; max-width: 20rem; aspect-ratio: 16 / 9; object-fit: cover; border: 1px solid var(--rule); border-radius: var(--radius); }
+.post-status { font-weight: 600; }
+.post-status:empty { display: none; }
+.post-status { margin-bottom: 16px; padding: 12px 16px; border-left: 4px solid var(--text); background: var(--gray-bg); }
+.state-line { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.apps-closed { max-width: 40rem; margin-top: 24px; }

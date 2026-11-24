@@ -66,3 +66,59 @@ Re-checked officer (signed in, phone and laptop) and tools (360px): all fixed.
 - Join success is a single line under the button, with no slip or reference. Enough for a prototype; the real site could show the saved application.
 - Officer dates are ISO (`2026-12-01`); fine for officers, but "1 Dec 2026" would match the rest of the site.
 - Phone header is about 210px tall (logo, search, two rows of links) and is not sticky on phones on purpose.
+
+
+---
+
+# News feature (QA run 2026-11-24)
+
+Added per `../FEATURE-NEWS.md`: `news.html`, `article.html`, "Latest from Hygears" on Home (in place of the sample notices), the applications open/closed state on Join, a Posts sheet on the Officer dashboard with a fifth count, and News in every header and footer. Checked at 390 x 844 and 360 (phone) and 1280 x 800 (laptop) on news, article (`?id=3`), home, join (`?season=closed`) and officer (signed in, with a photo chosen). The publish flow was run end to end in headless Chrome: empty form, wrong file type, a 3 MB file, a good PNG with preview, missing photo description, publish, unpublish a sample, edit and save, then news, home and article read back in the same browser profile. No page scrolls sideways at 360px.
+
+## 1. A student reading an article on a phone
+"It reads like the rest of the site: serif text, a black rule on top of the list, the category in small bold type next to the date. The article text is big enough and the lines are short. The photo has the same thin black frame as the photos on Home. Back to News is at the top and More posts at the bottom."
+- Works: 18px serif body at 1.7, max 66ch; Back to News; More posts; "Sample article" marked; posts without a photo skip the empty slot on phones.
+- No issues found on the phone.
+
+## 2. Paolo, officer, publishing on phone and laptop
+"There's a fifth number at the top now, Published posts, and it jumps to the Posts sheet. The New post form is white inside the gray sheet, the same fields as Reserve. The preview showed up as soon as I picked a photo, and a wrong file or a 3 MB photo got a clear message under the field. On the laptop the Edit and Unpublish buttons stacked on top of each other in every row, so the table was twice as tall as it needed to be."
+- Works: preview, type and size checks, required fields with messages, Publish vs Save draft, Unpublish/Publish, the count updates, the status message gets focus, edits say "Saved changes to".
+- Fails: Edit and Unpublish stacked in each laptop row. **Minor**
+
+## 3. Bea, from Facebook, looking for news
+"News is right after Home. The ASCEND post lists the committees from the recruitment post. The closed Join page tells me to follow them for the next ASCEND and links Facebook and Instagram, so I know where to look."
+- Works: News highlighted on news and article; Join open line and closed panel.
+- No issues.
+
+## 4. Senior UI/UX designer
+"News is the notices list grown up: ruled rows with the 2px bar on top, square framed photos, the joined segmented filter from Tools, the category as a plain sans label rather than a coloured chip. It belongs to the printed-record look. But on the Home page the post list ran off the right edge of the screen on a laptop: long titles pushed the grid wider than the container, the left heading column got squeezed to a few words a line, and the photo columns on News were different widths from row to row."
+- Fails: Home "Latest" rows overflow the right edge on laptop, and photo columns change width per row on News. **Major**
+
+## 5. Sir Cadaoas
+- Palette: no new colours; the category is a text label, red only on Publish and the nav underline. Pass.
+- Two fonts kept (Hanken Grotesk, Newsreader). Same h1/h2/h3. Article body 18px at 1.7. Pass.
+- One stylesheet (new section 12), one `app.js`, same header and footer, current page marked. Pass.
+- Labels, hints and error text on the New post form; alt text on every photo; officers must describe their photo. Pass.
+
+## 6. Hans, rebuilding it in PHP
+"Same as the rest of this direction: plain functions and loops. The post objects use the `posts` column names, the list is one loop, the form names match the columns. I'd need to explain `FileReader`, `JSON.stringify`/`JSON.parse` and `sort()` with a compare function. The `minmax(0, 2fr)` in the CSS is new to me but the comment says why."
+- No blockers. **Minor:** those lookups.
+
+## 7. Accessibility
+- Filter: fieldset, legend, real radios; count is `aria-live`.
+- One heading per post; "Read more" carries the title; list photos have empty alt (the title follows), article photos have full alt.
+- Officer: buttons labelled with the post title; `role="status"` message gets focus; Edit moves focus to the form heading; labels, hints and `aria-live` errors on every field; errors clear as you fix them (the existing input listener).
+- No issues.
+
+## Fix list (News feature)
+1. **Major** Home "Latest" rows overflow on laptop; News photo column width changes per row.
+2. **Minor** Officer posts table: Edit and Unpublish stacked on laptop.
+
+## After fixes
+- 1: `.post` columns are `minmax(0, 2fr) minmax(0, 5fr)` and `.posts` has `min-width: 0`, so long titles wrap. Re-shot Home and News at 1280: rows stay inside the container and every photo column is the same width.
+- 2: `#post-table .actions` doesn't wrap from 640px up. Re-shot: one line per post.
+
+**Still open**
+- Browser storage holds about 5 MB, so only a few posts with photos fit; the form says so when it is full. The real site saves files to `uploads/`.
+- News, the home strip and the article are drawn by JavaScript; without JS they show a short note. PHP prints them on the server.
+- No Delete (the spec asks for Edit and Unpublish). Clearing site data restores the samples.
+- Officer dates stay ISO (`2026-11-21`) like the other dashboard tables; the public pages use "21 November 2026".

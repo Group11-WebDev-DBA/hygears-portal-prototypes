@@ -21,6 +21,7 @@
     <nav class="nav" aria-label="Main">
       <ul>
           <li><a href="index.html">Home</a></li>
+          <li><a href="news.html">News</a></li>
           <li><a href="tools.html">Tools</a></li>
           <li><a href="track.html">Track request</a></li>
           <li><a href="join.html" aria-current="page">Join</a></li>
@@ -39,11 +40,17 @@
   <section class="page-head">
     <div class="container">
       <h1>Apply to join Hygears</h1>
-      <p class="lead">Tell the officers who you are and which committee you want.</p>
+      <p class="lead">Applications open each ASCEND recruitment season. Tell the officers who you are and which committee you want.</p>
+      <!-- Recruitment season: app.js shows the open line or the closed panel (the real site reads an officer setting) -->
+      <p class="season" id="apps-open"><span class="status status--approved"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Applications open</span> ASCEND 2026 recruitment is on. <span class="muted small">Sample: officers set the real dates.</span></p>
+      <div class="panel season-closed" id="apps-closed" hidden>
+        <p class="season"><span class="status status--declined"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>Applications closed</span></p>
+        <p>Hygears recruits once a season through ASCEND. Follow us for the next ASCEND: the call goes up on <a href="https://www.facebook.com/PUPHygears">Facebook</a> and <a href="https://www.instagram.com/puphygears">Instagram</a> first, and on <a href="news.html">News</a>.</p>
+      </div>
     </div>
   </section>
 
-  <section class="section--s">
+  <section class="section--s" id="apply">
     <div class="container split split--7-5 split--top">
       <form class="panel form" id="join-form" data-endpoint="" novalidate>
         <div class="form__row">
@@ -115,7 +122,7 @@
     <p class="site-foot__line">“We don’t just build vehicles, we build people to help us build the future!” #GEARINGUpTowardExcellence</p>
     <p class="site-foot__line">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
     <div class="site-foot__cols">
-      <div><h2>Pages</h2><ul><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li></ul></div>
+      <div><h2>Pages</h2><ul><li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li></ul></div>
       <div><h2>Contact</h2><ul>
         <li><a href="https://www.instagram.com/puphygears">Instagram: puphygears</a></li>
         <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>

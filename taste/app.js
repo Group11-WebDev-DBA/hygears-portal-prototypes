@@ -283,4 +283,331 @@
     });
     $('#signout').addEventListener('click', () => { $('#dash').hidden = true; $('#login-block').hidden = false; login.reset(); $('#o-email').focus(); });
   }
+
+  // ---------- News: the posts ----------
+  // On the real site each post is a row in the posts table, and PHP runs
+  // SELECT * FROM posts WHERE status = 'published' ORDER BY published_at DESC.
+  // Here the five sample posts below are the starting rows. When an officer
+  // saves a post, the whole list is saved in this browser (localStorage),
+  // so news.html and article.html show it too.
+  // Dates are sample dates; the article text is sample text written from
+  // the events on the Hygears Facebook page.
+  var SAMPLE_POSTS = [
+    {
+      id: 1, category: 'Competition', date: '2026-11-21', status: 'published', sample: true,
+      title: 'A PUP student is a finalist in the 1st National SOLIDWORKS Mechanical Design Challenge',
+      summary: 'A PUP student reached the finals of the first national SOLIDWORKS Mechanical Design Challenge. Hygears is cheering them on.',
+      cover: '', coverAlt: '', captionBy: '',
+      body: 'PUP Hygears congratulates a PUP student who was named a finalist in the 1st National SOLIDWORKS Mechanical Design Challenge 2026.\n\n' +
+        'SOLIDWORKS is the 3D design software engineering students use to model parts and assemblies before anything is cut or printed. A design challenge built around it tests how well students can turn an idea into a working mechanical design.\n\n' +
+        'Reaching the finals of the first edition of a national challenge is a big step for a student from our university, and it shows the kind of design work PUP engineering students can do.\n\n' +
+        'At Hygears the same skill goes into the Luna cars: every part starts as a model on screen before the team builds it. We hope this news gets more students practising design and joining projects where they can use it.\n\n' +
+        'The results of the final round will be posted here once they are announced.'
+    },
+    {
+      id: 2, category: 'Progress report', date: '2026-11-17', status: 'published', sample: true,
+      title: 'Luna team progress report (sample)',
+      summary: 'A sample that shows how the Luna team’s progress reports will look. The real report comes from the team.',
+      cover: 'img/luna-night.jpg', coverAlt: 'The black Luna car parked at night beside the PUP Lagoon sign, under string lights and trees.', captionBy: '',
+      body: 'This is a sample post. No real details of the current Luna build are known yet, so this text only shows where a progress report goes and how it reads.\n\n' +
+        'A real report would start with where the build stands: which parts of the car the team is working on, such as the chassis, the motor and controller, the battery or the body.\n\n' +
+        'Next it would say what changed since the last report, what was tested and what the team learned. Photos from the workshop fit here, each with a caption.\n\n' +
+        'It would end with what comes next and how members and supporters can help.\n\n' +
+        'Officers can replace this sample from the Posts section of the officer dashboard.'
+    },
+    {
+      id: 3, category: 'Recruitment', date: '2026-11-12', status: 'published', sample: true,
+      title: 'ASCEND 2026: meet the five committees',
+      summary: 'Hygears is recruiting for ASCEND 2026. Here are the five committees you can pick from when you apply.',
+      cover: 'img/team-2.jpg', coverAlt: 'More than twenty Hygears members in matching red and black team shirts stand in a line on the PUP campus.', captionBy: '',
+      photos: [{ after: 3, src: 'img/team-luna.jpg', alt: 'Hygears members gather around their black Luna car on a tree-lined road on the PUP campus.', caption: 'The team with a Luna car on campus.' }],
+      body: 'ASCEND 2026 is the Hygears recruitment season, and applications are open to PUP students. When you apply, you pick the committee you would most like to work in.\n\n' +
+        'Finance and Operations keeps the organization running: budgets, purchases and the paperwork behind every project.\n\n' +
+        'Internal Affairs looks after the members, from welcoming new ones to the activities that keep everyone together.\n\n' +
+        'Innovation and Research works on the technical side: the research and engineering behind the Luna cars and the team’s projects.\n\n' +
+        'External Affairs works with partners and other organizations outside Hygears.\n\n' +
+        'Creative Media and Design makes the posts, photos and designs that tell people what Hygears is doing.\n\n' +
+        'Members come from Mechanical, Electronics and Communications, Industrial, Electrical and Computer Engineering, and Marketing. Apply from the Join page.'
+    },
+    {
+      id: 4, category: 'Announcement', date: '2026-11-05', status: 'published', sample: true,
+      title: 'General Assembly: “The Force Awakens: Refining Our Legacy”',
+      summary: 'The Hygears General Assembly brought the Merakis together under the theme “The Force Awakens: Refining Our Legacy”.',
+      cover: '', coverAlt: '', captionBy: '',
+      body: 'Hygears held its General Assembly under the theme “The Force Awakens: Refining Our Legacy”.\n\n' +
+        'The General Assembly is where the members, whom Hygears calls Merakis, meet as one organization: to hear where Hygears is headed, meet the officers and committees, and start the year’s work.\n\n' +
+        'Photos and highlights from the assembly will be added here by the Creative Media and Design committee.'
+    },
+    {
+      id: 5, category: 'Workshop', date: '2026-10-25', status: 'published', sample: true,
+      title: 'PHYNIX 2026: PUP Hygears Research Workshop',
+      summary: 'PHYNIX 2026 is the Hygears research workshop for “Nex-thinkers, N-explorers, Nex-creators”.',
+      cover: 'img/team-luna.jpg', coverAlt: 'Hygears members gather around their black Luna car on a tree-lined road on the PUP campus, some kneeling in front.', captionBy: '',
+      photos: [{ after: 1, src: 'img/luna-night.jpg', alt: 'The black Luna car parked at night beside the PUP Lagoon sign, under string lights.', caption: 'A Luna car at PUP.' }],
+      body: 'PHYNIX 2026 is the PUP Hygears Research Workshop. Its tagline says who it is for: “Nex-thinkers, N-explorers, Nex-creators”.\n\n' +
+        'Research is part of why Hygears exists. In the organization’s own words, it aims to further enhance the awareness of PUP students in the field of research.\n\n' +
+        'This sample article will be replaced with the real program: the topics, the speakers, the schedule and photos from the day.\n\n' +
+        'Watch this page and the Hygears Facebook page for updates.'
+    }
+  ];
+
+  // All posts: the copy saved in this browser, or the samples the first time.
+  // try/catch because some browsers block storage on file:// pages.
+  function getPosts() {
+    try {
+      var saved = localStorage.getItem('hyg-posts');
+      if (saved) return JSON.parse(saved);
+    } catch (err) { /* fall back to the samples */ }
+    return SAMPLE_POSTS.slice();
+  }
+
+  // Saves the list. Returns false when the browser refuses (blocked or full).
+  function savePosts(posts) {
+    try {
+      localStorage.setItem('hyg-posts', JSON.stringify(posts));
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  // Newest first: by date, then by id for posts on the same day
+  function sortNewest(posts) {
+    posts.sort(function (a, b) {
+      if (a.date !== b.date) return a.date < b.date ? 1 : -1;
+      return b.id - a.id;
+    });
+    return posts;
+  }
+
+  // Only the published posts, newest first (what news.html shows)
+  function publishedPosts() {
+    var all = getPosts();
+    var list = [];
+    for (var i = 0; i < all.length; i++) {
+      if (all[i].status === 'published') list.push(all[i]);
+    }
+    return sortNewest(list);
+  }
+
+  // Finds one post by its id, or null
+  function findPost(id, posts) {
+    for (var i = 0; i < posts.length; i++) {
+      if (posts[i].id === id) return posts[i];
+    }
+    return null;
+  }
+
+  // Body text: a blank line starts a new paragraph
+  function toParagraphs(text) {
+    var parts = text.split(/\n\s*\n/);
+    var list = [];
+    for (var i = 0; i < parts.length; i++) {
+      if (parts[i].trim() !== '') list.push(parts[i].trim());
+    }
+    return list;
+  }
+
+  // The summary, or the start of the body when the officer left it empty
+  function summaryOf(post) {
+    if (post.summary) return post.summary;
+    var text = post.body.replace(/\s+/g, ' ').trim();
+    return text.length > 160 ? text.slice(0, 157) + '...' : text;
+  }
+
+  // "2026-11-21" becomes "21 November 2026"
+  function longDate(iso) {
+    return new Date(iso + 'T00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  /* ---------- News: one post card (news.html, the home strip, "More posts") ---------- */
+  // the list photo has empty alt because the title right under it says the same
+  const postCard = p => `<li class="card post">
+      ${p.cover ? `<img class="post__cover" src="${esc(p.cover)}" alt="" loading="lazy">` : `<div class="slot">${ICON.cam}Photo from Hygears</div>`}
+      <div class="post__meta"><span class="badge">${esc(p.category)}</span><time class="t-small muted" datetime="${p.date}">${longDate(p.date)}</time></div>
+      <h3><a href="article.html?id=${p.id}">${esc(p.title)}</a></h3>
+      <p>${esc(summaryOf(p))}</p>
+      <a class="card__go" href="article.html?id=${p.id}">Read more<span class="visually-hidden">: ${esc(p.title)}</span>${ICON.arrow}</a>
+    </li>`;
+
+  /* ---------- Home: "Latest from Hygears" (the 3 newest posts) ---------- */
+  if (page === 'index') {
+    $('#latest-posts').innerHTML = publishedPosts().slice(0, 3).map(postCard).join('');
+  }
+
+  /* ---------- News page: list with a category filter ---------- */
+  if (page === 'news') {
+    const cat = $('#n-cat');
+    const render = () => {
+      const shown = publishedPosts().filter(p => !cat.value || p.category === cat.value);
+      $('#news-list').innerHTML = shown.map(postCard).join('');
+      $('#news-empty').hidden = shown.length > 0;
+      $('#news-count').textContent = cat.value
+        ? `Showing ${shown.length} ${cat.value.toLowerCase()} post${shown.length === 1 ? '' : 's'}`
+        : `Showing all ${shown.length} posts, newest first`;
+    };
+    cat.addEventListener('change', render);
+    render();
+  }
+
+  /* ---------- Article page: article.html?id=N ---------- */
+  if (page === 'article') {
+    const published = publishedPosts();
+    const post = params.get('id') ? findPost(Number(params.get('id')), published) : published[0];
+    if (!post) {
+      // a wrong id, or a post that was unpublished
+      $('#article').innerHTML = `<h1 id="article-title">This post is not available</h1>
+        <p class="t-lead">It may have been unpublished, or the link is wrong.</p>
+        <p class="article__by"><a class="link" href="news.html">See all news</a></p>`;
+    } else {
+      document.title = `${post.title}, PUP Hygears`;
+      // paragraphs, with any inline photo placed after paragraph number "after"
+      const body = toParagraphs(post.body).map((text, k) => {
+        const photos = (post.photos || []).filter(ph => ph.after === k + 1);
+        return `<p>${esc(text)}</p>` + photos.map(ph =>
+          `<figure><img src="${esc(ph.src)}" alt="${esc(ph.alt)}" loading="lazy"><figcaption>${esc(ph.caption)}</figcaption></figure>`).join('');
+      }).join('');
+      $('#article').innerHTML = `
+        <div class="post__meta"><span class="badge">${esc(post.category)}</span><time class="t-small muted" datetime="${post.date}">${longDate(post.date)}</time>${post.sample ? '<span class="badge badge--sample">Sample article</span>' : ''}</div>
+        <h1 id="article-title">${esc(post.title)}</h1>
+        <p class="t-lead">${esc(summaryOf(post))}</p>
+        ${post.cover ? `<figure><img src="${esc(post.cover)}" alt="${esc(post.coverAlt || '')}"></figure>` : ''}
+        <div class="article__body">${body}</div>
+        <p class="article__by">Caption by ${post.captionBy ? `<strong>${esc(post.captionBy)}</strong>` : '<span class="fill">writer’s name to come</span>'} for PUP Hygears.</p>`;
+    }
+    // "More posts": up to 3 other published posts
+    $('#more-posts').innerHTML = published.filter(p => p !== post).slice(0, 3).map(postCard).join('');
+  }
+
+  /* ---------- Officer: Posts list and the New post form ---------- */
+  if (page === 'officer') {
+    const form = $('#post-form'), rows = $('#t-posts'), status = $('#post-status');
+    const cover = $('#np-cover'), coverErr = $('#np-cover-err'), box = $('#np-preview-box'), preview = $('#np-preview');
+    const MAX_PHOTO = 2 * 1024 * 1024;                   // 2 MB, the same limit PHP would check
+    const PHOTO_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+    let coverData = '';                                  // the chosen photo as a data URL
+    let coverBad = false;                                // true when the chosen file was refused
+    let editingId = null;                                // id of the post being edited, or null
+    let publishClicked = true;                           // which submit button was pressed
+
+    const postBadge = s => (s === 'published' ? `<span class="badge badge--approved">${ICON.check}Published</span>` : `<span class="badge">${ICON.clock}Draft</span>`);
+    // fills the officer table, drafts included, newest first
+    const drawPosts = () => {
+      const posts = sortNewest(getPosts());
+      rows.innerHTML = posts.length ? posts.map(p => `<tr>
+          <td data-label="Title"><b>${esc(p.title)}</b></td><td data-label="Category">${esc(p.category)}</td>
+          <td data-label="Date" class="nowrap">${fmtDate(p.date)}</td><td data-label="Status">${postBadge(p.status)}</td>
+          <td><div class="btn-row"><button class="btn btn--secondary btn--sm" type="button" data-post-edit="${p.id}" aria-label="Edit ${esc(p.title)}">Edit</button><button class="btn btn--secondary btn--sm" type="button" data-post-toggle="${p.id}" aria-label="${p.status === 'published' ? 'Unpublish' : 'Publish'} ${esc(p.title)}">${p.status === 'published' ? 'Unpublish' : 'Publish'}</button></div></td>
+        </tr>`).join('') : '<tr><td colspan="5">No posts yet. Write the first one below.</td></tr>';
+    };
+    const showPreview = src => { coverData = src; preview.src = src; box.hidden = !src; };
+
+    // cover photo: check the type and size, then preview it with FileReader
+    cover.addEventListener('change', () => {
+      const file = cover.files[0];
+      coverBad = false;
+      if (file && PHOTO_TYPES.indexOf(file.type) === -1) { coverBad = true; coverErr.textContent = 'That file is not a JPG, PNG or WebP photo.'; }
+      else if (file && file.size > MAX_PHOTO) { coverBad = true; coverErr.textContent = `That photo is ${(file.size / 1048576).toFixed(1)} MB. Use one under 2 MB.`; }
+      coverErr.hidden = !coverBad;
+      if (coverBad) cover.setAttribute('aria-invalid', 'true'); else cover.removeAttribute('aria-invalid');
+      if (!file || coverBad) { if (coverBad) cover.value = ''; showPreview(''); return; }
+      // FileReader turns the file into a data URL the <img> can show right away
+      const reader = new FileReader();
+      reader.addEventListener('load', () => showPreview(reader.result));
+      reader.readAsDataURL(file);
+    });
+    $('#np-remove').addEventListener('click', () => { cover.value = ''; showPreview(''); cover.focus(); });
+
+    // puts the form back to "New post"
+    const resetForm = () => {
+      form.reset();
+      showPreview('');
+      coverBad = false;
+      editingId = null;
+      $('#np-date').value = today();
+      $('#post-form-h').textContent = 'New post';
+      $('#np-cancel').hidden = true;
+      $$('.field__error', form).forEach(e => { e.hidden = true; });
+      $$('[aria-invalid]', form).forEach(e => e.removeAttribute('aria-invalid'));
+      $('[data-form-status]', form).textContent = '';
+    };
+
+    // remember which submit button was pressed (Publish or Save draft)
+    $$('button[type="submit"]', form).forEach(b => b.addEventListener('click', () => { publishClicked = b.dataset.status === 'published'; }));
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const ok = validate(form, (el, v) => {
+        if (el === cover) return !coverBad;
+        if (el.id === 'np-alt') return !(coverData && !v);
+      });
+      if (!ok) return;
+      const f = form.elements, posts = getPosts();
+      let post = editingId === null ? null : findPost(editingId, posts);
+      const verb = post ? 'Saved changes to' : 'Published';
+      if (!post) {
+        // new post: the next id (the database's AUTO_INCREMENT does this)
+        post = { id: posts.reduce((max, p) => Math.max(max, p.id), 0) + 1, sample: false };
+        posts.push(post);
+      }
+      Object.assign(post, {
+        title: f.title.value.trim(), category: f.category.value, date: f.date.value,
+        cover: coverData, coverAlt: coverData ? f.cover_alt.value.trim() : '',
+        summary: f.summary.value.trim(), body: f.body.value.trim(), captionBy: f.caption_by.value.trim(),
+        status: publishClicked ? 'published' : 'draft'
+      });
+      if (!savePosts(posts)) {
+        $('[data-form-status]', form).textContent = 'This browser would not save the post. The photo may be too big for browser storage: try a smaller one, or remove it.';
+        return;
+      }
+      status.innerHTML = publishClicked
+        ? `${verb} “${esc(post.title)}”. It is in the list above and shows on <a class="link" href="news.html">News</a> in this browser.`
+        : `Saved “${esc(post.title)}” as a draft. It stays off News until you publish it.`;
+      resetForm();
+      drawPosts();
+      status.focus();
+    });
+
+    $('#np-cancel').addEventListener('click', () => { resetForm(); status.textContent = ''; $('#post-form-h').focus(); });
+
+    // Edit and Publish/Unpublish buttons in the table (one listener for all rows)
+    rows.addEventListener('click', e => {
+      const b = e.target.closest('button');
+      if (!b) return;
+      const posts = getPosts();
+      if (b.dataset.postEdit) {
+        const p = findPost(Number(b.dataset.postEdit), posts), f = form.elements;
+        resetForm();
+        editingId = p.id;
+        f.title.value = p.title; f.category.value = p.category; f.date.value = p.date;
+        f.cover_alt.value = p.coverAlt || ''; f.summary.value = p.summary || ''; f.body.value = p.body; f.caption_by.value = p.captionBy || '';
+        showPreview(p.cover || '');
+        $('#post-form-h').textContent = 'Edit post';
+        $('#np-cancel').hidden = false;
+        $('#post-form-h').focus();
+        form.scrollIntoView();
+      }
+      if (b.dataset.postToggle) {
+        const p = findPost(Number(b.dataset.postToggle), posts);
+        p.status = p.status === 'published' ? 'draft' : 'published';
+        status.innerHTML = !savePosts(posts) ? 'This browser would not save the change.'
+          : p.status === 'published' ? `Published “${esc(p.title)}”. It shows on <a class="link" href="news.html">News</a> again.`
+          : `Unpublished “${esc(p.title)}”. It no longer shows on News.`;
+        drawPosts();
+        status.focus();
+      }
+    });
+
+    $('#np-date').value = today();
+    drawPosts();
+  }
+
+  /* ---------- Join: applications open or closed ---------- */
+  // recruitment is seasonal; the real site reads an officer setting. join.html?season=closed previews closed.
+  if (page === 'join') {
+    const open = params.get('season') !== 'closed';
+    $('#apps-open').hidden = !open;
+    $('#apps-closed').hidden = open;
+    $('#apply').hidden = !open;
+  }
 })();

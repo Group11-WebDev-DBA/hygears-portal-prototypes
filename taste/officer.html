@@ -26,6 +26,7 @@
     <a class="skip-link" href="#top">Skip to content</a>
     <a class="nav__logo" href="index.html"><img src="img/hygears-logo.png" alt="" width="32" height="32">PUP Hygears</a>
     <nav class="nav__links" id="site-menu" aria-label="Main">
+      <a class="nav__link" href="news.html">News</a>
       <a class="nav__link" href="tools.html">Tools</a>
       <a class="nav__link" href="track.html">Track</a>
       <a class="nav__link" href="join.html">Join</a>
@@ -46,7 +47,7 @@
     <div class="wrap">
       <p class="t-label">Officers only</p>
       <h1 id="page-h">Officer dashboard</h1>
-      <p class="t-lead">Approve reservations, follow up overdue items, review applications and check stock.</p>
+      <p class="t-lead">Approve reservations, follow up overdue items, review applications, check stock and post news.</p>
     </div>
   </section>
   <section class="block" id="login-block" aria-labelledby="login-h">
@@ -67,7 +68,7 @@
   </section>
   <section class="block" id="dash" hidden aria-labelledby="dash-h">
     <div class="wrap">
-      <div class="panel-head"><h2 id="dash-h" style="margin:0">Today&rsquo;s queue <span class="badge badge--sample">Sample data</span></h2><button class="btn btn--secondary btn--sm" type="button" id="signout">Sign out</button></div>
+      <div class="panel-head"><h2 id="dash-h" style="margin:0">Today&rsquo;s queue <span class="badge badge--sample">Sample data</span></h2><div class="btn-row dash-actions"><a class="btn btn--secondary btn--sm" href="#posts">Posts and New post</a><button class="btn btn--secondary btn--sm" type="button" id="signout">Sign out</button></div></div>
       <div class="stats" id="stats"></div>
 
       <div class="panel-head"><h3>Pending reservations</h3></div>
@@ -86,6 +87,50 @@
 
       <div class="panel-head" style="margin-top:48px"><h3>New applications</h3></div>
       <div class="table-wrap"><table class="table-stack"><thead><tr><th>Name</th><th>Course</th><th>Committee</th><th>Reason</th><th>Status</th></tr></thead><tbody id="t-apps"></tbody></table></div>
+
+      <div class="panel-head" id="posts" style="margin-top:48px"><h3>Posts</h3><a class="btn btn--primary btn--sm" href="#post-form">New post</a></div>
+      <p class="t-small muted posts-note">Published posts show on News, newest first. Drafts stay here until you publish them.</p>
+      <p class="form__status post-status" id="post-status" role="status" tabindex="-1"></p>
+      <!-- app.js fills the rows from the posts saved in this browser (PHP: SELECT * FROM posts ORDER BY published_at DESC) -->
+      <div class="table-wrap"><table class="table-stack"><thead><tr><th>Title</th><th>Category</th><th>Date</th><th>Status</th><th><span class="visually-hidden">Actions</span></th></tr></thead><tbody id="t-posts"></tbody></table></div>
+
+      <form class="form form-card post-form" id="post-form" novalidate aria-labelledby="post-form-h">
+        <div class="panel-head" style="margin:0"><h3 id="post-form-h" tabindex="-1">New post</h3><span class="badge badge--sample">Saved in this browser only</span></div>
+        <div class="form-grid">
+          <div class="field full"><label for="np-title">Title</label>
+            <span class="hint" id="np-title-hint">Up to 120 characters. Say what happened.</span>
+            <input id="np-title" name="title" maxlength="120" required aria-describedby="np-title-hint np-title-err">
+            <p class="field__error" id="np-title-err" hidden>Give the post a title.</p></div>
+          <div class="field"><label for="np-cat">Category</label>
+            <select id="np-cat" name="category" required aria-describedby="np-cat-err"><option value="">Choose a category</option><option>Competition</option><option>Progress report</option><option>Workshop</option><option>Announcement</option><option>Recruitment</option></select>
+            <p class="field__error" id="np-cat-err" hidden>Choose a category.</p></div>
+          <div class="field"><label for="np-date">Date</label>
+            <span class="hint" id="np-date-hint">Shown on the post. Newest dates go first.</span>
+            <input id="np-date" name="date" type="date" required aria-describedby="np-date-hint np-date-err">
+            <p class="field__error" id="np-date-err" hidden>Pick the post date.</p></div>
+          <div class="field full"><label for="np-cover">Cover photo</label>
+            <span class="hint" id="np-cover-hint">JPG, PNG or WebP, up to 2 MB. Optional: posts without one show a photo slot.</span>
+            <input id="np-cover" name="cover" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="np-cover-hint np-cover-err">
+            <p class="field__error" id="np-cover-err" hidden>That file is not a JPG, PNG or WebP photo.</p>
+            <div class="cover-preview" id="np-preview-box" hidden><img id="np-preview" src="" alt="Preview of the chosen cover photo"><button class="btn btn--secondary btn--sm" type="button" id="np-remove">Remove photo</button></div></div>
+          <div class="field full"><label for="np-alt">Photo description</label>
+            <span class="hint" id="np-alt-hint">What the photo shows, for screen readers. Needed when there is a photo.</span>
+            <input id="np-alt" name="cover_alt" maxlength="200" aria-describedby="np-alt-hint np-alt-err">
+            <p class="field__error" id="np-alt-err" hidden>Describe the photo in a few words, for screen readers.</p></div>
+          <div class="field full"><label for="np-summary">Summary</label>
+            <span class="hint" id="np-summary-hint">One or two lines for the News list. Leave empty to use the start of the body.</span>
+            <textarea id="np-summary" name="summary" maxlength="200" class="short" aria-describedby="np-summary-hint"></textarea></div>
+          <div class="field full"><label for="np-body">Body</label>
+            <span class="hint" id="np-body-hint">Leave a blank line between paragraphs.</span>
+            <textarea id="np-body" name="body" class="tall" required aria-describedby="np-body-hint np-body-err"></textarea>
+            <p class="field__error" id="np-body-err" hidden>Write the post body.</p></div>
+          <div class="field full"><label for="np-by">Caption writer</label>
+            <span class="hint" id="np-by-hint">Credited on the post, like the captions on Facebook.</span>
+            <input id="np-by" name="caption_by" maxlength="80" aria-describedby="np-by-hint"></div>
+        </div>
+        <div class="btn-row"><button class="btn btn--primary" type="submit" data-status="published">Publish</button><button class="btn btn--secondary" type="submit" data-status="draft">Save draft</button><button class="btn btn--secondary" type="button" id="np-cancel" hidden>Cancel editing</button></div>
+        <p class="form__status" role="status" data-form-status></p>
+      </form>
     </div>
   </section>
 </main>
@@ -117,7 +162,7 @@
           <li><a href="tools.html">Tools</a></li><li><a href="reserve.html">Reservation form</a></li><li><a href="track.html">Track a request</a></li>
         </ul></div>
         <div class="span-2"><h3>Hygears</h3><ul>
-          <li><a href="join.html">Membership</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li>
+          <li><a href="news.html">News</a></li><li><a href="join.html">Membership</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li>
         </ul></div>
       </div>
       <div class="footer__legal">

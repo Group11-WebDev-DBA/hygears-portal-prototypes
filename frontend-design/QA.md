@@ -53,3 +53,45 @@ Round 1 (Nov 22) fixed the empty Reserve dropdown, the Tools filters on phones, 
 - 4: eyelet ring is now light gray `--peg` with an ink edge; red stays for actions and the current page.
 - 5: `[tabindex="-1"]:focus { outline: none; }` in the base. The officer result line keeps its own outline (its rule comes later).
 - Still open: 6 (cut-off last chip is the only hint), and the round 1 items in 7.
+
+## News feature (2026-11-24)
+
+Added per `../FEATURE-NEWS.md`: `news.html`, `article.html`, a "Latest from Hygears" strip on Home (replaces the four Announcements), an Applications open / closed state on Join (`join.html?season=closed`), a Posts section on the officer desk, and News in every header. Screens: news phone 390 and 360, news laptop, article `?id=3` phone (full), officer `#signed-in` phone (390 and 360) and laptop, join closed phone, home laptop. Behaviour checked with a headless script that drove the officer form: empty Publish, a .txt file, a 3 MB file, a real PNG, then Publish, then read news.html, index.html and `article.html?id=6`.
+
+### Student reading an article on a phone
+"News is in the bottom bar now, between Home and Tools. The article reads like a real news page: category box, date, 'Sample article', the big condensed title, a photo with a border like the tool photos, then 18px paragraphs that don't run edge to edge. 'Back to News' sits at the top and More posts at the end."
+- Minor (fixed): the Back to News arrow showed as a broken glyph (a bad CSS escape).
+- Minor: on phones every card has a 16:9 cover, so only one post fits per screen. Kept: it matches the photo-led cards elsewhere.
+
+### Officer publishing (phone, then laptop)
+"Posts has a box in the tally row that jumps straight there, so I don't scroll past the whole stock table. Empty Publish gave me 'Give the post a title', 'Pick a category', 'Write the article' and focused the title. A .txt file: 'That file is not a JPG, PNG or WebP photo.' A 3 MB photo: 'That photo is 3.0 MB. Use one under 2 MB.' A real PNG showed a preview and asked me to describe it. Publish put my post at the top of the list with a 'Published... shows on News' line, and it was first on News, on Home and on its own article page."
+- Major (fixed): on the laptop the post cards ran the full width, so Edit and Unpublish became 500px bars. Now two cards a row.
+- Minor (open): the photo is stored as a data URL in localStorage, so a few 2 MB photos fill the browser's storage. The form catches that and says to use a smaller photo. The real site saves the file in `uploads/`.
+
+### Bea from Facebook looking for news
+"The same things their page posts (PHYNIX, the General Assembly with the Merakis, ASCEND, the SOLIDWORKS finalist) are on News with the same names, and I can filter to Recruitment. The home page shows the three newest."
+- Pass. All five are marked sample; no invented results, numbers or quotes.
+
+### UI critic: does News fit?
+"It is built from the site's own parts: post cards are the white label plates with the 4px ink top edge from the tool wall, the filter is the Tools chip row, the officer list reuses the request cards, the form is the Join form. No new colours; red stays on Publish and the current tab."
+- Minor: Home's lower "Be part of the team" band still has a red Apply button, so Join is not fully secondary yet. Left, because applications are open in the sample season.
+
+### Sir Cadaoas
+- Pass: same header/footer with News added on all 9 pages, News marked current on news.html (and article.html, as `aria-current="true"`), one style.css, same h1/h2/h3, labels, hints and error messages on every new field, alt text on every photo (the officer must describe a cover photo before publishing).
+
+### Hans (PHP rebuild)
+"`SAMPLE_POSTS` maps to the posts table one to one, `getPosts()`/`savePosts()` are the SELECT and INSERT/UPDATE, the new id is AUTO_INCREMENT. FileReader is only for the preview; in PHP it's `move_uploaded_file` into `uploads/`. All ES5 like the rest of app.js."
+- Pass. One thing to explain: `esc()` exists because officer text goes into innerHTML (in PHP: `htmlspecialchars`).
+
+### Accessibility
+- Pass: chips are buttons with `aria-pressed`, the count is a live status, cards have one title link plus "Read more" with the title in hidden text, the publish result is a status line that takes focus, errors are tied with `aria-describedby`, cover preview has alt text.
+- Minor (fixed): the article page marked News with `aria-current="page"` although it is not the News page; now `aria-current="true"` (CSS matches any `aria-current`).
+
+### Regression
+Home hero, tool wall, Tools, Reserve, Track, Join (open), About and the officer desk render as before. The phone tab bar now has six tabs (60px each at 360px, still over 44px), no sideways scroll at 360px on News or the officer form.
+
+### After fixes
+- Back arrow escape fixed (`content: "\2190"`).
+- Officer post cards two a row from 56rem.
+- Article nav marker uses `aria-current="true"`.
+- Still open: photo storage limit in localStorage (prototype only), Join's lede still says "Applying takes about three minutes" in the closed state, Home's red Apply button.

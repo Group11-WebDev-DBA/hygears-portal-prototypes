@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>News, PUP Hygears</title>
+<meta name="description" content="Competitions, progress reports, workshops and announcements from PUP Hygears.">
+<link rel="icon" href="../assets/hygears-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700&amp;family=IBM+Plex+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<!-- Adds a "js" class so the CSS knows JavaScript is on (used by the phone menu) -->
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <nav class="pill" aria-label="Main">
+      <a class="brand" href="index.html"><img src="../assets/hygears-logo.png" width="40" height="40" alt="">PUP Hygears</a>
+      <button class="btn btn--quiet btn--sm menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <ul class="nav-links" id="nav-links"><li><a href="index.html">Home</a></li><li><a href="news.html" aria-current="page">News</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a class="nav-officer" href="officer.html">Officer</a></li></ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-head">
+  <div class="container">
+    <h1>News</h1>
+    <p class="lead">Competitions, progress reports, workshops and announcements from Hygears.</p>
+    <p class="note">Sample posts written from events on the Hygears Facebook page. Officers publish the real ones from the officer desk.</p>
+  </div>
+</section>
+
+<section class="news" aria-label="Posts">
+  <div class="container">
+    <form class="news-filter" id="news-filter">
+      <fieldset class="seg field"><legend>Show</legend>
+        <input type="radio" name="cat" id="nc-all" value="" checked><label for="nc-all">All posts</label>
+        <input type="radio" name="cat" id="nc-comp" value="Competition"><label for="nc-comp">Competition</label>
+        <input type="radio" name="cat" id="nc-prog" value="Progress report"><label for="nc-prog">Progress report</label>
+        <input type="radio" name="cat" id="nc-work" value="Workshop"><label for="nc-work">Workshop</label>
+        <input type="radio" name="cat" id="nc-ann" value="Announcement"><label for="nc-ann">Announcement</label>
+        <input type="radio" name="cat" id="nc-rec" value="Recruitment"><label for="nc-rec">Recruitment</label>
+      </fieldset>
+    </form>
+    <p class="note" id="news-count" aria-live="polite"></p>
+    <div class="posts" id="news-list"><noscript><p>Turn on JavaScript to see the posts in this prototype. The real site lists them with PHP.</p></noscript></div>
+    <div class="table-empty" id="news-empty" hidden><p><strong>No posts in this category yet.</strong></p><p><a href="news.html">Show all posts</a></p></div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="colophon">
+      <img src="../assets/hygears-logo.png" width="48" height="48" alt="PUP Hygears logo">
+      <div><p><strong>PUP Hygears</strong> is a student research organization at the Polytechnic University of the Philippines, Sta. Mesa, Manila. Find us on <a href="https://www.instagram.com/puphygears/">Instagram</a>, <a href="https://www.facebook.com/PUPHygears">Facebook</a> and <a href="https://x.com/pup_hygears">X</a>, or write to <a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a>. Photographs by PUP Hygears.</p><p class="tagline">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p></div>
+      <ul class="foot-links"><li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer desk</a></li></ul>
+    </div>
+    <p class="legal">A prototype of the Hygears Web Portal, made for a Web Development final project in 2026. Sample data is marked where it appears.</p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

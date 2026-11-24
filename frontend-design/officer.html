@@ -19,6 +19,7 @@
     <nav class="nav" aria-label="Main">
       <ul>
         <li><a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Home</a></li>
+        <li><a href="news.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h12v14a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2zM16 9h4v10a2 2 0 0 1-2 2M7.5 9h5M7.5 13h5M7.5 17h3"/></svg>News</a></li>
         <li><a href="tools.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></svg>Tools</a></li>
         <li><a href="track.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>Track</a></li>
         <li><a href="join.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M19 8v6M16 11h6"/></svg>Join</a></li>
@@ -65,6 +66,7 @@
       <li><a href="#overdue"><strong data-tally="overdue">1</strong>Overdue</a></li>
       <li><a href="#apps"><strong data-tally="apps">2</strong>New applications</a></li>
       <li><a href="#stock"><strong>3</strong>Low or out of stock</a></li>
+      <li><a href="#posts"><strong data-tally="posts">5</strong>Published posts</a></li>
     </ul>
     <p class="visually-hidden" id="desk-live" role="status" aria-live="polite"></p>
     <div class="desk">
@@ -85,6 +87,74 @@
         </table>
       </div>
     </div>
+    <section class="posts-desk" aria-labelledby="posts">
+      <div class="section__head">
+        <h2 id="posts">Posts</h2>
+        <a href="#post-form-title">Write a new post</a>
+      </div>
+      <p class="hint">Posts show on News and on the home page. Prototype: they are saved in this browser only.</p>
+      <p class="req__result" id="post-status" tabindex="-1" role="status" aria-live="polite"></p>
+      <ul class="queue" id="post-list"></ul>
+
+      <h2 class="mt-7" id="post-form-title" tabindex="-1">New post</h2>
+      <form class="form" id="post-form" novalidate>
+        <div class="form-summary" role="alert" tabindex="-1"></div>
+        <div class="field">
+          <label for="f-postTitle">Title</label>
+          <input class="input" id="f-postTitle" name="postTitle" aria-describedby="e-postTitle" type="text" maxlength="120" required>
+          <p class="error" id="e-postTitle"><span></span></p>
+        </div>
+        <div class="field-row"><div class="field">
+          <label for="f-category">Category</label>
+          <select class="select" id="f-category" name="category" aria-describedby="e-category" required><option value="">Choose a category</option><option>Competition</option><option>Progress report</option><option>Workshop</option><option>Announcement</option><option>Recruitment</option></select>
+          <p class="error" id="e-category"><span></span></p>
+        </div><div class="field">
+          <label for="f-postDate">Date</label>
+          <input class="input" id="f-postDate" name="postDate" aria-describedby="e-postDate" type="date" required>
+          <p class="error" id="e-postDate"><span></span></p>
+        </div></div>
+        <div class="field">
+          <label for="f-cover">Cover photo (optional)</label>
+          <p class="hint" id="h-cover">JPG, PNG or WebP, up to 2 MB.</p>
+          <input class="input input--file" id="f-cover" name="cover" aria-describedby="h-cover e-cover" type="file" accept="image/jpeg,image/png,image/webp">
+          <p class="error" id="e-cover"><span></span></p>
+        </div>
+        <div class="preview" id="cover-preview" hidden>
+          <img id="cover-preview-img" src="" alt="Preview of the cover photo">
+          <button type="button" class="btn btn--outline" id="cover-remove">Remove photo</button>
+        </div>
+        <div class="field" id="cover-alt-field" hidden>
+          <label for="f-coverAlt">Describe the photo</label>
+          <p class="hint" id="h-coverAlt">For people using screen readers, like "Members around the Luna car on campus".</p>
+          <input class="input" id="f-coverAlt" name="coverAlt" aria-describedby="h-coverAlt e-coverAlt" type="text" maxlength="160">
+          <p class="error" id="e-coverAlt"><span></span></p>
+        </div>
+        <div class="field">
+          <label for="f-summary">Summary (optional)</label>
+          <p class="hint" id="h-summary">One or two lines for the News list. Left empty, the start of the body is used.</p>
+          <textarea class="textarea textarea--short" id="f-summary" name="summary" aria-describedby="h-summary e-summary" maxlength="220"></textarea>
+          <p class="error" id="e-summary"><span></span></p>
+        </div>
+        <div class="field">
+          <label for="f-body">Body</label>
+          <p class="hint" id="h-body">Leave a blank line between paragraphs.</p>
+          <textarea class="textarea textarea--long" id="f-body" name="body" aria-describedby="h-body e-body" required></textarea>
+          <p class="error" id="e-body"><span></span></p>
+        </div>
+        <div class="field">
+          <label for="f-captionBy">Caption by (optional)</label>
+          <p class="hint" id="h-captionBy">The writer credited at the end, as on our Facebook posts.</p>
+          <input class="input" id="f-captionBy" name="captionBy" aria-describedby="h-captionBy" type="text" maxlength="80" autocomplete="name">
+        </div>
+        <p class="form-summary" id="post-save-error" role="alert" tabindex="-1"></p>
+        <div class="btn-row">
+          <button class="btn btn--primary" type="submit" data-status="published">Publish</button>
+          <button class="btn btn--outline" type="submit" data-status="draft">Save draft</button>
+          <button class="btn btn--outline" type="button" id="post-cancel" hidden>Cancel edit</button>
+        </div>
+      </form>
+    </section>
+
   </div>
 </section>
 

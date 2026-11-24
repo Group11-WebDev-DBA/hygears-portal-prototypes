@@ -21,6 +21,7 @@
     <nav class="nav" aria-label="Main">
       <ul>
           <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="news.html">News</a></li>
           <li><a href="tools.html">Tools</a></li>
           <li><a href="track.html">Track request</a></li>
           <li><a href="join.html">Join</a></li>
@@ -43,7 +44,7 @@
         <p class="lead">Borrow workshop tools from PUP Hygears, or join the team building Luna.</p>
         <div class="actions">
           <a class="btn btn--primary" href="tools.html">Reserve a tool</a>
-          <a class="btn" href="join.html">Apply to join</a>
+          <a class="btn" href="news.html">Read the news</a>
         </div>
       </div>
       <div class="sheet">
@@ -82,17 +83,15 @@
     </div>
   </section>
 
-  <section class="section--l">
+  <section class="section--l" aria-labelledby="latest-title">
     <div class="container split split--4-8 split--top">
       <div class="stack--tight">
-        <h2>Notices from the workshop</h2>
-        <p class="muted small">Sample notices. Officers post the real ones here.</p>
+        <h2 id="latest-title">Latest from Hygears</h2>
+        <p class="muted small">Competitions, progress reports and workshops. Sample posts for now.</p>
+        <p><a href="news.html">All news</a></p>
       </div>
-      <ul class="rows">
-        <li><h3>Reserve online, not by message</h3><p>Each request gets a reference number to track.</p></li>
-        <li><h3>Membership applications</h3><p>Pick the committee you want to work in.</p></li>
-        <li><h3>Return what you borrow</h3><p>Tools go back by the return date.</p></li>
-      </ul>
+      <!-- app.js fills this with the 3 newest published posts (PHP: the same query with LIMIT 3) -->
+      <div class="posts" id="latest-posts"><noscript><p><a href="news.html">Read the news</a></p></noscript></div>
     </div>
   </section>
 
@@ -120,7 +119,7 @@
     <p class="site-foot__line">“We don’t just build vehicles, we build people to help us build the future!” #GEARINGUpTowardExcellence</p>
     <p class="site-foot__line">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p>
     <div class="site-foot__cols">
-      <div><h2>Pages</h2><ul><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li></ul></div>
+      <div><h2>Pages</h2><ul><li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officers</a></li></ul></div>
       <div><h2>Contact</h2><ul>
         <li><a href="https://www.instagram.com/puphygears">Instagram: puphygears</a></li>
         <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUPHygears</a></li>

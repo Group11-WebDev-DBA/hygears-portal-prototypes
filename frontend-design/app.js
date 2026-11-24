@@ -416,6 +416,393 @@
     }).join("");
   }
 
+  // ---------- News: the posts ----------
+  // On the real site each post is a row in the posts table and news.html runs
+  // SELECT * FROM posts WHERE status = 'published' ORDER BY published_at DESC.
+  // Here these five samples are the starting rows. When an officer saves a post,
+  // the whole list is saved in this browser (localStorage), so News shows it too.
+  // Dates are sample dates; the text is sample text written from the events on
+  // the Hygears Facebook page (no invented results, numbers or quotes).
+  var POSTS_KEY = "hyg-posts-shadowboard";   // own key, so other prototypes opened from file:// don't mix in
+  var SAMPLE_POSTS = [
+    { id: 1, category: "Competition", date: "2026-11-21", status: "published", sample: true,
+      title: "A PUP student is a finalist in the 1st National SOLIDWORKS Mechanical Design Challenge",
+      summary: "A PUP student reached the finals of the first national SOLIDWORKS Mechanical Design Challenge. Hygears is cheering them on.",
+      cover: "", coverAlt: "", captionBy: "",
+      body: "PUP Hygears congratulates a PUP student who was named a finalist in the 1st National SOLIDWORKS Mechanical Design Challenge 2026.\n\n" +
+        "SOLIDWORKS is the 3D design software engineering students use to model parts and assemblies before anything is cut or printed. A design challenge built around it tests how well students can turn an idea into a working mechanical design.\n\n" +
+        "Reaching the finals of the first edition of a national challenge is a big step for a student from our university, and it shows the kind of design work PUP engineering students can do.\n\n" +
+        "At Hygears the same skill goes into the Luna cars: every part starts as a model on screen before the team builds it.\n\n" +
+        "The results of the final round will be posted here once they are announced." },
+    { id: 2, category: "Progress report", date: "2026-11-17", status: "published", sample: true,
+      title: "Luna team progress report (sample)",
+      summary: "A sample that shows how the Luna team's progress reports will look. The real report comes from the team.",
+      cover: "../assets/luna-night.png", coverAlt: "The Luna car parked at night by the PUP Lagoon sign, under string lights.", captionBy: "",
+      body: "This is a sample post. No real details of the current Luna build are known yet, so this text only shows where a progress report goes and how it reads.\n\n" +
+        "A real report would start with where the build stands: which parts of the car the team is working on, such as the chassis, the motor and controller, the battery or the body.\n\n" +
+        "Next it would say what changed since the last report, what was tested and what the team learned. Photos from the workshop fit here, each with a caption.\n\n" +
+        "It would end with what comes next and how members and supporters can help.\n\n" +
+        "Officers can replace this sample from the Posts section of the officer desk." },
+    { id: 3, category: "Recruitment", date: "2026-11-12", status: "published", sample: true,
+      title: "ASCEND 2026: meet the five committees",
+      summary: "Hygears is recruiting for ASCEND 2026. Here are the five committees you can pick from when you apply.",
+      cover: "../assets/team-2.png", coverAlt: "A lineup of Hygears members in team shirts on the PUP campus.", captionBy: "",
+      photos: [{ after: 3, src: "../assets/team-luna-1.png", alt: "Hygears members gathered around the Luna car on a tree-lined road at PUP.", caption: "The team with a Luna car on campus." }],
+      body: "ASCEND 2026 is the Hygears recruitment season, and applications are open to PUP students. When you apply, you pick the committee you would most like to work in.\n\n" +
+        "Finance and Operations keeps the organization running: budgets, purchases and the paperwork behind every project.\n\n" +
+        "Internal Affairs looks after the members, from welcoming new ones to the activities that keep everyone together.\n\n" +
+        "Innovation and Research works on the technical side: the research and engineering behind the Luna cars and the team's projects.\n\n" +
+        "External Affairs works with partners and other organizations outside Hygears.\n\n" +
+        "Creative Media and Design makes the posts, photos and designs that tell people what Hygears is doing.\n\n" +
+        "Members come from Mechanical, Electronics and Communications, Industrial, Electrical and Computer Engineering, and Marketing. Apply from the Join page." },
+    { id: 4, category: "Announcement", date: "2026-11-05", status: "published", sample: true,
+      title: "General Assembly: “The Force Awakens: Refining Our Legacy”",
+      summary: "The Hygears General Assembly brought the Merakis together under the theme “The Force Awakens: Refining Our Legacy”.",
+      cover: "", coverAlt: "", captionBy: "",
+      body: "Hygears held its General Assembly under the theme “The Force Awakens: Refining Our Legacy”.\n\n" +
+        "The General Assembly is where the members, whom Hygears calls Merakis, meet as one organization: to hear where Hygears is headed, meet the officers and committees, and start the year's work.\n\n" +
+        "Photos from the assembly's photobooth are on the Hygears Facebook page. The Creative Media and Design committee will add highlights here." },
+    { id: 5, category: "Workshop", date: "2026-10-25", status: "published", sample: true,
+      title: "PHYNIX 2026: PUP Hygears Research Workshop",
+      summary: "PHYNIX 2026 is the Hygears research workshop for “Nex-thinkers, N-explorers, Nex-creators”.",
+      cover: "../assets/team-luna-1.png", coverAlt: "Hygears members gathered around the Luna car on a tree-lined road at PUP.", captionBy: "",
+      photos: [{ after: 1, src: "../assets/luna-night.png", alt: "The Luna car parked at night by the PUP Lagoon sign.", caption: "A Luna car at PUP." }],
+      body: "PHYNIX 2026 is the PUP Hygears Research Workshop. Its tagline says who it is for: “Nex-thinkers, N-explorers, Nex-creators”.\n\n" +
+        "Research is part of why Hygears exists. In the organization's own words, it aims to further enhance the awareness of PUP students in the field of research.\n\n" +
+        "This sample article will be replaced with the real program: the topics, the speakers, the schedule and photos from the day.\n\n" +
+        "Watch this page and the Hygears Facebook page for updates." }
+  ];
+
+  // All posts: the copy saved in this browser, or the samples the first time.
+  // try/catch because some browsers block storage on file:// pages.
+  function getPosts() {
+    try {
+      var saved = localStorage.getItem(POSTS_KEY);
+      if (saved) return JSON.parse(saved);
+    } catch (err) { /* fall back to the samples */ }
+    return SAMPLE_POSTS.slice();
+  }
+
+  // Saves the whole list. Returns false when the browser refuses (blocked or full).
+  function savePosts(posts) {
+    try {
+      localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  // Newest first: by date, then by id for posts on the same day
+  function sortNewest(posts) {
+    return posts.sort(function (a, b) {
+      if (a.date !== b.date) return a.date < b.date ? 1 : -1;
+      return b.id - a.id;
+    });
+  }
+
+  function publishedPosts() {
+    return sortNewest(getPosts().filter(function (p) { return p.status === "published"; }));
+  }
+
+  function findPost(id, posts) {
+    for (var i = 0; i < posts.length; i++) if (posts[i].id === id) return posts[i];
+    return null;
+  }
+
+  // Officer text goes into innerHTML, so turn & < > " into safe entities first
+  function esc(text) {
+    return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  // The summary, or the start of the body when the officer left it empty
+  function summaryOf(post) {
+    if (post.summary) return post.summary;
+    var text = post.body.replace(/\s+/g, " ").trim();
+    return text.length > 160 ? text.slice(0, 157) + "..." : text;
+  }
+
+  // One post card for news.html, the home strip and "More posts".
+  // The cover's alt is empty because the title right under it names the post.
+  function postCard(post) {
+    var link = "article.html?id=" + post.id;
+    var cover = post.cover
+      ? '<img class="post__cover" src="' + esc(post.cover) + '" alt="" loading="lazy">'
+      : '<div class="post__slot">Photo to come</div>';
+    return '<li class="post">' + cover + '<div class="post__plate">' +
+      '<p class="post__meta"><span class="post__cat">' + esc(post.category) + '</span><time datetime="' + post.date + '">' + niceDate(post.date) + "</time></p>" +
+      '<h3><a href="' + link + '">' + esc(post.title) + "</a></h3>" +
+      "<p>" + esc(summaryOf(post)) + "</p>" +
+      '<a class="post__more" href="' + link + '">Read more<span class="visually-hidden">: ' + esc(post.title) + "</span></a>" +
+      "</div></li>";
+  }
+
+  // ---------- Home: "Latest from Hygears" (the 3 newest) ----------
+  function initLatest() {
+    var el = document.getElementById("latest-posts");
+    if (!el) return;
+    el.innerHTML = publishedPosts().slice(0, 3).map(postCard).join("");
+  }
+
+  // ---------- News page: list with category chips ----------
+  function initNews() {
+    var el = document.getElementById("news-list");
+    if (!el) return;
+    var chips = document.getElementById("news-chips");
+    var note = document.getElementById("news-note");
+    var cat = "All";
+
+    function show() {
+      var list = publishedPosts().filter(function (p) { return cat === "All" || p.category === cat; });
+      el.innerHTML = list.map(postCard).join("");
+      document.getElementById("news-empty").hidden = list.length > 0;
+      note.textContent = (list.length === 1 ? "1 post" : list.length + " posts") + (cat === "All" ? ", newest first" : " in " + cat);
+    }
+    chips.addEventListener("click", function (e) {
+      var btn = e.target.closest("button");
+      if (!btn) return;
+      chips.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
+      cat = btn.dataset.value;
+      show();
+    });
+    show();
+  }
+
+  // ---------- Article page: article.html?id=N (no id = the newest post) ----------
+  function initArticle() {
+    var box = document.getElementById("article");
+    if (!box) return;
+    var published = publishedPosts();
+    var id = new URLSearchParams(location.search).get("id");
+    var post = id ? findPost(Number(id), published) : published[0];
+
+    if (!post) {
+      // a wrong id, or a post that was unpublished
+      box.innerHTML = '<h1 id="article-title">This post is not available</h1>' +
+        '<p class="lede">It may have been unpublished, or the link is wrong.</p><p><a href="news.html">See all news</a></p>';
+    } else {
+      document.title = post.title + " | PUP Hygears";
+      var html = '<p class="post__meta"><span class="post__cat">' + esc(post.category) + "</span>" +
+        '<time datetime="' + post.date + '">' + niceDate(post.date) + "</time>" +
+        (post.sample ? '<span class="sample">Sample article</span>' : "") + "</p>" +
+        '<h1 id="article-title">' + esc(post.title) + "</h1>" +
+        '<p class="lede">' + esc(summaryOf(post)) + "</p>";
+      if (post.cover) html += '<figure><img src="' + esc(post.cover) + '" alt="' + esc(post.coverAlt || "") + '"></figure>';
+
+      // paragraphs split on blank lines; an inline photo goes after paragraph number "after"
+      var paras = post.body.split(/\n\s*\n/);
+      var photos = post.photos || [];
+      html += '<div class="article__body">';
+      paras.forEach(function (text, i) {
+        if (text.trim()) html += "<p>" + esc(text.trim()) + "</p>";
+        photos.forEach(function (ph) {
+          if (ph.after === i + 1) {
+            html += '<figure><img src="' + esc(ph.src) + '" alt="' + esc(ph.alt) + '" loading="lazy"><figcaption>' + esc(ph.caption) + "</figcaption></figure>";
+          }
+        });
+      });
+      html += "</div>";
+      html += '<p class="article__by">Caption by ' + (post.captionBy ? "<strong>" + esc(post.captionBy) + "</strong>" : "the writer (name to be added)") + " for PUP Hygears.</p>";
+      box.innerHTML = html;
+    }
+
+    // "More posts": up to 3 other published posts
+    document.getElementById("more-posts").innerHTML = published.filter(function (p) { return p !== post; }).slice(0, 3).map(postCard).join("");
+  }
+
+  // ---------- Officer: Posts list and the New post form ----------
+  function initPosts() {
+    var form = document.getElementById("post-form");
+    if (!form) return;
+    var list = document.getElementById("post-list");
+    var status = document.getElementById("post-status");
+    var saveError = document.getElementById("post-save-error");
+    var fileInput = form.elements.cover;
+    var preview = document.getElementById("cover-preview");
+    var previewImg = document.getElementById("cover-preview-img");
+    var altField = document.getElementById("cover-alt-field");
+    var formTitle = document.getElementById("post-form-title");
+    var cancelBtn = document.getElementById("post-cancel");
+    var MAX_PHOTO = 2 * 1024 * 1024;                        // 2 MB, the same limit PHP would check
+    var PHOTO_TYPES = ["image/jpeg", "image/png", "image/webp"];
+    var coverData = "";      // the chosen photo as a data URL (or a sample's file path)
+    var coverError = "";     // message when the chosen file is wrong
+    var editingId = null;    // id of the post being edited, null for a new post
+    var publishing = true;   // which submit button was pressed
+
+    function renderList() {
+      var posts = sortNewest(getPosts());
+      list.innerHTML = posts.map(function (p) {
+        var live = p.status === "published";
+        return '<li class="req' + (live ? "" : " is-done") + '"><h3>' + esc(p.title) + "</h3>" +
+          "<p>" + esc(p.category) + ", " + niceDate(p.date) + (p.sample ? " (sample)" : "") + "</p>" +
+          '<p class="req__result">' + (live ? ICON.check + "Published, on News" : ICON.clock + "Draft, not on News") + "</p>" +
+          '<div class="btn-row"><button type="button" class="btn btn--outline" data-edit="' + p.id + '" aria-label="Edit ' + esc(p.title) + '">Edit</button>' +
+          '<button type="button" class="btn btn--outline" data-toggle="' + p.id + '" aria-label="' + (live ? "Unpublish " : "Publish ") + esc(p.title) + '">' + (live ? "Unpublish" : "Publish") + "</button></div></li>";
+      }).join("") || '<li class="empty"><strong>No posts yet.</strong> Write the first one below.</li>';
+      var tally = document.querySelector('[data-tally="posts"]');
+      if (tally) tally.textContent = posts.filter(function (p) { return p.status === "published"; }).length;
+    }
+
+    function showPreview(src) {
+      coverData = src;
+      previewImg.src = src;
+      preview.hidden = !src;
+      altField.hidden = !src;   // the photo description is only asked for when there is a photo
+    }
+
+    // Cover photo: check type and size, then show it with FileReader
+    fileInput.addEventListener("change", function () {
+      var file = fileInput.files[0];
+      coverError = "";
+      if (!file) { showPreview(""); return; }
+      if (PHOTO_TYPES.indexOf(file.type) === -1) {
+        coverError = "That file is not a JPG, PNG or WebP photo. Choose another file.";
+      } else if (file.size > MAX_PHOTO) {
+        coverError = "That photo is " + (file.size / 1048576).toFixed(1) + " MB. Use one under 2 MB (resize it first).";
+      }
+      validate(form, { cover: function () { return coverError; } });
+      if (coverError) { fileInput.value = ""; showPreview(""); return; }
+      // FileReader turns the file into a data URL that the <img> can show right away
+      var reader = new FileReader();
+      reader.addEventListener("load", function () { showPreview(reader.result); });
+      reader.readAsDataURL(file);
+    });
+
+    document.getElementById("cover-remove").addEventListener("click", function () {
+      fileInput.value = "";
+      showPreview("");
+      fileInput.focus();
+    });
+
+    // Back to an empty "New post" form
+    function resetForm() {
+      form.reset();
+      showPreview("");
+      coverError = "";
+      editingId = null;
+      form.elements.postDate.value = todayIso();
+      formTitle.textContent = "New post";
+      cancelBtn.hidden = true;
+      saveError.classList.remove("is-shown");
+      form.querySelector(".form-summary").classList.remove("is-shown");
+      form.querySelectorAll(".field").forEach(function (f) { f.classList.remove("has-error"); });
+      form.querySelectorAll("[aria-invalid]").forEach(function (f) { f.setAttribute("aria-invalid", "false"); });
+    }
+
+    // Remember which submit button was pressed (Publish or Save draft)
+    form.querySelectorAll('button[type="submit"]').forEach(function (b) {
+      b.addEventListener("click", function () { publishing = b.dataset.status === "published"; });
+    });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      saveError.classList.remove("is-shown");
+      var result = validate(form, {
+        postTitle: function (v) { return v ? "" : "Give the post a title."; },
+        category: function (v) { return v ? "" : "Pick a category so the post shows under the right filter."; },
+        postDate: function (v) { return v ? "" : "Pick the date the post is for."; },
+        cover: function () { return coverError; },
+        coverAlt: function (v) { return v ? "" : "Describe the photo in a few words, for screen reader users."; },
+        body: function (v) { return v ? "" : "Write the article. Leave a blank line between paragraphs."; }
+      });
+      showSummary(form, result);
+      if (result.bad) return;
+
+      var f = form.elements;
+      var posts = getPosts();
+      var post = editingId === null ? null : findPost(editingId, posts);
+      if (!post) {
+        // a new post gets the next id (the database's AUTO_INCREMENT does this)
+        var nextId = 1;
+        posts.forEach(function (p) { nextId = Math.max(nextId, p.id + 1); });
+        post = { id: nextId, sample: false };
+        posts.push(post);
+      }
+      post.title = f.postTitle.value.trim();
+      post.category = f.category.value;
+      post.date = f.postDate.value;
+      post.cover = coverData;
+      post.coverAlt = coverData ? f.coverAlt.value.trim() : "";
+      post.summary = f.summary.value.trim();
+      post.body = f.body.value.trim();
+      post.captionBy = f.captionBy.value.trim();
+      post.status = publishing ? "published" : "draft";
+
+      if (!savePosts(posts)) {
+        saveError.textContent = "This browser would not save the post. The photo may be too big for browser storage: try a smaller one, or remove it.";
+        saveError.classList.add("is-shown");
+        saveError.focus();
+        return;
+      }
+      status.innerHTML = publishing
+        ? ICON.check + "Published “" + esc(post.title) + '”. It is at the top of the list and shows on <a href="news.html">News</a> in this browser.'
+        : ICON.clock + "Saved “" + esc(post.title) + "” as a draft. It stays off News until you publish it.";
+      resetForm();
+      renderList();
+      status.focus();
+    });
+
+    cancelBtn.addEventListener("click", function () {
+      resetForm();
+      formTitle.focus();
+    });
+
+    // Edit and Publish/Unpublish buttons on the list (one listener for every card)
+    list.addEventListener("click", function (e) {
+      var btn = e.target.closest("button");
+      if (!btn) return;
+      var posts = getPosts();
+      if (btn.dataset.edit) {
+        var post = findPost(Number(btn.dataset.edit), posts);
+        resetForm();
+        editingId = post.id;
+        var f = form.elements;
+        f.postTitle.value = post.title;
+        f.category.value = post.category;
+        f.postDate.value = post.date;
+        f.summary.value = post.summary || "";
+        f.body.value = post.body;
+        f.captionBy.value = post.captionBy || "";
+        showPreview(post.cover || "");
+        f.coverAlt.value = post.coverAlt || "";
+        formTitle.textContent = "Edit post";
+        cancelBtn.hidden = false;
+        formTitle.scrollIntoView();
+        formTitle.focus();
+      }
+      if (btn.dataset.toggle) {
+        var target = findPost(Number(btn.dataset.toggle), posts);
+        target.status = target.status === "published" ? "draft" : "published";
+        if (!savePosts(posts)) {
+          status.textContent = "This browser would not save the change.";
+        } else {
+          status.innerHTML = target.status === "published"
+            ? ICON.check + "Published “" + esc(target.title) + '”. It shows on <a href="news.html">News</a> again.'
+            : ICON.cross + "Unpublished “" + esc(target.title) + "”. It no longer shows on News.";
+        }
+        renderList();
+        status.focus();
+      }
+    });
+
+    form.elements.postDate.value = todayIso();
+    renderList();
+  }
+
+  // ---------- Join: applications open or closed ----------
+  // Recruitment is seasonal. The real site reads this from an officer setting;
+  // here join.html?season=closed previews the closed state.
+  function initSeason() {
+    var openLine = document.getElementById("apps-open");
+    if (!openLine) return;
+    var open = new URLSearchParams(location.search).get("season") !== "closed";
+    openLine.hidden = !open;
+    document.getElementById("apps-closed-line").hidden = open;
+    document.getElementById("apps-closed").hidden = open;
+    document.getElementById("join-form").hidden = !open;
+  }
+
   injectSprite();
   initHome();
   initTools();
@@ -423,4 +810,9 @@
   initTrack();
   initJoin();
   initOfficer();
+  initLatest();
+  initNews();
+  initArticle();
+  initPosts();
+  initSeason();
 })();

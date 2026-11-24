@@ -35,6 +35,7 @@
     alert: '<path d="M12 4L2.8 19.5h18.4z"/><path d="M12 10v4.2M12 17.2v.1"/>',
     search: '<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>',
     menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+    back: '<path d="M19 12H5M11 6l-6 6 6 6"/>',
     arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
     mail: '<rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 6.5l8.5 7 8.5-7"/>',
     pin: '<path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>',
@@ -352,5 +353,327 @@
     });
     const stock = $('#stock-board');
     stock.innerHTML = ITEMS.map(i => slotHTML(i, { short: true, noAction: true })).join('');
+  }
+
+  /* ---------- News: the posts ----------
+     On the real site each post is a row in the posts table, and news.html runs
+     SELECT * FROM posts WHERE status = 'published' ORDER BY published_at DESC.
+     Here the five samples below are the starting rows. When an officer saves a post,
+     the whole list is saved in this browser (localStorage), so News shows it too.
+     Dates are sample dates; the text is sample text written from the events on the
+     Hygears Facebook page (no invented results, numbers or quotes). */
+  const POSTS_KEY = 'hg-posts-impeccable';   // own key, so other prototypes opened from file:// don't mix in
+  const SAMPLE_POSTS = [
+    { id: 1, category: 'Competition', date: '2026-11-21', status: 'published', sample: true,
+      title: 'A PUP student is a finalist in the 1st National SOLIDWORKS Mechanical Design Challenge',
+      summary: 'A PUP student reached the finals of the first national SOLIDWORKS Mechanical Design Challenge. Hygears is cheering them on.',
+      cover: '', coverAlt: '', captionBy: '',
+      body: 'PUP Hygears congratulates a PUP student who was named a finalist in the 1st National SOLIDWORKS Mechanical Design Challenge 2026.\n\n' +
+        'SOLIDWORKS is the 3D design software engineering students use to model parts and assemblies before anything is cut or printed. A design challenge built around it tests how well students can turn an idea into a working mechanical design.\n\n' +
+        'Reaching the finals of the first edition of a national challenge is a big step for a student from our university, and it shows the kind of design work PUP engineering students can do.\n\n' +
+        'At Hygears the same skill goes into the Luna cars: every part starts as a model on screen before the team builds it.\n\n' +
+        'The results of the final round will be posted here once they are announced.' },
+    { id: 2, category: 'Progress report', date: '2026-11-17', status: 'published', sample: true,
+      title: 'Luna team progress report (sample)',
+      summary: "A sample that shows how the Luna team's progress reports will look. The real report comes from the team.",
+      cover: 'img/luna-night.jpg', coverAlt: 'The black Luna car parked at night by the PUP Lagoon sign, under string lights.', captionBy: '',
+      body: 'This is a sample post. No real details of the current Luna build are known yet, so this text only shows where a progress report goes and how it reads.\n\n' +
+        'A real report would start with where the build stands: which parts of the car the team is working on, such as the chassis, the motor and controller, the battery or the body.\n\n' +
+        'Next it would say what changed since the last report, what was tested and what the team learned. Photos from the workshop fit here, each with a caption.\n\n' +
+        'It would end with what comes next and how members and supporters can help.\n\n' +
+        'Officers can replace this sample from the Posts section of the officer desk.' },
+    { id: 3, category: 'Recruitment', date: '2026-11-12', status: 'published', sample: true,
+      title: 'ASCEND 2026: meet the five committees',
+      summary: 'Hygears is recruiting for ASCEND 2026. Here are the five committees you can pick from when you apply.',
+      cover: 'img/team-lineup.jpg', coverAlt: 'A lineup of Hygears members in maroon and black team shirts on the PUP campus.', captionBy: '',
+      photos: [{ after: 3, src: 'img/team-luna.jpg', alt: 'Hygears members gathered around the black Luna car on a tree-lined PUP campus road.', caption: 'The team with a Luna car on campus.' }],
+      body: 'ASCEND 2026 is the Hygears recruitment season, and applications are open to PUP students. When you apply, you pick the committee you would most like to work in.\n\n' +
+        'Finance and Operations keeps the organization running: budgets, purchases and the paperwork behind every project.\n\n' +
+        'Internal Affairs looks after the members, from welcoming new ones to the activities that keep everyone together.\n\n' +
+        "Innovation and Research works on the technical side: the research and engineering behind the Luna cars and the team's projects.\n\n" +
+        'External Affairs works with partners and other organizations outside Hygears.\n\n' +
+        'Creative Media and Design makes the posts, photos and designs that tell people what Hygears is doing.\n\n' +
+        'Members come from Mechanical, Electronics and Communications, Industrial, Electrical and Computer Engineering, and Marketing. Apply from the Join page.' },
+    { id: 4, category: 'Announcement', date: '2026-11-05', status: 'published', sample: true,
+      title: 'General Assembly: "The Force Awakens: Refining Our Legacy"',
+      summary: 'The Hygears General Assembly brought the Merakis together under the theme "The Force Awakens: Refining Our Legacy".',
+      cover: '', coverAlt: '', captionBy: '',
+      body: 'Hygears held its General Assembly under the theme "The Force Awakens: Refining Our Legacy".\n\n' +
+        "The General Assembly is where the members, whom Hygears calls Merakis, meet as one organization: to hear where Hygears is headed, meet the officers and committees, and start the year's work.\n\n" +
+        "Photos from the assembly's photobooth are on the Hygears Facebook page. The Creative Media and Design committee will add highlights here." },
+    { id: 5, category: 'Workshop', date: '2026-10-25', status: 'published', sample: true,
+      title: 'PHYNIX 2026: PUP Hygears Research Workshop',
+      summary: 'PHYNIX 2026 is the Hygears research workshop for "Nex-thinkers, N-explorers, Nex-creators".',
+      cover: 'img/team-luna.jpg', coverAlt: 'Hygears members gathered around the black Luna car on a tree-lined PUP campus road.', captionBy: '',
+      photos: [{ after: 1, src: 'img/luna-night.jpg', alt: 'The black Luna car parked at night by the PUP Lagoon sign.', caption: 'A Luna car at PUP.' }],
+      body: 'PHYNIX 2026 is the PUP Hygears Research Workshop. Its tagline says who it is for: "Nex-thinkers, N-explorers, Nex-creators".\n\n' +
+        "Research is part of why Hygears exists. In the organization's own words, it aims to further enhance the awareness of PUP students in the field of research.\n\n" +
+        'This sample article will be replaced with the real program: the topics, the speakers, the schedule and photos from the day.\n\n' +
+        'Watch this page and the Hygears Facebook page for updates.' }
+  ];
+
+  // All posts: the copy saved in this browser, or the samples the first time.
+  // try/catch because some browsers block storage on file:// pages.
+  function getPosts() {
+    try {
+      const saved = localStorage.getItem(POSTS_KEY);
+      if (saved) return JSON.parse(saved);
+    } catch (e) { /* fall back to the samples */ }
+    return SAMPLE_POSTS.slice();
+  }
+  // Saves the whole list. Returns false when the browser refuses (blocked or full).
+  function savePosts(posts) {
+    try { localStorage.setItem(POSTS_KEY, JSON.stringify(posts)); return true; } catch (e) { return false; }
+  }
+  // Newest first: by date, then by id for posts on the same day
+  function sortNewest(posts) {
+    return posts.sort(function (a, b) {
+      if (a.date !== b.date) return a.date < b.date ? 1 : -1;
+      return b.id - a.id;
+    });
+  }
+  function publishedPosts() {
+    return sortNewest(getPosts().filter(function (p) { return p.status === 'published'; }));
+  }
+  function findPost(id, posts) {
+    return posts.find(function (p) { return p.id === id; }) || null;
+  }
+  // The summary, or the start of the body when the officer left it empty
+  function summaryOf(post) {
+    if (post.summary) return post.summary;
+    const text = post.body.replace(/\s+/g, ' ').trim();
+    return text.length > 160 ? text.slice(0, 157) + '...' : text;
+  }
+
+  // One post card for news.html, the home strip and "More posts".
+  // The cover's alt is empty because the title right under it names the post.
+  function postCard(post) {
+    const link = 'article.html?id=' + post.id;
+    const cover = post.cover
+      ? '<img class="post-cover" src="' + esc(post.cover) + '" alt="" loading="lazy">'
+      : '<div class="post-slot">Photo to come</div>';
+    return '<li class="post">' + cover + '<div class="post-body">' +
+      '<p class="post-meta"><span class="post-cat">' + esc(post.category) + '</span><time datetime="' + post.date + '">' + niceDate(post.date) + '</time></p>' +
+      '<h3><a href="' + link + '">' + esc(post.title) + '</a></h3>' +
+      '<p>' + esc(summaryOf(post)) + '</p>' +
+      '<a class="more" href="' + link + '">Read more<span class="visually-hidden">: ' + esc(post.title) + '</span>' + icon('arrow') + '</a>' +
+      '</div></li>';
+  }
+
+  /* ---------- Home: "Latest from Hygears" (the 3 newest) ---------- */
+  const latest = $('#latest-posts');
+  if (latest) latest.innerHTML = publishedPosts().slice(0, 3).map(postCard).join('');
+
+  /* ---------- News page: list with a category filter ---------- */
+  const newsList = $('#news-list');
+  if (newsList) {
+    const catSel = $('#news-cat');
+    function showNews() {
+      const cat = catSel.value;
+      const list = publishedPosts().filter(function (p) { return !cat || p.category === cat; });
+      newsList.innerHTML = list.map(postCard).join('');
+      $('#news-empty').hidden = list.length > 0;
+      $('#news-count').textContent = (list.length === 1 ? '1 post' : list.length + ' posts') + (cat ? ' in ' + cat : ', newest first');
+    }
+    catSel.addEventListener('change', showNews);
+    showNews();
+  }
+
+  /* ---------- Article page: article.html?id=N (no id = the newest post) ---------- */
+  const articleBox = $('#article');
+  if (articleBox) {
+    const published = publishedPosts();
+    const id = new URLSearchParams(location.search).get('id');
+    const post = id ? findPost(Number(id), published) : published[0];
+    if (!post) {
+      // a wrong id, or a post that was unpublished
+      articleBox.innerHTML = '<h1 id="article-title">This post is not available</h1>' +
+        '<p class="lede">It may have been unpublished, or the link is wrong.</p><p><a href="news.html">See all news</a></p>';
+    } else {
+      document.title = post.title + ' | PUP Hygears';
+      let html = '<p class="post-meta"><span class="post-cat">' + esc(post.category) + '</span>' +
+        '<time datetime="' + post.date + '">' + niceDate(post.date) + '</time>' +
+        (post.sample ? '<span class="sample-flag">' + icon('info') + 'Sample article</span>' : '') + '</p>' +
+        '<h1 id="article-title">' + esc(post.title) + '</h1>' +
+        '<p class="lede">' + esc(summaryOf(post)) + '</p>';
+      if (post.cover) html += '<figure><img src="' + esc(post.cover) + '" alt="' + esc(post.coverAlt || '') + '"></figure>';
+      // paragraphs split on blank lines; an inline photo goes after paragraph number "after"
+      const photos = post.photos || [];
+      html += '<div class="article-body">';
+      post.body.split(/\n\s*\n/).forEach(function (text, i) {
+        if (text.trim()) html += '<p>' + esc(text.trim()) + '</p>';
+        photos.forEach(function (ph) {
+          if (ph.after === i + 1) html += '<figure><img src="' + esc(ph.src) + '" alt="' + esc(ph.alt) + '" loading="lazy"><figcaption>' + esc(ph.caption) + '</figcaption></figure>';
+        });
+      });
+      html += '</div><p class="byline">Caption by ' + (post.captionBy ? '<strong>' + esc(post.captionBy) + '</strong>' : 'the writer (name to be added)') + ' for PUP Hygears.</p>';
+      articleBox.innerHTML = html;
+    }
+    // "More posts": up to 3 other published posts
+    $('#more-posts').innerHTML = published.filter(function (p) { return p !== post; }).slice(0, 3).map(postCard).join('');
+  }
+
+  /* ---------- Officer: Posts list and the New post form ---------- */
+  const postForm = $('#post-form');
+  if (postForm) {
+    const rows = $('#post-rows'), postMsg = $('#post-msg'), saveErr = $('#p-save-error');
+    const fileInput = $('#p-cover'), preview = $('#p-preview'), previewImg = $('#p-preview-img');
+    const altField = $('#p-alt-field'), altInput = $('#p-alt'), formTitle = $('#post-form-title'), cancelBtn = $('#p-cancel');
+    const MAX_PHOTO = 2 * 1024 * 1024;                       // 2 MB, the same limit PHP would check
+    const PHOTO_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+    let coverData = '';     // the chosen photo as a data URL (or a sample's file path)
+    let coverError = '';    // message when the chosen file is wrong
+    let editingId = null;   // id of the post being edited, null for a new post
+    let publishing = true;  // which submit button was pressed
+
+    // The table: drafts included, newest first. On phones each row becomes a card.
+    function renderRows() {
+      const posts = sortNewest(getPosts());
+      rows.innerHTML = posts.map(function (p) {
+        const live = p.status === 'published';
+        return '<tr><td class="title-cell" data-label="Title">' + esc(p.title) + '</td>' +
+          '<td data-label="Category">' + esc(p.category) + '</td>' +
+          '<td class="num" data-label="Date">' + niceDate(p.date) + '</td>' +
+          '<td data-label="Status">' + (live ? '<span class="chip chip--approved">' + icon('check') + 'Published</span>' : '<span class="chip chip--pending">' + icon('clock') + 'Draft</span>') + '</td>' +
+          '<td class="actions-cell"><div class="actions">' +
+          '<button class="btn btn--ghost btn--small" type="button" data-edit="' + p.id + '" aria-label="Edit ' + esc(p.title) + '">Edit</button>' +
+          '<button class="btn btn--ghost btn--small" type="button" data-toggle="' + p.id + '" aria-label="' + (live ? 'Unpublish ' : 'Publish ') + esc(p.title) + '">' + (live ? 'Unpublish' : 'Publish') + '</button>' +
+          '</div></td></tr>';
+      }).join('') || '<tr><td colspan="5"><strong>No posts yet.</strong> Write the first one below.</td></tr>';
+      $('#n-posts').textContent = posts.filter(function (p) { return p.status === 'published'; }).length;
+    }
+
+    function showPreview(src) {
+      coverData = src;
+      previewImg.src = src;
+      preview.hidden = !src;
+      // the photo description is only asked for when there is a photo
+      altField.hidden = !src;
+      altInput.disabled = !src;
+    }
+
+    // Cover photo: check type and size, then show it with FileReader
+    fileInput.addEventListener('change', function () {
+      const file = fileInput.files[0];
+      coverError = '';
+      if (!file) { showPreview(''); setError(fileInput, ''); return; }
+      if (PHOTO_TYPES.indexOf(file.type) === -1) coverError = 'That file is not a JPG, PNG or WebP photo. Choose another file.';
+      else if (file.size > MAX_PHOTO) coverError = 'That photo is ' + (file.size / 1048576).toFixed(1) + ' MB. Use one under 2 MB (resize it first).';
+      setError(fileInput, coverError);
+      if (coverError) { fileInput.value = ''; showPreview(''); return; }
+      // FileReader turns the file into a data URL that the <img> can show right away
+      const reader = new FileReader();
+      reader.addEventListener('load', function () { showPreview(reader.result); });
+      reader.readAsDataURL(file);
+    });
+    $('#p-remove').addEventListener('click', function () { fileInput.value = ''; showPreview(''); fileInput.focus(); });
+
+    // Back to an empty "New post" form
+    function resetForm() {
+      postForm.reset();
+      showPreview('');
+      coverError = ''; editingId = null;
+      $('#p-date').value = isoToday();
+      formTitle.textContent = 'New post';
+      cancelBtn.hidden = true;
+      $('.error-summary', postForm).hidden = true;
+      $$('input, select, textarea', postForm).forEach(function (el) { if (el.id) setError(el, ''); });
+      saveErr.classList.remove('is-shown');
+    }
+
+    // Remember which submit button was pressed (Publish or Save draft)
+    $$('button[type="submit"]', postForm).forEach(function (b) {
+      b.addEventListener('click', function () { publishing = b.dataset.status === 'published'; });
+    });
+
+    runForm(postForm, {
+      'p-title': function (el) { return el.value.trim() ? '' : 'Give the post a title.'; },
+      'p-cat': function (el) { return el.value ? '' : 'Choose a category so the post shows under the right filter.'; },
+      'p-date': function (el) { return el.value ? '' : 'Choose the date the post is for.'; },
+      'p-cover': function () { return coverError; },
+      'p-alt': function (el) { return el.value.trim() ? '' : 'Describe the photo in a few words, for screen reader users.'; },
+      'p-body': function (el) { return el.value.trim() ? '' : 'Write the article. Leave a blank line between paragraphs.'; }
+    }, function () {
+      saveErr.classList.remove('is-shown');
+      const posts = getPosts();
+      let post = editingId === null ? null : findPost(editingId, posts);
+      if (!post) {
+        // a new post gets the next id (the database's AUTO_INCREMENT does this)
+        let nextId = 1;
+        posts.forEach(function (p) { nextId = Math.max(nextId, p.id + 1); });
+        post = { id: nextId, sample: false };
+        posts.push(post);
+      }
+      post.title = $('#p-title').value.trim();
+      post.category = $('#p-cat').value;
+      post.date = $('#p-date').value;
+      post.cover = coverData;
+      post.coverAlt = coverData ? altInput.value.trim() : '';
+      post.summary = $('#p-summary').value.trim();
+      post.body = $('#p-body').value.trim();
+      post.captionBy = $('#p-by').value.trim();
+      post.status = publishing ? 'published' : 'draft';
+      if (!savePosts(posts)) {
+        saveErr.innerHTML = icon('alert') + '<span>This browser would not save the post. The photo may be too big for browser storage: try a smaller one, or remove it.</span>';
+        saveErr.classList.add('is-shown');
+        return;
+      }
+      postMsg.innerHTML = publishing
+        ? 'Published "' + esc(post.title) + '". It is at the top of the list and shows on <a href="news.html">News</a> in this browser.'
+        : 'Saved "' + esc(post.title) + '" as a draft. It stays off News until you publish it.';
+      resetForm();
+      renderRows();
+      postMsg.focus();
+    });
+
+    cancelBtn.addEventListener('click', function () { resetForm(); formTitle.focus(); });
+
+    // Edit and Publish/Unpublish buttons in the table (one listener for every row)
+    rows.addEventListener('click', function (e) {
+      const b = e.target.closest('button'); if (!b) return;
+      const posts = getPosts();
+      if (b.dataset.edit) {
+        const post = findPost(Number(b.dataset.edit), posts);
+        resetForm();
+        editingId = post.id;
+        $('#p-title').value = post.title;
+        $('#p-cat').value = post.category;
+        $('#p-date').value = post.date;
+        $('#p-summary').value = post.summary || '';
+        $('#p-body').value = post.body;
+        $('#p-by').value = post.captionBy || '';
+        showPreview(post.cover || '');
+        altInput.value = post.coverAlt || '';
+        formTitle.textContent = 'Edit post';
+        cancelBtn.hidden = false;
+        formTitle.scrollIntoView();
+        formTitle.focus();
+      }
+      if (b.dataset.toggle) {
+        const target = findPost(Number(b.dataset.toggle), posts);
+        target.status = target.status === 'published' ? 'draft' : 'published';
+        if (!savePosts(posts)) postMsg.textContent = 'This browser would not save the change.';
+        else postMsg.innerHTML = target.status === 'published'
+          ? 'Published "' + esc(target.title) + '". It shows on <a href="news.html">News</a> again.'
+          : 'Unpublished "' + esc(target.title) + '". It no longer shows on News.';
+        renderRows();
+        postMsg.focus();
+      }
+    });
+
+    $('#p-date').value = isoToday();
+    renderRows();
+  }
+
+  /* ---------- Join: applications open or closed ----------
+     Recruitment is seasonal. The real site reads this from an officer setting;
+     here join.html?season=closed previews the closed state. */
+  const appsOpen = $('#apps-open');
+  if (appsOpen) {
+    const open = new URLSearchParams(location.search).get('season') !== 'closed';
+    appsOpen.hidden = !open;
+    $('#apps-closed-line').hidden = open;
+    $('#apps-closed').hidden = open;
+    $('#join-form').hidden = !open;
   }
 })();

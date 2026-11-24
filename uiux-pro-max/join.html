@@ -22,7 +22,7 @@
     </a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Menu</span></button>
     <nav id="site-nav" class="site-nav" aria-label="Main">
-      <ul><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track Request</a></li><li><a href="join.html" aria-current="page">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer</a></li></ul>
+      <ul><li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track Request</a></li><li><a href="join.html" aria-current="page">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer</a></li></ul>
     </nav>
   </div>
 </header>
@@ -34,6 +34,8 @@
       <p class="eyebrow">ASCEND 2026 &bull; Membership</p>
       <h1>Be the missing piece.</h1>
       <p class="lead">Hygears trains students through real work on an energy-efficient vehicle. Any PUP student can apply.</p>
+      <p class="status status--approved" id="apps-open"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Applications open</p>
+      <p class="status status--declined" id="apps-closed-line" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg>Applications closed</p>
     </div>
     <figure class="frame"><img src="../assets/luna-night.png" alt="The Luna electric vehicle parked at night at PUP" width="1440" height="653"></figure>
   </div>
@@ -46,6 +48,14 @@
       <p class="hint">Right now ASCEND 2026 applications also run through a Google Form on the Hygears Facebook page.</p>
     </aside>
     <div>
+      <div class="card" id="apps-closed" hidden>
+        <h2 class="h3">Recruitment is closed for now</h2>
+        <p>Hygears recruits once a season. Follow us for the next ASCEND, and see what the team is up to in <a href="news.html">News</a>.</p>
+        <ul class="contact-list">
+          <li><a href="https://www.facebook.com/PUPHygears">Facebook: PUP Hygears</a></li>
+          <li><a href="https://www.instagram.com/puphygears">Instagram: @puphygears</a></li>
+        </ul>
+      </div>
       <div class="error-summary" id="j-summary" tabindex="-1" role="alert" hidden></div>
       <form class="card form" id="join-form" novalidate>
         <h2 class="h3">Application form</h2>

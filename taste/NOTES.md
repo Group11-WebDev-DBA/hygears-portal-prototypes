@@ -3,7 +3,7 @@
 Built with the taste-skill (design-taste-frontend 2.5.1), kind **service** (site-kind other): real photographs, flat white and gray grounds, heavy type, no effects or 3D. Our professor's rules win wherever the skill disagrees.
 
 ## Pages
-`index.html`, `tools.html`, `reserve.html`, `track.html`, `join.html`, `about.html`, `officer.html`. They share one `style.css`, one `app.js`, and the same header and footer. The nav marks the current page with a red bar, and `reserve.html` lights up Tools. Every page opens by double-click.
+`index.html`, `news.html`, `article.html`, `tools.html`, `reserve.html`, `track.html`, `join.html`, `about.html`, `officer.html`. They share one `style.css`, one `app.js`, and the same header and footer. The nav marks the current page with a red bar, and `reserve.html` lights up Tools. Every page opens by double-click.
 
 ## Palette (updated 2026-11-23: classic Hygears red and white, no cream or orange)
 | Role | Colour | Use |
@@ -39,7 +39,7 @@ Status never relies on colour alone. Every status badge is an icon plus a word: 
 - **Moment and hero entrance (changed 2026-11-23):** the word-highlight moment and its ES-module kit were dropped so every page is plain CSS + one plain script. The hero words fade up once with a single CSS `@keyframes` (off under reduced motion).
 
 ## Code standard (2026-11-23)
-- One `style.css`, mobile first, 19 numbered sections with short comments: variables, base, grid, header, buttons, hero, photos, cards, badges, ticket, rows, forms, catalog, dashboard, home sections, footer, then the 640px and 1024px media queries and reduced motion.
+- One `style.css`, mobile first, 20 numbered sections with short comments: variables, base, grid, header, buttons, hero, photos, cards, badges, ticket, rows, forms, catalog, dashboard, home sections, footer, then the 640px and 1024px media queries, reduced motion, and News (section 20, added 2026-11-24).
 - Only hex variables, Flexbox, a 12-column Grid with `span-N` / `start-N` classes, media queries. No clamp(), min(), svh, :has(), oklch/color-mix, container queries or modules. `[hidden]{display:none !important}` is in the base.
 - `app.js` is one plain script (no modules) with a commented section per page.
 - `assets/moments/` is no longer used by any page; delete it.
@@ -52,11 +52,27 @@ The finish gate ran 2 rounds on `index.html`, capped at two browser renders for 
 - **Copy-lint:** 0 FAIL on all 7 pages. One WARN stays: the exclamation mark in the tagline, which is the org's own words.
 - **Not gated:** the gate only checks the home page. The six inner pages follow the professor's rules (page head, then content) rather than the skill's one-section-per-screen rule.
 
+## News feature (2026-11-24)
+Officers post competitions, progress reports, workshops and announcements from the site (see `../FEATURE-NEWS.md`).
+- **`news.html`**: published posts, newest first, as cards in the Tools grid (1, 2, then 3 columns): rounded cover photo (or the dashed "Photo from Hygears" slot from 640px up), category badge, date, title, summary, Read more. The filter is a Category select like the one on Tools, with the count beside it.
+- **`article.html?id=N`**: one column (18px, about 68 characters a line): category badge, date, "Sample article" badge, title at the normal h1 size, cover, paragraphs with inline photos and captions, "Caption by", Back to News, and three More posts cards. No id opens the newest post; a wrong or unpublished id says the post is not available.
+- **Home**: "Latest from Hygears" (the 3 newest posts) replaced the sample announcements and the drawn officer-form mock-up. The hero's second button is now Read the news; Join keeps its own section below. (Taste never had merch.)
+- **Join**: an "Applications open" badge with the ASCEND line. `join.html?season=closed` previews the closed state: the form section hides and a card says "Follow us for the next ASCEND" with Facebook, Instagram and News.
+- **Officer dashboard**: a "Posts and New post" button next to Sign out and a Posts section after New applications: a table with Edit and Unpublish/Publish, and the New post form card (title, category, date, cover photo with a FileReader preview and Remove photo, photo description, summary, body where blank lines make paragraphs, caption writer, Publish / Save draft). JPG, PNG or WebP up to 2 MB.
+- **How it works here**: five sample posts sit in `SAMPLE_POSTS` in `app.js` (photos from `img/`). The first save copies the list into `localStorage` (`hyg-posts`), so news, article and Home show the officer's posts in the same browser. Clear the site data to get the samples back.
+
+### How it maps to the real build
+`posts` table: `post_id`, `title`, `category`, `summary`, `body`, `cover_image` (file name), `cover_alt`, `caption_by`, `status` (`draft`/`published`), `published_at`, `created_by` (officer). The JS object keys match these columns (`id`, `date`, `cover`, `coverAlt`, `captionBy` stand for `post_id`, `published_at`, `cover_image`, `cover_alt`, `caption_by`).
+- news.html: `SELECT * FROM posts WHERE status = 'published' ORDER BY published_at DESC`, then a `while` loop that prints the same markup as `postCard()`. The filter becomes `?cat=Workshop` and `AND category = ?`.
+- article.html: `SELECT * FROM posts WHERE post_id = ? AND status = 'published'`; split `body` on blank lines into paragraphs.
+- Home strip: the same query with `LIMIT 3`.
+- Officer form: `INSERT` (new) or `UPDATE ... WHERE post_id = ?` (edit) with prepared statements; Unpublish is `UPDATE posts SET status = 'draft' WHERE post_id = ?`. The photo comes in through `$_FILES`, is checked for type and size again on the server, and `move_uploaded_file()` saves it in `uploads/`; only the file name goes in `cover_image`. Print every field with `htmlspecialchars()` (the JS uses `escapeHtml()` for the same job).
+
 ## Still needs real material
 - The current logo: the flame-gradient HG mark. `img/hygears-logo.png` is the older red one.
 - Photos of each item for the catalog. Every card shows a marked "Photo from Hygears" slot.
 - The real stock list: items, categories and counts. The 12 items are the brief's sample list with made-up counts, labelled "Sample list".
-- Real announcements. The home page shows 3 posts labelled as samples.
+- Real news posts. The five posts and their dates are sample text written from the Hygears Facebook page; real posts, photos and caption writers come from the officers.
 - The borrowing rules, which are marked "Draft" on About and Reserve. Also the pickup place and hours, which are not mentioned anywhere.
 - The street address. Only "Sta. Mesa, Manila" is shown.
 - A form endpoint and real officer login. In the PHP build, reference numbers will be made in MySQL, not in the browser.

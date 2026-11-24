@@ -25,6 +25,7 @@
     <nav class="site-nav" id="site-nav" aria-label="Main">
       <ul>
         <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">News</a></li>
         <li><a href="tools.html">Tools</a></li>
         <li><a href="track.html">Track request</a></li>
         <li><a href="join.html" aria-current="page">Join</a></li>
@@ -39,9 +40,19 @@
   <div class="page-head">
     <h1>Join Hygears</h1>
     <p class="lede">ASCEND 2026: find your missing piece. Tell us who you are and where you'd like to help; officers review every application.</p>
+    <p class="chip chip--approved" id="apps-open"><i data-icon="check"></i>Applications open</p>
+    <p class="chip chip--pending" id="apps-closed-line" hidden><i data-icon="x"></i>Applications closed</p>
   </div>
   <div class="layout-split">
     <div>
+      <div class="form-panel closed-panel" id="apps-closed" hidden>
+        <h2>Recruitment is closed for now</h2>
+        <p>Hygears recruits once a season. Follow us for the next ASCEND, and see what the team is up to in <a href="news.html">News</a>.</p>
+        <ul class="contact-list">
+          <li><a href="https://www.facebook.com/PUPHygears"><i data-icon="link"></i>Facebook: PUP Hygears</a></li>
+          <li><a href="https://www.instagram.com/puphygears"><i data-icon="link"></i>Instagram: @puphygears</a></li>
+        </ul>
+      </div>
       <form class="form form-panel" id="join-form" novalidate>
         <div class="error-summary" hidden>
           <p class="es-title" tabindex="-1"><i data-icon="alert"></i>Please fix these before applying</p>

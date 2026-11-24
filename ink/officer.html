@@ -20,7 +20,7 @@
     <nav class="pill" aria-label="Main">
       <a class="brand" href="index.html"><img src="../assets/hygears-logo.png" width="40" height="40" alt="">PUP Hygears</a>
       <button class="btn btn--quiet btn--sm menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
-      <ul class="nav-links" id="nav-links"><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a class="nav-officer" href="officer.html" aria-current="page">Officer</a></li></ul>
+      <ul class="nav-links" id="nav-links"><li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a class="nav-officer" href="officer.html" aria-current="page">Officer</a></li></ul>
     </nav>
   </div>
 </header>
@@ -28,7 +28,7 @@
 <section class="page-head">
   <div class="container">
     <h1>Officer desk</h1>
-    <p class="lead">Review reservations, returns, applications and stock.</p>
+    <p class="lead">Review reservations, returns, applications and stock, and post news.</p>
   </div>
 </section>
 
@@ -48,7 +48,7 @@
   <section class="dash" aria-labelledby="dash-title">
     <div class="dash-bar">
       <div><h2 id="dash-title" tabindex="-1">Today at the desk</h2><p class="note">Signed in as <b id="who">an officer</b>. Sample data: the live dashboard reads from the database.</p></div>
-      <button class="btn btn--quiet btn--sm" type="button" id="sign-out">Sign out</button>
+      <div class="actions"><a class="btn btn--sm" href="#p-posts">New post</a><button class="btn btn--quiet btn--sm" type="button" id="sign-out">Sign out</button></div>
     </div>
     <dl class="stats">
       <div><dt><a href="#p-pending">Pending reservations</a></dt><dd data-count="pending">4</dd></div>
@@ -76,6 +76,33 @@
       <tbody><tr data-row><td class="mono" data-label="Student number">2025-00111-MN-0</td><td data-label="Course">Mechanical Engineering</td><td data-label="Year and section">1-2</td><td data-label="Committee">Innovation and Research</td><td data-label="Applied"><time datetime="2026-11-21">21 Nov 2026</time></td><td class="state" data-label="State"><span class="tag tag--wait"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5"/></svg>New</span></td><td class="act"><div class="actions"><button class="btn btn--sm" type="button" data-act="accept">Accept</button><button class="btn btn--quiet btn--sm" type="button" data-act="decline">Decline</button></div></td></tr><tr data-row><td class="mono" data-label="Student number">2024-00222-MN-0</td><td data-label="Course">Marketing</td><td data-label="Year and section">2-1</td><td data-label="Committee">Creative Media and Design</td><td data-label="Applied"><time datetime="2026-11-20">20 Nov 2026</time></td><td class="state" data-label="State"><span class="tag tag--wait"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5"/></svg>New</span></td><td class="act"><div class="actions"><button class="btn btn--sm" type="button" data-act="accept">Accept</button><button class="btn btn--quiet btn--sm" type="button" data-act="decline">Decline</button></div></td></tr><tr data-row><td class="mono" data-label="Student number">2025-00333-MN-0</td><td data-label="Course">Computer Engineering</td><td data-label="Year and section">1-4</td><td data-label="Committee">Internal Affairs</td><td data-label="Applied"><time datetime="2026-11-19">19 Nov 2026</time></td><td class="state" data-label="State"><span class="tag tag--wait"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5"/></svg>New</span></td><td class="act"><div class="actions"><button class="btn btn--sm" type="button" data-act="accept">Accept</button><button class="btn btn--quiet btn--sm" type="button" data-act="decline">Decline</button></div></td></tr><tr class="empty-row" hidden><td colspan="7"><p><strong>No new applications left.</strong></p><p class="note">Applications from the Join page show up here.</p></td></tr></tbody></table>
     </section>
 
+    <section class="panel" aria-labelledby="p-posts">
+      <h2 id="p-posts">Posts</h2>
+      <p class="note">Published posts show on News, newest first. Drafts stay here until you publish them.</p>
+      <p class="post-status" id="post-status" role="status" tabindex="-1"></p>
+      <!-- app.js fills the rows from the posts saved in this browser (PHP: SELECT * FROM posts ORDER BY published_at DESC) -->
+      <table class="table" id="post-table"><thead><tr><th scope="col">Title</th><th scope="col">Category</th><th scope="col">Date</th><th scope="col">State</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead>
+      <tbody id="post-rows"></tbody></table>
+
+      <form class="slip post-form" id="post-form" novalidate aria-labelledby="post-form-title">
+        <div class="slip__title"><p class="slip__name" id="post-form-title" tabindex="-1">New post</p><span class="note">Prototype: saved in this browser only</span></div>
+        <div class="form-grid">
+          <div class="field field--full"><label for="np-title">Title</label><input id="np-title" name="title" type="text" required maxlength="120" data-req="Give the post a title." aria-describedby="np-title-hint np-title-err"><p class="hint" id="np-title-hint">Up to 120 characters. Say what happened.</p><p class="error" id="np-title-err" aria-live="polite"></p></div>
+          <div class="field"><label for="np-cat">Category</label><select id="np-cat" name="category" required data-req="Choose a category." aria-describedby="np-cat-hint np-cat-err"><option value="">Choose a category</option><option>Competition</option><option>Progress report</option><option>Workshop</option><option>Announcement</option><option>Recruitment</option></select><p class="hint" id="np-cat-hint"></p><p class="error" id="np-cat-err" aria-live="polite"></p></div>
+          <div class="field"><label for="np-date">Date</label><input id="np-date" name="date" type="date" required data-req="Pick the post date." data-nomin aria-describedby="np-date-hint np-date-err"><p class="hint" id="np-date-hint">Shown on the post. Newest dates go first.</p><p class="error" id="np-date-err" aria-live="polite"></p></div>
+          <div class="field field--full"><label for="np-cover">Cover photo</label><input id="np-cover" name="cover" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="np-cover-hint np-cover-err"><p class="hint" id="np-cover-hint">JPG, PNG or WebP, up to 2 MB. Optional: posts without one show a photo slot.</p><p class="error" id="np-cover-err" aria-live="polite"></p>
+            <div class="cover-preview" id="np-preview-box" hidden><img id="np-preview" src="" alt="Preview of the chosen cover photo"><button class="btn btn--quiet btn--sm" type="button" id="np-remove">Remove photo</button></div>
+          </div>
+          <div class="field field--full"><label for="np-alt">Photo description</label><input id="np-alt" name="cover_alt" type="text" maxlength="200" aria-describedby="np-alt-hint np-alt-err"><p class="hint" id="np-alt-hint">What the photo shows, for screen readers. Needed when there is a photo.</p><p class="error" id="np-alt-err" aria-live="polite"></p></div>
+          <div class="field field--full"><label for="np-summary">Summary</label><textarea id="np-summary" name="summary" rows="2" maxlength="200" aria-describedby="np-summary-hint np-summary-err"></textarea><p class="hint" id="np-summary-hint">One or two lines for the News list. Leave empty to use the start of the body.</p><p class="error" id="np-summary-err" aria-live="polite"></p></div>
+          <div class="field field--full"><label for="np-body">Body</label><textarea id="np-body" name="body" rows="10" required data-req="Write the post body." aria-describedby="np-body-hint np-body-err"></textarea><p class="hint" id="np-body-hint">Leave a blank line between paragraphs.</p><p class="error" id="np-body-err" aria-live="polite"></p></div>
+          <div class="field field--full"><label for="np-by">Caption writer</label><input id="np-by" name="caption_by" type="text" maxlength="80" autocomplete="name" aria-describedby="np-by-hint np-by-err"><p class="hint" id="np-by-hint">Credited on the post, like the captions on Facebook.</p><p class="error" id="np-by-err" aria-live="polite"></p></div>
+        </div>
+        <p class="error" id="np-form-err" aria-live="polite"></p>
+        <div class="form-foot"><button class="btn" type="submit" data-status="published" id="np-publish">Publish</button><button class="btn btn--quiet" type="submit" data-status="draft">Save draft</button><button class="btn btn--quiet" type="button" id="np-cancel" hidden>Cancel editing</button></div>
+      </form>
+    </section>
+
     <section class="panel" aria-labelledby="p-stock">
       <h2 id="p-stock">Item stock</h2>
       <table class="table"><thead><tr><th scope="col">Item</th><th scope="col">Type</th><th scope="col">Category</th><th scope="col" class="num">Available</th><th scope="col">State</th></tr></thead>
@@ -89,7 +116,7 @@
     <div class="colophon">
       <img src="../assets/hygears-logo.png" width="48" height="48" alt="PUP Hygears logo">
       <div><p><strong>PUP Hygears</strong> is a student research organization at the Polytechnic University of the Philippines, Sta. Mesa, Manila. Find us on <a href="https://www.instagram.com/puphygears/">Instagram</a>, <a href="https://www.facebook.com/PUPHygears">Facebook</a> and <a href="https://x.com/pup_hygears">X</a>, or write to <a href="mailto:puphygears@gmail.com">puphygears@gmail.com</a>. Photographs by PUP Hygears.</p><p class="tagline">Engineering Innovation &bull; Research &bull; Technology &bull; Leadership</p></div>
-      <ul class="foot-links"><li><a href="index.html">Home</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer desk</a></li></ul>
+      <ul class="foot-links"><li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li><li><a href="tools.html">Tools</a></li><li><a href="track.html">Track request</a></li><li><a href="join.html">Join</a></li><li><a href="about.html">About</a></li><li><a href="officer.html">Officer desk</a></li></ul>
     </div>
     <p class="legal">A prototype of the Hygears Web Portal, made for a Web Development final project in 2026. Sample data is marked where it appears.</p>
   </div>
